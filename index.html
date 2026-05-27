@@ -6,76 +6,176 @@
   <title>Bow &amp; Arrow — Datenschutz</title>
   <style>
     :root { color-scheme: light dark; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; max-width: 42rem; margin: 2rem auto; padding: 0 1.25rem; }
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.55; max-width: 42rem; margin: 2rem auto; padding: 0 1.25rem; color: #1a1a1a; }
+    @media (prefers-color-scheme: dark) { body { color: #e8e8e8; } hr { border-top-color: #444; } small { color: #aaa; } }
     h1, h2 { line-height: 1.25; }
     a { color: #9a7b2e; }
     hr { margin: 2rem 0; border: none; border-top: 1px solid #ccc; }
     small { color: #666; }
+    ul { padding-left: 1.25rem; }
   </style>
 </head>
 <body>
   <h1>Datenschutzerklärung</h1>
-  <p><small>Stand: Mai 2026 — App „Bow &amp; Arrow“</small></p>
+  <p><small>Stand: Mai 2026 — App „Bow &amp; Arrow“ (iOS)</small></p>
 
-  <h2>Verantwortlicher</h2>
+  <h2>1. Verantwortlicher</h2>
   <p>
-    <!-- TODO: Replace with your legal entity -->
-    [Name / Firma]<br />
-    [Straße, PLZ Ort]<br />
-    E-Mail: <a href="mailto:support@example.com">support@example.com</a>
+    Jen Eric Preißer<br />
+    Schellingstraße 18/1<br />
+    72622 Nürtingen<br />
+    Deutschland<br />
+    E-Mail: <a href="mailto:jen@preisser.de">jen@preisser.de</a>
   </p>
 
-  <h2>Überblick</h2>
+  <h2>2. Überblick</h2>
   <p>
-    Die App ist ein Offline-first Spiel mit optionalem Cloud-Speicher und optionalen Online-Funktionen über Apple-Dienste.
-    Wir betreiben kein werbebasiertes Tracking und verkaufen keine personenbezogenen Daten.
+    „Bow &amp; Arrow“ ist ein Spiel für iOS (ab 12 Jahren). Der Spielstand wird primär auf deinem Gerät gespeichert.
+    Optional kannst du iCloud-Synchronisation und Game Center nutzen — beides läuft über Apple, nicht über eigene Server des Entwicklers.
+  </p>
+  <p>
+    Es gibt <strong>kein Werbe-Tracking</strong>, keine Analytics-Dienste (z. B. Firebase) und <strong>keinen Verkauf</strong> personenbezogener Daten.
+    Es wird <strong>kein eigenes Backend</strong> betrieben, das Spielerdaten außerhalb von Apple-Diensten speichert.
   </p>
 
-  <h2>Welche Daten verarbeitet die App?</h2>
+  <h2>3. Welche Daten werden verarbeitet?</h2>
   <ul>
-    <li><strong>Spielstand (lokal):</strong> Fortschritt, Inventar, Einstellungen — gespeichert auf dem Gerät.</li>
-    <li><strong>iCloud / CloudKit (optional):</strong> Wenn du in den iOS-Einstellungen mit Apple-ID angemeldet bist und iCloud verfügbar ist, kann der Spielstand in deiner privaten iCloud-Datenbank synchronisiert werden (gleicher Apple-Account auf mehreren Geräten).</li>
-    <li><strong>Game Center (optional):</strong> Ranglistenplatzierung (Trophäen-Anzahl) und Erfolge über Apple Game Center; dabei verarbeitet Apple die Game-Center-ID und Anzeigenamen gemäß Apple-Richtlinien.</li>
-    <li><strong>In-App-Käufe:</strong> Abwicklung ausschließlich über den Apple App Store; wir erhalten keine Kreditkartendaten.</li>
+    <li>
+      <strong>Spielstand und Einstellungen (lokal):</strong>
+      Fortschritt, Inventar, Einstellungen und vergleichbare Spieldaten werden auf deinem iPhone/iPad gespeichert.
+    </li>
+    <li>
+      <strong>iCloud / CloudKit (optional):</strong>
+      Wenn du mit deiner Apple-ID angemeldet bist und iCloud verfügbar ist, kann der Spielstand in deiner
+      <strong>privaten iCloud-Datenbank</strong> synchronisiert werden (Standard-CloudKit von Apple, gleicher Account auf mehreren Geräten).
+      Der Entwickler betreibt hierfür keine eigenen Server.
+    </li>
+    <li>
+      <strong>Game Center (optional):</strong>
+      Trophäen-Fortschritt, Erfolge und eine <strong>globale Rangliste</strong> (Trophäen-Anzahl) über Apple Game Center.
+      In der App können <strong>Anzeigenamen und Avatare anderer Spieler</strong> in der Rangliste sichtbar sein — bereitgestellt von Apple.
+    </li>
+    <li>
+      <strong>In-App-Käufe:</strong>
+      Einmalkäufe werden ausschließlich über den <strong>Apple App Store</strong> abgewickelt.
+      Zahlungsdaten erhält der Entwickler nicht; Apple stellt ggf. Kaufinformationen/Entitlements bereit.
+    </li>
+    <li>
+      <strong>Technische Daten bei Apple:</strong>
+      Sturz- oder Diagnosedaten können, wie bei jeder iOS-App, über Apple (z. B. wenn du Fehlerberichte teilst) verarbeitet werden —
+      nicht über separate Drittanbieter-Dienste des Entwicklers.
+    </li>
   </ul>
 
-  <h2>Zweck</h2>
-  <p>Bereitstellung des Spiels, Speicherung des Fortschritts, Synchronisation (optional), Ranglisten/Erfolge (optional), Kaufbestätigung über Apple.</p>
+  <h2>4. Zwecke</h2>
+  <p>
+    Bereitstellung des Spiels, Speicherung und Wiederherstellung des Fortschritts, optionale Geräte-Synchronisation,
+    optionale Ranglisten und Erfolge, Abwicklung von Käufen über Apple sowie Stabilität und Support.
+  </p>
 
-  <h2>Rechtsgrundlagen (EU/EWR)</h2>
-  <p>Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO), berechtigtes Interesse an stabiler App-Funktion (lit. f), ggf. Einwilligung wo erforderlich.</p>
+  <h2>5. Rechtsgrundlagen (EU/EWR)</h2>
+  <ul>
+    <li><strong>Art. 6 Abs. 1 lit. b DSGVO</strong> — Vertragserfüllung (Spielnutzung, Käufe über Apple).</li>
+    <li><strong>Art. 6 Abs. 1 lit. f DSGVO</strong> — berechtigtes Interesse an technisch stabiler App und Support.</li>
+    <li><strong>Art. 6 Abs. 1 lit. a DSGVO</strong> — nur soweit du optionale Apple-Dienste (iCloud, Game Center) aktiv nutzt bzw. einwilligst, soweit erforderlich.</li>
+  </ul>
 
-  <h2>Speicherdauer</h2>
-  <p>Lokale Daten bleiben bis zur Deinstallation oder „Fortschritt zurücksetzen“ in der App. iCloud-Daten unterliegen Apples Löschfristen in deinem Konto. Game Center-Daten verwaltet Apple.</p>
+  <h2>6. Speicherdauer</h2>
+  <ul>
+    <li>Lokale Daten: bis zur Deinstallation der App oder „Fortschritt zurücksetzen“ in den Einstellungen.</li>
+    <li>iCloud-Daten: gemäß deinen Apple-Konto-Einstellungen und Apples Löschfristen.</li>
+    <li>Game Center: gemäß Apple Game Center und deinen Apple-Einstellungen.</li>
+  </ul>
 
-  <h2>Deine Rechte</h2>
-  <p>Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch, Datenübertragbarkeit — kontaktiere uns per E-Mail. Beschwerden bei einer Aufsichtsbehörde sind möglich.</p>
+  <h2>7. Empfänger und Drittländer</h2>
+  <p>
+    Empfänger ist im Wesentlichen <strong>Apple Inc.</strong> (iCloud, CloudKit, Game Center, App Store).
+    Apple kann Daten auch außerhalb der EU/EWR verarbeiten (z. B. USA). Apple stellt hierfür geeignete Garantien ein
+    (u. a. Standardvertragsklauseln); Details in der
+    <a href="https://www.apple.com/legal/privacy/">Datenschutzerklärung von Apple</a>.
+  </p>
 
-  <h2>Drittanbieter</h2>
-  <p>Apple (iCloud, Game Center, App Store) — siehe <a href="https://www.apple.com/legal/privacy/">Apple Privacy Policy</a>.</p>
+  <h2>8. Deine Rechte</h2>
+  <p>
+    Du hast nach der DSGVO u. a. Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+    Widerspruch und Datenübertragbarkeit, soweit anwendbar.
+    Wende dich an <a href="mailto:jen@preisser.de">jen@preisser.de</a>.
+  </p>
+  <p>
+    Du kannst dich bei einer Datenschutz-Aufsichtsbehörde beschweren, z. B. beim
+    <a href="https://www.baden-wuerttemberg.datenschutz.de/">LfDI Baden-Württemberg</a>.
+  </p>
+
+  <h2>9. Kinder</h2>
+  <p>
+    Die App richtet sich an Nutzer <strong>ab 12 Jahren</strong>. Es wird nicht wissentlich Daten von Kindern unter 12 Jahren erhoben.
+    Wenn du als Erziehungsberechtigte*r annimmst, dass ein Kind uns Daten gesendet hat, kontaktiere uns bitte per E-Mail.
+  </p>
+
+  <h2>10. Änderungen</h2>
+  <p>
+    Diese Erklärung kann bei neuen Funktionen oder rechtlichen Anforderungen angepasst werden.
+    Das Datum oben gilt als letzte Aktualisierung.
+  </p>
+
+  <p><a href="impressum.html">Impressum</a></p>
 
   <hr />
 
   <h1 id="en">Privacy Policy (English)</h1>
-  <p><small>Last updated: May 2026 — “Bow &amp; Arrow” app</small></p>
+  <p><small>Last updated: May 2026 — “Bow &amp; Arrow” (iOS)</small></p>
 
-  <h2>Controller</h2>
-  <p>[Name / company], [address]. Contact: <a href="mailto:support@example.com">support@example.com</a></p>
+  <h2>1. Controller</h2>
+  <p>
+    Jen Eric Preißer<br />
+    Schellingstraße 18/1<br />
+    72622 Nürtingen, Germany<br />
+    Email: <a href="mailto:jen@preisser.de">jen@preisser.de</a>
+  </p>
 
-  <h2>Summary</h2>
-  <p>Offline-first game with optional iCloud save sync and optional Apple Game Center features. No ad tracking; we do not sell personal data.</p>
+  <h2>2. Overview</h2>
+  <p>
+    “Bow &amp; Arrow” is a game for iOS (ages 12+). Save data is stored primarily on your device.
+    You may optionally use iCloud sync and Game Center — both are provided by Apple; the developer does not run separate game servers.
+  </p>
+  <p>
+    There is <strong>no ad tracking</strong>, no analytics SDKs (e.g. Firebase), and <strong>no sale</strong> of personal data.
+    No developer-operated backend stores player data outside Apple services.
+  </p>
 
-  <h2>Data we process</h2>
+  <h2>3. Data we process</h2>
   <ul>
-    <li><strong>Local save:</strong> progress and settings on device.</li>
-    <li><strong>iCloud / CloudKit (optional):</strong> private database sync when iCloud is available.</li>
-    <li><strong>Game Center (optional):</strong> leaderboard rank and achievements via Apple.</li>
-    <li><strong>In-app purchases:</strong> processed by Apple App Store only.</li>
+    <li><strong>Local save:</strong> progress, inventory, settings, and similar game data on your device.</li>
+    <li><strong>iCloud / CloudKit (optional):</strong> private iCloud database sync via Apple’s standard CloudKit when iCloud is enabled.</li>
+    <li><strong>Game Center (optional):</strong> trophies, achievements, and a global leaderboard; other players’ <strong>display names and avatars</strong> may appear in the leaderboard via Apple.</li>
+    <li><strong>In-app purchases:</strong> one-time purchases only, processed by the Apple App Store; we do not receive payment card data.</li>
+    <li><strong>Technical data via Apple:</strong> crash/diagnostic data may be processed by Apple if you share reports — not via separate third-party analytics from the developer.</li>
   </ul>
 
-  <h2>Retention &amp; rights</h2>
-  <p>Local data until delete/reset; iCloud/Game Center per Apple. EU users may contact us for GDPR rights.</p>
+  <h2>4. Purposes &amp; legal bases</h2>
+  <p>
+    Providing the game, saving progress, optional sync and leaderboards, purchases via Apple, stability and support.
+    Legal bases under GDPR: contract (Art. 6(1)(b)), legitimate interests (Art. 6(1)(f)), consent where required for optional Apple services (Art. 6(1)(a)).
+  </p>
 
-  <p><a href="impressum.html">Impressum</a></p>
+  <h2>5. Retention</h2>
+  <p>Local data until uninstall or in-app reset; iCloud and Game Center data per your Apple account and Apple’s policies.</p>
+
+  <h2>6. Recipients</h2>
+  <p>
+    Main recipient: <strong>Apple Inc.</strong> (iCloud, Game Center, App Store). Data may be processed outside the EEA; see
+    <a href="https://www.apple.com/legal/privacy/">Apple’s Privacy Policy</a>.
+  </p>
+
+  <h2>7. Your rights</h2>
+  <p>
+    You may request access, rectification, erasure, restriction, objection, and portability where applicable by emailing
+    <a href="mailto:jen@preisser.de">jen@preisser.de</a>. You may lodge a complaint with a supervisory authority.
+  </p>
+
+  <h2>8. Children</h2>
+  <p>The app is intended for users aged <strong>12+</strong>. We do not knowingly collect data from children under 12.</p>
+
+  <p><a href="impressum.html">Impressum (German legal notice)</a></p>
 </body>
 </html>

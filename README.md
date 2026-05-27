@@ -1,18 +1,19 @@
-# Legal pages (GitHub Pages)
+# BowAndArrowPrivacy — GitHub Pages
 
-Host the privacy policy and imprint for App Store Connect and in-app links.
+Public legal pages for **Bow & Arrow** (private game repo stays private).
 
-## Setup
+## Deploy
 
-1. Replace placeholders in `impressum.html` (name, address, email) and `support@example.com` in `BowAndArrow/Data/LegalDocumentURLs.swift`.
-2. Set `LegalDocumentURLs.pagesBaseURL` to your real Pages URL (same as below).
-3. GitHub → **Settings → Pages** → Build from branch **`main`**, folder **`/docs`**.
-4. After deploy (~1–2 min), open `https://<user>.github.io/BowAndArrow/index.html`.
-5. App Store Connect → **Privacy Policy URL** and **Support URL** → use those URLs.
+1. Create GitHub repo **`BowAndArrowPrivacy`** (public).
+2. Copy `index.html` and `impressum.html` into the repo root (or `/docs` if using docs folder — then set Pages source accordingly).
+3. **Settings → Pages** → deploy from `main` / root (or `/docs`).
+4. Live URLs:
+   - Privacy: `https://jenpreisser.github.io/BowAndArrowPrivacy/index.html`
+   - Imprint: `https://jenpreisser.github.io/BowAndArrowPrivacy/impressum.html`
 
-## Files
+5. App Store Connect → **Privacy Policy URL** + **Support URL** (same domain).
+6. In-game links: `BowAndArrow/Data/LegalDocumentURLs.swift` (must match this base URL).
 
-| File | Purpose |
-|------|---------|
-| `index.html` | Privacy policy (DE + EN) |
-| `impressum.html` | Imprint / Impressum (DE) |
+## Contact
+
+Jen Eric Preißer — jen@preisser.de
