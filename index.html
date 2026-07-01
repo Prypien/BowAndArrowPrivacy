@@ -200,7 +200,7 @@
         <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Panel" hint-size="100%,360px">
           <div style="display:flex;flex-direction:column;gap:12px;">
             <sc-for list="{{ forgeRows }}" as="r" hint-placeholder-count="4">
-              <x-import component-from-global-scope="BowArrowDesignSystem_19524f.StatUpgradeRow" icon="{{ r.icon }}" name="{{ r.n }}" level="{{ r.lv }}" max-level="{{ r.mx }}" cost="{{ r.cost }}" currency="gold" cost-icon-src="assets/ds/league-gold.png" hint-size="100%,72px"></x-import>
+              <x-import component-from-global-scope="BowArrowDesignSystem_19524f.StatUpgradeRow" icon="{{ r.icon }}" name="{{ r.n }}" level="{{ r.lv }}" max-level="{{ r.mx }}" cost="{{ r.cost }}" currency="gold" hint-size="100%,72px"></x-import>
             </sc-for>
           </div>
         </x-import>
@@ -337,7 +337,6 @@
           <div>
             <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
               <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Badge" variant="{{ sel.variant }}" size="md" hint-size="auto,28px">{{ sel.rank }}</x-import>
-              <span style="font-size:18px;letter-spacing:1px;color:var(--ba-parchment-dim);">{{ t.codex.size }}: {{ sel.size }}px</span>
             </div>
             <h3 style="font-size:42px;line-height:.95;color:var(--ba-gold);text-shadow:var(--text-outline);margin:0 0 4px;">{{ sel.name }}</h3>
             <div style="font-size:22px;letter-spacing:1px;color:var(--ba-parchment-dim);margin-bottom:14px;">{{ sel.role }}</div>
@@ -520,13 +519,13 @@ class Component extends DCLogic {
           { label: 'BEGLEITER', href: '#companions' }, { label: 'SCHMIEDE', href: '#forge' },
           { label: 'BEUTE', href: '#loot' }, { label: 'FAQ', href: '#faq' }
         ],
-        hero: { kick: '★ RETRO TOWER-DEFENSE', platform: 'FÜR IPHONE · iOS 26+', sub: 'Spanne deinen Langbogen, rufe Begleiter und halte die Linie gegen die endlose Ork-Horde. Ein Bogenschütze. Eine Burg. Tausend Feinde.', play: '▶ IM APP STORE', seeEnemies: 'GEGNER ANSEHEN', scroll: 'SCROLLEN', rateBadge: '5,0 ★ APP STORE', freeBadge: 'GRATIS SPIELBAR' },
+        hero: { kick: '★ RETRO TOWER-DEFENSE', platform: 'FÜR IPHONE', sub: 'Ein Bogen. Eine Burg.', play: '▶ IM APP STORE', seeEnemies: 'GEGNER ANSEHEN', scroll: 'SCROLLEN', rateBadge: '5,0 ★ APP STORE', freeBadge: 'GRATIS SPIELBAR' },
         stats: [{ v: '5,0★', l: 'App-Store-Wertung' }, { v: '18', l: 'Gegnertypen' }, { v: '4', l: 'Begleiter-Helden' }, { v: '∞', l: 'Endlos-Belagerung' }],
         feat: { kick: 'WAS DICH ERWARTET', t: 'Gebaut für die Belagerung', items: [
           { icons: [I + 'longbow.png', I + 'dragonbow.png', I + 'staff.png'], t: 'MEISTERE DIE WAFFEN', b: 'Schmiede und verbessere Langbogen, Drachenfeuer-Bogen und Zauberstab. Stimme Krit, Angriffstempo und Rückstoß auf deinen Kampfstil ab.' },
           { icons: [I + 'healingwave.png', I + 'blizzard.png', I + 'meteor.png'], t: 'WIRKE ZAUBER', b: 'Setze Mana für Heilwelle, Blizzard und Meteorschlag ein und wende jede Welle zu deinen Gunsten.' },
           { icons: [C + 'lemmrich_logo.png', C + 'misswolf_logo.png', C + 'arthur_logo.png', C + 'sergio_logo.png'], t: 'RUFE BEGLEITER', b: 'Rekrutiere vier Helden — Lemmrich, Miss Wolf, Sir Arthur und Sergio — verbünde dich mit ihnen und entfessle verheerende Ultimates.' } ] },
-        arsenal: { kick: 'MASTER THE WEAPON', t: 'Dein Arsenal', sub: 'Sammle Bögen und Zauber in fünf Seltenheitsstufen — jedes Item sitzt in seinem eigenen Rarität-Rahmen, genau wie im Spiel.', items: [
+        arsenal: { kick: 'MASTER THE WEAPON', t: 'Dein Arsenal', sub: 'Sammle Bögen und Zauber in fünf Seltenheitsstufen.', items: [
           { icon: I + 'longbow.png', border: I + 'border-bronze.png', name: 'LANGBOGEN', rarity: 'Bronze', rk: 'bronze' },
           { icon: I + 'dragonbow.png', border: I + 'border-platin.png', name: 'DRACHENFEUER-BOGEN', rarity: 'Legendär', rk: 'legend' },
           { icon: I + 'staff.png', border: I + 'border-gold.png', name: 'ZAUBERSTAB', rarity: 'Gold', rk: 'gold' },
@@ -534,7 +533,7 @@ class Component extends DCLogic {
           { icon: I + 'blizzard.png', border: I + 'border-gold.png', name: 'BLIZZARD', rarity: 'Gold', rk: 'gold' },
           { icon: I + 'meteor.png', border: I + 'border-platin.png', name: 'METEORSCHLAG', rarity: 'Legendär', rk: 'legend' },
           { icon: I + 'wind.png', border: I + 'border-bronze.png', name: 'WINDSCHILD', rarity: 'Bronze', rk: 'bronze' } ] },
-        play: { kick: 'DIE WELLEN-MECHANIK', t: 'Halte die Linie', sub: 'Die Orks marschieren von rechts heran — Welle um Welle, bis der Boss erscheint.', steps: [
+        play: { kick: 'DIE WELLEN-MECHANIK', t: 'Halte die Linie', sub: 'Welle um Welle.', steps: [
           { n: '01', t: 'ZIELE & SCHIESSE', b: 'Spanne den Bogen, führe vor und lass Pfeile auf die anrückende Horde regnen.' },
           { n: '02', t: 'ÜBERLEBE DIE WELLE', b: 'Jede Welle wird härter — Schildträger blocken, Schamanen heilen, Bomber explodieren.' },
           { n: '03', t: 'STÜRZE DEN BOSS', b: 'Am Ende jeder Etappe wartet ein Boss. Besiege ihn und rücke vor.' } ] },
@@ -575,13 +574,13 @@ class Component extends DCLogic {
           { label: 'COMPANIONS', href: '#companions' }, { label: 'FORGE', href: '#forge' },
           { label: 'LOOT', href: '#loot' }, { label: 'FAQ', href: '#faq' }
         ],
-        hero: { kick: '★ RETRO TOWER DEFENSE', platform: 'FOR IPHONE · iOS 26+', sub: 'Draw your longbow, command companions, and hold the line against the endless orc horde. One archer. One castle. A thousand foes.', play: '▶ ON THE APP STORE', seeEnemies: 'SEE THE ENEMIES', scroll: 'SCROLL', rateBadge: '5.0 ★ APP STORE', freeBadge: 'FREE TO PLAY' },
+        hero: { kick: '★ RETRO TOWER DEFENSE', platform: 'FOR IPHONE', sub: 'One bow. One castle.', play: '▶ ON THE APP STORE', seeEnemies: 'SEE THE ENEMIES', scroll: 'SCROLL', rateBadge: '5.0 ★ APP STORE', freeBadge: 'FREE TO PLAY' },
         stats: [{ v: '5.0★', l: 'App Store Rating' }, { v: '18', l: 'Enemy Types' }, { v: '4', l: 'Companion Heroes' }, { v: '∞', l: 'Endless Siege' }],
         feat: { kick: 'WHAT AWAITS YOU', t: 'Built for the siege', items: [
           { icons: [I + 'longbow.png', I + 'dragonbow.png', I + 'staff.png'], t: 'MASTER THE WEAPONS', b: 'Forge and upgrade longbow, dragonfire bow and wizard staff. Tune crit, attack speed, and knockback to your battle style.' },
           { icons: [I + 'healingwave.png', I + 'blizzard.png', I + 'meteor.png'], t: 'CAST SPELLS', b: 'Spend mana on healing wave, blizzard and meteor strike to turn the tide of any wave.' },
           { icons: [C + 'lemmrich_logo.png', C + 'misswolf_logo.png', C + 'arthur_logo.png', C + 'sergio_logo.png'], t: 'RALLY COMPANIONS', b: 'Recruit four heroes — Lemmrich, Miss Wolf, Sir Arthur and Sergio — bond with them, and unleash devastating ultimate abilities.' } ] },
-        arsenal: { kick: 'MASTER THE WEAPON', t: 'Your arsenal', sub: 'Collect bows and spells across five rarity tiers — every item sits in its own rarity frame, just like in the game.', items: [
+        arsenal: { kick: 'MASTER THE WEAPON', t: 'Your arsenal', sub: 'Collect bows and spells across five rarity tiers.', items: [
           { icon: I + 'longbow.png', border: I + 'border-bronze.png', name: 'LONGBOW', rarity: 'Bronze', rk: 'bronze' },
           { icon: I + 'dragonbow.png', border: I + 'border-platin.png', name: 'DRAGONFIRE BOW', rarity: 'Legendary', rk: 'legend' },
           { icon: I + 'staff.png', border: I + 'border-gold.png', name: 'WIZARD STAFF', rarity: 'Gold', rk: 'gold' },
@@ -589,7 +588,7 @@ class Component extends DCLogic {
           { icon: I + 'blizzard.png', border: I + 'border-gold.png', name: 'BLIZZARD', rarity: 'Gold', rk: 'gold' },
           { icon: I + 'meteor.png', border: I + 'border-platin.png', name: 'METEOR STRIKE', rarity: 'Legendary', rk: 'legend' },
           { icon: I + 'wind.png', border: I + 'border-bronze.png', name: 'WIND SHIELD', rarity: 'Bronze', rk: 'bronze' } ] },
-        play: { kick: 'THE WAVE MECHANIC', t: 'Hold the line', sub: 'Orcs march in from the right — wave after wave, until the boss appears.', steps: [
+        play: { kick: 'THE WAVE MECHANIC', t: 'Hold the line', sub: 'Wave after wave.', steps: [
           { n: '01', t: 'AIM & FIRE', b: 'Draw the bow, lead your shot, and rain arrows on the advancing horde.' },
           { n: '02', t: 'SURVIVE THE WAVE', b: 'Every wave bites harder — shieldbearers block, shamans heal, bombers explode.' },
           { n: '03', t: 'FELL THE BOSS', b: 'A boss waits at the end of each stage. Bring it down and press on.' } ] },

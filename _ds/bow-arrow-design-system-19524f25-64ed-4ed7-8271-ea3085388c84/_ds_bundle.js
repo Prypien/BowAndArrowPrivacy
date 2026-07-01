@@ -354,12 +354,7 @@ function CurrencyLabel({
       imageRendering: "pixelated",
       display: "block"
     }
-  }) : /*#__PURE__*/React.createElement("span", {
-    style: {
-      color: tint,
-      fontSize: "1.05em"
-    }
-  }, fallbackGlyph), amount.toLocaleString());
+  }) : null, amount.toLocaleString());
 }
 Object.assign(__ds_scope, { CurrencyLabel });
 })(); } catch (e) { __ds_ns.__errors.push({ path: "components/game/CurrencyLabel.jsx", error: String((e && e.message) || e) }); }
