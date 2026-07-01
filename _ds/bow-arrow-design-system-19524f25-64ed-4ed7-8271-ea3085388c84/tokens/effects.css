@@ -1,0 +1,44 @@
+/* ============================================================
+   EFFECTS — Bow & Arrow
+   Shadows are hard and dark (pixel art casts crisp, not blurry).
+   The hallmark is the GOLD DOUBLE-STROKE panel: a 2px gold edge
+   sitting just inside a darker stone border, with a deep inset
+   shadow so panels read as carved openings.
+   Motion is fast and snappy: press = scale .96 + slight dim.
+   ============================================================ */
+:root {
+  /* Hard drop shadows (pixel-crisp; low blur) */
+  --shadow-sm: 0 2px 0 rgba(0,0,0,0.45);
+  --shadow-md: 0 3px 0 rgba(0,0,0,0.5), 0 6px 14px rgba(0,0,0,0.45);
+  --shadow-lg: 0 4px 0 rgba(0,0,0,0.55), 0 10px 28px rgba(0,0,0,0.55);
+
+  /* Inset stone depth for sunken panels / tracks */
+  --shadow-inset: inset 0 2px 6px rgba(0,0,0,0.6);
+
+  /* Gold glow — used sparingly on legendary / active focus */
+  --glow-gold: 0 0 0 2px rgba(191,153,63,0.35), 0 0 18px rgba(191,153,63,0.45);
+  --glow-mana: 0 0 14px rgba(77,140,242,0.5);
+
+  /* The signature panel edge: gold inner stroke + dark outer */
+  --edge-gold: 0 0 0 var(--stroke-gold) var(--ba-gold),
+               0 0 0 calc(var(--stroke-gold) + 2px) var(--ba-stroke-dark);
+
+  /* Pixel text outline (apply as text-shadow for that black 1px halo) */
+  --text-outline: 1px 1px 0 var(--ba-stroke-dark),
+                  -1px 1px 0 var(--ba-stroke-dark),
+                  1px -1px 0 var(--ba-stroke-dark),
+                  -1px -1px 0 var(--ba-stroke-dark);
+
+  /* Motion */
+  --ease-snap: cubic-bezier(0.2, 0.8, 0.2, 1); /* @kind other */
+  --dur-press: 120ms; /* @kind other */
+  --dur-base: 180ms; /* @kind other */
+  --press-scale: 0.96; /* @kind other */
+  --press-dim: brightness(0.94); /* @kind other */
+
+  /* Keep pixel art crisp when scaled */
+  --img-render: pixelated; /* @kind other */
+}
+
+/* Utility: any imagery in this system should NOT be smoothed */
+.ba-pixelated { image-rendering: pixelated; image-rendering: crisp-edges; }

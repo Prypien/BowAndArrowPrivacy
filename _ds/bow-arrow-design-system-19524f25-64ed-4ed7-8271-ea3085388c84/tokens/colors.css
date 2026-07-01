@@ -1,0 +1,64 @@
+/* ============================================================
+   COLORS — Bow & Arrow
+   Lifted directly from the game's SwiftUI Theme.swift / UIStyleSheet.
+   A dark-fantasy, pixel-art palette: heraldic GOLD on near-black
+   stone, with parchment text and jewel-tone accents.
+   ============================================================ */
+:root {
+  /* ---- Core brand ---- */
+  --ba-gold: #BF993F;            /* heraldic gold — THE brand color (lion crest, borders, CTAs) */
+  --ba-gold-bright: #F2C733;     /* bright gold — highlights, currency, legendary */
+  --ba-gold-deep: #B3852E;       /* deep gold — gradient bottom, pressed gold */
+  --ba-gold-pale: #E0C266;       /* pale gold — gradient top, sheen */
+
+  /* ---- Surfaces (near-black stone) ---- */
+  --ba-bg: #0A0E18;              /* app background — bluish near-black */
+  --ba-bg-deep: #080C14;         /* deepest layer / behind panels */
+  --ba-panel: #14141A;           /* panel / card fill */
+  --ba-panel-raised: #1F1F24;    /* dark stone — raised rows, inputs */
+  --ba-panel-border: #473D38;    /* warm stone border under the gold */
+  --ba-overlay: rgba(8,12,20,0.72); /* modal scrim */
+
+  /* ---- Text (parchment on stone) ---- */
+  --ba-parchment: #D9D1BF;       /* primary text — warm off-white */
+  --ba-parchment-dim: #8C8474;   /* secondary / muted parchment */
+  --ba-ink: #0A0E18;             /* text ON gold surfaces */
+  --ba-stroke-dark: #1A1208;     /* the 1px black pixel outline on art & glyphs */
+
+  /* ---- Heraldic accents ---- */
+  --ba-sapphire: #4D8CF2;        /* banner blue — the lion's field, info */
+  --ba-sapphire-deep: #3359A6;   /* arcane / deep banner */
+  --ba-blood: #8C1414;           /* blood red — danger banners, boss */
+
+  /* ---- Semantic ---- */
+  --ba-success: #408C4D;
+  --ba-warning: #D9991F;
+  --ba-danger: #B32626;
+  --ba-mana: #4D8CF2;            /* mana / spell blue */
+  --ba-poison: #408040;
+  --ba-royal: #663380;           /* royal purple — epic */
+
+  /* ---- Item rarity (chests, gear) ---- */
+  --ba-rarity-common: #8C8474;
+  --ba-rarity-bronze: #AB7547;
+  --ba-rarity-silver: #C7CCD6;
+  --ba-rarity-gold: #F2C733;
+  --ba-rarity-epic: #663380;
+  --ba-rarity-legendary: #D9991F;
+
+  /* ---- Gradients ---- */
+  --ba-gradient-gold: linear-gradient(180deg, #E0C266 0%, #BF993F 52%, #B3852E 100%); /* @kind color */
+  --ba-gradient-panel: linear-gradient(180deg, #1B1B22 0%, #14141A 100%); /* @kind color */
+  --ba-gradient-sky: linear-gradient(180deg, #0A0E18 0%, #10182B 100%); /* @kind color */
+
+  /* ---- Semantic aliases (use these in components) ---- */
+  --surface-app: var(--ba-bg);
+  --surface-card: var(--ba-panel);
+  --surface-raised: var(--ba-panel-raised);
+  --border-default: var(--ba-panel-border);
+  --border-gold: var(--ba-gold);
+  --text-body: var(--ba-parchment);
+  --text-muted: var(--ba-parchment-dim);
+  --text-on-gold: var(--ba-ink);
+  --accent: var(--ba-gold);
+}

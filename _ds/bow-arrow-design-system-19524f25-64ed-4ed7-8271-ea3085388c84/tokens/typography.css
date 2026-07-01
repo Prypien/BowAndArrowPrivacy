@@ -1,0 +1,33 @@
+/* ============================================================
+   TYPOGRAPHY — Bow & Arrow
+   One face does almost everything: VT323, a monospaced pixel
+   terminal font. Sizing is generous (pixel fonts read small).
+   Letter-spacing is tight; the font already has its own rhythm.
+   ============================================================ */
+:root {
+  --font-pixel: "VT323", "Courier New", monospace;     /* default UI + display */
+  --font-blocky: "Press Start 2P", "VT323", monospace; /* chunky 8-bit accents only */
+
+  /* Type scale (px). Pixel fonts want to land on whole/even sizes. */
+  --text-2xs: 14px;   /* fine print, captions */
+  --text-xs: 16px;    /* dense labels, stat values */
+  --text-sm: 18px;    /* secondary body */
+  --text-base: 22px;  /* body / default control text */
+  --text-md: 26px;    /* row titles, list items */
+  --text-lg: 32px;    /* section headers */
+  --text-xl: 40px;    /* screen titles */
+  --text-2xl: 56px;   /* hero numerals, panel headers */
+  --text-3xl: 76px;   /* marketing display */
+  --text-4xl: 104px;  /* hero wordmark */
+
+  --leading-tight: 1.0;
+  --leading-snug: 1.15;
+  --leading-normal: 1.35;
+
+  /* VT323 has near-zero native tracking; nudge for caps runs */
+  --tracking-tight: 0px;
+  --tracking-wide: 1px;
+  --tracking-caps: 2px;
+
+  --weight-normal: 400; /* VT323 ships a single weight */
+}

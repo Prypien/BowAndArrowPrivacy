@@ -1,0 +1,351 @@
+{
+  "plugins": [
+    "react",
+    "import"
+  ],
+  "rules": {
+    "react/forbid-elements": [
+      "warn",
+      {
+        "forbid": []
+      }
+    ],
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": [
+          {
+            "group": [
+              "components/core/**",
+              "components/game/**",
+              "ui_kits/game/**",
+              "ui_kits/website/**"
+            ],
+            "message": "Import design-system components from 'index.js', not component internals."
+          }
+        ]
+      }
+    ],
+    "no-restricted-syntax": [
+      "warn",
+      {
+        "selector": "Literal[value=/#[0-9a-fA-F]{3,8}\\b/]",
+        "message": "Raw hex color — use a design-system color token via var()."
+      },
+      {
+        "selector": "Literal[value=/\\b\\d+px\\b/]",
+        "message": "Raw px value — use a design-system spacing token via var()."
+      },
+      {
+        "selector": "Literal[value=/font-family\\s*:\\s*(?!['\\\"]?(?:VT323|Press Start 2P))/i]",
+        "message": "Font not provided by the design system. Available: VT323, Press Start 2P."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|size|icon|style|children|key|ref|className|style|children)$/]",
+        "message": "<Badge> doesn't accept that prop. Declared props: variant, size, icon, style, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:gold|stone|sapphire|success|warning|danger|bronze|silver|epic)$/]",
+        "message": "<Badge> variant must be one of 'gold' | 'stone' | 'sapphire' | 'success' | 'warning' | 'danger' | 'bronze' | 'silver' | 'epic'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Badge'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<Badge> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute > JSXIdentifier[name!=/^(?:variant|size|icon|full|disabled|children|key|ref|className|style|children)$/]",
+        "message": "<Button> doesn't accept that prop. Declared props: variant, size, icon, full, disabled, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:primary|secondary|danger|ghost)$/]",
+        "message": "<Button> variant must be one of 'primary' | 'secondary' | 'danger' | 'ghost'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Button'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<Button> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CurrencyLabel'] > JSXAttribute > JSXIdentifier[name!=/^(?:amount|currency|affordable|size|iconSrc|style|key|ref|className|style|children)$/]",
+        "message": "<CurrencyLabel> doesn't accept that prop. Declared props: amount, currency, affordable, size, iconSrc, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CurrencyLabel'] > JSXAttribute[name.name='currency'] > Literal[value!=/^(?:gold|mana)$/]",
+        "message": "<CurrencyLabel> currency must be one of 'gold' | 'mana'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='CurrencyLabel'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<CurrencyLabel> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Panel'] > JSXAttribute > JSXIdentifier[name!=/^(?:title|icon|variant|inset|style|bodyStyle|children|key|ref|className|style|children)$/]",
+        "message": "<Panel> doesn't accept that prop. Declared props: title, icon, variant, inset, style, bodyStyle, children."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='Panel'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:default|plain|legendary)$/]",
+        "message": "<Panel> variant must be one of 'default' | 'plain' | 'legendary'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ProgressBar'] > JSXAttribute > JSXIdentifier[name!=/^(?:value|max|variant|segments|height|label|style|key|ref|className|style|children)$/]",
+        "message": "<ProgressBar> doesn't accept that prop. Declared props: value, max, variant, segments, height, label, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ProgressBar'] > JSXAttribute[name.name='variant'] > Literal[value!=/^(?:gold|mana|health|poison|xp)$/]",
+        "message": "<ProgressBar> variant must be one of 'gold' | 'mana' | 'health' | 'poison' | 'xp'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ResourceCounter'] > JSXAttribute > JSXIdentifier[name!=/^(?:amount|iconSrc|glyph|tint|showAdd|onAdd|size|style|key|ref|className|style|children)$/]",
+        "message": "<ResourceCounter> doesn't accept that prop. Declared props: amount, iconSrc, glyph, tint, showAdd, onAdd, size, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='ResourceCounter'] > JSXAttribute[name.name='size'] > Literal[value!=/^(?:sm|md|lg)$/]",
+        "message": "<ResourceCounter> size must be one of 'sm' | 'md' | 'lg'."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='SegmentOption'] > JSXAttribute > JSXIdentifier[name!=/^(?:value|label|icon|key|ref|className|style|children)$/]",
+        "message": "<SegmentOption> doesn't accept that prop. Declared props: value, label, icon."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StatUpgradeRow'] > JSXAttribute > JSXIdentifier[name!=/^(?:icon|name|level|maxLevel|cost|currency|affordable|maxed|costIconSrc|onUpgrade|style|key|ref|className|style|children)$/]",
+        "message": "<StatUpgradeRow> doesn't accept that prop. Declared props: icon, name, level, maxLevel, cost, currency, affordable, maxed, costIconSrc, onUpgrade, style."
+      },
+      {
+        "selector": "JSXOpeningElement[name.name='StatUpgradeRow'] > JSXAttribute[name.name='currency'] > Literal[value!=/^(?:gold|mana)$/]",
+        "message": "<StatUpgradeRow> currency must be one of 'gold' | 'mana'."
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "**/index.js"
+      ],
+      "rules": {
+        "no-restricted-imports": "off"
+      }
+    }
+  ],
+  "x-omelette": {
+    "components": {
+      "Badge": {
+        "replaces": []
+      },
+      "Button": {
+        "replaces": []
+      },
+      "CurrencyLabel": {
+        "replaces": []
+      },
+      "Panel": {
+        "replaces": []
+      },
+      "ProgressBar": {
+        "replaces": []
+      },
+      "ResourceCounter": {
+        "replaces": []
+      },
+      "SegmentOption": {
+        "replaces": []
+      },
+      "StatUpgradeRow": {
+        "replaces": []
+      }
+    },
+    "tokens": [
+      "--accent",
+      "--ba-bg",
+      "--ba-bg-deep",
+      "--ba-blood",
+      "--ba-danger",
+      "--ba-gold",
+      "--ba-gold-bright",
+      "--ba-gold-deep",
+      "--ba-gold-pale",
+      "--ba-gradient-gold",
+      "--ba-gradient-panel",
+      "--ba-gradient-sky",
+      "--ba-ink",
+      "--ba-mana",
+      "--ba-overlay",
+      "--ba-panel",
+      "--ba-panel-border",
+      "--ba-panel-raised",
+      "--ba-parchment",
+      "--ba-parchment-dim",
+      "--ba-poison",
+      "--ba-rarity-bronze",
+      "--ba-rarity-common",
+      "--ba-rarity-epic",
+      "--ba-rarity-gold",
+      "--ba-rarity-legendary",
+      "--ba-rarity-silver",
+      "--ba-royal",
+      "--ba-sapphire",
+      "--ba-sapphire-deep",
+      "--ba-stroke-dark",
+      "--ba-success",
+      "--ba-warning",
+      "--border-default",
+      "--border-gold",
+      "--control-lg",
+      "--control-md",
+      "--control-sm",
+      "--dur-base",
+      "--dur-press",
+      "--ease-snap",
+      "--edge-gold",
+      "--font-blocky",
+      "--font-pixel",
+      "--glow-gold",
+      "--glow-mana",
+      "--img-render",
+      "--leading-normal",
+      "--leading-snug",
+      "--leading-tight",
+      "--press-dim",
+      "--press-scale",
+      "--radius-lg",
+      "--radius-md",
+      "--radius-pill",
+      "--radius-sm",
+      "--radius-xs",
+      "--shadow-inset",
+      "--shadow-lg",
+      "--shadow-md",
+      "--shadow-sm",
+      "--space-0",
+      "--space-1",
+      "--space-2",
+      "--space-3",
+      "--space-4",
+      "--space-5",
+      "--space-6",
+      "--space-7",
+      "--space-8",
+      "--stroke-gold",
+      "--stroke-heavy",
+      "--stroke-thin",
+      "--surface-app",
+      "--surface-card",
+      "--surface-raised",
+      "--text-2xl",
+      "--text-2xs",
+      "--text-3xl",
+      "--text-4xl",
+      "--text-base",
+      "--text-body",
+      "--text-lg",
+      "--text-md",
+      "--text-muted",
+      "--text-on-gold",
+      "--text-outline",
+      "--text-sm",
+      "--text-xl",
+      "--text-xs",
+      "--tracking-caps",
+      "--tracking-tight",
+      "--tracking-wide",
+      "--weight-normal"
+    ],
+    "tokenKinds": {
+      "--ba-gold": "color",
+      "--ba-gold-bright": "color",
+      "--ba-gold-deep": "color",
+      "--ba-gold-pale": "color",
+      "--ba-bg": "color",
+      "--ba-bg-deep": "color",
+      "--ba-panel": "color",
+      "--ba-panel-raised": "color",
+      "--ba-panel-border": "color",
+      "--ba-overlay": "color",
+      "--ba-parchment": "color",
+      "--ba-parchment-dim": "color",
+      "--ba-ink": "color",
+      "--ba-stroke-dark": "color",
+      "--ba-sapphire": "color",
+      "--ba-sapphire-deep": "color",
+      "--ba-blood": "color",
+      "--ba-success": "color",
+      "--ba-warning": "color",
+      "--ba-danger": "color",
+      "--ba-mana": "color",
+      "--ba-poison": "color",
+      "--ba-royal": "color",
+      "--ba-rarity-common": "color",
+      "--ba-rarity-bronze": "color",
+      "--ba-rarity-silver": "color",
+      "--ba-rarity-gold": "color",
+      "--ba-rarity-epic": "color",
+      "--ba-rarity-legendary": "color",
+      "--ba-gradient-gold": "color",
+      "--ba-gradient-panel": "color",
+      "--ba-gradient-sky": "color",
+      "--surface-app": "color",
+      "--surface-card": "color",
+      "--surface-raised": "color",
+      "--border-default": "color",
+      "--border-gold": "color",
+      "--text-body": "font",
+      "--text-muted": "font",
+      "--text-on-gold": "font",
+      "--accent": "color",
+      "--font-pixel": "font",
+      "--font-blocky": "font",
+      "--text-2xs": "font",
+      "--text-xs": "font",
+      "--text-sm": "font",
+      "--text-base": "font",
+      "--text-md": "font",
+      "--text-lg": "font",
+      "--text-xl": "font",
+      "--text-2xl": "font",
+      "--text-3xl": "font",
+      "--text-4xl": "font",
+      "--leading-tight": "font",
+      "--leading-snug": "font",
+      "--leading-normal": "font",
+      "--tracking-tight": "font",
+      "--tracking-wide": "font",
+      "--tracking-caps": "font",
+      "--weight-normal": "font",
+      "--space-0": "spacing",
+      "--space-1": "spacing",
+      "--space-2": "spacing",
+      "--space-3": "spacing",
+      "--space-4": "spacing",
+      "--space-5": "spacing",
+      "--space-6": "spacing",
+      "--space-7": "spacing",
+      "--space-8": "spacing",
+      "--radius-xs": "radius",
+      "--radius-sm": "radius",
+      "--radius-md": "radius",
+      "--radius-lg": "radius",
+      "--radius-pill": "radius",
+      "--stroke-thin": "color",
+      "--stroke-gold": "color",
+      "--stroke-heavy": "color",
+      "--control-sm": "spacing",
+      "--control-md": "spacing",
+      "--control-lg": "spacing",
+      "--shadow-sm": "shadow",
+      "--shadow-md": "shadow",
+      "--shadow-lg": "shadow",
+      "--shadow-inset": "shadow",
+      "--glow-gold": "shadow",
+      "--glow-mana": "shadow",
+      "--edge-gold": "color",
+      "--text-outline": "font",
+      "--ease-snap": "other",
+      "--dur-press": "other",
+      "--dur-base": "other",
+      "--press-scale": "other",
+      "--press-dim": "other",
+      "--img-render": "other"
+    },
+    "fontFamilies": [
+      "Press Start 2P",
+      "VT323"
+    ]
+  }
+}

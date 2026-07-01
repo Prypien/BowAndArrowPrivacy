@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bow &amp; Arrow — Datenschutz / Privacy</title>
+  <meta name="description" content="Datenschutzerklärung und Privacy Policy für die iOS-App Bow & Arrow." />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap" />
+  <style>
+    :root {
+      --ba-gold: #BF993F;
+      --ba-gold-pale: #E0C266;
+      --ba-bg: #0A0E18;
+      --ba-bg-deep: #080C14;
+      --ba-panel: #14141A;
+      --ba-panel-raised: #1F1F24;
+      --ba-panel-border: #473D38;
+      --ba-parchment: #D9D1BF;
+      --ba-parchment-dim: #8C8474;
+      --font-pixel: "VT323", ui-monospace, "Courier New", monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-pixel);
+      font-size: 21px;
+      line-height: 1.4;
+      color: var(--ba-parchment);
+      background: var(--ba-bg);
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: var(--ba-gold); color: var(--ba-bg); }
+    .wrap { max-width: 50rem; margin: 0 auto; padding: 40px 22px 80px; }
+    header.bar {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(8,12,20,0.92);
+      border-bottom: 2px solid var(--ba-panel-border);
+      backdrop-filter: blur(6px);
+    }
+    header.bar .inner {
+      max-width: 50rem; margin: 0 auto; padding: 12px 22px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    header.bar a.home {
+      color: var(--ba-gold); letter-spacing: 1px; font-size: 24px;
+      text-shadow: 1px 1px 0 #000;
+    }
+    nav.legal-tabs { margin-left: auto; display: flex; gap: 8px; }
+    nav.legal-tabs a {
+      font-size: 18px; letter-spacing: 1px; padding: 6px 14px;
+      border: 2px solid var(--ba-panel-border); border-radius: 6px;
+      color: var(--ba-parchment-dim); text-decoration: none;
+    }
+    nav.legal-tabs a.active {
+      color: var(--ba-bg); border-color: var(--ba-gold);
+      background: linear-gradient(180deg, var(--ba-gold-pale), var(--ba-gold));
+    }
+    nav.legal-tabs a:hover { color: var(--ba-gold); }
+    nav.legal-tabs a.active:hover { color: var(--ba-bg); filter: brightness(1.06); }
+    h1 {
+      font-size: 52px; line-height: 1; margin: 18px 0 6px;
+      color: var(--ba-gold); letter-spacing: 1px; text-shadow: 1px 1px 0 #000;
+    }
+    h2 {
+      font-size: 30px; margin: 34px 0 8px; color: var(--ba-gold-pale);
+      letter-spacing: 1px;
+    }
+    p, li { color: var(--ba-parchment); }
+    small { color: var(--ba-parchment-dim); font-size: 18px; }
+    a { color: var(--ba-gold); }
+    ul { padding-left: 1.3rem; }
+    li { margin: 4px 0; }
+    hr { border: none; border-top: 2px solid var(--ba-panel-border); margin: 48px 0; }
+    .lang-switch { display: flex; gap: 10px; margin: 14px 0 0; }
+    .lang-switch a { font-size: 18px; letter-spacing: 1px; }
+    footer.foot {
+      max-width: 50rem; margin: 0 auto; padding: 0 22px 60px;
+      color: var(--ba-parchment-dim); font-size: 18px;
+    }
+    footer.foot a { color: var(--ba-gold); }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <div class="inner">
+      <a class="home" href="index.html">BOW &amp; ARROW</a>
+      <nav class="legal-tabs">
+        <a class="active" href="privacy.html">PRIVACY</a>
+        <a href="impressum.html">IMPRESSUM</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="lang-switch"><a href="#de">Deutsch</a> · <a href="#en">English</a></div>
+
+    <h1 id="de">Datenschutzerklärung</h1>
+    <p><small>Stand: Mai 2026 — App „Bow &amp; Arrow“ (iOS)</small></p>
+
+    <h2>1. Verantwortlicher</h2>
+    <p>
+      Jen Eric Preißer<br />
+      Schellingstraße 18/1<br />
+      72622 Nürtingen<br />
+      Deutschland<br />
+      E-Mail: <a href="mailto:jen@preisser.de">jen@preisser.de</a>
+    </p>
+
+    <h2>2. Überblick</h2>
+    <p>
+      „Bow &amp; Arrow“ ist ein Spiel für iOS (ab 13 Jahren). Der Spielstand wird primär auf deinem Gerät gespeichert.
+      Optional kannst du iCloud-Synchronisation und Game Center nutzen — beides läuft über Apple, nicht über eigene Server des Entwicklers.
+    </p>
+    <p>
+      Es gibt <strong>kein Werbe-Tracking</strong>, keine Analytics-Dienste (z. B. Firebase) und <strong>keinen Verkauf</strong> personenbezogener Daten.
+      Es wird <strong>kein eigenes Backend</strong> betrieben, das Spielerdaten außerhalb von Apple-Diensten speichert.
+    </p>
+
+    <h2>3. Welche Daten werden verarbeitet?</h2>
+    <ul>
+      <li><strong>Spielstand und Einstellungen (lokal):</strong> Fortschritt, Inventar, Einstellungen und vergleichbare Spieldaten werden auf deinem iPhone gespeichert.</li>
+      <li><strong>iCloud / CloudKit (optional):</strong> Wenn du mit deiner Apple-ID angemeldet bist und iCloud verfügbar ist, kann der Spielstand in deiner <strong>privaten iCloud-Datenbank</strong> synchronisiert werden (Standard-CloudKit von Apple, gleicher Account auf mehreren Geräten). Der Entwickler betreibt hierfür keine eigenen Server.</li>
+      <li><strong>Game Center (optional):</strong> Trophäen-Fortschritt, Erfolge und eine <strong>globale Rangliste</strong> (Trophäen-Anzahl) über Apple Game Center. In der App können <strong>Anzeigenamen und Avatare anderer Spieler</strong> in der Rangliste sichtbar sein — bereitgestellt von Apple.</li>
+      <li><strong>In-App-Käufe:</strong> Einmalkäufe werden ausschließlich über den <strong>Apple App Store</strong> abgewickelt. Zahlungsdaten erhält der Entwickler nicht; Apple stellt ggf. Kaufinformationen/Entitlements bereit.</li>
+      <li><strong>Technische Daten bei Apple:</strong> Sturz- oder Diagnosedaten können, wie bei jeder iOS-App, über Apple (z. B. wenn du Fehlerberichte teilst) verarbeitet werden — nicht über separate Drittanbieter-Dienste des Entwicklers.</li>
+    </ul>
+
+    <h2>4. Zwecke</h2>
+    <p>
+      Bereitstellung des Spiels, Speicherung und Wiederherstellung des Fortschritts, optionale Geräte-Synchronisation,
+      optionale Ranglisten und Erfolge, Abwicklung von Käufen über Apple sowie Stabilität und Support.
+    </p>
+
+    <h2>5. Rechtsgrundlagen (EU/EWR)</h2>
+    <ul>
+      <li><strong>Art. 6 Abs. 1 lit. b DSGVO</strong> — Vertragserfüllung (Spielnutzung, Käufe über Apple).</li>
+      <li><strong>Art. 6 Abs. 1 lit. f DSGVO</strong> — berechtigtes Interesse an technisch stabiler App und Support.</li>
+      <li><strong>Art. 6 Abs. 1 lit. a DSGVO</strong> — nur soweit du optionale Apple-Dienste (iCloud, Game Center) aktiv nutzt bzw. einwilligst, soweit erforderlich.</li>
+    </ul>
+
+    <h2>6. Speicherdauer</h2>
+    <ul>
+      <li>Lokale Daten: bis zur Deinstallation der App oder „Fortschritt zurücksetzen“ in den Einstellungen.</li>
+      <li>iCloud-Daten: gemäß deinen Apple-Konto-Einstellungen und Apples Löschfristen.</li>
+      <li>Game Center: gemäß Apple Game Center und deinen Apple-Einstellungen.</li>
+    </ul>
+
+    <h2>7. Empfänger und Drittländer</h2>
+    <p>
+      Empfänger ist im Wesentlichen <strong>Apple Inc.</strong> (iCloud, CloudKit, Game Center, App Store).
+      Apple kann Daten auch außerhalb der EU/EWR verarbeiten (z. B. USA). Apple stellt hierfür geeignete Garantien ein
+      (u. a. Standardvertragsklauseln); Details in der
+      <a href="https://www.apple.com/legal/privacy/">Datenschutzerklärung von Apple</a>.
+    </p>
+
+    <h2>8. Deine Rechte</h2>
+    <p>
+      Du hast nach der DSGVO u. a. Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung,
+      Widerspruch und Datenübertragbarkeit, soweit anwendbar.
+      Wende dich an <a href="mailto:jen@preisser.de">jen@preisser.de</a>.
+    </p>
+    <p>
+      Du kannst dich bei einer Datenschutz-Aufsichtsbehörde beschweren, z. B. beim
+      <a href="https://www.baden-wuerttemberg.datenschutz.de/">LfDI Baden-Württemberg</a>.
+    </p>
+
+    <h2>9. Kinder</h2>
+    <p>
+      Die App richtet sich an Nutzer <strong>ab 13 Jahren</strong>. Es wird nicht wissentlich Daten von Kindern unter 13 Jahren erhoben.
+      Wenn du als Erziehungsberechtigte*r annimmst, dass ein Kind uns Daten gesendet hat, kontaktiere uns bitte per E-Mail.
+    </p>
+
+    <h2>10. Änderungen</h2>
+    <p>
+      Diese Erklärung kann bei neuen Funktionen oder rechtlichen Anforderungen angepasst werden.
+      Das Datum oben gilt als letzte Aktualisierung.
+    </p>
+
+    <p><a href="impressum.html">Impressum</a></p>
+
+    <hr />
+
+    <h1 id="en">Privacy Policy (English)</h1>
+    <p><small>Last updated: May 2026 — “Bow &amp; Arrow” (iOS)</small></p>
+
+    <h2>1. Controller</h2>
+    <p>
+      Jen Eric Preißer<br />
+      Schellingstraße 18/1<br />
+      72622 Nürtingen, Germany<br />
+      Email: <a href="mailto:jen@preisser.de">jen@preisser.de</a>
+    </p>
+
+    <h2>2. Overview</h2>
+    <p>
+      “Bow &amp; Arrow” is a game for iOS (ages 13+). Save data is stored primarily on your device.
+      You may optionally use iCloud sync and Game Center — both are provided by Apple; the developer does not run separate game servers.
+    </p>
+    <p>
+      There is <strong>no ad tracking</strong>, no analytics SDKs (e.g. Firebase), and <strong>no sale</strong> of personal data.
+      No developer-operated backend stores player data outside Apple services.
+    </p>
+
+    <h2>3. Data we process</h2>
+    <ul>
+      <li><strong>Local save:</strong> progress, inventory, settings, and similar game data on your device.</li>
+      <li><strong>iCloud / CloudKit (optional):</strong> private iCloud database sync via Apple’s standard CloudKit when iCloud is enabled.</li>
+      <li><strong>Game Center (optional):</strong> trophies, achievements, and a global leaderboard; other players’ <strong>display names and avatars</strong> may appear in the leaderboard via Apple.</li>
+      <li><strong>In-app purchases:</strong> one-time purchases only, processed by the Apple App Store; we do not receive payment card data.</li>
+      <li><strong>Technical data via Apple:</strong> crash/diagnostic data may be processed by Apple if you share reports — not via separate third-party analytics from the developer.</li>
+    </ul>
+
+    <h2>4. Purposes &amp; legal bases</h2>
+    <p>
+      Providing the game, saving progress, optional sync and leaderboards, purchases via Apple, stability and support.
+      Legal bases under GDPR: contract (Art. 6(1)(b)), legitimate interests (Art. 6(1)(f)), consent where required for optional Apple services (Art. 6(1)(a)).
+    </p>
+
+    <h2>5. Retention</h2>
+    <p>Local data until uninstall or in-app reset; iCloud and Game Center data per your Apple account and Apple’s policies.</p>
+
+    <h2>6. Recipients</h2>
+    <p>
+      Main recipient: <strong>Apple Inc.</strong> (iCloud, Game Center, App Store). Data may be processed outside the EEA; see
+      <a href="https://www.apple.com/legal/privacy/">Apple’s Privacy Policy</a>.
+    </p>
+
+    <h2>7. Your rights</h2>
+    <p>
+      You may request access, rectification, erasure, restriction, objection, and portability where applicable by emailing
+      <a href="mailto:jen@preisser.de">jen@preisser.de</a>. You may lodge a complaint with a supervisory authority.
+    </p>
+
+    <h2>8. Children</h2>
+    <p>The app is intended for users aged <strong>13+</strong>. We do not knowingly collect data from children under 13.</p>
+
+    <p><a href="impressum.html">Impressum (German legal notice)</a></p>
+  </div>
+
+  <footer class="foot">
+    <p>© 2026 Jen Eric Preißer · <a href="index.html">Bow &amp; Arrow</a> · <a href="mailto:jen@preisser.de">jen@preisser.de</a></p>
+  </footer>
+</body>
+</html>

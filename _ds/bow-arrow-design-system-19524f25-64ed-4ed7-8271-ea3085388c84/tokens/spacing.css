@@ -1,0 +1,33 @@
+/* ============================================================
+   SPACING & RADII — Bow & Arrow
+   The SwiftUI UIStyleSheet works on a tight 4/8/16/24/32 grid.
+   Radii are small — this is chiselled stone, not soft glass.
+   ============================================================ */
+:root {
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+
+  /* Corner radii — chunky stone keeps corners modest */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-pill: 999px;
+
+  /* Border widths — the signature gold double-stroke */
+  --stroke-thin: 1px;
+  --stroke-gold: 2px;   /* the gold panel edge */
+  --stroke-heavy: 3px;
+
+  /* Stock control heights */
+  --control-sm: 32px;
+  --control-md: 44px;   /* min tap target */
+  --control-lg: 56px;
+}
