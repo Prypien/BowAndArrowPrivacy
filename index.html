@@ -52,11 +52,26 @@
   .ba-modal-overlay{padding:24px;}
   .ba-hero-overlay-side{background:linear-gradient(90deg,rgba(8,12,20,.93) 0%,rgba(8,12,20,.72) 40%,rgba(8,12,20,.3) 72%,rgba(8,12,20,.55) 100%);}
 
+  /* Icon strip inside feature cards */
+  .ba-feat-icons{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px;min-height:74px;}
+  .ba-feat-icons>div{flex-shrink:0;}
+
+  /* Horizontal scroll rails (mobile) */
+  .ba-rail-hint{
+    display:none;
+    font-size:16px;
+    letter-spacing:2px;
+    color:var(--ba-parchment-dim);
+    margin-top:8px;
+    text-align:center;
+  }
+
   @media (max-width:1024px){
     .ba-section,.ba-section-wide,.ba-section-narrow{padding:72px 24px;}
     .ba-grid-forge{grid-template-columns:1fr;gap:32px;}
+    .ba-forge-panel{display:none !important;}
     .ba-grid-hero-modal,.ba-grid-modal{grid-template-columns:1fr;}
-    .ba-grid-3{grid-template-columns:repeat(2,1fr);}
+    .ba-grid-3:not(.ba-rail){grid-template-columns:repeat(2,1fr);}
     .ba-hero-overlay-side{background:linear-gradient(180deg,rgba(8,12,20,.88) 0%,rgba(8,12,20,.72) 45%,rgba(8,12,20,.5) 100%);}
   }
 
@@ -73,14 +88,43 @@
     .ba-hero-actions>button,.ba-hero-actions>a{text-align:center;font-size:22px !important;padding:13px 20px !important;}
     .ba-grid-stats{grid-template-columns:repeat(2,1fr);gap:14px;}
     .ba-stat-v{font-size:36px !important;}
-    .ba-grid-3,.ba-grid-2{grid-template-columns:1fr;}
-    .ba-grid-codex{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;}
-    .ba-grid-arsenal{grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:12px;}
+    .ba-grid-2:not(.ba-rail){grid-template-columns:1fr;}
+
+    /* Switch grids to swipeable rails instead of stacking */
+    .ba-grid-3.ba-rail,.ba-grid-arsenal.ba-rail,.ba-grid-codex.ba-rail,.ba-grid-2.ba-rail,.ba-loot-rail{
+      display:flex !important;
+      grid-template-columns:unset !important;
+      gap:16px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding:4px 2px 14px;
+    }
+    .ba-feat-cards>.ba-feat-card{flex:0 0 min(88vw,340px);}
+    .ba-steps-rail>.ba-step-card{flex:0 0 min(88vw,300px);}
+    .ba-reviews-rail>.ba-review-card{flex:0 0 min(88vw,320px);}
+    .ba-arsenal-rail>.ba-arsenal-item{flex:0 0 132px;}
+    .ba-codex-rail>.ba-codex-card{flex:0 0 156px;}
+    .ba-loot-rail>.ba-loot-card{flex:0 0 150px;width:auto !important;max-width:none !important;}
+    .ba-loot-rail{flex-wrap:nowrap !important;justify-content:flex-start !important;}
+
+    .ba-feat-icons{
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding:4px 2px 10px;
+      margin-bottom:16px;
+      min-height:74px;
+    }
+    .ba-feat-icons>div{scroll-snap-align:start;}
+    .ba-rail-hint{display:block;}
+
     .ba-codex-header{flex-direction:column;align-items:flex-start;}
     .ba-codex-mascot{height:100px !important;align-self:center;}
     .ba-comp-header{flex-direction:column;align-items:stretch;}
     .ba-comp-nav{align-self:flex-end;}
-    .ba-footer-row{flex-direction:column;align-items:flex-start;}
+    .ba-footer-row{flex-direction:column;align-items:stretch;}
     .ba-footer-links{margin-left:0;}
     .ba-feat-card-title{font-size:24px !important;}
     .ba-step-num{font-size:42px !important;}
@@ -94,7 +138,6 @@
     .ba-modal-body{font-size:19px !important;}
     .ba-hero-modal-portrait{height:260px !important;}
     .ba-codex-modal-portrait{height:220px !important;}
-    .ba-forge-panel{overflow-x:auto;-webkit-overflow-scrolling:touch;}
     .ba-stats-strip{padding:28px 18px !important;}
     .ba-gameplay-inner{padding:56px 18px !important;}
     .ba-reviews-inner{padding:56px 18px !important;}
@@ -103,7 +146,9 @@
     .ba-modal-overlay{padding:12px !important;align-items:flex-end !important;}
     .ba-modal-panel{max-height:92vh !important;border-bottom-left-radius:0 !important;border-bottom-right-radius:0 !important;}
     footer{padding:24px 18px !important;}
-    .ba-loot-card{width:140px !important;}
+    #ba-captain{height:180px !important;}
+    .ba-forge-copy{text-align:center;}
+    .ba-forge-copy p{margin-left:auto;margin-right:auto;}
   }
 
   @media (max-width:480px){
@@ -118,8 +163,6 @@
     .ba-grid-stats{gap:10px;}
     .ba-stat-v{font-size:28px !important;}
     .ba-stat-l{font-size:13px !important;letter-spacing:0 !important;}
-    .ba-grid-codex{grid-template-columns:repeat(2,1fr);}
-    .ba-grid-arsenal{grid-template-columns:repeat(3,1fr);}
     .ba-modal-panel{padding:16px 12px !important;border-radius:10px !important;}
     .ba-modal-title{font-size:28px !important;}
     .ba-modal-nav{flex-direction:column;}
@@ -128,6 +171,7 @@
     .ba-footer-rights{font-size:14px !important;line-height:1.45;}
     .ba-kick{font-size:17px !important;letter-spacing:2px !important;}
     .ba-arsenal-item-name{font-size:16px !important;}
+    .ba-feat-cards>.ba-feat-card{flex:0 0 92vw;}
   }
 </style>
 </helmet>
@@ -225,12 +269,12 @@
       <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.feat.kick }}</div>
       <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 36px;">{{ t.feat.t }}</h2>
     </div>
-    <div class="ba-grid-3">
+    <div class="ba-grid-3 ba-rail ba-feat-cards ba-scroll">
       <sc-for list="{{ features }}" as="f" hint-placeholder-count="3">
-        <div data-reveal="{{ f.delay }}" style="height:100%;">
+        <div data-reveal="{{ f.delay }}" class="ba-feat-card" style="height:100%;">
           <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Panel" hint-size="100%,280px">
             <div style="display:flex;flex-direction:column;height:100%;">
-              <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px;min-height:74px;">
+              <div class="ba-feat-icons ba-scroll">
                 <sc-for list="{{ f.icons }}" as="ic" hint-placeholder-count="3">
                   <div style="width:66px;height:66px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#20202a,#0b0b10);border:2px solid var(--ba-panel-border);border-radius:10px;box-shadow:var(--shadow-inset);">
                     <sc-if value="{{ ic }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ ic }}" style="max-width:48px;max-height:48px;object-fit:contain;"></sc-if>
@@ -244,15 +288,16 @@
         </div>
       </sc-for>
     </div>
+    <div class="ba-rail-hint">{{ t.railHint }}</div>
 
     <!-- ARSENAL: Master the Weapon, border slots -->
     <div data-reveal="0" style="margin-top:56px;">
       <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:6px;">{{ t.arsenal.kick }}</div>
       <h3 style="font-size:clamp(28px,4vw,44px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 8px;">{{ t.arsenal.t }}</h3>
       <p style="font-size:21px;color:var(--ba-parchment-dim);margin:0 0 28px;max-width:640px;">{{ t.arsenal.sub }}</p>
-      <div class="ba-grid-arsenal">
+      <div class="ba-grid-arsenal ba-rail ba-arsenal-rail ba-scroll">
         <sc-for list="{{ arsenal }}" as="it" hint-placeholder-count="7">
-          <div style="text-align:center;">
+          <div class="ba-arsenal-item" style="text-align:center;">
             <div style="position:relative;aspect-ratio:1;max-width:128px;margin:0 auto;display:flex;align-items:center;justify-content:center;transition:transform .14s cubic-bezier(.2,.8,.2,1),filter .14s;" style-hover="transform:translateY(-6px);filter:drop-shadow(0 0 11px rgba(191,153,63,.55))">
               <sc-if value="{{ it.border }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ it.border }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></sc-if>
               <sc-if value="{{ it.icon }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ it.icon }}" style="position:relative;width:54%;height:54%;object-fit:contain;z-index:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.65));"></sc-if>
@@ -262,6 +307,7 @@
           </div>
         </sc-for>
       </div>
+      <div class="ba-rail-hint">{{ t.railHint }}</div>
     </div>
   </section>
 
@@ -273,26 +319,27 @@
         <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 12px;">{{ t.play.t }}</h2>
         <p style="font-size:23px;color:var(--ba-parchment-dim);margin:0 auto;max-width:560px;">{{ t.play.sub }}</p>
       </div>
-      <div class="ba-grid-3">
+      <div class="ba-grid-3 ba-rail ba-steps-rail ba-scroll">
         <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
-          <div data-reveal="{{ st.delay }}" style="position:relative;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,0 4px 0 rgba(0,0,0,.5);border-radius:8px;padding:28px 24px;">
+          <div data-reveal="{{ st.delay }}" class="ba-step-card" style="position:relative;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,0 4px 0 rgba(0,0,0,.5);border-radius:8px;padding:28px 24px;">
             <div class="ba-step-num" style="font-size:54px;color:var(--ba-gold);opacity:.5;text-shadow:var(--text-outline);line-height:1;">{{ st.n }}</div>
             <div class="ba-step-title" style="font-size:27px;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:8px 0 8px;">{{ st.t }}</div>
             <p style="font-size:21px;line-height:1.28;color:var(--ba-parchment-dim);margin:0;">{{ st.b }}</p>
           </div>
         </sc-for>
       </div>
+      <div class="ba-rail-hint">{{ t.railHint }}</div>
     </div>
   </section>
 
   <!-- ============ FORGE ============ -->
   <section id="forge" data-screen-label="Forge" class="ba-wrap ba-section" style="max-width:1180px;margin:0 auto;padding:96px 28px;">
     <div class="ba-grid-forge">
-      <div data-reveal="0">
+      <div data-reveal="0" class="ba-forge-copy">
         <div style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.forge.kick }}</div>
         <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 16px;">{{ t.forge.t }}</h2>
         <p style="font-size:23px;line-height:1.28;color:var(--ba-parchment-dim);margin:0 0 22px;">{{ t.forge.sub }}</p>
-        <div style="display:flex;align-items:flex-end;gap:16px;">
+        <div style="display:flex;align-items:flex-end;gap:16px;justify-content:center;">
           <img id="ba-captain" src="assets/captain/idle_0.png" style="height:150px;filter:drop-shadow(0 8px 0 rgba(0,0,0,.45));">
           <div style="padding-bottom:14px;">
             <div style="font-size:24px;color:var(--ba-gold);text-shadow:var(--text-outline);line-height:1;">{{ t.forge.captainName }}</div>
@@ -409,9 +456,9 @@
       </div>
       <img class="ba-codex-mascot" src="assets/enemy/berserker_idle.gif" style="height:140px;filter:drop-shadow(0 6px 0 rgba(0,0,0,.45));">
     </div>
-    <div data-reveal="0" class="ba-grid-codex">
+    <div data-reveal="0" class="ba-grid-codex ba-rail ba-codex-rail ba-scroll">
       <sc-for list="{{ enemies }}" as="e" hint-placeholder-count="18">
-        <div onClick="{{ e.select }}" style="cursor:pointer;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,0 3px 0 rgba(0,0,0,.5);border-radius:8px;padding:12px;transition:transform .14s cubic-bezier(.2,.8,.2,1),filter .14s;" style-hover="transform:translateY(-6px);filter:brightness(1.08)" style-active="transform:scale(.97)">
+        <div onClick="{{ e.select }}" class="ba-codex-card" style="cursor:pointer;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,0 3px 0 rgba(0,0,0,.5);border-radius:8px;padding:12px;transition:transform .14s cubic-bezier(.2,.8,.2,1),filter .14s;" style-hover="transform:translateY(-6px);filter:brightness(1.08)" style-active="transform:scale(.97)">
           <div style="position:relative;height:120px;display:flex;align-items:flex-end;justify-content:center;background:url(assets/ds/battlefield-bg.png) center/cover;border-radius:6px;box-shadow:var(--shadow-inset);overflow:hidden;">
             <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,24,.1),rgba(10,14,24,.5));"></div>
             <sc-if value="{{ e.img }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ e.img }}" style="position:relative;max-height:104px;max-width:90%;margin-bottom:4px;filter:drop-shadow(0 4px 0 rgba(0,0,0,.4));"></sc-if>
@@ -425,7 +472,8 @@
         </div>
       </sc-for>
     </div>
-    <div style="text-align:center;margin-top:24px;font-size:19px;letter-spacing:2px;color:var(--ba-gold);">{{ t.codex.hint }}</div>
+    <div class="ba-rail-hint">{{ t.railHint }}</div>
+    <div style="text-align:center;margin-top:16px;font-size:19px;letter-spacing:2px;color:var(--ba-gold);">{{ t.codex.hint }}</div>
   </section>
 
   <!-- ============ CODEX DETAIL MODAL ============ -->
@@ -475,9 +523,9 @@
         <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 12px;">{{ t.loot.t }}</h2>
         <p style="font-size:23px;color:var(--ba-parchment-dim);margin:0 auto;max-width:560px;">{{ t.loot.sub }}</p>
       </div>
-      <div style="display:flex;justify-content:center;gap:28px;flex-wrap:wrap;">
+      <div class="ba-loot-rail ba-rail ba-scroll" style="display:flex;justify-content:flex-start;gap:28px;flex-wrap:nowrap;">
         <sc-for list="{{ chests }}" as="c" hint-placeholder-count="4">
-          <div data-reveal="{{ c.delay }}" class="ba-loot-card" style="text-align:center;width:168px;max-width:46vw;">
+          <div data-reveal="{{ c.delay }}" class="ba-loot-card" style="text-align:center;width:168px;">
             <sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ c.img }}" style="height:118px;filter:drop-shadow(0 10px 0 rgba(0,0,0,.4));"></sc-if>
             <div style="margin-top:16px;margin-bottom:6px;">
               <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Badge" variant="{{ c.variant }}" size="md" hint-size="auto,28px">{{ c.n }}</x-import>
@@ -486,6 +534,7 @@
           </div>
         </sc-for>
       </div>
+      <div class="ba-rail-hint">{{ t.railHint }}</div>
     </div>
   </section>
 
@@ -511,9 +560,9 @@
         <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.rev.kick }}</div>
         <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0;">{{ t.rev.t }}</h2>
       </div>
-      <div class="ba-grid-3">
+      <div class="ba-grid-3 ba-rail ba-reviews-rail ba-scroll">
         <sc-for list="{{ reviews }}" as="rv" hint-placeholder-count="3">
-          <div data-reveal="{{ rv.delay }}" style="height:100%;">
+          <div data-reveal="{{ rv.delay }}" class="ba-review-card" style="height:100%;">
             <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Panel" hint-size="100%,220px">
               <div style="display:flex;flex-direction:column;height:100%;">
                 <div style="font-size:24px;color:var(--ba-gold);letter-spacing:2px;margin-bottom:8px;">{{ rv.stars }}</div>
@@ -525,6 +574,7 @@
           </div>
         </sc-for>
       </div>
+      <div class="ba-rail-hint">{{ t.railHint }}</div>
     </div>
   </section>
 
@@ -617,6 +667,7 @@ class Component extends DCLogic {
     this.STR = {
       de: {
         get: 'GRATIS LADEN',
+        railHint: '◄ Wischen ►',
         menu: { title: 'MENÜ', lang: 'SPRACHE', legal: 'RECHTLICHES' },
         nav: [
           { label: 'FEATURES', href: '#features' }, { label: 'GEGNER-CODEX', href: '#codex' },
@@ -672,6 +723,7 @@ class Component extends DCLogic {
       },
       en: {
         get: 'GET IT FREE',
+        railHint: '◄ Swipe ►',
         menu: { title: 'MENU', lang: 'LANGUAGE', legal: 'LEGAL' },
         nav: [
           { label: 'FEATURES', href: '#features' }, { label: 'ENEMY CODEX', href: '#codex' },
