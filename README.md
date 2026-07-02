@@ -44,9 +44,14 @@ Die `CNAME`-Datei erst hinzufügen, wenn das DNS steht (sonst brechen die Apple-
 
 ## Tech-Stack der Landingpage
 
-- **GSAP 3** (CDN) — Timeline-Choreografie: Stern-Herzschlag, Kachel-Einflug, Warp
-- **tsParticles slim 2** (CDN) — interaktives Sternenfeld mit Maus-Parallaxe
-- **Canvas 2D** — pulsierender Stern, Urknall-Explosion, Hyperraum-Streifen
+- **Three.js + eigene GLSL-Shader** (`webgl.js`, CDN-Importmap) — GPU-Partikelsystem
+  (~12k Punkte), das scroll-synchron durch vier prozedurale Formen morpht:
+  Nebel → Bogen+Pfeil (Bow & Arrow) → Signalringe (Project II) → Komet (Logo).
+  Dazu Shader-Sternenfeld mit Maus-Aufleuchten und Kamera-Parallaxe.
+- **GSAP 3 + ScrollTrigger** (CDN) — Intro-Choreografie, Scroll-Reveals,
+  wortweises Füllen der Statement-Sätze
+- **Canvas 2D** — pulsierender Stern und Urknall-Explosion im Intro
+- **tsParticles slim 2** (CDN) — reiner Fallback, falls WebGL nicht verfügbar ist
 - **Spline-Slot** — vorbereitet in `index.html` (auskommentiert); eigene Szene per
   `data-spline-url` einhängen, `main.js` lädt den Viewer automatisch
 

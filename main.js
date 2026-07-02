@@ -18,6 +18,10 @@
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const alreadySeen = sessionStorage.getItem("cdi_intro_seen") === "1";
 
+  /* Geteilter Zustand mit der WebGL-Ebene (webgl.js liest ihn pro Frame) */
+  const sharedFx = (window.CDI_FX = window.CDI_FX || {});
+  if (typeof sharedFx.reveal !== "number") sharedFx.reveal = 0;
+
   const head = document.getElementById("site-head");
   const skipBtn = document.getElementById("skip-intro");
   const toast = document.getElementById("glitch-toast");
@@ -183,9 +187,14 @@
   })(lastT);
 
   /* ============================================================
-     2) tsParticles — das interaktive kosmische Sternenfeld
+     2) tsParticles — nur noch Fallback, falls WebGL (webgl.js)
+        nicht startet. Die WebGL-Ebene meldet sich synchron über
+        window.__CDI_GL_READY; wir prüfen kurz nach dem Laden.
      ============================================================ */
-  if (window.tsParticles) {
+  let starfieldStarted = false;
+  function startStarfieldFallback() {
+    if (starfieldStarted || window.__CDI_GL_READY || !window.tsParticles) return;
+    starfieldStarted = true;
     tsParticles.load("starfield", {
       fpsLimit: 60,
       detectRetina: true,
@@ -225,6 +234,10 @@
       },
     }).catch((err) => console.warn("tsParticles konnte nicht starten:", err));
   }
+  /* WebGL-Modul lädt asynchron — kurz warten, dann ggf. Fallback starten.
+     Unsichtbar für Besucher: Das Feld wird erst beim "Urknall" eingeblendet. */
+  setTimeout(startStarfieldFallback, 1500);
+  window.addEventListener("load", () => setTimeout(startStarfieldFallback, 400));
 
   /* ============================================================
      3) Optionaler Spline-Slot (siehe Kommentar in index.html)
@@ -299,10 +312,11 @@
   /* Direkt zum Endzustand (Skip, erneuter Besuch, reduzierte Bewegung) */
   function finalize(fast) {
     if (introTl) { introTl.kill(); introTl = null; }
-    gsap.killTweensOf([fx.star, "#starfield", head, ".hero-kicker", "#title .ch", "#tagline", ".scroll-cue"]);
+    gsap.killTweensOf([fx.star, sharedFx, "#starfield", head, ".hero-kicker", "#title .ch", "#tagline", ".scroll-cue"]);
     fx.star.alpha = 0;
     const d = fast ? 0.8 : 0;
     gsap.to("#starfield", { autoAlpha: 1, duration: d });
+    gsap.to(sharedFx, { reveal: 1, duration: d });
     gsap.to([head, ".hero-kicker", "#title .ch", "#tagline", ".scroll-cue"], { autoAlpha: 1, y: 0, duration: d });
     finishIntro();
   }
@@ -325,6 +339,7 @@
       .fromTo("#burst-flash", { autoAlpha: 0 }, { autoAlpha: 0.85, duration: 0.09 }, "<")
       .to("#burst-flash", { autoAlpha: 0, duration: 0.8, ease: "power2.out" })
       .to("#starfield", { autoAlpha: 1, duration: 1.8, ease: "sine.inOut" }, "<")
+      .to(sharedFx, { reveal: 1, duration: 1.8, ease: "sine.inOut" }, "<")
       /* Der Hero erwacht */
       .to(".hero-kicker", { autoAlpha: 0.95, y: 0, duration: 0.7 }, "-=1.3")
       .to("#title .ch", { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.028, ease: "power3.out" }, "-=0.45")
