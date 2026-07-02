@@ -35,10 +35,6 @@ import * as THREE from "three";
   }
   window.__CDI_GL_READY = true; /* main.js überspringt damit den Fallback */
 
-  /* Gemeinsamer Animations-Zustand — GSAP (main.js) tweent reveal. */
-  const state = (window.CDI_FX = window.CDI_FX || {});
-  if (typeof state.reveal !== "number") state.reveal = 0;
-
   const DPR = Math.min(window.devicePixelRatio || 1, 1.75);
   renderer.setPixelRatio(DPR);
 
@@ -224,7 +220,7 @@ import * as THREE from "three";
     uSize: { value: 4.4 },
     uPixelRatio: { value: DPR },
     uMouse: { value: new THREE.Vector2(10, 10) },
-    uMouseStrength: { value: 1.4 },
+    uMouseStrength: { value: 0.35 }, /* Morph-Objekt reagiert nur dezent */
   };
 
   const vertexShader = /* glsl */ `
@@ -275,7 +271,8 @@ import * as THREE from "three";
       float md = length(ndc - uMouse);
       float boost = 1.0 + uMouseStrength * smoothstep(0.38, 0.0, md);
 
-      float tw = 0.75 + 0.25 * sin(uTime * (1.2 + aSeed * 1.6) + aSeed * 40.0);
+      /* ruhiges, langsames Funkeln — kein Blinken */
+      float tw = 0.86 + 0.14 * sin(uTime * (0.45 + aSeed * 0.8) + aSeed * 40.0);
       gl_PointSize = uSize * uPixelRatio * boost * tw * (2.6 / -mv.z);
       gl_Position = proj;
 
@@ -337,7 +334,7 @@ import * as THREE from "three";
     uSize: { value: 3.4 },
     uPixelRatio: { value: DPR },
     uMouse: uniforms.uMouse,
-    uMouseStrength: { value: 2.2 },
+    uMouseStrength: { value: 1.7 }, /* Sterne leuchten zur Maus hin auf */
   };
   const starPoints = new THREE.Points(
     sgeo,
@@ -351,6 +348,76 @@ import * as THREE from "three";
     })
   );
   scene.add(starPoints);
+
+  /* ============================================================
+     Konstellations-Linien: feine Verbindungen zwischen nahen
+     Sternen; nahe der Maus leuchten sie deutlich auf ("grab").
+     ============================================================ */
+  (function buildConstellations() {
+    const MAX_DIST = 1.7;
+    const MAX_PER_STAR = 3;
+    const MAX_LINES = 1400;
+    const linkCount = new Uint8Array(SN);
+    const positions = [];
+    const fades = [];
+    let lines = 0;
+    for (let i = 0; i < SN && lines < MAX_LINES; i++) {
+      if (linkCount[i] >= MAX_PER_STAR) continue;
+      for (let j = i + 1; j < SN && lines < MAX_LINES; j++) {
+        if (linkCount[j] >= MAX_PER_STAR) continue;
+        const dx = spos[i * 3] - spos[j * 3];
+        const dy = spos[i * 3 + 1] - spos[j * 3 + 1];
+        const dz = spos[i * 3 + 2] - spos[j * 3 + 2];
+        const d = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (d > MAX_DIST) continue;
+        const fade = 1 - d / MAX_DIST;
+        positions.push(
+          spos[i * 3], spos[i * 3 + 1], spos[i * 3 + 2],
+          spos[j * 3], spos[j * 3 + 1], spos[j * 3 + 2]
+        );
+        fades.push(fade, fade);
+        linkCount[i]++; linkCount[j]++;
+        lines++;
+        if (linkCount[i] >= MAX_PER_STAR) break;
+      }
+    }
+
+    const lgeo = new THREE.BufferGeometry();
+    lgeo.setAttribute("position", new THREE.BufferAttribute(new Float32Array(positions), 3));
+    lgeo.setAttribute("aFade", new THREE.BufferAttribute(new Float32Array(fades), 1));
+
+    const lineMat = new THREE.ShaderMaterial({
+      uniforms: {
+        uMouse: uniforms.uMouse,
+        uReveal: uniforms.uReveal,
+      },
+      vertexShader: /* glsl */ `
+        attribute float aFade;
+        uniform vec2 uMouse;
+        uniform float uReveal;
+        varying float vA;
+        void main() {
+          vec4 proj = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          vec2 ndc = proj.xy / proj.w;
+          float md = length(ndc - uMouse);
+          float boost = smoothstep(0.5, 0.06, md);
+          vA = aFade * (0.13 + 1.15 * boost) * uReveal;
+          gl_Position = proj;
+        }
+      `,
+      fragmentShader: /* glsl */ `
+        varying float vA;
+        void main() {
+          gl_FragColor = vec4(0.77, 0.71, 0.99, vA * 0.5);
+        }
+      `,
+      transparent: true,
+      depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+
+    scene.add(new THREE.LineSegments(lgeo, lineMat));
+  })();
 
   /* ============================================================
      Scroll-Sync: Morph-Fortschritt direkt aus den DOM-Positionen
@@ -417,7 +484,8 @@ import * as THREE from "three";
   function frame() {
     const t = clock.getElapsedTime();
     uniforms.uTime.value = t;
-    uniforms.uReveal.value = state.reveal;
+    /* ruhiger Auftakt: die Ebene blendet sich einmal weich ein */
+    uniforms.uReveal.value = Math.min(1, t / 1.6);
 
     /* Morph weich nachziehen (fühlt sich physischer an als 1:1) */
     morphSmooth += (scrollMorph() - morphSmooth) * 0.09;
@@ -439,13 +507,13 @@ import * as THREE from "three";
   window.CDI_GL_DEBUG = {
     renderOnce() {
       uniforms.uTime.value += 0.016;
-      uniforms.uReveal.value = state.reveal;
+      uniforms.uReveal.value = 1;
       morphSmooth = scrollMorph();
       uniforms.uMorph.value = morphSmooth;
       applyPose(morphSmooth);
       uniforms.uMouse.value.copy(mouseTarget);
       renderer.render(scene, camera);
-      return { morph: morphSmooth, reveal: state.reveal };
+      return { morph: morphSmooth, reveal: uniforms.uReveal.value };
     },
   };
 })();

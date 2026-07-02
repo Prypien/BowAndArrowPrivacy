@@ -24,28 +24,30 @@
 
   <!-- ============ KOSMOS (fixe Hintergrund-Ebenen über die gesamte Scroll-Länge) ============ -->
   <div id="cosmos" aria-hidden="true">
-    <!-- WebGL-Ebene (Three.js + GLSL): Sternenfeld + scroll-synchrones
-         Partikel-Morphing (Nebel → Bogen+Pfeil → Signal → Komet) -->
+    <!-- Aurora: großflächige, sehr dezente Farbflächen — wandern nur per Scroll-Parallaxe -->
+    <div id="aurora">
+      <span class="a1"></span>
+      <span class="a2"></span>
+    </div>
+    <!-- WebGL-Ebene (Three.js + GLSL): Sternenfeld, Konstellations-Linien
+         und scroll-synchrones Partikel-Morphing (Nebel → Bogen+Pfeil → Signal → Komet) -->
     <canvas id="gl-canvas"></canvas>
     <!-- Fallback-Sternenfeld (tsParticles) — nur wenn WebGL fehlt -->
     <div id="starfield"></div>
-    <!-- Der pulsierende Stern und die Urknall-Explosion (2D-Canvas-Intro) -->
-    <canvas id="star-canvas"></canvas>
 
     <!-- ======================= SPLINE-SLOT =======================
          Eigene 3D-Szene aus spline.design einhängen:
          1. Block auskommentieren.
          2. data-spline-url durch die eigene Szenen-URL ersetzen
             (Spline-Editor → Export → "Code" → URL endet auf /scene.splinecode).
-         main.js lädt dann automatisch den Spline-Viewer per CDN und
-         blendet den Code-Stern aus — Timing & Explosion bleiben erhalten.
+         main.js lädt dann automatisch den Spline-Viewer per CDN als
+         zusätzliche Hintergrund-Ebene.
 
     <div id="spline-stage"
          data-spline-url="https://prod.spline.design/DEINE-SZENE-ID/scene.splinecode"></div>
     ============================================================ -->
   </div>
   <div id="vignette" aria-hidden="true"></div>
-  <div id="cursor-glow" aria-hidden="true"></div>
 
   <!-- ============ Sticky Header ============ -->
   <header id="site-head">
@@ -188,8 +190,6 @@
   </main>
 
   <!-- ============ Overlays ============ -->
-  <button id="skip-intro" type="button">Intro überspringen&nbsp;⏭</button>
-  <div id="burst-flash" aria-hidden="true"></div>
   <p id="glitch-toast" role="status">// SIGNAL LOST · TRANSMISSION PENDING //</p>
 
   <!-- ============ Bibliotheken (CDN) ============ -->
