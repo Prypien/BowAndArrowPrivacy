@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Project II — Transmission Pending | Chasing Dreams Interactive</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Syne:wght@800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(120vmax 90vmax at 50% 40%, #0a0a1c 0%, #030309 55%, #010104 100%);
+      color: #eef0ff;
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    /* schlichtes CSS-Sternenfeld */
+    .stars { position: fixed; inset: 0; pointer-events: none; }
+    .stars span {
+      position: absolute;
+      width: 2px; height: 2px;
+      border-radius: 50%;
+      background: #b9c2ff;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+    @keyframes twinkle { 0%, 100% { opacity: .15; } 50% { opacity: .9; } }
+    main { position: relative; padding: 24px; }
+    .kicker { font-size: .72rem; letter-spacing: .45em; text-transform: uppercase; color: #9aa0c3; }
+    h1 {
+      font-family: "Syne", sans-serif;
+      font-size: clamp(1.6rem, 5vw, 3rem);
+      letter-spacing: .12em;
+      margin: 18px 0 14px;
+      animation: flicker 4s steps(1) infinite;
+    }
+    @keyframes flicker {
+      0%, 61%, 63%, 88%, 91%, 100% { opacity: 1; }
+      62% { opacity: .35; }
+      89% { opacity: .5; }
+    }
+    p { color: #9aa0c3; letter-spacing: .05em; }
+    a {
+      display: inline-block;
+      margin-top: 34px;
+      padding: 12px 26px;
+      color: #7de7ff;
+      text-decoration: none;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      font-size: .74rem;
+      border: 1px solid rgba(125, 231, 255, .4);
+      border-radius: 999px;
+      transition: background .2s ease;
+    }
+    a:hover { background: rgba(125, 231, 255, .1); }
+  </style>
+</head>
+<body>
+  <div class="stars" aria-hidden="true">
+    <span style="top:12%;left:18%"></span><span style="top:26%;left:74%;animation-delay:.7s"></span>
+    <span style="top:44%;left:8%;animation-delay:1.4s"></span><span style="top:63%;left:88%;animation-delay:.3s"></span>
+    <span style="top:78%;left:30%;animation-delay:2s"></span><span style="top:8%;left:52%;animation-delay:1.1s"></span>
+    <span style="top:85%;left:62%;animation-delay:1.8s"></span><span style="top:35%;left:42%;animation-delay:2.4s"></span>
+  </div>
+  <main>
+    <p class="kicker">Project II</p>
+    <h1>TRANSMISSION PENDING</h1>
+    <p>Ein neues Signal formt sich in der Leere. Bald mehr.</p>
+    <a href="../">◂ Zurück zum Studio</a>
+  </main>
+</body>
+</html>

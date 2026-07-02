@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chasing Dreams Interactive — Indie Game Studio</title>
+  <meta name="description" content="Chasing Dreams Interactive ist ein unabhängiges Spielestudio. Wir jagen Träume durch die Dunkelheit – und gießen sie in Spiele.">
+  <meta name="theme-color" content="#05060f">
+
+  <meta property="og:title" content="Chasing Dreams Interactive">
+  <meta property="og:description" content="Ein unabhängiges Spielestudio. Wir jagen Träume durch die Dunkelheit – und gießen sie in Spiele.">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- Fonts: Syne (Display), Space Grotesk (Text), Press Start 2P (Pixel-Akzente) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Space+Grotesk:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ KOSMOS (Hintergrund-Ebenen) ============ -->
+  <div id="cosmos" aria-hidden="true">
+    <!-- Interaktives Sternenfeld (tsParticles) — reagiert mit Parallaxe auf die Maus -->
+    <div id="starfield"></div>
+    <!-- Der pulsierende Stern, die Urknall-Explosion und der Hyperraum-Warp (Canvas) -->
+    <canvas id="star-canvas"></canvas>
+
+    <!-- ======================= SPLINE-SLOT =======================
+         Eigene 3D-Szene aus spline.design einhängen:
+         1. Block auskommentieren.
+         2. data-spline-url durch die eigene Szenen-URL ersetzen
+            (Spline-Editor → Export → "Code" → URL endet auf /scene.splinecode).
+         main.js lädt dann automatisch den Spline-Viewer per CDN und
+         blendet den Code-Stern aus — Timing & Explosion bleiben erhalten.
+
+    <div id="spline-stage"
+         data-spline-url="https://prod.spline.design/DEINE-SZENE-ID/scene.splinecode"></div>
+    ============================================================ -->
+  </div>
+  <div id="vignette" aria-hidden="true"></div>
+
+  <!-- ============ SZENE (schwebender Raum mit Perspektive) ============ -->
+  <main id="scene">
+    <header id="hero">
+      <p class="hero-kicker">Ein unabhängiges Spielestudio</p>
+      <h1 id="title">Chasing Dreams Interactive</h1>
+      <p id="tagline">Wir jagen Träume durch die Dunkelheit&nbsp;–&nbsp;und gießen sie in Spiele.</p>
+    </header>
+
+    <section id="fleet" aria-label="Projekte">
+      <p class="fleet-label" aria-hidden="true">✦&ensp;Projekte&ensp;✦</p>
+
+      <!-- Kachel 1: Bow & Arrow — Pixel-Art-Teaser mit echten Assets aus dem Spiel -->
+      <article class="card card--bow" id="card-bow">
+        <div class="card-float">
+          <a class="card-frame card-link" href="BowAndArrowPrivacy/" aria-label="Bow and Arrow – Projektseite öffnen">
+            <span class="chip">
+              <span class="chip-label">Project I</span>
+              <span class="chip-os">iOS</span>
+            </span>
+            <span class="bow-stage">
+              <img class="knight" src="BowAndArrowPrivacy/assets/captain/idle_0.png" alt="" width="128" height="128" decoding="async">
+              <span class="bow-ground"></span>
+            </span>
+            <span class="bow-info">
+              <img class="bow-icon" src="BowAndArrowPrivacy/assets/ds/app-icon-dark.png" alt="" width="52" height="52" loading="lazy" decoding="async">
+              <span class="bow-titles">
+                <span class="bow-name">Bow &amp; Arrow</span>
+                <span class="bow-sub">Dark-Fantasy Archery</span>
+              </span>
+            </span>
+            <span class="pixel-btn">Enter the Realm&nbsp;▸</span>
+          </a>
+        </div>
+      </article>
+
+      <!-- Kachel 2: Platzhalter — Transmission Pending -->
+      <article class="card card--pending" id="card-pending">
+        <div class="card-float">
+          <div class="card-frame">
+            <span class="chip chip--ghost">
+              <span class="chip-label">Project II</span>
+              <span class="chip-os">???</span>
+            </span>
+            <span class="signal" aria-hidden="true">
+              <span class="signal-ring"></span>
+              <span class="signal-ring"></span>
+              <span class="signal-core"></span>
+            </span>
+            <h2 class="glitch" data-text="TRANSMISSION PENDING">TRANSMISSION PENDING</h2>
+            <p class="pending-sub">Ein neues Signal formt sich in der Leere.</p>
+            <button class="ghost-btn" id="pending-btn" type="button" aria-disabled="true">Awaiting Signal</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer id="site-foot">
+      <span>© 2026 Chasing Dreams Interactive</span>
+      <nav aria-label="Rechtliches">
+        <a href="BowAndArrowPrivacy/">Bow &amp; Arrow</a>
+        <a href="BowAndArrowPrivacy/impressum.html">Impressum</a>
+        <a href="BowAndArrowPrivacy/privacy.html">Datenschutz</a>
+      </nav>
+    </footer>
+  </main>
+
+  <!-- ============ Overlays ============ -->
+  <button id="skip-intro" type="button">Intro überspringen&nbsp;⏭</button>
+  <div id="warp-flash" aria-hidden="true"></div>
+  <div id="pixel-gate" aria-hidden="true"></div>
+  <p id="glitch-toast" role="status">// SIGNAL LOST · TRANSMISSION PENDING //</p>
+
+  <!-- ============ Bibliotheken (CDN) ============ -->
+  <!-- GSAP — kinoreife Timeline-Choreografie -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <!-- tsParticles (slim) — interaktives kosmisches Partikelfeld -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
+
+  <script src="main.js" defer></script>
+</body>
+</html>

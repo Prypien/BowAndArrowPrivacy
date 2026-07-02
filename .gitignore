@@ -4,3 +4,6 @@
 # Raw design sources / imports — not part of the deployed site
 Website für Spiel mit Marketing/
 *.zip
+
+# Local tooling
+.claude/
