@@ -1,22 +1,22 @@
 /* ============================================================
    Chasing Dreams Interactive — Studio-Landingpage
-   Düster-kosmischer Look (Lusion / Active Theory inspiriert).
-   Pixel-/Dark-Fantasy-Stil lebt bewusst NUR in der Bow&Arrow-Kachel.
+   Ruhiger, edler Look (Opal-inspiriert): warme Creme-Typo auf
+   tiefem Nachtblau, sanfte Pastell-Akzente, einheitliche
+   Glas-Kacheln. Die Pixel-Art lebt nur IM Artwork der Kachel.
    ============================================================ */
 
 :root {
-  --bg-0: #030309;
-  --bg-1: #0a0a1c;
-  --ink: #eef0ff;
-  --muted: #9aa0c3;
-  --iris: #8b7bff;
-  --cyan: #7de7ff;
-  --gold: #e8b64c;
-  --gold-deep: #a97c1b;
-  --error: #ff5470;
-  --font-display: "Syne", system-ui, sans-serif;
-  --font-body: "Space Grotesk", system-ui, sans-serif;
-  --font-pixel: "Press Start 2P", monospace;
+  --bg-0: #020204;
+  --bg-1: #0d0b1a;
+  --ink: #f2efe6;          /* warmes Creme */
+  --muted: #a09db3;
+  --lav: #c4b5fd;          /* Lavendel */
+  --aqua: #a7e8e0;         /* zartes Aqua */
+  --rose: #f5c8e0;         /* Rosé */
+  --peach: #f5c8b8;
+  --error: #ff8fa3;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -25,7 +25,7 @@ html { color-scheme: dark; }
 
 body {
   background:
-    radial-gradient(120vmax 90vmax at 50% 38%, var(--bg-1) 0%, var(--bg-0) 55%, #010104 100%);
+    radial-gradient(120vmax 90vmax at 50% 38%, var(--bg-1) 0%, #060510 55%, var(--bg-0) 100%);
   color: var(--ink);
   font-family: var(--font-body);
   min-height: 100svh;
@@ -33,14 +33,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: rgba(139, 123, 255, .35); }
+::selection { background: rgba(196, 181, 253, .35); }
 
 a { color: inherit; }
 
 :focus-visible {
-  outline: 2px solid var(--cyan);
+  outline: 2px solid var(--lav);
   outline-offset: 3px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 /* ---------- Kosmos-Ebenen ---------- */
@@ -51,6 +51,7 @@ a { color: inherit; }
   position: absolute; inset: 0;
   opacity: 0;                       /* wird beim "Urknall" eingeblendet */
   pointer-events: none;
+  will-change: transform, opacity;
 }
 .no-anim #starfield { opacity: 1; } /* Fallback ohne JS/GSAP */
 
@@ -70,7 +71,7 @@ a { color: inherit; }
   position: fixed; inset: 0; z-index: 3;
   pointer-events: none;
   background:
-    radial-gradient(140% 110% at 50% 42%, transparent 55%, rgba(1, 1, 5, .55) 88%, rgba(1, 1, 5, .82) 100%);
+    radial-gradient(140% 110% at 50% 42%, transparent 55%, rgba(2, 2, 5, .5) 88%, rgba(2, 2, 5, .78) 100%);
 }
 
 /* Feiner Filmkorn-Schleier über allem */
@@ -78,7 +79,7 @@ body::after {
   content: "";
   position: fixed; inset: -60px; z-index: 40;
   pointer-events: none;
-  opacity: .05;
+  opacity: .04;
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='180' height='180' filter='url(%23n)'/></svg>");
 }
 
@@ -101,7 +102,8 @@ body::after {
 }
 
 .hero-kicker {
-  font-size: clamp(.68rem, 1.4vw, .8rem);
+  font-size: clamp(.66rem, 1.3vw, .76rem);
+  font-weight: 500;
   letter-spacing: .42em;
   text-transform: uppercase;
   color: var(--muted);
@@ -109,39 +111,32 @@ body::after {
 
 #title {
   font-family: var(--font-display);
-  font-weight: 800;
-  font-size: clamp(2.1rem, 6.2vw, 4.6rem);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 6.4vw, 5.1rem);
   line-height: 1.06;
-  letter-spacing: .01em;
-  margin-top: 18px;
-  background: linear-gradient(180deg, #ffffff 20%, #b9c2ff 70%, #8b7bff 115%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  letter-spacing: -0.015em;
+  margin-top: 20px;
+  color: var(--ink);
   text-wrap: balance;
-  filter: drop-shadow(0 0 26px rgba(139, 123, 255, .28));
 }
 #title .w { display: inline-block; white-space: nowrap; }
-/* Gradient pro Buchstabe: background-clip:text bricht auf dem <h1>,
-   sobald die Spans durch GSAP-Transforms eigene Layer bekommen. */
-#title .ch {
-  display: inline-block;
-  will-change: transform, opacity;
-  background: linear-gradient(180deg, #ffffff 20%, #b9c2ff 70%, #8b7bff 115%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+#title .ch { display: inline-block; will-change: transform, opacity; }
+/* "Dreams" kursiv in zartem Lavendel — der Opal-Moment */
+#title .w:nth-of-type(2) {
+  font-style: italic;
+  font-weight: 340;
+  color: var(--lav);
 }
 
 #tagline {
-  margin-top: 18px;
-  font-size: clamp(.95rem, 2vw, 1.15rem);
+  margin-top: 20px;
+  font-size: clamp(.95rem, 2vw, 1.1rem);
   font-weight: 400;
   color: var(--muted);
-  letter-spacing: .04em;
+  letter-spacing: .015em;
 }
 
-/* ---------- Projekt-Grid (schwebende Monolithen) ---------- */
+/* ---------- Projekt-Grid (schwebende Kacheln) ---------- */
 
 #fleet {
   flex: 1;
@@ -158,10 +153,11 @@ body::after {
 .fleet-label {
   flex-basis: 100%;
   text-align: center;
-  font-size: .7rem;
+  font-size: .66rem;
+  font-weight: 500;
   letter-spacing: .5em;
   text-transform: uppercase;
-  color: rgba(154, 160, 195, .7);
+  color: rgba(160, 157, 179, .75);
 }
 
 .card {
@@ -172,16 +168,26 @@ body::after {
 
 .card-float { transform-style: preserve-3d; will-change: transform; }
 
+/* Gemeinsamer Glas-Rahmen — beide Kacheln im selben Stil */
 .card-frame {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 16px;
   min-height: clamp(430px, 56vh, 500px);
   padding: 22px;
   text-decoration: none;
   overflow: hidden;
-  transition: transform .45s cubic-bezier(.2, .8, .2, 1), box-shadow .45s ease;
+  border-radius: 22px;
+  border: 1px solid rgba(242, 239, 230, .1);
+  background: linear-gradient(165deg, rgba(34, 30, 58, .5), rgba(11, 9, 20, .74));
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, .5),
+    inset 0 1px 0 rgba(255, 255, 255, .06);
+  transition: transform .45s cubic-bezier(.2, .8, .2, 1), border-color .45s ease, box-shadow .45s ease;
 }
 
 /* Status-Chip oben */
@@ -189,143 +195,130 @@ body::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: .62rem;
+  font-size: .6rem;
+  font-weight: 500;
   letter-spacing: .3em;
   text-transform: uppercase;
   color: var(--muted);
 }
 .chip-os {
-  border: 1px solid rgba(154, 160, 195, .35);
-  padding: 4px 10px;
+  border: 1px solid rgba(160, 157, 179, .35);
+  padding: 4px 11px;
   border-radius: 999px;
-  letter-spacing: .2em;
+  letter-spacing: .18em;
 }
 
-/* ===== Kachel 1: Bow & Arrow (Pixel / Dark-Fantasy) ===== */
+/* ===== Kachel 1: Bow & Arrow ===== */
 
-.card--bow .card-frame {
-  border: 3px solid var(--gold-deep);
-  box-shadow:
-    0 0 0 3px #05030a,
-    0 0 0 5px rgba(169, 124, 27, .45),
-    0 26px 70px rgba(0, 0, 0, .6),
-    0 0 46px rgba(232, 182, 76, .12);
-  background:
-    linear-gradient(180deg, rgba(3, 4, 10, .28) 0%, rgba(3, 4, 10, .62) 55%, rgba(2, 3, 8, .9) 100%),
-    url("BowAndArrowPrivacy/assets/ds/battlefield-bg.png") center 30% / cover no-repeat #0a0d0a;
-  image-rendering: pixelated;
-  cursor: pointer;
-}
+.card--bow .card-frame { cursor: pointer; }
 .card--bow .card-frame:hover,
 .card--bow .card-frame:focus-visible {
-  transform: scale(1.025);
+  transform: translateY(-5px);
+  border-color: rgba(196, 181, 253, .35);
   box-shadow:
-    0 0 0 3px #05030a,
-    0 0 0 5px rgba(232, 182, 76, .8),
-    0 30px 80px rgba(0, 0, 0, .65),
-    0 0 70px rgba(232, 182, 76, .3);
+    0 36px 90px rgba(0, 0, 0, .55),
+    0 0 60px rgba(196, 181, 253, .12),
+    inset 0 1px 0 rgba(255, 255, 255, .08);
 }
-.card--bow .chip { color: #cdb27a; }
-.card--bow .chip-os { border-color: rgba(232, 182, 76, .5); color: var(--gold); }
 
+/* Artwork-Inset: hier darf das Spiel Pixel sein */
 .bow-stage {
   position: relative;
   display: grid;
   place-items: center;
-  padding: 18px 0 6px;
+  min-height: 200px;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid rgba(242, 239, 230, .08);
+  background:
+    linear-gradient(180deg, rgba(6, 8, 5, .12) 30%, rgba(4, 5, 3, .55) 100%),
+    url("BowAndArrowPrivacy/assets/ds/battlefield-bg.png") center 32% / cover no-repeat #0a0d0a;
+  image-rendering: pixelated;
 }
 .knight {
-  width: clamp(104px, 30%, 132px);
+  width: clamp(92px, 26%, 116px);
   height: auto;
   image-rendering: pixelated;
-  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .65));
+  filter: drop-shadow(0 14px 18px rgba(0, 0, 0, .6));
 }
 .bow-ground {
   position: absolute;
-  bottom: 0;
-  width: 46%;
+  bottom: 14px;
+  width: 42%;
   height: 12px;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(232, 182, 76, .28), transparent 75%);
+  background: radial-gradient(closest-side, rgba(242, 239, 230, .2), transparent 75%);
 }
 
 .bow-info {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-top: 8px;
 }
 .bow-icon {
-  width: 52px; height: 52px;
-  border-radius: 10px;
-  border: 2px solid rgba(232, 182, 76, .55);
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  border: 1px solid rgba(242, 239, 230, .14);
   image-rendering: pixelated;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, .5);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .45);
 }
-.bow-titles { display: flex; flex-direction: column; gap: 8px; }
+.bow-titles { display: flex; flex-direction: column; gap: 5px; }
 .bow-name {
-  font-family: var(--font-pixel);
-  font-size: .92rem;
-  color: var(--gold);
-  text-shadow: 2px 2px 0 #000, 0 0 18px rgba(232, 182, 76, .4);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.45rem;
+  letter-spacing: .01em;
+  color: var(--ink);
 }
 .bow-sub {
-  font-family: var(--font-pixel);
-  font-size: .5rem;
-  letter-spacing: .12em;
-  color: #b8c0d8;
-  text-shadow: 1px 1px 0 #000;
+  font-size: .64rem;
+  font-weight: 500;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 
-.pixel-btn {
+/* Creme-Pill-Button (Opal-Stil) */
+.cta-btn {
   display: block;
-  margin-top: 18px;
-  padding: 14px 16px;
+  padding: 15px 18px;
   text-align: center;
-  font-family: var(--font-pixel);
-  font-size: .62rem;
-  color: var(--gold);
-  background: rgba(10, 7, 2, .82);
-  border: 3px solid var(--gold-deep);
-  box-shadow: inset 0 0 0 2px #05030a, 3px 3px 0 #05030a;
-  text-shadow: 1px 1px 0 #000;
-  transition: background .2s ease, color .2s ease;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #16131f;
+  font-size: .74rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  transition: background .25s ease, transform .25s ease;
 }
-.card--bow .card-frame:hover .pixel-btn {
-  background: var(--gold);
-  color: #140c02;
-  text-shadow: none;
+.card--bow .card-frame:hover .cta-btn {
+  background: #ffffff;
+  transform: translateY(-1px);
 }
 
-/* ===== Kachel 2: Transmission Pending (Glas / Glitch) ===== */
+/* ===== Kachel 2: Transmission Pending ===== */
 
 .card--pending .card-frame {
   align-items: center;
   text-align: center;
-  gap: 10px;
-  border: 1px solid rgba(139, 123, 255, .28);
-  border-radius: 18px;
-  background: linear-gradient(165deg, rgba(24, 26, 52, .55), rgba(7, 7, 18, .78));
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 26px 70px rgba(0, 0, 0, .55), inset 0 0 60px rgba(139, 123, 255, .05);
   cursor: not-allowed;
 }
 .card--pending .chip { width: 100%; }
 
-/* Scanlines + Rausch-Schleier */
+/* Scanlines + Rausch-Schleier — sehr dezent */
 .card--pending .card-frame::before {
   content: "";
   position: absolute; inset: 0;
   pointer-events: none;
-  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .028) 0 1px, transparent 1px 4px);
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .022) 0 1px, transparent 1px 4px);
   animation: scan-drift 9s linear infinite;
 }
 .card--pending .card-frame::after {
   content: "";
   position: absolute; inset: -40px;
   pointer-events: none;
-  opacity: .07;
+  opacity: .06;
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='140' height='140' filter='url(%23n)'/></svg>");
   animation: noise-jump .6s steps(4) infinite;
 }
@@ -349,19 +342,19 @@ body::after {
   position: absolute;
   width: 100%; height: 100%;
   border-radius: 50%;
-  border: 1px solid rgba(125, 231, 255, .5);
+  border: 1px solid rgba(167, 232, 224, .45);
   animation: ring-pulse 2.6s ease-out infinite;
 }
 .signal-ring:nth-child(2) { animation-delay: 1.3s; }
 .signal-core {
-  width: 10px; height: 10px;
+  width: 9px; height: 9px;
   border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 18px var(--cyan), 0 0 42px rgba(125, 231, 255, .5);
+  background: var(--aqua);
+  box-shadow: 0 0 16px var(--aqua), 0 0 38px rgba(167, 232, 224, .4);
   animation: core-blink 2.6s ease-in-out infinite;
 }
 @keyframes ring-pulse {
-  from { transform: scale(.18); opacity: .9; }
+  from { transform: scale(.18); opacity: .85; }
   to   { transform: scale(1.15); opacity: 0; }
 }
 @keyframes core-blink { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
@@ -369,10 +362,10 @@ body::after {
 .glitch {
   position: relative;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.15rem, 3vw, 1.45rem);
-  letter-spacing: .14em;
-  color: #dfe3ff;
+  font-weight: 480;
+  font-size: clamp(1.25rem, 3vw, 1.55rem);
+  letter-spacing: .09em;
+  color: #ece9f5;
   text-wrap: balance;
 }
 .glitch::before,
@@ -383,12 +376,12 @@ body::after {
   opacity: .8;
 }
 .glitch::before {
-  color: var(--cyan);
+  color: var(--aqua);
   clip-path: inset(0 0 52% 0);
   animation: glitch-a 3.4s steps(1) infinite;
 }
 .glitch::after {
-  color: var(--error);
+  color: var(--rose);
   clip-path: inset(56% 0 0 0);
   animation: glitch-b 2.9s steps(1) infinite;
 }
@@ -407,10 +400,10 @@ body::after {
 
 /* Fehler-Zustand: kurzer analoger Zusammenbruch */
 .card--pending.is-erroring .card-frame {
-  border-color: rgba(255, 84, 112, .65);
-  box-shadow: 0 26px 70px rgba(0, 0, 0, .55), 0 0 46px rgba(255, 84, 112, .25);
+  border-color: rgba(255, 143, 163, .55);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .5), 0 0 46px rgba(255, 143, 163, .2);
 }
-.card--pending.is-erroring .card-frame::after { opacity: .3; animation-duration: .12s; }
+.card--pending.is-erroring .card-frame::after { opacity: .26; animation-duration: .12s; }
 .card--pending.is-erroring .glitch::before { animation: glitch-hard-a .16s steps(2) infinite; opacity: 1; }
 .card--pending.is-erroring .glitch::after { animation: glitch-hard-b .13s steps(2) infinite; opacity: 1; }
 @keyframes glitch-hard-a {
@@ -427,22 +420,22 @@ body::after {
 .pending-sub {
   font-size: .86rem;
   color: var(--muted);
-  letter-spacing: .05em;
+  letter-spacing: .02em;
 }
 
 .ghost-btn {
   margin-top: 10px;
   width: 100%;
-  padding: 14px 16px;
+  padding: 15px 18px;
   font-family: var(--font-body);
-  font-size: .78rem;
-  font-weight: 600;
-  letter-spacing: .3em;
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .28em;
   text-transform: uppercase;
-  color: rgba(154, 160, 195, .8);
+  color: rgba(242, 239, 230, .5);
   background: transparent;
-  border: 1px dashed rgba(154, 160, 195, .4);
-  border-radius: 10px;
+  border: 1px solid rgba(242, 239, 230, .18);
+  border-radius: 999px;
   cursor: not-allowed;
 }
 
@@ -454,8 +447,8 @@ body::after {
   gap: 10px 28px;
   align-items: center;
   justify-content: center;
-  font-size: .78rem;
-  letter-spacing: .06em;
+  font-size: .76rem;
+  letter-spacing: .03em;
   color: var(--muted);
   padding-bottom: 6px;
 }
@@ -465,7 +458,7 @@ body::after {
   opacity: .85;
   transition: opacity .2s ease, color .2s ease;
 }
-#site-foot a:hover { opacity: 1; color: var(--cyan); }
+#site-foot a:hover { opacity: 1; color: var(--lav); }
 
 /* ---------- Overlays ---------- */
 
@@ -476,18 +469,19 @@ body::after {
   z-index: 45;
   padding: 10px 18px;
   font-family: var(--font-body);
-  font-size: .72rem;
+  font-size: .7rem;
+  font-weight: 500;
   letter-spacing: .22em;
   text-transform: uppercase;
   color: var(--muted);
-  background: rgba(10, 10, 28, .55);
-  border: 1px solid rgba(154, 160, 195, .3);
+  background: rgba(13, 11, 26, .55);
+  border: 1px solid rgba(160, 157, 179, .3);
   border-radius: 999px;
   cursor: pointer;
   backdrop-filter: blur(8px);
   transition: color .2s ease, border-color .2s ease;
 }
-#skip-intro:hover { color: var(--ink); border-color: rgba(154, 160, 195, .7); }
+#skip-intro:hover { color: var(--ink); border-color: rgba(160, 157, 179, .7); }
 #skip-intro.is-hidden { display: none; }
 .no-anim #skip-intro { display: none; }
 
@@ -495,7 +489,7 @@ body::after {
   position: fixed; inset: 0; z-index: 55;
   pointer-events: none;
   opacity: 0; visibility: hidden;
-  background: radial-gradient(60% 60% at 50% 44%, rgba(255, 255, 255, .95), rgba(185, 194, 255, .35) 55%, transparent 100%);
+  background: radial-gradient(60% 60% at 50% 44%, rgba(246, 241, 230, .95), rgba(196, 181, 253, .3) 55%, transparent 100%);
   mix-blend-mode: screen;
 }
 
@@ -514,14 +508,15 @@ body::after {
   bottom: clamp(60px, 9vh, 96px);
   z-index: 50;
   transform: translateX(-50%);
-  padding: 12px 22px;
-  font-family: var(--font-pixel);
-  font-size: .58rem;
-  letter-spacing: .1em;
+  padding: 12px 24px;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .18em;
   color: var(--error);
-  background: rgba(8, 4, 10, .88);
-  border: 1px solid rgba(255, 84, 112, .5);
-  box-shadow: 0 0 30px rgba(255, 84, 112, .18);
+  background: rgba(10, 6, 12, .88);
+  border: 1px solid rgba(255, 143, 163, .4);
+  border-radius: 999px;
+  box-shadow: 0 0 30px rgba(255, 143, 163, .14);
   opacity: 0; visibility: hidden;
   white-space: nowrap;
 }
@@ -531,11 +526,11 @@ body::after {
 /* Kompakt-Stufe: auf flacheren Desktop-Screens alles in einen Viewport */
 @media (min-width: 861px) and (max-height: 960px) {
   #hero { margin-top: 2vh; }
-  #title { font-size: clamp(2rem, 5vw, 3.6rem); }
+  #title { font-size: clamp(2.2rem, 5.2vw, 4rem); }
   #tagline { margin-top: 12px; }
   #fleet { padding: 22px 0; gap: clamp(26px, 4vw, 56px); }
   .card-frame { min-height: clamp(380px, 52vh, 450px); }
-  .bow-stage { padding: 10px 0 4px; }
+  .bow-stage { min-height: 170px; }
 }
 
 @media (max-width: 860px) {

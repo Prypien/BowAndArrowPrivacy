@@ -6,16 +6,16 @@
   <title>Project II — Transmission Pending | Chasing Dreams Interactive</title>
   <meta name="robots" content="noindex">
   <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600&family=Syne:wght@800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       min-height: 100svh;
       display: grid;
       place-items: center;
-      background: radial-gradient(120vmax 90vmax at 50% 40%, #0a0a1c 0%, #030309 55%, #010104 100%);
-      color: #eef0ff;
-      font-family: "Space Grotesk", system-ui, sans-serif;
+      background: radial-gradient(120vmax 90vmax at 50% 40%, #0d0b1a 0%, #060510 55%, #020204 100%);
+      color: #f2efe6;
+      font-family: "Inter", system-ui, sans-serif;
       text-align: center;
       overflow: hidden;
     }
@@ -25,16 +25,17 @@
       position: absolute;
       width: 2px; height: 2px;
       border-radius: 50%;
-      background: #b9c2ff;
+      background: #d9d2ff;
       animation: twinkle 3s ease-in-out infinite;
     }
     @keyframes twinkle { 0%, 100% { opacity: .15; } 50% { opacity: .9; } }
     main { position: relative; padding: 24px; }
-    .kicker { font-size: .72rem; letter-spacing: .45em; text-transform: uppercase; color: #9aa0c3; }
+    .kicker { font-size: .72rem; font-weight: 500; letter-spacing: .45em; text-transform: uppercase; color: #a09db3; }
     h1 {
-      font-family: "Syne", sans-serif;
-      font-size: clamp(1.6rem, 5vw, 3rem);
-      letter-spacing: .12em;
+      font-family: "Fraunces", Georgia, serif;
+      font-weight: 500;
+      font-size: clamp(1.7rem, 5vw, 3.1rem);
+      letter-spacing: .06em;
       margin: 18px 0 14px;
       animation: flicker 4s steps(1) infinite;
     }
@@ -43,21 +44,22 @@
       62% { opacity: .35; }
       89% { opacity: .5; }
     }
-    p { color: #9aa0c3; letter-spacing: .05em; }
+    p { color: #a09db3; letter-spacing: .02em; }
     a {
       display: inline-block;
       margin-top: 34px;
       padding: 12px 26px;
-      color: #7de7ff;
+      color: #a7e8e0;
       text-decoration: none;
       letter-spacing: .25em;
       text-transform: uppercase;
-      font-size: .74rem;
-      border: 1px solid rgba(125, 231, 255, .4);
+      font-size: .72rem;
+      font-weight: 500;
+      border: 1px solid rgba(167, 232, 224, .35);
       border-radius: 999px;
       transition: background .2s ease;
     }
-    a:hover { background: rgba(125, 231, 255, .1); }
+    a:hover { background: rgba(167, 232, 224, .08); }
   </style>
 </head>
 <body>

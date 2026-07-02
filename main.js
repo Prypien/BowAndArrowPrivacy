@@ -1,8 +1,8 @@
 /* ============================================================
    Chasing Dreams Interactive — Regie
    Phase 1  "Der Urknall":   pulsierender Stern → Explosion ins Partikelfeld
-   Phase 2  "Der Space-Flug": Kacheln docken als Monolithen im 3D-Raum an
-   Phase 3  "Das Portal":     Hyperraum-Warp + Pixel-Dissolve in das Projekt
+   Phase 2  "Der Space-Flug": Kacheln docken sanft im 3D-Raum an
+   Phase 3  "Das Portal":     weicher Zoom-Bloom + Pixel-Dissolve ins Projekt
    ============================================================ */
 (() => {
   "use strict";
@@ -40,7 +40,6 @@
     star: { alpha: 0, energy: 0.55, spin: 0 },
     burst: [],
     shock: { r: 0, alpha: 0 },
-    warp: { active: false, boost: 0, streaks: [] },
     splineActive: false,
   };
 
@@ -64,9 +63,9 @@
     ctx.rotate(angle);
     ctx.scale(1, width / len);
     const g = ctx.createRadialGradient(0, 0, 0, 0, 0, len);
-    g.addColorStop(0, `rgba(235, 238, 255, ${alpha})`);
-    g.addColorStop(0.45, `rgba(160, 150, 255, ${alpha * 0.35})`);
-    g.addColorStop(1, "rgba(160, 150, 255, 0)");
+    g.addColorStop(0, `rgba(246, 242, 232, ${alpha})`);
+    g.addColorStop(0.45, `rgba(196, 181, 253, ${alpha * 0.3})`);
+    g.addColorStop(1, "rgba(196, 181, 253, 0)");
     ctx.fillStyle = g;
     ctx.beginPath();
     ctx.arc(0, 0, len, 0, Math.PI * 2);
@@ -85,23 +84,24 @@
     ctx.globalCompositeOperation = "lighter";
     ctx.globalAlpha = s.alpha;
 
-    /* Halo */
-    const haloR = base * 0.16 * e;
+    /* Halo — weich, warm, ohne Sci-Fi-Neon */
+    const haloR = base * 0.17 * e;
     const halo = ctx.createRadialGradient(x, y, 0, x, y, haloR);
-    halo.addColorStop(0, `rgba(200, 195, 255, ${0.5 * e})`);
-    halo.addColorStop(0.4, `rgba(139, 123, 255, ${0.22 * e})`);
-    halo.addColorStop(1, "rgba(139, 123, 255, 0)");
+    halo.addColorStop(0, `rgba(226, 217, 255, ${0.42 * e})`);
+    halo.addColorStop(0.4, `rgba(196, 181, 253, ${0.16 * e})`);
+    halo.addColorStop(0.75, `rgba(245, 200, 184, ${0.05 * e})`);
+    halo.addColorStop(1, "rgba(196, 181, 253, 0)");
     ctx.fillStyle = halo;
     ctx.beginPath();
     ctx.arc(x, y, haloR, 0, Math.PI * 2);
     ctx.fill();
 
-    /* Beugungsstrahlen (Kreuz + kürzere Diagonalen) */
+    /* Vierstrahliger Funkel (✦) — kürzer und sanfter als ein Beugungskreuz */
     const spin = s.spin;
-    drawSpike(x, y, spin, base * 0.30 * e, 2.6, 0.9 * e);
-    drawSpike(x, y, spin + Math.PI / 2, base * 0.30 * e, 2.6, 0.9 * e);
-    drawSpike(x, y, spin + Math.PI / 4, base * 0.15 * e, 1.8, 0.55 * e);
-    drawSpike(x, y, spin - Math.PI / 4, base * 0.15 * e, 1.8, 0.55 * e);
+    drawSpike(x, y, spin, base * 0.24 * e, 2.2, 0.7 * e);
+    drawSpike(x, y, spin + Math.PI / 2, base * 0.24 * e, 2.2, 0.7 * e);
+    drawSpike(x, y, spin + Math.PI / 4, base * 0.1 * e, 1.5, 0.35 * e);
+    drawSpike(x, y, spin - Math.PI / 4, base * 0.1 * e, 1.5, 0.35 * e);
 
     /* Kern */
     const coreR = Math.max(1.5, base * 0.014 * e);
@@ -118,7 +118,7 @@
   }
 
   const BURST_COLORS = [
-    [255, 255, 255], [185, 194, 255], [139, 123, 255], [125, 231, 255], [232, 182, 76],
+    [255, 255, 255], [242, 239, 230], [217, 210, 255], [196, 181, 253], [167, 232, 224], [245, 200, 184],
   ];
 
   function spawnBurst() {
@@ -149,7 +149,7 @@
 
     if (fx.shock.alpha > 0.01) {
       const { x, y } = starCenter();
-      ctx.strokeStyle = `rgba(190, 186, 255, ${fx.shock.alpha})`;
+      ctx.strokeStyle = `rgba(226, 217, 255, ${fx.shock.alpha})`;
       ctx.lineWidth = 1.5;
       ctx.beginPath();
       ctx.arc(x, y, fx.shock.r, 0, Math.PI * 2);
@@ -173,47 +173,6 @@
     ctx.restore();
   }
 
-  /* Hyperraum: Sternstreifen, die aus der Mitte heraus beschleunigen */
-  function startWarp() {
-    fx.warp.active = true;
-    fx.warp.boost = 0.25;
-    fx.warp.streaks = Array.from({ length: 240 }, () => ({
-      angle: Math.random() * Math.PI * 2,
-      dist: 20 + Math.random() * Math.min(fx.w, fx.h) * 0.5,
-      speed: 0.6 + Math.random() * 1.6,
-    }));
-    gsap.to(fx.warp, { boost: 6, duration: 1.3, ease: "power2.in" });
-  }
-
-  function drawWarp(dt) {
-    if (!fx.warp.active) return;
-    const cx = fx.w / 2, cy = fx.h / 2;
-    const maxR = Math.hypot(fx.w, fx.h) * 0.6;
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter";
-    ctx.lineCap = "round";
-    for (const s of fx.warp.streaks) {
-      s.dist += s.speed * fx.warp.boost * dt * 620;
-      if (s.dist > maxR) {
-        s.dist = 10 + Math.random() * 60;
-        s.angle = Math.random() * Math.PI * 2;
-      }
-      const tail = Math.max(6, s.dist * 0.16 * fx.warp.boost * 0.4);
-      const x1 = cx + Math.cos(s.angle) * s.dist;
-      const y1 = cy + Math.sin(s.angle) * s.dist;
-      const x2 = cx + Math.cos(s.angle) * (s.dist - tail);
-      const y2 = cy + Math.sin(s.angle) * (s.dist - tail);
-      const a = Math.min(0.85, 0.1 + (s.dist / maxR) * 0.9);
-      ctx.strokeStyle = `rgba(200, 205, 255, ${a})`;
-      ctx.lineWidth = 1 + (s.dist / maxR) * 1.8;
-      ctx.beginPath();
-      ctx.moveTo(x2, y2);
-      ctx.lineTo(x1, y1);
-      ctx.stroke();
-    }
-    ctx.restore();
-  }
-
   let lastT = performance.now();
   (function tick(now) {
     const dt = Math.min(0.05, (now - lastT) / 1000);
@@ -222,7 +181,6 @@
     ctx.clearRect(0, 0, fx.w, fx.h);
     drawStar();
     drawBurst(dt);
-    drawWarp(dt);
     requestAnimationFrame(tick);
   })(lastT);
 
@@ -236,35 +194,35 @@
       fullScreen: { enable: false },
       background: { color: "transparent" },
       particles: {
-        number: { value: 150, density: { enable: true, area: 900 } },
-        color: { value: ["#ffffff", "#b9c2ff", "#8b7bff", "#7de7ff"] },
+        number: { value: 170, density: { enable: true, area: 900 } },
+        color: { value: ["#ffffff", "#f2efe6", "#d9d2ff", "#c4b5fd", "#a7e8e0", "#f5c8b8"] },
         size: { value: { min: 0.4, max: 1.9 } },
         opacity: {
-          value: { min: 0.1, max: 0.75 },
-          animation: { enable: !prefersReduced, speed: 0.55, minimumValue: 0.08, sync: false },
+          value: { min: 0.08, max: 0.7 },
+          animation: { enable: !prefersReduced, speed: 0.5, minimumValue: 0.06, sync: false },
         },
         move: {
           enable: !prefersReduced,
-          speed: 0.25,
+          speed: 0.22,
           direction: "none",
           random: true,
           outModes: { default: "out" },
         },
-        links: { enable: true, distance: 150, color: "#8b7bff", opacity: 0.05, width: 1 },
+        links: { enable: false },
       },
       interactivity: {
         detectsOn: "window",
         events: {
           onHover: {
+            /* Sterne nahe der Maus leuchten auf und wachsen sanft */
             enable: !prefersReduced,
-            mode: ["grab", "bubble"],
-            parallax: { enable: !prefersReduced, force: 42, smooth: 14 },
+            mode: "bubble",
+            parallax: { enable: !prefersReduced, force: 46, smooth: 14 },
           },
           resize: true,
         },
         modes: {
-          grab: { distance: 190, links: { opacity: 0.2 } },
-          bubble: { distance: 170, size: 2.8, duration: 2, opacity: 0.9 },
+          bubble: { distance: 220, size: 3.6, duration: 1.8, opacity: 1 },
         },
       },
     }).catch((err) => console.warn("tsParticles konnte nicht starten:", err));
@@ -450,9 +408,9 @@
   })();
 
   /* ============================================================
-     8) Phase 3 — Das Portal: Hyperraum + Pixel-Dissolve
+     8) Phase 3 — Das Portal: weicher Zoom-Bloom + Pixel-Dissolve
      ============================================================ */
-  const GATE_TONES = ["#07050f", "#0d0a1c", "#120c26", "#1a0f33", "#241a08"];
+  const GATE_TONES = ["#0a0814", "#110d1e", "#181229", "#201834", "#191326"];
 
   function openPixelGate() {
     const cols = 26;
@@ -491,12 +449,12 @@
       return;
     }
 
-    tl.add(startWarp, 0)
-      .to([hero, ".fleet-label", cardPending, "#site-foot"], { autoAlpha: 0, duration: 0.35, ease: "power1.in" }, 0)
-      .to(cardBow, { z: 640, y: -20, autoAlpha: 0, duration: 0.9, ease: "power2.in" }, 0)
-      .to("#starfield", { autoAlpha: 0.35, duration: 0.9 }, 0)
-      .fromTo("#warp-flash", { autoAlpha: 0 }, { autoAlpha: 0.45, duration: 0.16 }, 0.55)
-      .to("#warp-flash", { autoAlpha: 0, duration: 0.4 }, 0.75)
+    tl.to([hero, ".fleet-label", cardPending, "#site-foot"], { autoAlpha: 0, duration: 0.35, ease: "power1.in" }, 0)
+      .to(cardBow, { z: 640, y: -16, autoAlpha: 0, duration: 0.9, ease: "power2.in" }, 0)
+      /* Sternenfeld zieht sanft auf den Betrachter zu — Tiefe ohne Streifen */
+      .to("#starfield", { scale: 1.55, autoAlpha: 0.45, duration: 1.5, ease: "power2.in", transformOrigin: "50% 45%" }, 0)
+      .fromTo("#warp-flash", { autoAlpha: 0 }, { autoAlpha: 0.5, duration: 0.18 }, 0.5)
+      .to("#warp-flash", { autoAlpha: 0, duration: 0.4 }, 0.72)
       .add(openPixelGate, 0.6)
       .to({}, { duration: 1.35 }, 0.6); /* warten, bis das Pixel-Tor geschlossen ist */
   }
