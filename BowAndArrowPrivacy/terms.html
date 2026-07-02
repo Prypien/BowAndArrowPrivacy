@@ -5,79 +5,105 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bow &amp; Arrow — Nutzungshinweise &amp; Impressum / Terms</title>
   <meta name="description" content="Nutzungshinweise, Terms of Use und Impressum für die iOS-App Bow & Arrow." />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=VT323&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;480;560&family=Inter:wght@400;500;600&display=swap" />
   <style>
     :root {
       --ba-gold: #BF993F;
       --ba-gold-pale: #E0C266;
-      --ba-bg: #0A0E18;
-      --ba-bg-deep: #080C14;
-      --ba-panel: #14141A;
-      --ba-panel-raised: #1F1F24;
-      --ba-panel-border: #473D38;
-      --ba-parchment: #D9D1BF;
-      --ba-parchment-dim: #8C8474;
-      --font-pixel: "VT323", ui-monospace, "Courier New", monospace;
+      --bg-0: #020204;
+      --bg-1: #0d0b1a;
+      --ink: #f2efe6;
+      --muted: #a09db3;
+      --lav: #c4b5fd;
+      --line: rgba(242, 239, 230, .1);
+      --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; }
+    html { color-scheme: dark; scroll-behavior: smooth; }
     body {
-      font-family: var(--font-pixel);
-      font-size: 21px;
-      line-height: 1.4;
-      color: var(--ba-parchment);
-      background: var(--ba-bg);
+      font-family: var(--font-body);
+      font-size: 16.5px;
+      line-height: 1.7;
+      color: var(--ink);
+      background: radial-gradient(120vmax 90vmax at 50% 0%, var(--bg-1) 0%, #060510 50%, var(--bg-0) 100%) fixed;
       -webkit-font-smoothing: antialiased;
     }
-    ::selection { background: var(--ba-gold); color: var(--ba-bg); }
-    .wrap { max-width: 50rem; margin: 0 auto; padding: 40px 22px 80px; }
+    ::selection { background: rgba(196, 181, 253, .35); }
+    :focus-visible { outline: 2px solid var(--lav); outline-offset: 3px; border-radius: 6px; }
+    .wrap { max-width: 46rem; margin: 0 auto; padding: 48px 22px 90px; }
     header.bar {
       position: sticky; top: 0; z-index: 5;
-      background: rgba(8,12,20,0.92);
-      border-bottom: 2px solid var(--ba-panel-border);
-      backdrop-filter: blur(6px);
+      background: rgba(6, 5, 16, .6);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
     header.bar .inner {
-      max-width: 50rem; margin: 0 auto; padding: 12px 22px;
+      max-width: 46rem; margin: 0 auto; padding: 14px 22px;
       display: flex; align-items: center; gap: 14px;
     }
     header.bar a.home {
-      color: var(--ba-gold); letter-spacing: 1px; font-size: 24px;
-      text-shadow: 1px 1px 0 #000;
+      font-family: var(--font-display);
+      font-weight: 480;
+      font-size: 1.05rem;
+      letter-spacing: .02em;
+      color: var(--ba-gold-pale);
+      text-decoration: none;
     }
+    header.bar a.home:hover { color: var(--ink); }
     nav.legal-tabs { margin-left: auto; display: flex; gap: 8px; }
     nav.legal-tabs a {
-      font-size: 18px; letter-spacing: 1px; padding: 6px 14px;
-      border: 2px solid var(--ba-panel-border); border-radius: 6px;
-      color: var(--ba-parchment-dim); text-decoration: none;
+      font-size: .68rem; font-weight: 500;
+      letter-spacing: .18em;
+      padding: 8px 16px;
+      border: 1px solid rgba(242, 239, 230, .18);
+      border-radius: 999px;
+      color: var(--muted); text-decoration: none;
+      transition: color .2s ease, border-color .2s ease;
     }
     nav.legal-tabs a.active {
-      color: var(--ba-bg); border-color: var(--ba-gold);
+      color: #16131f; border-color: var(--ba-gold);
       background: linear-gradient(180deg, var(--ba-gold-pale), var(--ba-gold));
     }
-    nav.legal-tabs a:hover { color: var(--ba-gold); }
-    nav.legal-tabs a.active:hover { color: var(--ba-bg); filter: brightness(1.06); }
+    nav.legal-tabs a:hover { color: var(--ink); border-color: rgba(242, 239, 230, .4); }
+    nav.legal-tabs a.active:hover { color: #16131f; filter: brightness(1.06); }
     h1 {
-      font-size: 52px; line-height: 1; margin: 18px 0 6px;
-      color: var(--ba-gold); letter-spacing: 1px; text-shadow: 1px 1px 0 #000;
+      font-family: var(--font-display);
+      font-weight: 480;
+      font-size: clamp(2rem, 6vw, 2.9rem);
+      line-height: 1.1; margin: 26px 0 8px;
+      letter-spacing: -0.01em;
+      color: var(--ba-gold-pale);
     }
     h2 {
-      font-size: 30px; margin: 34px 0 8px; color: var(--ba-gold-pale);
-      letter-spacing: 1px;
+      font-family: var(--font-display);
+      font-weight: 480;
+      font-size: 1.35rem;
+      margin: 40px 0 10px;
+      color: var(--ink);
     }
-    p, li { color: var(--ba-parchment); }
-    small { color: var(--ba-parchment-dim); font-size: 18px; }
-    a { color: var(--ba-gold); }
+    p, li { color: var(--muted); }
+    strong { color: var(--ink); font-weight: 600; }
+    small { color: rgba(160, 157, 179, .8); font-size: .82rem; }
+    a { color: var(--ba-gold-pale); text-underline-offset: 3px; }
+    a:hover { color: var(--ink); }
     ul { padding-left: 1.3rem; }
-    li { margin: 4px 0; }
-    hr { border: none; border-top: 2px solid var(--ba-panel-border); margin: 48px 0; }
-    .lang-switch { display: flex; gap: 10px; margin: 14px 0 0; }
-    .lang-switch a { font-size: 18px; letter-spacing: 1px; }
-    footer.foot {
-      max-width: 50rem; margin: 0 auto; padding: 0 22px 60px;
-      color: var(--ba-parchment-dim); font-size: 18px;
+    li { margin: 6px 0; }
+    hr { border: none; border-top: 1px solid var(--line); margin: 56px 0; }
+    .lang-switch { display: flex; align-items: center; gap: 10px; margin: 18px 0 0; color: var(--muted); }
+    .lang-switch a {
+      font-size: .68rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+      text-decoration: none; padding: 7px 14px;
+      border: 1px solid rgba(242, 239, 230, .18); border-radius: 999px; color: var(--muted);
     }
-    footer.foot a { color: var(--ba-gold); }
+    .lang-switch a:hover { color: var(--ink); border-color: rgba(242, 239, 230, .4); }
+    footer.foot {
+      max-width: 46rem; margin: 0 auto; padding: 0 22px 60px;
+      color: rgba(160, 157, 179, .8); font-size: .82rem;
+    }
+    footer.foot a { color: var(--ba-gold-pale); }
   </style>
 </head>
 <body>

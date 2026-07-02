@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Chasing Dreams Interactive — Indie Game Studio</title>
   <meta name="description" content="Chasing Dreams Interactive ist ein unabhängiges Spielestudio. Wir jagen Träume durch die Dunkelheit – und gießen sie in Spiele.">
-  <meta name="theme-color" content="#05060f">
+  <meta name="theme-color" content="#060510">
 
   <meta property="og:title" content="Chasing Dreams Interactive">
   <meta property="og:description" content="Ein unabhängiges Spielestudio. Wir jagen Träume durch die Dunkelheit – und gießen sie in Spiele.">
@@ -22,11 +22,11 @@
 </head>
 <body>
 
-  <!-- ============ KOSMOS (Hintergrund-Ebenen) ============ -->
+  <!-- ============ KOSMOS (fixe Hintergrund-Ebenen über die gesamte Scroll-Länge) ============ -->
   <div id="cosmos" aria-hidden="true">
-    <!-- Interaktives Sternenfeld (tsParticles) — reagiert mit Parallaxe auf die Maus -->
+    <!-- Interaktives Sternenfeld (tsParticles) — Sterne leuchten zur Maus hin auf -->
     <div id="starfield"></div>
-    <!-- Der pulsierende Stern, die Urknall-Explosion und der Hyperraum-Warp (Canvas) -->
+    <!-- Der pulsierende Stern und die Urknall-Explosion (Canvas) -->
     <canvas id="star-canvas"></canvas>
 
     <!-- ======================= SPLINE-SLOT =======================
@@ -42,82 +42,157 @@
     ============================================================ -->
   </div>
   <div id="vignette" aria-hidden="true"></div>
+  <div id="cursor-glow" aria-hidden="true"></div>
 
-  <!-- ============ SZENE (schwebender Raum mit Perspektive) ============ -->
+  <!-- ============ Sticky Header ============ -->
+  <header id="site-head">
+    <a class="brand" href="#top" aria-label="Chasing Dreams Interactive — zum Seitenanfang">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <defs>
+          <linearGradient id="bm-g" x1="0" y1="1" x2="1" y2="0">
+            <stop offset="0" stop-color="#a7e8e0"/>
+            <stop offset="0.55" stop-color="#c4b5fd"/>
+            <stop offset="1" stop-color="#f5c8e0"/>
+          </linearGradient>
+        </defs>
+        <path d="M5 27 C 12 24.5, 17.5 19, 21.5 11.5" fill="none" stroke="url(#bm-g)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M23 4.5 L24.6 7.9 L28 9.5 L24.6 11.1 L23 14.5 L21.4 11.1 L18 9.5 L21.4 7.9 Z" fill="#f2efe6"/>
+      </svg>
+      <span class="brand-word">Chasing&nbsp;<em>Dreams</em></span>
+    </a>
+    <nav class="site-nav" aria-label="Hauptnavigation">
+      <a href="#works">Projekte</a>
+      <a href="#studio">Studio</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- ============ Scroll-Erlebnis ============ -->
   <main id="scene">
-    <header id="hero">
-      <p class="hero-kicker">Ein unabhängiges Spielestudio</p>
-      <h1 id="title">Chasing Dreams Interactive</h1>
-      <p id="tagline">Wir jagen Träume durch die Dunkelheit&nbsp;–&nbsp;und gießen sie in Spiele.</p>
-    </header>
 
-    <section id="fleet" aria-label="Projekte">
-      <p class="fleet-label" aria-hidden="true">✦&ensp;Projekte&ensp;✦</p>
+    <!-- Hero -->
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <p class="hero-kicker">Ein unabhängiges Spielestudio</p>
+        <h1 id="title">Chasing Dreams Interactive</h1>
+        <p id="tagline">Wir jagen Träume durch die Dunkelheit&nbsp;–&nbsp;und gießen sie in Spiele.</p>
+      </div>
+      <a class="scroll-cue" href="#studio">
+        <span>Scrollen</span>
+        <span class="scroll-cue-arrow" aria-hidden="true">↓</span>
+      </a>
+    </section>
 
-      <!-- Kachel 1: Bow & Arrow — cleaner Glas-Rahmen, Pixel-Art nur im Artwork-Inset -->
-      <article class="card card--bow" id="card-bow">
-        <div class="card-float">
-          <a class="card-frame card-link" href="BowAndArrowPrivacy/" aria-label="Bow and Arrow – Projektseite öffnen">
-            <span class="chip">
-              <span class="chip-label">Project I</span>
-              <span class="chip-os">iOS</span>
-            </span>
-            <span class="bow-stage">
+    <!-- Statement / Studio -->
+    <section class="statement" id="studio">
+      <p class="section-kicker" data-reveal>✦&ensp;Studio</p>
+      <h2 class="statement-line" data-words>Wir erschaffen kleine Welten, in die man eintauchen will.</h2>
+      <p class="statement-copy" data-reveal>
+        Chasing Dreams Interactive ist ein unabhängiges Spielestudio.
+        Wir bauen handgemachte Spiele mit Liebe zum Detail — von der ersten Skizze
+        bis zum letzten Pixel. Ohne Trends zu jagen, dafür mit Geduld für Welten,
+        die sich echt anfühlen.
+      </p>
+    </section>
+
+    <!-- Works -->
+    <section class="works" id="works">
+      <div class="works-head" data-reveal>
+        <p class="section-kicker">✦&ensp;Ausgewählte Projekte</p>
+        <span class="works-count" aria-hidden="true">(02)</span>
+      </div>
+
+      <!-- 01 · Bow & Arrow — direkter Link, kein Portal -->
+      <article class="work work--bow" id="work-bow" data-reveal>
+        <a class="work-link" href="BowAndArrowPrivacy/" aria-label="Bow and Arrow – Projekt ansehen">
+          <span class="work-media">
+            <span class="work-visual work-visual--bow">
               <img class="knight" src="BowAndArrowPrivacy/assets/captain/idle_0.png" alt="" width="128" height="128" decoding="async">
               <span class="bow-ground"></span>
             </span>
-            <span class="bow-info">
-              <img class="bow-icon" src="BowAndArrowPrivacy/assets/ds/app-icon-dark.png" alt="" width="52" height="52" loading="lazy" decoding="async">
-              <span class="bow-titles">
-                <span class="bow-name">Bow &amp; Arrow</span>
-                <span class="bow-sub">Dark-Fantasy Archery</span>
-              </span>
+            <span class="work-open">Projekt ansehen&nbsp;<span aria-hidden="true">→</span></span>
+          </span>
+          <span class="work-meta">
+            <span class="work-index" aria-hidden="true">01</span>
+            <span class="work-titles">
+              <span class="work-title">Bow &amp; Arrow</span>
+              <span class="work-tags">iOS&ensp;·&ensp;Pixel Art&ensp;·&ensp;Tower Defense&ensp;·&ensp;Dark Fantasy</span>
             </span>
-            <span class="cta-btn">Enter the Realm&nbsp;→</span>
-          </a>
-        </div>
+            <span class="work-desc">Verteidige deine Burg mit Bogen, Begleitern und Legenden — ein handgezeichnetes Retro-Abenteuer für iPhone.</span>
+            <span class="work-year" aria-hidden="true">2026</span>
+          </span>
+        </a>
       </article>
 
-      <!-- Kachel 2: Platzhalter — Transmission Pending -->
-      <article class="card card--pending" id="card-pending">
-        <div class="card-float">
-          <div class="card-frame">
-            <span class="chip chip--ghost">
-              <span class="chip-label">Project II</span>
-              <span class="chip-os">???</span>
+      <!-- 02 · Project II — Coming Soon mit Fehler-Effekt -->
+      <article class="work work--pending" id="work-pending" data-reveal>
+        <div class="work-link is-disabled" role="button" tabindex="0" aria-disabled="true" aria-label="Project II – Ankündigung folgt">
+          <span class="work-media">
+            <span class="work-visual work-visual--pending">
+              <span class="signal" aria-hidden="true">
+                <span class="signal-ring"></span>
+                <span class="signal-ring"></span>
+                <span class="signal-core"></span>
+              </span>
+              <span class="glitch" data-text="TRANSMISSION PENDING">TRANSMISSION PENDING</span>
             </span>
-            <span class="signal" aria-hidden="true">
-              <span class="signal-ring"></span>
-              <span class="signal-ring"></span>
-              <span class="signal-core"></span>
+            <span class="work-open work-open--ghost">Awaiting Signal</span>
+          </span>
+          <span class="work-meta">
+            <span class="work-index" aria-hidden="true">02</span>
+            <span class="work-titles">
+              <span class="work-title">Project II</span>
+              <span class="work-tags">In Entwicklung&ensp;·&ensp;???</span>
             </span>
-            <h2 class="glitch" data-text="TRANSMISSION PENDING">TRANSMISSION PENDING</h2>
-            <p class="pending-sub">Ein neues Signal formt sich in der Leere.</p>
-            <button class="ghost-btn" id="pending-btn" type="button" aria-disabled="true">Awaiting Signal</button>
-          </div>
+            <span class="work-desc">Ein neues Signal formt sich in der Leere. Bald mehr.</span>
+            <span class="work-year" aria-hidden="true">✦</span>
+          </span>
         </div>
       </article>
     </section>
 
+    <!-- Statement / Kontakt-Übergang -->
+    <section class="statement statement--cta" id="contact">
+      <h2 class="statement-line" data-words>Der nächste Traum entsteht bereits.</h2>
+      <a class="cta-btn" href="mailto:jen@preisser.de" data-reveal>Schreib uns&nbsp;→</a>
+    </section>
+
+    <!-- Footer -->
     <footer id="site-foot">
-      <span>© 2026 Chasing Dreams Interactive</span>
-      <nav aria-label="Rechtliches">
+      <div class="foot-brand">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <defs>
+            <linearGradient id="fm-g" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#a7e8e0"/>
+              <stop offset="0.55" stop-color="#c4b5fd"/>
+              <stop offset="1" stop-color="#f5c8e0"/>
+            </linearGradient>
+          </defs>
+          <path d="M5 27 C 12 24.5, 17.5 19, 21.5 11.5" fill="none" stroke="url(#fm-g)" stroke-width="2" stroke-linecap="round"/>
+          <path d="M23 4.5 L24.6 7.9 L28 9.5 L24.6 11.1 L23 14.5 L21.4 11.1 L18 9.5 L21.4 7.9 Z" fill="#f2efe6"/>
+        </svg>
+        <p class="foot-name">Chasing <em>Dreams</em> Interactive</p>
+        <p class="foot-claim">Handgemachte Spiele aus Deutschland.</p>
+      </div>
+      <nav class="foot-nav" aria-label="Seiten und Rechtliches">
         <a href="BowAndArrowPrivacy/">Bow &amp; Arrow</a>
         <a href="BowAndArrowPrivacy/impressum.html">Impressum</a>
         <a href="BowAndArrowPrivacy/privacy.html">Datenschutz</a>
+        <a href="mailto:jen@preisser.de">jen@preisser.de</a>
       </nav>
+      <p class="foot-copy">© 2026 Chasing Dreams Interactive</p>
     </footer>
   </main>
 
   <!-- ============ Overlays ============ -->
   <button id="skip-intro" type="button">Intro überspringen&nbsp;⏭</button>
-  <div id="warp-flash" aria-hidden="true"></div>
-  <div id="pixel-gate" aria-hidden="true"></div>
+  <div id="burst-flash" aria-hidden="true"></div>
   <p id="glitch-toast" role="status">// SIGNAL LOST · TRANSMISSION PENDING //</p>
 
   <!-- ============ Bibliotheken (CDN) ============ -->
-  <!-- GSAP — kinoreife Timeline-Choreografie -->
+  <!-- GSAP + ScrollTrigger — Intro-Choreografie & Scroll-Reveals -->
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
   <!-- tsParticles (slim) — interaktives kosmisches Partikelfeld -->
   <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
 

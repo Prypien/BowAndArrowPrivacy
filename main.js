@@ -1,8 +1,8 @@
 /* ============================================================
    Chasing Dreams Interactive — Regie
-   Phase 1  "Der Urknall":   pulsierender Stern → Explosion ins Partikelfeld
-   Phase 2  "Der Space-Flug": Kacheln docken sanft im 3D-Raum an
-   Phase 3  "Das Portal":     weicher Zoom-Bloom + Pixel-Dissolve ins Projekt
+   Intro:   pulsierender Stern → Urknall ins Partikelfeld → Hero
+   Scroll:  Sektionen & Works-Reihen erscheinen beim Erreichen,
+            Statement-Sätze füllen sich wortweise mit dem Scroll
    ============================================================ */
 (() => {
   "use strict";
@@ -12,25 +12,23 @@
     document.documentElement.classList.add("no-anim");
     return;
   }
+  const hasScrollTrigger = !!window.ScrollTrigger;
+  if (hasScrollTrigger) gsap.registerPlugin(ScrollTrigger);
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const alreadySeen = sessionStorage.getItem("cdi_intro_seen") === "1";
 
-  const scene = document.getElementById("scene");
-  const fleet = document.getElementById("fleet");
-  const cardBow = document.getElementById("card-bow");
-  const cardPending = document.getElementById("card-pending");
+  const head = document.getElementById("site-head");
   const skipBtn = document.getElementById("skip-intro");
-  const gate = document.getElementById("pixel-gate");
   const toast = document.getElementById("glitch-toast");
+  const workPending = document.getElementById("work-pending");
 
   let introDone = false;
-  let warping = false;
   let glitching = false;
   let introTl = null;
 
   /* ============================================================
-     1) Stern-Canvas: Stern, Urknall-Burst, Schockwelle, Hyperraum
+     1) Stern-Canvas: Stern, Urknall-Burst, Schockwelle
      ============================================================ */
   const canvas = document.getElementById("star-canvas");
   const ctx = canvas.getContext("2d");
@@ -43,7 +41,7 @@
     splineActive: false,
   };
 
-  const starCenter = () => ({ x: fx.w / 2, y: fx.h * 0.44 });
+  const starCenter = () => ({ x: fx.w / 2, y: fx.h * 0.42 });
 
   function resizeCanvas() {
     fx.dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -56,7 +54,7 @@
   resizeCanvas();
   window.addEventListener("resize", resizeCanvas);
 
-  /* Ein "Spike" = stark abgeflachter radialer Verlauf → Beugungsstrahl */
+  /* Ein "Spike" = stark abgeflachter radialer Verlauf → weicher Funkelstrahl */
   function drawSpike(cx, cy, angle, len, width, alpha) {
     ctx.save();
     ctx.translate(cx, cy);
@@ -84,7 +82,7 @@
     ctx.globalCompositeOperation = "lighter";
     ctx.globalAlpha = s.alpha;
 
-    /* Halo — weich, warm, ohne Sci-Fi-Neon */
+    /* Halo — weich und warm */
     const haloR = base * 0.17 * e;
     const halo = ctx.createRadialGradient(x, y, 0, x, y, haloR);
     halo.addColorStop(0, `rgba(226, 217, 255, ${0.42 * e})`);
@@ -96,7 +94,7 @@
     ctx.arc(x, y, haloR, 0, Math.PI * 2);
     ctx.fill();
 
-    /* Vierstrahliger Funkel (✦) — kürzer und sanfter als ein Beugungskreuz */
+    /* Vierstrahliger Funkel (✦) */
     const spin = s.spin;
     drawSpike(x, y, spin, base * 0.24 * e, 2.2, 0.7 * e);
     drawSpike(x, y, spin + Math.PI / 2, base * 0.24 * e, 2.2, 0.7 * e);
@@ -107,8 +105,8 @@
     const coreR = Math.max(1.5, base * 0.014 * e);
     const core = ctx.createRadialGradient(x, y, 0, x, y, coreR * 2.4);
     core.addColorStop(0, "rgba(255, 255, 255, 1)");
-    core.addColorStop(0.55, "rgba(224, 226, 255, .85)");
-    core.addColorStop(1, "rgba(224, 226, 255, 0)");
+    core.addColorStop(0.55, "rgba(238, 232, 255, .85)");
+    core.addColorStop(1, "rgba(238, 232, 255, 0)");
     ctx.fillStyle = core;
     ctx.beginPath();
     ctx.arc(x, y, coreR * 2.4, 0, Math.PI * 2);
@@ -222,7 +220,7 @@
           resize: true,
         },
         modes: {
-          bubble: { distance: 220, size: 3.6, duration: 1.8, opacity: 1 },
+          bubble: { distance: 240, size: 3.6, duration: 1.8, opacity: 1 },
         },
       },
     }).catch((err) => console.warn("tsParticles konnte nicht starten:", err));
@@ -240,11 +238,11 @@
     const viewer = document.createElement("spline-viewer");
     viewer.setAttribute("url", splineStage.dataset.splineUrl);
     splineStage.appendChild(viewer);
-    fx.splineActive = true; /* Code-Stern aus, Spline übernimmt Phase 1 */
+    fx.splineActive = true; /* Code-Stern aus, Spline übernimmt das Intro */
   }
 
   /* ============================================================
-     4) Titel in animierbare Buchstaben zerlegen
+     4) Text-Splits: Hero-Titel in Buchstaben, Statements in Worte
      ============================================================ */
   const title = document.getElementById("title");
   (function splitTitle() {
@@ -266,38 +264,30 @@
     });
   })();
 
-  /* ============================================================
-     5) Choreografie (GSAP)
-     ============================================================ */
-  const hero = document.getElementById("hero");
+  function splitWords(el) {
+    const text = el.textContent.trim();
+    el.setAttribute("aria-label", text);
+    el.textContent = "";
+    text.split(/\s+/).forEach((word, i, arr) => {
+      const w = document.createElement("span");
+      w.className = "wd";
+      w.setAttribute("aria-hidden", "true");
+      w.textContent = word;
+      el.appendChild(w);
+      if (i < arr.length - 1) el.appendChild(document.createTextNode(" "));
+    });
+    return el.querySelectorAll(".wd");
+  }
 
+  /* ============================================================
+     5) Intro — gate't NUR den Hero; alles darunter regelt Scroll
+     ============================================================ */
   gsap.set("#starfield", { autoAlpha: 0 });
+  gsap.set(head, { autoAlpha: 0, y: -14 });
   gsap.set(".hero-kicker", { autoAlpha: 0, y: 14 });
   gsap.set("#title .ch", { autoAlpha: 0, y: 36 });
   gsap.set("#tagline", { autoAlpha: 0, y: 18 });
-  gsap.set(hero, { y: "16vh", scale: 1.08, transformOrigin: "50% 0%" });
-  gsap.set(".fleet-label", { autoAlpha: 0 });
-  gsap.set(".card", { z: -1500, y: 90, rotationX: 16, autoAlpha: 0 });
-  gsap.set("#site-foot", { autoAlpha: 0 });
-
-  function startFloats() {
-    if (prefersReduced) return;
-    document.querySelectorAll(".card-float").forEach((el, i) => {
-      const dir = i % 2 === 0 ? 1 : -1;
-      gsap.to(el, {
-        y: dir * 11,
-        duration: 3.8 + i * 0.9,
-        yoyo: true, repeat: -1, ease: "sine.inOut",
-        delay: i * 0.6,
-      });
-      gsap.to(el, {
-        rotationZ: dir * 0.5,
-        rotationX: dir * -1.1,
-        duration: 5.2 + i * 1.1,
-        yoyo: true, repeat: -1, ease: "sine.inOut",
-      });
-    });
-  }
+  gsap.set(".scroll-cue", { autoAlpha: 0 });
 
   function finishIntro() {
     if (introDone) return;
@@ -309,53 +299,38 @@
   /* Direkt zum Endzustand (Skip, erneuter Besuch, reduzierte Bewegung) */
   function finalize(fast) {
     if (introTl) { introTl.kill(); introTl = null; }
-    gsap.killTweensOf([fx.star, ".hero-kicker", "#title .ch", "#tagline", hero, ".card", ".fleet-label", "#site-foot", "#starfield"]);
+    gsap.killTweensOf([fx.star, "#starfield", head, ".hero-kicker", "#title .ch", "#tagline", ".scroll-cue"]);
     fx.star.alpha = 0;
     const d = fast ? 0.8 : 0;
     gsap.to("#starfield", { autoAlpha: 1, duration: d });
-    gsap.to([".hero-kicker", "#title .ch", "#tagline", ".fleet-label", "#site-foot"], { autoAlpha: 1, y: 0, duration: d });
-    gsap.to(hero, { y: 0, scale: 1, duration: d });
-    gsap.to(".card", { z: 0, y: 0, rotationX: 0, autoAlpha: 1, duration: d });
-    startFloats();
+    gsap.to([head, ".hero-kicker", "#title .ch", "#tagline", ".scroll-cue"], { autoAlpha: 1, y: 0, duration: d });
     finishIntro();
   }
 
   function buildIntro() {
     const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
 
-    /* --- Phase 1: Der Urknall --- */
+    /* Der Urknall */
     tl.to(fx.star, { alpha: 1, duration: 0.9, ease: "sine.out" }, 0.3)
-      /* Herzschlag 1 */
-      .to(fx.star, { energy: 1.22, duration: 0.34, ease: "sine.in" }, "+=0.2")
+      .to(fx.star, { energy: 1.22, duration: 0.34, ease: "sine.in" }, "+=0.2")   /* Herzschlag 1 */
       .to(fx.star, { energy: 0.62, duration: 0.55, ease: "sine.out" })
-      /* Herzschlag 2 */
-      .to(fx.star, { energy: 1.34, duration: 0.32, ease: "sine.in" }, "+=0.12")
+      .to(fx.star, { energy: 1.34, duration: 0.32, ease: "sine.in" }, "+=0.12")  /* Herzschlag 2 */
       .to(fx.star, { energy: 0.66, duration: 0.5, ease: "sine.out" })
-      /* Kollaps … */
-      .to(fx.star, { energy: 0.2, duration: 0.4, ease: "power3.in" })
-      /* … und sanfte Explosion ins Partikelfeld */
-      .add(() => {
+      .to(fx.star, { energy: 0.2, duration: 0.4, ease: "power3.in" })            /* Kollaps … */
+      .add(() => {                                                               /* … Explosion */
         spawnBurst();
         gsap.to(fx.star, { alpha: 0, duration: 0.45, ease: "power1.out" });
         if (fx.splineActive) gsap.to("#spline-stage", { autoAlpha: 0, duration: 0.6 });
       })
-      .fromTo("#warp-flash", { autoAlpha: 0 }, { autoAlpha: 0.85, duration: 0.09 }, "<")
-      .to("#warp-flash", { autoAlpha: 0, duration: 0.8, ease: "power2.out" })
+      .fromTo("#burst-flash", { autoAlpha: 0 }, { autoAlpha: 0.85, duration: 0.09 }, "<")
+      .to("#burst-flash", { autoAlpha: 0, duration: 0.8, ease: "power2.out" })
       .to("#starfield", { autoAlpha: 1, duration: 1.8, ease: "sine.inOut" }, "<")
-      /* Der Schriftzug fadet edel ein */
+      /* Der Hero erwacht */
       .to(".hero-kicker", { autoAlpha: 0.95, y: 0, duration: 0.7 }, "-=1.3")
       .to("#title .ch", { autoAlpha: 1, y: 0, duration: 0.9, stagger: 0.028, ease: "power3.out" }, "-=0.45")
       .to("#tagline", { autoAlpha: 1, y: 0, duration: 0.8 }, "-=0.4")
-
-      /* --- Phase 2: Der Space-Flug --- */
-      .to(hero, { y: 0, scale: 1, duration: 1.5, ease: "power2.inOut" }, "+=0.5")
-      .to(".fleet-label", { autoAlpha: 1, duration: 0.9 }, "<+0.3")
-      .to(".card", {
-        z: 0, y: 0, rotationX: 0, autoAlpha: 1,
-        duration: 1.8, ease: "power3.out", stagger: 0.22,
-      }, "<")
-      .add(startFloats, "-=0.5")
-      .to("#site-foot", { autoAlpha: 1, duration: 0.9 }, "-=0.7")
+      .to(head, { autoAlpha: 1, y: 0, duration: 0.8 }, "-=0.5")
+      .to(".scroll-cue", { autoAlpha: 1, duration: 0.8 }, "-=0.4")
       .add(finishIntro);
 
     return tl;
@@ -367,32 +342,61 @@
     introTl = buildIntro();
   }
 
-  /* Intro überspringen: Button oder Escape */
   skipBtn.addEventListener("click", () => finalize(true));
   window.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && !introDone) finalize(true);
   });
 
   /* ============================================================
-     6) Maus-Parallaxe: der schwebende Raum neigt sich zum Cursor
+     6) Scroll-Reveals — unabhängig vom Intro, sofort scharf
      ============================================================ */
-  if (!prefersReduced) {
-    const tiltX = gsap.quickTo(fleet, "rotationX", { duration: 1.1, ease: "power3.out" });
-    const tiltY = gsap.quickTo(fleet, "rotationY", { duration: 1.1, ease: "power3.out" });
-    window.addEventListener("pointermove", (e) => {
-      if (warping) return;
-      const nx = (e.clientX / window.innerWidth) * 2 - 1;
-      const ny = (e.clientY / window.innerHeight) * 2 - 1;
-      tiltY(nx * 3.5);
-      tiltX(ny * -2.6);
+  if (!prefersReduced && hasScrollTrigger) {
+    gsap.utils.toArray("[data-reveal]").forEach((el) => {
+      gsap.fromTo(el,
+        { autoAlpha: 0, y: 44 },
+        {
+          autoAlpha: 1, y: 0, duration: 1.1, ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+        });
+    });
+
+    /* Statement-Sätze füllen sich wortweise mit dem Scrollfortschritt */
+    document.querySelectorAll("[data-words]").forEach((el) => {
+      const words = splitWords(el);
+      gsap.fromTo(words,
+        { opacity: 0.12 },
+        {
+          opacity: 1, stagger: 0.06, ease: "none",
+          scrollTrigger: { trigger: el, start: "top 82%", end: "top 30%", scrub: true },
+        });
     });
   }
 
   /* ============================================================
-     7) Ritter-Sprite: Idle-Animation aus den echten Spiel-Frames
+     7) Header-Zustand & Cursor-Glow
+     ============================================================ */
+  const onScroll = () => head.classList.toggle("is-scrolled", window.scrollY > 24);
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  if (!prefersReduced) {
+    const glow = document.getElementById("cursor-glow");
+    const glowX = gsap.quickTo(glow, "x", { duration: 0.7, ease: "power3.out" });
+    const glowY = gsap.quickTo(glow, "y", { duration: 0.7, ease: "power3.out" });
+    let glowOn = false;
+    window.addEventListener("pointermove", (e) => {
+      if (e.pointerType && e.pointerType !== "mouse") return;
+      if (!glowOn) { glowOn = true; gsap.to(glow, { autoAlpha: 1, duration: 0.6 }); }
+      glowX(e.clientX);
+      glowY(e.clientY);
+    });
+  }
+
+  /* ============================================================
+     8) Ritter-Sprite: Idle-Animation aus den echten Spiel-Frames
      ============================================================ */
   (function animateKnight() {
-    const img = cardBow.querySelector(".knight");
+    const img = document.querySelector(".knight");
     if (!img || prefersReduced) return;
     const frames = Array.from({ length: 8 }, (_, i) => {
       const f = new Image();
@@ -408,73 +412,15 @@
   })();
 
   /* ============================================================
-     8) Phase 3 — Das Portal: weicher Zoom-Bloom + Pixel-Dissolve
-     ============================================================ */
-  const GATE_TONES = ["#0a0814", "#110d1e", "#181229", "#201834", "#191326"];
-
-  function openPixelGate() {
-    const cols = 26;
-    const rows = Math.max(10, Math.round(cols * (window.innerHeight / window.innerWidth)));
-    gate.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
-    gate.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
-    const frag = document.createDocumentFragment();
-    const cells = [];
-    for (let i = 0; i < cols * rows; i++) {
-      const cell = document.createElement("div");
-      cell.style.background = GATE_TONES[(Math.random() * GATE_TONES.length) | 0];
-      frag.appendChild(cell);
-      cells.push(cell);
-    }
-    gate.replaceChildren(frag);
-    gate.classList.add("is-active");
-    gsap.to(cells, {
-      scale: 1.04,
-      duration: 0.22,
-      ease: "steps(2)",
-      stagger: { each: 1.05 / cells.length, from: "random" },
-    });
-  }
-
-  function warpTo(href) {
-    if (warping) return;
-    warping = true;
-    finishIntro();
-
-    const tl = gsap.timeline({
-      onComplete: () => { window.location.href = href; },
-    });
-
-    if (prefersReduced) {
-      tl.to("#scene", { autoAlpha: 0, duration: 0.3 });
-      return;
-    }
-
-    tl.to([hero, ".fleet-label", cardPending, "#site-foot"], { autoAlpha: 0, duration: 0.35, ease: "power1.in" }, 0)
-      .to(cardBow, { z: 640, y: -16, autoAlpha: 0, duration: 0.9, ease: "power2.in" }, 0)
-      /* Sternenfeld zieht sanft auf den Betrachter zu — Tiefe ohne Streifen */
-      .to("#starfield", { scale: 1.55, autoAlpha: 0.45, duration: 1.5, ease: "power2.in", transformOrigin: "50% 45%" }, 0)
-      .fromTo("#warp-flash", { autoAlpha: 0 }, { autoAlpha: 0.5, duration: 0.18 }, 0.5)
-      .to("#warp-flash", { autoAlpha: 0, duration: 0.4 }, 0.72)
-      .add(openPixelGate, 0.6)
-      .to({}, { duration: 1.35 }, 0.6); /* warten, bis das Pixel-Tor geschlossen ist */
-  }
-
-  cardBow.querySelector(".card-link").addEventListener("click", (e) => {
-    /* Neue-Tab-Klicks (Cmd/Ctrl/Mitteltaste) nicht kapern */
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    e.preventDefault();
-    warpTo(e.currentTarget.href);
-  });
-
-  /* ============================================================
-     9) Kachel 2: deaktiviert — Klick löst den Fehler-Effekt aus
+     9) Project II: deaktiviert — Klick löst den Fehler-Effekt aus
+        (Bow & Arrow ist bewusst ein ganz normaler Link.)
      ============================================================ */
   function signalError() {
     if (glitching) return;
     glitching = true;
-    cardPending.classList.add("is-erroring");
+    workPending.classList.add("is-erroring");
 
-    gsap.fromTo(cardPending.querySelector(".card-frame"),
+    gsap.fromTo(workPending.querySelector(".work-media"),
       { x: -7 },
       { x: 7, duration: 0.055, repeat: 11, yoyo: true, ease: "none", clearProps: "x" });
 
@@ -483,13 +429,14 @@
       .to(toast, { autoAlpha: 0, y: 0, duration: 0.45, delay: 1.5 });
 
     setTimeout(() => {
-      cardPending.classList.remove("is-erroring");
+      workPending.classList.remove("is-erroring");
       glitching = false;
     }, 950);
   }
 
-  cardPending.addEventListener("click", signalError);
-  document.getElementById("pending-btn").addEventListener("keydown", (e) => {
+  const pendingLink = workPending.querySelector(".work-link");
+  pendingLink.addEventListener("click", signalError);
+  pendingLink.addEventListener("keydown", (e) => {
     if (e.key === "Enter" || e.key === " ") { e.preventDefault(); signalError(); }
   });
 })();
