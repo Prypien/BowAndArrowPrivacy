@@ -159,35 +159,37 @@ import * as THREE from "three";
     return p;
   }
 
-  /* 3 · Komet: geschwungener Schweif + funkelnder Kopf (Logo-Mark) */
-  function shapeComet() {
+  /* 3 · Logo-Mark: Nordstern mit Orbit-Ellipse (identisch zum Logo) */
+  function shapeLogo() {
     const p = new Float32Array(N * 3);
-    const P0 = { x: -1.35, y: -0.85 };
-    const P1 = { x: -0.2, y: -0.55 };  /* Bezier-Kontrollpunkt */
-    const P2 = { x: 0.72, y: 0.52 };   /* Kopf */
+    const TILT = (-24 * Math.PI) / 180;   /* Orbit-Neigung wie im Logo */
+    const cosT = Math.cos(TILT), sinT = Math.sin(TILT);
+    const RAY_V = 1.0;                     /* langer vertikaler Strahl */
+    const RAY_H = 0.52;                    /* kürzere Querstrahlen */
     for (let i = 0; i < N; i++) {
       const r = Math.random();
       let x, y, z;
-      if (r < 0.62) {
-        /* Schweif: Quadratische Bezier, zum Kopf hin dichter & schmaler */
-        const t = Math.pow(Math.random(), 0.65);
-        const it = 1 - t;
-        x = it * it * P0.x + 2 * it * t * P1.x + t * t * P2.x;
-        y = it * it * P0.y + 2 * it * t * P1.y + t * t * P2.y;
-        const w = 0.14 * (1 - t) + 0.012;
-        x += gauss() * w; y += gauss() * w; z = gauss() * w;
-      } else if (r < 0.9) {
-        /* Kopf-Cluster */
-        x = P2.x + gauss() * 0.09;
-        y = P2.y + gauss() * 0.09;
-        z = gauss() * 0.09;
+      if (r < 0.52) {
+        /* Orbit-Ellipse */
+        const a = Math.random() * Math.PI * 2;
+        const ex = 1.32 * Math.cos(a) + gauss() * 0.022;
+        const ey = 0.46 * Math.sin(a) + gauss() * 0.022;
+        x = ex * cosT - ey * sinT;
+        y = ex * sinT + ey * cosT;
+        z = gauss() * 0.05;
+      } else if (r < 0.88) {
+        /* Nordstern: vier Strahlen, vertikal betont, zur Spitze schmaler */
+        const vertical = Math.random() < 0.62;
+        const L = vertical ? RAY_V : RAY_H;
+        const t = Math.pow(Math.random(), 0.75) * L * (Math.random() < 0.5 ? 1 : -1);
+        const taper = 1 - Math.abs(t) / L;
+        const w = gauss() * 0.055 * taper;
+        x = vertical ? w : t;
+        y = vertical ? t : w;
+        z = gauss() * 0.05;
       } else {
-        /* Vier Funkel-Strahlen (✦) am Kopf */
-        const t = Math.random() * 0.34;
-        const dir = (Math.random() * 4) | 0;
-        x = P2.x + (dir === 0 ? t : dir === 1 ? -t : 0);
-        y = P2.y + (dir === 2 ? t : dir === 3 ? -t : 0);
-        z = 0;
+        /* leuchtender Kern */
+        x = gauss() * 0.07; y = gauss() * 0.07; z = gauss() * 0.07;
       }
       p[i * 3] = x; p[i * 3 + 1] = y; p[i * 3 + 2] = z;
     }
@@ -201,7 +203,7 @@ import * as THREE from "three";
   geo.setAttribute("position", new THREE.BufferAttribute(shapeNebula(), 3));
   geo.setAttribute("aPos1", new THREE.BufferAttribute(shapeBow(), 3));
   geo.setAttribute("aPos2", new THREE.BufferAttribute(shapeSignal(), 3));
-  geo.setAttribute("aPos3", new THREE.BufferAttribute(shapeComet(), 3));
+  geo.setAttribute("aPos3", new THREE.BufferAttribute(shapeLogo(), 3));
 
   const seeds = new Float32Array(N);
   const colors = new Float32Array(N * 3);
@@ -372,20 +374,25 @@ import * as THREE from "three";
     );
   }
 
-  /* Objekt-Lage je Form: [x, y, scale] — sanft dazwischen gemischt */
+  /* Objekt-Lage je Form: [x, y, scale] — sanft dazwischen gemischt.
+     Bogen links neben der Bow&Arrow-Kachel, Signal rechts neben
+     Project II, Logo-Stern wieder mittig. */
   const POSE = [
-    [0, -0.1, 1.0],   /* Nebel   */
-    [0, 0.05, 1.05],  /* Bogen   */
-    [0, 0, 0.95],     /* Signal  */
-    [0, 0.05, 1.0],   /* Komet   */
+    [0, -0.1, 1.0],     /* Nebel — mittig hinter dem Hero */
+    [-1.25, 0, 0.78],   /* Bogen+Pfeil — linke Seite */
+    [1.25, 0, 0.74],    /* Signalringe — rechte Seite */
+    [0, 0.05, 0.95],    /* Logo-Stern — mittig am CTA */
   ];
   function applyPose(m) {
     const i = Math.min(2, Math.floor(m));
     const t = clamp01(m - i);
     const a = POSE[i], b = POSE[i + 1];
-    morphPoints.position.x = a[0] + (b[0] - a[0]) * t;
+    /* Auf schmalen Screens stapeln die Kacheln — Formen bleiben mittig */
+    const side = window.innerWidth > 980 ? 1 : 0;
+    const mobileScale = side ? 1 : 0.7;
+    morphPoints.position.x = (a[0] + (b[0] - a[0]) * t) * side;
     morphPoints.position.y = a[1] + (b[1] - a[1]) * t;
-    const s = a[2] + (b[2] - a[2]) * t;
+    const s = (a[2] + (b[2] - a[2]) * t) * mobileScale;
     morphPoints.scale.setScalar(s);
   }
 
@@ -444,7 +451,11 @@ import * as THREE from "three";
       applyPose(morphSmooth);
       uniforms.uMouse.value.copy(mouseTarget);
       renderer.render(scene, camera);
-      return { morph: morphSmooth, reveal: uniforms.uReveal.value };
+      return {
+        morph: +morphSmooth.toFixed(3),
+        poseX: +morphPoints.position.x.toFixed(3),
+        scale: +morphPoints.scale.x.toFixed(3),
+      };
     },
   };
 })();

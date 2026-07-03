@@ -274,13 +274,15 @@ body::after {
   margin-bottom: clamp(44px, 8vh, 90px);
 }
 
-.work--bow { grid-column: 1 / span 7; }
+/* Kachel rechts — links formt sich der Partikel-Bogen im Hintergrund */
+.work--bow { grid-column: 7 / -1; }
+/* Kachel links — rechts formen sich die Signalringe */
 .work--pending {
-  grid-column: 8 / -1;
-  margin-top: clamp(90px, 20vh, 220px);
+  grid-column: 1 / span 6;
+  margin-top: clamp(120px, 26vh, 300px);
 }
-.work--bow .work-media { aspect-ratio: 16 / 11; }
-.work--pending .work-media { aspect-ratio: 4 / 5; }
+.work--bow .work-media { aspect-ratio: 4 / 3; }
+.work--pending .work-media { aspect-ratio: 4 / 3; }
 .works-count {
   font-family: var(--font-display);
   font-style: italic;
@@ -320,24 +322,23 @@ body::after {
 
 .work-visual--bow {
   background:
-    linear-gradient(180deg, rgba(6, 8, 5, .1) 30%, rgba(4, 5, 3, .5) 100%),
+    linear-gradient(180deg, rgba(6, 8, 5, .18) 30%, rgba(4, 5, 3, .58) 100%),
     url("BowAndArrowPrivacy/assets/ds/battlefield-bg.png") center 32% / cover no-repeat #0a0d0a;
   image-rendering: pixelated;
 }
-.knight {
-  width: clamp(96px, 14vw, 170px);
-  height: auto;
-  image-rendering: pixelated;
-  filter: drop-shadow(0 16px 22px rgba(0, 0, 0, .6));
+
+/* Auf dem Bild steht nur der Hauptschriftzug des Projekts */
+.work-name {
+  font-family: var(--font-display);
+  font-weight: 480;
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
+  letter-spacing: .01em;
+  color: var(--ink);
+  text-align: center;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, .65);
+  transition: letter-spacing .6s ease;
 }
-.bow-ground {
-  position: absolute;
-  bottom: 12%;
-  width: 26%;
-  height: 14px;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(242, 239, 230, .18), transparent 75%);
-}
+.work-link:hover .work-name { letter-spacing: .035em; }
 
 /* "Projekt ansehen"-Pille erscheint beim Hover */
 .work-open {
@@ -382,13 +383,6 @@ body::after {
   align-items: baseline;
   justify-content: space-between;
   gap: 18px;
-}
-.work-title {
-  font-family: var(--font-display);
-  font-weight: 480;
-  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
-  letter-spacing: 0;
-  color: var(--ink);
 }
 .work-index {
   font-family: var(--font-body);
@@ -452,41 +446,9 @@ body::after {
   100% { transform: translate(12px, 10px); }
 }
 
-.signal {
-  position: relative;
-  width: 92px; height: 92px;
-  display: grid;
-  place-items: center;
-}
-.signal-ring {
-  position: absolute;
-  width: 100%; height: 100%;
-  border-radius: 50%;
-  border: 1px solid rgba(167, 232, 224, .45);
-  animation: ring-pulse 2.6s ease-out infinite;
-}
-.signal-ring:nth-child(2) { animation-delay: 1.3s; }
-.signal-core {
-  width: 9px; height: 9px;
-  border-radius: 50%;
-  background: var(--aqua);
-  box-shadow: 0 0 16px var(--aqua), 0 0 38px rgba(167, 232, 224, .4);
-  animation: core-blink 2.6s ease-in-out infinite;
-}
-@keyframes ring-pulse {
-  from { transform: scale(.18); opacity: .85; }
-  to   { transform: scale(1.15); opacity: 0; }
-}
-@keyframes core-blink { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
-
+/* Glitch liefert nur den Effekt — Größe/Farbe kommen vom Schriftzug */
 .glitch {
   position: relative;
-  font-family: var(--font-display);
-  font-weight: 480;
-  font-size: clamp(1.1rem, 2.6vw, 1.6rem);
-  letter-spacing: .12em;
-  color: #ece9f5;
-  text-align: center;
 }
 .glitch::before,
 .glitch::after {
@@ -655,7 +617,6 @@ body::after {
   html { scroll-behavior: auto; }
   .work-visual--pending::before,
   .work-visual--pending::after,
-  .signal-ring, .signal-core,
   .glitch::before, .glitch::after,
   .scroll-cue-arrow { animation: none !important; }
   .work-visual, .work-media, .cta-btn { transition: none; }

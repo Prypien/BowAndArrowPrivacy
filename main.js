@@ -173,26 +173,7 @@
   onScroll();
 
   /* ============================================================
-     6) Ritter-Sprite: Idle-Animation aus den echten Spiel-Frames
-     ============================================================ */
-  (function animateKnight() {
-    const img = document.querySelector(".knight");
-    if (!img || prefersReduced) return;
-    const frames = Array.from({ length: 8 }, (_, i) => {
-      const f = new Image();
-      f.src = `BowAndArrowPrivacy/assets/captain/idle_${i}.png`;
-      return f;
-    });
-    let i = 0;
-    setInterval(() => {
-      if (document.hidden) return;
-      i = (i + 1) % frames.length;
-      if (frames[i].complete) img.src = frames[i].src;
-    }, 170);
-  })();
-
-  /* ============================================================
-     7) Project II: deaktiviert — Klick löst den Fehler-Effekt aus
+     6) Project II: deaktiviert — Klick löst den Fehler-Effekt aus
      ============================================================ */
   let glitching = false;
   function signalError() {
