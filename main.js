@@ -38,11 +38,11 @@
       background: { color: "transparent" },
       particles: {
         number: { value: 150, density: { enable: true, area: 900 } },
-        color: { value: ["#ffffff", "#f2efe6", "#d9d2ff", "#c4b5fd", "#a7e8e0"] },
+        color: { value: ["#ffffff", "#edf1fa", "#c7d6ff", "#9db8ff", "#8fd8e8"] },
         size: { value: { min: 0.4, max: 1.9 } },
         opacity: { value: { min: 0.1, max: 0.7 } },
         move: { enable: !prefersReduced, speed: 0.18, random: true, outModes: { default: "out" } },
-        links: { enable: true, distance: 150, color: "#c4b5fd", opacity: 0.05, width: 1 },
+        links: { enable: true, distance: 150, color: "#9db8ff", opacity: 0.05, width: 1 },
       },
       interactivity: {
         detectsOn: "window",

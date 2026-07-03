@@ -6,16 +6,16 @@
    ============================================================ */
 
 :root {
-  --bg-0: #020204;
-  --bg-1: #0d0b1a;
-  --ink: #f2efe6;          /* warmes Creme */
-  --muted: #a09db3;
-  --lav: #c4b5fd;          /* Lavendel */
-  --aqua: #a7e8e0;         /* zartes Aqua */
-  --rose: #f5c8e0;         /* Rosé */
-  --peach: #f5c8b8;
+  --bg-0: #04070f;         /* tiefe Nacht */
+  --bg-1: #142c54;         /* Galaxie-Blau */
+  --ink: #e9edf4;          /* kühles Weiß */
+  --muted: #93a0b8;
+  --lav: #9db8ff;          /* Eisblau */
+  --aqua: #8fd8e8;
+  --rose: #b4a8ff;
+  --peach: #cfe0ff;
   --error: #ff8fa3;
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-display: "Lora", Georgia, "Times New Roman", serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
 
@@ -25,7 +25,7 @@ html { color-scheme: dark; scroll-behavior: smooth; }
 
 body {
   background:
-    radial-gradient(120vmax 90vmax at 50% 20%, var(--bg-1) 0%, #060510 50%, var(--bg-0) 100%);
+    radial-gradient(120vmax 90vmax at 50% 22%, var(--bg-1) 0%, #0a1730 48%, var(--bg-0) 100%);
   color: var(--ink);
   font-family: var(--font-body);
   min-height: 100svh;
@@ -33,7 +33,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-::selection { background: rgba(196, 181, 253, .35); }
+::selection { background: rgba(157, 184, 255, .35); }
 
 a { color: inherit; }
 
@@ -70,7 +70,7 @@ a { color: inherit; }
   position: fixed; inset: 0; z-index: 3;
   pointer-events: none;
   background:
-    radial-gradient(140% 110% at 50% 42%, transparent 55%, rgba(2, 2, 5, .5) 88%, rgba(2, 2, 5, .78) 100%);
+    radial-gradient(140% 110% at 50% 42%, transparent 55%, rgba(3, 6, 12, .5) 88%, rgba(3, 6, 12, .78) 100%);
 }
 
 /* Feiner Filmkorn-Schleier über allem */
@@ -97,8 +97,8 @@ body::after {
   border-bottom: 1px solid transparent;
 }
 #site-head.is-scrolled {
-  background: rgba(6, 5, 16, .55);
-  border-bottom-color: rgba(242, 239, 230, .07);
+  background: rgba(5, 10, 22, .55);
+  border-bottom-color: rgba(233, 237, 244, .07);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 }
@@ -141,7 +141,7 @@ body::after {
   font-weight: 500;
   letter-spacing: .5em;
   text-transform: uppercase;
-  color: rgba(160, 157, 179, .8);
+  color: rgba(147, 160, 184, .8);
 }
 
 /* ---------- Hero ---------- */
@@ -163,24 +163,19 @@ body::after {
   color: var(--muted);
 }
 
+/* Der Hero trägt das Logo: einheitliches Silbergrau, klassische Serife */
 #title {
   font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(2.6rem, 7vw, 5.8rem);
-  line-height: 1.05;
-  letter-spacing: -0.015em;
+  font-weight: 500;
+  font-size: clamp(2.4rem, 6.4vw, 5.2rem);
+  line-height: 1.08;
+  letter-spacing: .012em;
   margin-top: 22px;
-  color: var(--ink);
+  color: #c6cdd9;
   text-wrap: balance;
 }
 #title .w { display: inline-block; white-space: nowrap; }
 #title .ch { display: inline-block; will-change: transform, opacity; }
-/* "Dreams" kursiv in zartem Lavendel */
-#title .w:nth-of-type(2) {
-  font-style: italic;
-  font-weight: 340;
-  color: var(--lav);
-}
 
 #tagline {
   margin-top: 22px;
@@ -267,7 +262,7 @@ body::after {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  border-bottom: 1px solid rgba(242, 239, 230, .1);
+  border-bottom: 1px solid rgba(233, 237, 244, .1);
   padding-bottom: 18px;
   margin-bottom: clamp(44px, 8vh, 90px);
 }
@@ -301,7 +296,7 @@ body::after {
   display: block;
   border-radius: clamp(18px, 2.5vw, 28px);
   overflow: hidden;
-  border: 1px solid rgba(242, 239, 230, .07);
+  border: 1px solid rgba(233, 237, 244, .07);
   box-shadow: 0 22px 60px rgba(0, 0, 0, .35);
   transition: filter .5s ease;
 }
@@ -346,7 +341,7 @@ body::after {
   padding: 12px 22px;
   border-radius: 999px;
   background: var(--ink);
-  color: #16131f;
+  color: #0c1322;
   font-size: .7rem;
   font-weight: 600;
   letter-spacing: .18em;
@@ -362,8 +357,8 @@ body::after {
 }
 .work-open--ghost {
   background: transparent;
-  color: rgba(242, 239, 230, .55);
-  border: 1px solid rgba(242, 239, 230, .2);
+  color: rgba(233, 237, 244, .55);
+  border: 1px solid rgba(233, 237, 244, .2);
 }
 @media (hover: none) {
   .work-open { opacity: 1; transform: none; }
@@ -413,7 +408,7 @@ body::after {
 /* ===== Project II: Sende-Bühne mit Scanlines, Rauschen, Glitch ===== */
 
 .work-visual--pending {
-  background: linear-gradient(165deg, rgba(34, 30, 58, .55), rgba(11, 9, 20, .8));
+  background: linear-gradient(165deg, rgba(24, 38, 66, .55), rgba(8, 13, 24, .8));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -505,7 +500,7 @@ body::after {
   padding: 16px 34px;
   border-radius: 999px;
   background: var(--ink);
-  color: #16131f;
+  color: #0c1322;
   font-size: .76rem;
   font-weight: 600;
   letter-spacing: .18em;
@@ -521,7 +516,7 @@ body::after {
   max-width: 1160px;
   margin: 0 auto;
   padding: 8vh clamp(20px, 5vw, 56px) 40px;
-  border-top: 1px solid rgba(242, 239, 230, .08);
+  border-top: 1px solid rgba(233, 237, 244, .08);
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 26px 40px;
@@ -554,10 +549,10 @@ body::after {
 .foot-copy {
   grid-column: 1 / -1;
   padding-top: 18px;
-  border-top: 1px solid rgba(242, 239, 230, .06);
+  border-top: 1px solid rgba(233, 237, 244, .06);
   font-size: .74rem;
   letter-spacing: .04em;
-  color: rgba(160, 157, 179, .7);
+  color: rgba(147, 160, 184, .7);
 }
 
 /* ---------- Overlays ---------- */

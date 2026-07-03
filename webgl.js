@@ -42,13 +42,13 @@ import * as THREE from "three";
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 60);
   camera.position.set(0, 0, 4.6);
 
-  /* ---------- Farbpalette (Marke) ---------- */
+  /* ---------- Farbpalette (Galaxie-Blau) ---------- */
   const PALETTE = [
-    [0.95, 0.94, 0.90], /* Creme  */
-    [0.77, 0.71, 0.99], /* Lavendel */
-    [0.65, 0.91, 0.88], /* Aqua   */
-    [0.96, 0.78, 0.88], /* Rosé   */
-    [1.00, 1.00, 1.00], /* Weiß   */
+    [0.93, 0.95, 1.00], /* kühles Weiß */
+    [0.62, 0.72, 1.00], /* Eisblau     */
+    [0.78, 0.86, 1.00], /* helles Blau */
+    [0.56, 0.85, 0.91], /* Blau-Cyan   */
+    [1.00, 1.00, 1.00], /* Weiß        */
   ];
   const pickColor = () => {
     const r = Math.random();
