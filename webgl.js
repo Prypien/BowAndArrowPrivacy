@@ -3,7 +3,7 @@
    Ein GPU-Partikelsystem morpht scroll-synchron durch vier Formen:
      0  Nebel         (Hero / Studio)
      1  Wappen-Löwe   (Works · Bow & Arrow — aus dem App-Icon gesampelt)
-     2  Signalringe   (Works · Project II)
+     2  Blatt-Konstellation (Works · Grow into Life — aus dem App-Logo gesampelt)
      3  Galaxien-Ring (CTA — umschließt das Abschluss-Statement)
    Dazu ein Shader-Sternenfeld, dessen Sterne zur Maus hin
    aufleuchten. Alles prozedural, keine externen 3D-Assets.
@@ -136,23 +136,25 @@ import * as THREE from "three";
     return p;
   }
 
-  /* 2 · Signalringe (Project II) */
-  function shapeSignal() {
+  /* 2 · Blatt-Konstellation (Grow into Life) — Fallback-Ring,
+        wird durch Logo-Sampling ersetzt */
+  function shapeLeafRing() {
     const p = new Float32Array(N * 3);
-    const rings = [0.42, 0.78, 1.14];
     for (let i = 0; i < N; i++) {
       const r = Math.random();
       let x, y, z;
-      if (r < 0.18) {
-        /* dichter Kern */
-        x = gauss() * 0.1; y = gauss() * 0.1; z = gauss() * 0.1;
-      } else {
-        const ring = rings[(Math.random() * rings.length) | 0];
+      if (r < 0.38) {
         const a = Math.random() * Math.PI * 2;
-        const rr = ring + gauss() * 0.02;
+        const rr = 0.92 + gauss() * 0.028;
         x = rr * Math.cos(a);
-        y = rr * Math.sin(a) * 0.92;
-        z = gauss() * 0.05;
+        y = rr * Math.sin(a);
+        z = gauss() * 0.04;
+      } else {
+        const t = Math.random();
+        const spread = (1 - t) * 0.34;
+        x = gauss() * spread;
+        y = t * 0.82 - 0.38 + gauss() * 0.02;
+        z = gauss() * 0.04;
       }
       p[i * 3] = x; p[i * 3 + 1] = y; p[i * 3 + 2] = z;
     }
@@ -195,7 +197,7 @@ import * as THREE from "three";
   const geo = new THREE.BufferGeometry();
   geo.setAttribute("position", new THREE.BufferAttribute(shapeNebula(), 3));
   geo.setAttribute("aPos1", new THREE.BufferAttribute(shapeBow(), 3));
-  geo.setAttribute("aPos2", new THREE.BufferAttribute(shapeSignal(), 3));
+  geo.setAttribute("aPos2", new THREE.BufferAttribute(shapeLeafRing(), 3));
   geo.setAttribute("aPos3", new THREE.BufferAttribute(shapeGalaxy(), 3));
 
   /* Das Wappen von Bow & Arrow: goldene Pixel des App-Icons werden zu
@@ -230,6 +232,39 @@ import * as THREE from "three";
       }
       attr.needsUpdate = true;
       window.CDI_GL_DEBUG && (window.CDI_GL_DEBUG.lionLoaded = true);
+    };
+  })();
+
+  /* Grow into Life: grüne Pixel des Blatt-Logos werden zur Sternenkonstellation */
+  (function loadLeafConstellation() {
+    const img = new Image();
+    img.src = "assets/grow-into-life-logo.png";
+    img.onload = () => {
+      const S = 180;
+      const cv = document.createElement("canvas");
+      cv.width = S; cv.height = S;
+      const c2 = cv.getContext("2d", { willReadFrequently: true });
+      c2.drawImage(img, 0, 0, S, S);
+      const data = c2.getImageData(0, 0, S, S).data;
+      const pts = [];
+      for (let y = 0; y < S; y++) {
+        for (let x = 0; x < S; x++) {
+          const i = (y * S + x) * 4;
+          const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
+          if (a > 100 && g > 72 && g >= r * 0.82 && g >= b * 0.88) pts.push(x, y);
+        }
+      }
+      if (pts.length < 200) return;
+      const attr = geo.getAttribute("aPos2");
+      const H = 2.2;
+      for (let i = 0; i < N; i++) {
+        const k = ((Math.random() * (pts.length / 2)) | 0) * 2;
+        attr.array[i * 3] = (pts[k] / S - 0.5) * H + gauss() * 0.01;
+        attr.array[i * 3 + 1] = (0.5 - pts[k + 1] / S) * H + gauss() * 0.01;
+        attr.array[i * 3 + 2] = gauss() * 0.04;
+      }
+      attr.needsUpdate = true;
+      window.CDI_GL_DEBUG && (window.CDI_GL_DEBUG.leafLoaded = true);
     };
   })();
 
@@ -306,9 +341,11 @@ import * as THREE from "three";
       gl_PointSize = uSize * uPixelRatio * boost * tw * (2.6 / -mv.z);
       gl_Position = proj;
 
-      /* In der Wappen-Phase färben sich die Partikel golden */
+      /* In der Wappen-Phase golden, in der Blatt-Phase salbeigrün */
       float lionW = 1.0 - min(1.0, abs(m - 1.0));
-      vColor = mix(aColor, vec3(0.88, 0.72, 0.30), lionW * 0.85);
+      float leafW = 1.0 - min(1.0, abs(m - 2.0));
+      vec3 tinted = mix(aColor, vec3(0.88, 0.72, 0.30), lionW * 0.85);
+      vColor = mix(tinted, vec3(0.72, 0.84, 0.62), leafW * 0.82);
       vAlpha = uReveal * (0.5 + 0.5 * tw) * min(1.6, boost) * 0.6;
     }
   `;
@@ -386,7 +423,7 @@ import * as THREE from "three";
      Scroll-Sync: Morph-Fortschritt direkt aus den DOM-Positionen
      ============================================================ */
   const secBow = document.getElementById("work-bow");
-  const secPending = document.getElementById("work-pending");
+  const secGrow = document.getElementById("work-grow");
   const secContact = document.getElementById("contact");
 
   const clamp01 = (v) => Math.max(0, Math.min(1, v));
@@ -399,18 +436,18 @@ import * as THREE from "three";
   function scrollMorph() {
     return (
       sectionT(secBow, 0.95, 0.38) +
-      sectionT(secPending, 0.95, 0.38) +
+      sectionT(secGrow, 0.95, 0.38) +
       sectionT(secContact, 0.95, 0.45)
     );
   }
 
   /* Objekt-Lage je Form: [x, y, scale] — sanft dazwischen gemischt.
-     Bogen links neben der Bow&Arrow-Kachel, Signal rechts neben
-     Project II, Logo-Stern wieder mittig. */
+     Bogen links neben der Bow&Arrow-Kachel, Blatt-Konstellation rechts neben
+     Grow into Life, Logo-Stern wieder mittig. */
   const POSE = [
     [0, -0.1, 1.0],     /* Nebel — mittig hinter dem Hero */
     [-1.25, 0, 0.78],   /* Wappen-Löwe — linke Seite */
-    [1.25, 0, 0.74],    /* Signalringe — rechte Seite */
+    [1.25, 0, 0.74],    /* Blatt-Konstellation — rechte Seite */
     [0, 0, 1.0],        /* Galaxien-Ring — umschließt das CTA-Statement */
   ];
   function applyPose(m) {

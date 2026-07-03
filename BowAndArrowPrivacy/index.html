@@ -56,6 +56,12 @@
   .ba-feat-icons{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px;min-height:74px;}
   .ba-feat-icons>div{flex-shrink:0;}
 
+  /* Loot-Kisten: sanfter Hover-Pop (Desktop) */
+  .ba-loot-card{transition:transform .25s ease;}
+  .ba-loot-card img{transition:filter .25s ease;}
+  .ba-loot-card:hover{transform:translateY(-6px);}
+  .ba-loot-card:hover img{filter:drop-shadow(0 14px 0 rgba(0,0,0,.35)) drop-shadow(0 0 18px rgba(224,194,102,.4));}
+
   /* Horizontal scroll rails (mobile) */
   .ba-rail-hint{
     display:none;
@@ -523,7 +529,7 @@
         <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 12px;">{{ t.loot.t }}</h2>
         <p style="font-size:23px;color:var(--ba-parchment-dim);margin:0 auto;max-width:560px;">{{ t.loot.sub }}</p>
       </div>
-      <div class="ba-loot-rail ba-rail ba-scroll" style="display:flex;justify-content:flex-start;gap:28px;flex-wrap:nowrap;">
+      <div class="ba-loot-rail ba-rail ba-scroll" style="display:flex;justify-content:center;gap:28px;flex-wrap:nowrap;">
         <sc-for list="{{ chests }}" as="c" hint-placeholder-count="4">
           <div data-reveal="{{ c.delay }}" class="ba-loot-card" style="text-align:center;width:168px;">
             <sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ c.img }}" style="height:118px;filter:drop-shadow(0 10px 0 rgba(0,0,0,.4));"></sc-if>
@@ -620,6 +626,7 @@
         <div style="font-size:18px;color:var(--ba-parchment-dim);">{{ t.foot.tag }}</div>
       </div>
       <div class="ba-footer-links">
+        <a href="mailto:support@chasingdreamsinteractive.com" style="font-size:18px;color:var(--ba-parchment-dim);letter-spacing:1px;text-decoration:none;" onmouseover="this.style.color='var(--ba-gold)'" onmouseout="this.style.color='var(--ba-parchment-dim)'">support@chasingdreamsinteractive.com</a>
         <span onClick="{{ openPrivacy }}" style="font-size:18px;color:var(--ba-parchment-dim);letter-spacing:1px;cursor:pointer;" style-hover="color:var(--ba-gold)">{{ t.legal.tabPrivacy }}</span>
         <span onClick="{{ openImpressum }}" style="font-size:18px;color:var(--ba-parchment-dim);letter-spacing:1px;cursor:pointer;" style-hover="color:var(--ba-gold)">{{ t.legal.tabImpressum }}</span>
       </div>
@@ -783,36 +790,36 @@ class Component extends DCLogic {
     this.LEGAL = {
       de: {
         privacy: { title: 'Datenschutzerklärung', meta: 'Stand: Mai 2026 — App „Bow & Arrow" (iOS)', blocks: [
-          { h: '1. Verantwortlicher', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen\nDeutschland\nE-Mail: jen@preisser.de' },
+          { h: '1. Verantwortlicher', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen\nDeutschland\nE-Mail: support@chasingdreamsinteractive.com' },
           { h: '2. Überblick', p: '„Bow & Arrow" ist ein Spiel für iOS (ab 13 Jahren). Der Spielstand wird primär auf deinem Gerät gespeichert. Optional kannst du iCloud-Synchronisation und Game Center nutzen — beides läuft über Apple, nicht über eigene Server des Entwicklers.\n\nEs gibt kein Werbe-Tracking, keine Analytics-Dienste (z. B. Firebase) und keinen Verkauf personenbezogener Daten. Es wird kein eigenes Backend betrieben, das Spielerdaten außerhalb von Apple-Diensten speichert.' },
           { h: '3. Welche Daten werden verarbeitet?', p: 'Spielstand und Einstellungen (lokal): Fortschritt, Inventar, Einstellungen und vergleichbare Spieldaten werden auf deinem iPhone gespeichert.\n\niCloud / CloudKit (optional): Wenn du mit deiner Apple-ID angemeldet bist und iCloud verfügbar ist, kann der Spielstand in deiner privaten iCloud-Datenbank synchronisiert werden (Standard-CloudKit von Apple, gleicher Account auf mehreren Geräten). Der Entwickler betreibt hierfür keine eigenen Server.\n\nGame Center (optional): Trophäen-Fortschritt, Erfolge und eine globale Rangliste (Trophäen-Anzahl) über Apple Game Center. In der App können Anzeigenamen und Avatare anderer Spieler in der Rangliste sichtbar sein — bereitgestellt von Apple.\n\nIn-App-Käufe: Einmalkäufe werden ausschließlich über den Apple App Store abgewickelt. Zahlungsdaten erhält der Entwickler nicht; Apple stellt ggf. Kaufinformationen/Entitlements bereit.\n\nTechnische Daten bei Apple: Sturz- oder Diagnosedaten können, wie bei jeder iOS-App, über Apple (z. B. wenn du Fehlerberichte teilst) verarbeitet werden — nicht über separate Drittanbieter-Dienste des Entwicklers.' },
           { h: '4. Zwecke', p: 'Bereitstellung des Spiels, Speicherung und Wiederherstellung des Fortschritts, optionale Geräte-Synchronisation, optionale Ranglisten und Erfolge, Abwicklung von Käufen über Apple sowie Stabilität und Support.' },
           { h: '5. Rechtsgrundlagen (EU/EWR)', p: 'Art. 6 Abs. 1 lit. b DSGVO — Vertragserfüllung (Spielnutzung, Käufe über Apple).\nArt. 6 Abs. 1 lit. f DSGVO — berechtigtes Interesse an technisch stabiler App und Support.\nArt. 6 Abs. 1 lit. a DSGVO — nur soweit du optionale Apple-Dienste (iCloud, Game Center) aktiv nutzt bzw. einwilligst, soweit erforderlich.' },
           { h: '6. Speicherdauer', p: 'Lokale Daten: bis zur Deinstallation der App oder „Fortschritt zurücksetzen" in den Einstellungen.\niCloud-Daten: gemäß deinen Apple-Konto-Einstellungen und Apples Löschfristen.\nGame Center: gemäß Apple Game Center und deinen Apple-Einstellungen.' },
           { h: '7. Empfänger und Drittländer', p: 'Empfänger ist im Wesentlichen Apple Inc. (iCloud, CloudKit, Game Center, App Store). Apple kann Daten auch außerhalb der EU/EWR verarbeiten (z. B. USA). Apple stellt hierfür geeignete Garantien ein (u. a. Standardvertragsklauseln); Details in der Datenschutzerklärung von Apple.' },
-          { h: '8. Deine Rechte', p: 'Du hast nach der DSGVO u. a. Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch und Datenübertragbarkeit, soweit anwendbar. Wende dich an jen@preisser.de.\n\nDu kannst dich bei einer Datenschutz-Aufsichtsbehörde beschweren, z. B. beim LfDI Baden-Württemberg.' },
+          { h: '8. Deine Rechte', p: 'Du hast nach der DSGVO u. a. Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch und Datenübertragbarkeit, soweit anwendbar. Wende dich an support@chasingdreamsinteractive.com.\n\nDu kannst dich bei einer Datenschutz-Aufsichtsbehörde beschweren, z. B. beim LfDI Baden-Württemberg.' },
           { h: '9. Kinder', p: 'Die App richtet sich an Nutzer ab 13 Jahren. Es wird nicht wissentlich Daten von Kindern unter 13 Jahren erhoben. Wenn du als Erziehungsberechtigte*r annimmst, dass ein Kind uns Daten gesendet hat, kontaktiere uns bitte per E-Mail.' },
           { h: '10. Änderungen', p: 'Diese Erklärung kann bei neuen Funktionen oder rechtlichen Anforderungen angepasst werden. Das Datum oben gilt als letzte Aktualisierung.' } ] },
         impressum: { title: 'Impressum', meta: 'Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz)', blocks: [
           { h: 'Anbieter', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen\nDeutschland' },
-          { h: 'Kontakt', p: 'E-Mail: jen@preisser.de' },
+          { h: 'Kontakt', p: 'E-Mail: support@chasingdreamsinteractive.com' },
           { h: 'Verantwortlich für den Inhalt', p: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: Jen Eric Preißer (Anschrift wie oben).' },
           { h: 'Hinweis', p: '„Bow & Arrow" wird als Privatperson angeboten. Umsatzsteuer-Identifikationsnummer: nicht vorhanden (Kleinunternehmer/Privatperson).' },
           { h: 'Streitbeilegung', p: 'Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG), sofern nicht gesetzlich zwingend.' } ] }
       },
       en: {
         privacy: { title: 'Privacy Policy (English)', meta: 'Last updated: May 2026 — "Bow & Arrow" (iOS)', blocks: [
-          { h: '1. Controller', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen, Germany\nEmail: jen@preisser.de' },
+          { h: '1. Controller', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen, Germany\nEmail: support@chasingdreamsinteractive.com' },
           { h: '2. Overview', p: '"Bow & Arrow" is a game for iOS (ages 13+). Save data is stored primarily on your device. You may optionally use iCloud sync and Game Center — both are provided by Apple; the developer does not run separate game servers.\n\nThere is no ad tracking, no analytics SDKs (e.g. Firebase), and no sale of personal data. No developer-operated backend stores player data outside Apple services.' },
           { h: '3. Data we process', p: 'Local save: progress, inventory, settings, and similar game data on your device.\n\niCloud / CloudKit (optional): private iCloud database sync via Apple\'s standard CloudKit when iCloud is enabled.\n\nGame Center (optional): trophies, achievements, and a global leaderboard; other players\' display names and avatars may appear in the leaderboard via Apple.\n\nIn-app purchases: one-time purchases only, processed by the Apple App Store; we do not receive payment card data.\n\nTechnical data via Apple: crash/diagnostic data may be processed by Apple if you share reports — not via separate third-party analytics from the developer.' },
           { h: '4. Purposes & legal bases', p: 'Providing the game, saving progress, optional sync and leaderboards, purchases via Apple, stability and support. Legal bases under GDPR: contract (Art. 6(1)(b)), legitimate interests (Art. 6(1)(f)), consent where required for optional Apple services (Art. 6(1)(a)).' },
           { h: '5. Retention', p: 'Local data until uninstall or in-app reset; iCloud and Game Center data per your Apple account and Apple\'s policies.' },
           { h: '6. Recipients', p: 'Main recipient: Apple Inc. (iCloud, Game Center, App Store). Data may be processed outside the EEA; see Apple\'s Privacy Policy.' },
-          { h: '7. Your rights', p: 'You may request access, rectification, erasure, restriction, objection, and portability where applicable by emailing jen@preisser.de. You may lodge a complaint with a supervisory authority.' },
+          { h: '7. Your rights', p: 'You may request access, rectification, erasure, restriction, objection, and portability where applicable by emailing support@chasingdreamsinteractive.com. You may lodge a complaint with a supervisory authority.' },
           { h: '8. Children', p: 'The app is intended for users aged 13+. We do not knowingly collect data from children under 13.' } ] },
         impressum: { title: 'Impressum (German legal notice)', meta: 'Legal notice pursuant to German law', blocks: [
           { h: 'Provider', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen, Germany' },
-          { h: 'Contact', p: 'Email: jen@preisser.de' },
+          { h: 'Contact', p: 'Email: support@chasingdreamsinteractive.com' },
           { h: 'Content responsibility', p: 'Responsible for content pursuant to § 18 (2) MStV: Jen Eric Preißer (address as above).' },
           { h: 'Note', p: '"Bow & Arrow" is offered as a private individual. VAT identification number: not applicable (small business/private individual).' },
           { h: 'Dispute resolution', p: 'We are not obliged and not willing to participate in dispute resolution proceedings before a consumer arbitration board (§ 36 VSBG), unless legally mandatory.' } ] }

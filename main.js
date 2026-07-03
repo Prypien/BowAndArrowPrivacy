@@ -18,8 +18,6 @@
 
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const head = document.getElementById("site-head");
-  const toast = document.getElementById("glitch-toast");
-  const workPending = document.getElementById("work-pending");
 
   /* ============================================================
      1) Sternenfeld-Fallback (tsParticles) — nur wenn WebGL fehlt.
@@ -173,31 +171,52 @@
   onScroll();
 
   /* ============================================================
-     6) Project II: deaktiviert — Klick löst den Fehler-Effekt aus
+     6) Projekt öffnen: die Kachel wächst auf, füllt den ganzen
+        Schirm und man "geht hinein" — dann lädt die Projektseite.
      ============================================================ */
-  let glitching = false;
-  function signalError() {
-    if (glitching) return;
-    glitching = true;
-    workPending.classList.add("is-erroring");
+  let opening = false;
+  document.querySelectorAll(".work-link[href]").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      /* Neue-Tab-Klicks nicht kapern; reduzierte Bewegung: direkt hin */
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+      if (prefersReduced) return;
+      e.preventDefault();
+      if (opening) return;
+      opening = true;
 
-    gsap.fromTo(workPending.querySelector(".work-media"),
-      { x: -7 },
-      { x: 7, duration: 0.055, repeat: 11, yoyo: true, ease: "none", clearProps: "x" });
+      const href = link.href;
+      const media = link.querySelector(".work-media");
+      const r = media.getBoundingClientRect();
 
-    gsap.timeline()
-      .to(toast, { autoAlpha: 1, y: -6, duration: 0.2 })
-      .to(toast, { autoAlpha: 0, y: 0, duration: 0.45, delay: 1.5 });
+      /* Klon an exakt derselben Stelle fixieren, Original verstecken */
+      const clone = media.cloneNode(true);
+      Object.assign(clone.style, {
+        position: "fixed",
+        top: r.top + "px",
+        left: r.left + "px",
+        width: r.width + "px",
+        height: r.height + "px",
+        margin: "0",
+        zIndex: 80,
+        aspectRatio: "auto",
+        pointerEvents: "none",
+      });
+      document.body.appendChild(clone);
+      media.style.visibility = "hidden";
 
-    setTimeout(() => {
-      workPending.classList.remove("is-erroring");
-      glitching = false;
-    }, 950);
-  }
-
-  const pendingLink = workPending.querySelector(".work-link");
-  pendingLink.addEventListener("click", signalError);
-  pendingLink.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); signalError(); }
+      gsap.timeline({
+        defaults: { ease: "power3.inOut" },
+        onComplete: () => { window.location.href = href; },
+      })
+        .to([head, "#scene"], { autoAlpha: 0, duration: 0.45 }, 0)
+        .to(clone.querySelector(".work-open"), { autoAlpha: 0, duration: 0.25 }, 0)
+        .to(clone, {
+          top: 0, left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+          borderRadius: 0,
+          duration: 0.95,
+        }, 0.05);
+    });
   });
 })();

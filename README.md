@@ -57,4 +57,4 @@ Die `CNAME`-Datei erst hinzufügen, wenn das DNS steht (sonst brechen die Apple-
 
 ## Kontakt
 
-Jen Eric Preißer — jen@preisser.de
+Jen Eric Preißer — support@chasingdreamsinteractive.com
