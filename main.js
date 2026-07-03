@@ -154,7 +154,7 @@
           scale: 1, ease: "none",
           scrollTrigger: { trigger: el, start: "top 96%", end: "top 34%", scrub: true },
         });
-      const metaBits = el.querySelectorAll(".work-index, .work-titles, .work-desc, .work-year");
+      const metaBits = el.querySelectorAll(".work-meta-top, .work-tags, .work-desc");
       gsap.fromTo(metaBits,
         { autoAlpha: 0, y: 26 },
         {
@@ -163,15 +163,6 @@
         });
     });
 
-    /* Aurora-Hintergrund: wandert nur per Scroll-Parallaxe */
-    gsap.to("#aurora .a1", {
-      yPercent: 24, ease: "none",
-      scrollTrigger: { trigger: "#scene", start: "top top", end: "bottom bottom", scrub: true },
-    });
-    gsap.to("#aurora .a2", {
-      yPercent: -20, ease: "none",
-      scrollTrigger: { trigger: "#scene", start: "top top", end: "bottom bottom", scrub: true },
-    });
   }
 
   /* ============================================================

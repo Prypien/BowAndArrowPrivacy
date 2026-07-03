@@ -24,13 +24,8 @@
 
   <!-- ============ KOSMOS (fixe Hintergrund-Ebenen über die gesamte Scroll-Länge) ============ -->
   <div id="cosmos" aria-hidden="true">
-    <!-- Aurora: großflächige, sehr dezente Farbflächen — wandern nur per Scroll-Parallaxe -->
-    <div id="aurora">
-      <span class="a1"></span>
-      <span class="a2"></span>
-    </div>
-    <!-- WebGL-Ebene (Three.js + GLSL): Sternenfeld, Konstellations-Linien
-         und scroll-synchrones Partikel-Morphing (Nebel → Bogen+Pfeil → Signal → Komet) -->
+    <!-- WebGL-Ebene (Three.js + GLSL): Sternenfeld und scroll-synchrones
+         Partikel-Morphing (Nebel → Bogen+Pfeil → Signal → Komet) -->
     <canvas id="gl-canvas"></canvas>
     <!-- Fallback-Sternenfeld (tsParticles) — nur wenn WebGL fehlt -->
     <div id="starfield"></div>
@@ -118,13 +113,12 @@
             <span class="work-open">Projekt ansehen&nbsp;<span aria-hidden="true">→</span></span>
           </span>
           <span class="work-meta">
-            <span class="work-index" aria-hidden="true">01</span>
-            <span class="work-titles">
-              <span class="work-title">Bow &amp; Arrow</span>
-              <span class="work-tags">iOS&ensp;·&ensp;Pixel Art&ensp;·&ensp;Tower Defense&ensp;·&ensp;Dark Fantasy</span>
+            <span class="work-meta-top">
+              <span class="work-title"><span class="work-index" aria-hidden="true">01</span>Bow &amp; Arrow</span>
+              <span class="work-year" aria-hidden="true">2026</span>
             </span>
+            <span class="work-tags">iOS&ensp;·&ensp;Pixel Art&ensp;·&ensp;Tower Defense&ensp;·&ensp;Dark Fantasy</span>
             <span class="work-desc">Verteidige deine Burg mit Bogen, Begleitern und Legenden — ein handgezeichnetes Retro-Abenteuer für iPhone.</span>
-            <span class="work-year" aria-hidden="true">2026</span>
           </span>
         </a>
       </article>
@@ -144,13 +138,12 @@
             <span class="work-open work-open--ghost">Awaiting Signal</span>
           </span>
           <span class="work-meta">
-            <span class="work-index" aria-hidden="true">02</span>
-            <span class="work-titles">
-              <span class="work-title">Project II</span>
-              <span class="work-tags">In Entwicklung&ensp;·&ensp;???</span>
+            <span class="work-meta-top">
+              <span class="work-title"><span class="work-index" aria-hidden="true">02</span>Project II</span>
+              <span class="work-year" aria-hidden="true">✦</span>
             </span>
+            <span class="work-tags">In Entwicklung&ensp;·&ensp;???</span>
             <span class="work-desc">Ein neues Signal formt sich in der Leere. Bald mehr.</span>
-            <span class="work-year" aria-hidden="true">✦</span>
           </span>
         </div>
       </article>

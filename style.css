@@ -47,24 +47,6 @@ a { color: inherit; }
 
 #cosmos { position: fixed; inset: 0; z-index: 0; }
 
-/* Aurora: sehr dezente Farbflächen, bewegt nur durch Scroll-Parallaxe */
-#aurora { position: absolute; inset: 0; overflow: hidden; }
-#aurora span {
-  position: absolute;
-  border-radius: 50%;
-  will-change: transform;
-}
-#aurora .a1 {
-  width: 85vmax; height: 70vmax;
-  left: -22vmax; top: -18vmax;
-  background: radial-gradient(closest-side, rgba(196, 181, 253, .075), transparent 70%);
-}
-#aurora .a2 {
-  width: 75vmax; height: 65vmax;
-  right: -20vmax; bottom: -22vmax;
-  background: radial-gradient(closest-side, rgba(167, 232, 224, .05), rgba(245, 200, 224, .025) 45%, transparent 70%);
-}
-
 #gl-canvas {
   position: absolute; inset: 0;
   width: 100%; height: 100%;
@@ -271,22 +253,34 @@ body::after {
 
 /* ---------- Works ---------- */
 
+/* Versetztes Editorial-Grid: breite Kachel links,
+   schmalere hochformatige rechts mit deutlichem Versatz */
 .works {
-  max-width: 1160px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 6vh clamp(20px, 5vw, 56px) 10vh;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(64px, 10vh, 120px);
+  padding: 6vh clamp(20px, 5vw, 56px) 12vh;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 0 clamp(24px, 4vw, 64px);
 }
 
 .works-head {
+  grid-column: 1 / -1;
   display: flex;
   align-items: baseline;
   justify-content: space-between;
   border-bottom: 1px solid rgba(242, 239, 230, .1);
   padding-bottom: 18px;
+  margin-bottom: clamp(44px, 8vh, 90px);
 }
+
+.work--bow { grid-column: 1 / span 7; }
+.work--pending {
+  grid-column: 8 / -1;
+  margin-top: clamp(90px, 20vh, 220px);
+}
+.work--bow .work-media { aspect-ratio: 16 / 11; }
+.work--pending .work-media { aspect-ratio: 4 / 5; }
 .works-count {
   font-family: var(--font-display);
   font-style: italic;
@@ -301,22 +295,19 @@ body::after {
 }
 .work-link.is-disabled { cursor: not-allowed; }
 
-/* Media-Bühne: großes Panel, Artwork darf hier Pixel sein */
+/* Media-Bühne: flaches, großzügiges Panel — das Artwork ist der Held */
 .work-media {
   position: relative;
   display: block;
-  aspect-ratio: 16 / 9;
-  border-radius: clamp(16px, 2.5vw, 26px);
+  border-radius: clamp(18px, 2.5vw, 28px);
   overflow: hidden;
-  border: 1px solid rgba(242, 239, 230, .1);
-  box-shadow: 0 34px 90px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .05);
-  transition: border-color .5s ease, box-shadow .5s ease;
+  border: 1px solid rgba(242, 239, 230, .07);
+  box-shadow: 0 22px 60px rgba(0, 0, 0, .35);
+  transition: filter .5s ease;
 }
 .work-link:hover .work-media,
 .work-link:focus-visible .work-media {
-  border-color: rgba(196, 181, 253, .35);
-  box-shadow: 0 40px 100px rgba(0, 0, 0, .55), 0 0 70px rgba(196, 181, 253, .1),
-              inset 0 1px 0 rgba(255, 255, 255, .07);
+  filter: brightness(1.09) saturate(1.05);
 }
 
 /* Transform gehört GSAP (Scroll-Scrub) — kein CSS-Hover-Zoom, keine Transition */
@@ -379,34 +370,39 @@ body::after {
   .work-open { opacity: 1; transform: none; }
 }
 
-/* Meta-Zeile unter dem Panel */
+/* Meta unter dem Panel: großer Titel, Tags-Zeile, kurze Beschreibung */
 .work-meta {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 8px 22px;
-  align-items: baseline;
-  padding: 22px 6px 0;
-}
-.work-index {
-  grid-column: 1;
-  font-size: .78rem;
-  font-weight: 500;
-  letter-spacing: .12em;
-  color: var(--muted);
-}
-.work-titles {
-  grid-column: 2;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 4px 0;
+}
+.work-meta-top {
+  display: flex;
   align-items: baseline;
-  gap: 8px 20px;
+  justify-content: space-between;
+  gap: 18px;
 }
 .work-title {
   font-family: var(--font-display);
   font-weight: 480;
-  font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
   letter-spacing: 0;
   color: var(--ink);
+}
+.work-index {
+  font-family: var(--font-body);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  color: var(--muted);
+  vertical-align: super;
+  margin-right: 14px;
+}
+.work-year {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--muted);
 }
 .work-tags {
   font-size: .66rem;
@@ -416,17 +412,9 @@ body::after {
   color: var(--muted);
 }
 .work-desc {
-  grid-column: 2;
-  max-width: 62ch;
-  font-size: .92rem;
+  max-width: 52ch;
+  font-size: .88rem;
   line-height: 1.65;
-  color: var(--muted);
-}
-.work-year {
-  grid-column: 3;
-  grid-row: 1;
-  font-family: var(--font-display);
-  font-style: italic;
   color: var(--muted);
 }
 
@@ -637,18 +625,23 @@ body::after {
 
 /* ---------- Responsive ---------- */
 
+@media (max-width: 980px) {
+  /* Kacheln untereinander, Versatz aufgehoben */
+  .work--bow, .work--pending { grid-column: 1 / -1; }
+  .work--pending { margin-top: clamp(56px, 10vh, 90px); }
+  .work--bow .work-media,
+  .work--pending .work-media { aspect-ratio: 16 / 10; }
+}
+
 @media (max-width: 760px) {
   .site-nav a { font-size: .64rem; letter-spacing: .16em; }
   .brand-word { font-size: .95rem; }
+  .work-year { display: none; }
 }
 
 @media (max-width: 480px) {
   .brand-word { display: none; } /* nur das Kometen-Mark */
   .site-nav { gap: 18px; }
-
-  .work-meta { grid-template-columns: auto 1fr; }
-  .work-year { display: none; }
-  .work-desc { grid-column: 1 / -1; }
 
   #site-foot { grid-template-columns: 1fr; }
   .foot-nav { text-align: left; }
