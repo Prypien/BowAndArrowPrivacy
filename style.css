@@ -240,7 +240,25 @@ body::after {
   color: var(--muted);
 }
 
-.statement--cta { padding-bottom: clamp(14vh, 18vh, 22vh); }
+/* Abschluss: eigene kleine Galaxie — Schimmer im Hintergrund,
+   der Partikel-Ring legt sich beim Scrollen um das Statement */
+.statement--cta {
+  position: relative;
+  padding-top: clamp(22vh, 28vh, 34vh);
+  padding-bottom: clamp(18vh, 24vh, 30vh);
+}
+.statement--cta::before {
+  content: "";
+  position: absolute;
+  inset: -12% -30%;
+  pointer-events: none;
+  background: radial-gradient(46% 56% at 50% 48%,
+    rgba(36, 68, 128, .34),
+    rgba(20, 42, 84, .12) 55%,
+    transparent 76%);
+}
+.statement--cta .statement-line,
+.statement--cta .cta-btn { position: relative; }
 .statement--cta .statement-line { margin-top: 0; }
 .statement--cta .cta-btn { margin-top: 40px; }
 
@@ -315,9 +333,12 @@ body::after {
 
 .work-visual--bow {
   background:
-    linear-gradient(180deg, rgba(6, 8, 5, .18) 30%, rgba(4, 5, 3, .58) 100%),
-    url("BowAndArrowPrivacy/assets/ds/battlefield-bg.png") center 32% / cover no-repeat #0a0d0a;
+    linear-gradient(180deg, rgba(5, 6, 8, .22) 30%, rgba(3, 4, 6, .6) 100%),
+    url("BowAndArrowPrivacy/assets/ds/menu-castle-hub.png") center 38% / cover no-repeat #0a0d0a;
   image-rendering: pixelated;
+  /* Wordmark sitzt seitlich unten links */
+  place-items: end start;
+  padding: clamp(18px, 6%, 38px);
 }
 
 /* Auf dem Bild steht nur der Hauptschriftzug des Projekts */
@@ -332,6 +353,23 @@ body::after {
   transition: letter-spacing .6s ease;
 }
 .work-link:hover .work-name { letter-spacing: .035em; }
+
+/* Bow & Arrow: das Pixel-Wordmark des Spiels (Press Start 2P, Gold) */
+.work-name--pixel {
+  font-family: "Press Start 2P", "Courier New", monospace;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 2.6vw, 2rem);
+  line-height: 1.5;
+  text-align: left;
+  text-transform: uppercase;
+  color: #d2a648;
+  text-shadow: 3px 3px 0 rgba(0, 0, 0, .8), 0 0 30px rgba(210, 166, 72, .25);
+  transition: transform .5s ease;
+}
+.work-link:hover .work-name--pixel {
+  letter-spacing: normal;      /* Pixel-Schrift nicht spreizen */
+  transform: translateY(-3px);
+}
 
 /* "Projekt ansehen"-Pille erscheint beim Hover */
 .work-open {

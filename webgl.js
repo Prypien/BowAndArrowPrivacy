@@ -1,11 +1,10 @@
 /* ============================================================
    Chasing Dreams Interactive — WebGL-Ebene (Three.js + GLSL)
-   Ein GPU-Partikelsystem morpht scroll-synchron durch vier
-   prozedurale Formen:
-     0  Nebel      (Hero / Studio)
-     1  Bogen+Pfeil (Works · Bow & Arrow)
-     2  Signalringe (Works · Project II)
-     3  Komet      (CTA / Footer — das Logo-Mark)
+   Ein GPU-Partikelsystem morpht scroll-synchron durch vier Formen:
+     0  Nebel         (Hero / Studio)
+     1  Wappen-Löwe   (Works · Bow & Arrow — aus dem App-Icon gesampelt)
+     2  Signalringe   (Works · Project II)
+     3  Galaxien-Ring (CTA — umschließt das Abschluss-Statement)
    Dazu ein Shader-Sternenfeld, dessen Sterne zur Maus hin
    aufleuchten. Alles prozedural, keine externen 3D-Assets.
    Fallback: lädt WebGL nicht, startet main.js tsParticles.
@@ -160,39 +159,32 @@ import * as THREE from "three";
     return p;
   }
 
-  /* 3 · Logo-Mark: Nordstern mit Orbit-Ellipse (identisch zum Logo) */
-  function shapeLogo() {
+  /* 3 · Galaxien-Ring: legt sich um das Abschluss-Statement.
+        Die Mitte bleibt frei — dort steht der Text. */
+  function shapeGalaxy() {
     const p = new Float32Array(N * 3);
-    const TILT = (-24 * Math.PI) / 180;   /* Orbit-Neigung wie im Logo */
+    const TILT = (-12 * Math.PI) / 180;
     const cosT = Math.cos(TILT), sinT = Math.sin(TILT);
-    const RAY_V = 1.0;                     /* langer vertikaler Strahl */
-    const RAY_H = 0.52;                    /* kürzere Querstrahlen */
+    const RX = 2.05, RY = 0.68;
     for (let i = 0; i < N; i++) {
       const r = Math.random();
-      let x, y, z;
-      if (r < 0.52) {
-        /* Orbit-Ellipse */
-        const a = Math.random() * Math.PI * 2;
-        const ex = 1.32 * Math.cos(a) + gauss() * 0.022;
-        const ey = 0.46 * Math.sin(a) + gauss() * 0.022;
-        x = ex * cosT - ey * sinT;
-        y = ex * sinT + ey * cosT;
-        z = gauss() * 0.05;
-      } else if (r < 0.88) {
-        /* Nordstern: vier Strahlen, vertikal betont, zur Spitze schmaler */
-        const vertical = Math.random() < 0.62;
-        const L = vertical ? RAY_V : RAY_H;
-        const t = Math.pow(Math.random(), 0.75) * L * (Math.random() < 0.5 ? 1 : -1);
-        const taper = 1 - Math.abs(t) / L;
-        const w = gauss() * 0.055 * taper;
-        x = vertical ? w : t;
-        y = vertical ? t : w;
-        z = gauss() * 0.05;
+      let rr;
+      if (r < 0.66) {
+        /* Hauptring */
+        rr = 1 + gauss() * 0.035;
+      } else if (r < 0.9) {
+        /* innere Scheibe — endet deutlich vor der Mitte */
+        rr = 0.62 + Math.random() * 0.33;
       } else {
-        /* leuchtender Kern */
-        x = gauss() * 0.07; y = gauss() * 0.07; z = gauss() * 0.07;
+        /* äußerer Halo */
+        rr = 1.06 + Math.random() * 0.3;
       }
-      p[i * 3] = x; p[i * 3 + 1] = y; p[i * 3 + 2] = z;
+      const a = Math.random() * Math.PI * 2;
+      const ex = RX * rr * Math.cos(a) + gauss() * 0.02;
+      const ey = RY * rr * Math.sin(a) + gauss() * 0.02;
+      p[i * 3] = ex * cosT - ey * sinT;
+      p[i * 3 + 1] = ex * sinT + ey * cosT;
+      p[i * 3 + 2] = gauss() * 0.06;
     }
     return p;
   }
@@ -204,7 +196,7 @@ import * as THREE from "three";
   geo.setAttribute("position", new THREE.BufferAttribute(shapeNebula(), 3));
   geo.setAttribute("aPos1", new THREE.BufferAttribute(shapeBow(), 3));
   geo.setAttribute("aPos2", new THREE.BufferAttribute(shapeSignal(), 3));
-  geo.setAttribute("aPos3", new THREE.BufferAttribute(shapeLogo(), 3));
+  geo.setAttribute("aPos3", new THREE.BufferAttribute(shapeGalaxy(), 3));
 
   /* Das Wappen von Bow & Arrow: goldene Pixel des App-Icons werden zu
      Partikelzielen. Läuft asynchron — bis dahin gilt der Bogen-Fallback. */
@@ -417,9 +409,9 @@ import * as THREE from "three";
      Project II, Logo-Stern wieder mittig. */
   const POSE = [
     [0, -0.1, 1.0],     /* Nebel — mittig hinter dem Hero */
-    [-1.25, 0, 0.78],   /* Bogen+Pfeil — linke Seite */
+    [-1.25, 0, 0.78],   /* Wappen-Löwe — linke Seite */
     [1.25, 0, 0.74],    /* Signalringe — rechte Seite */
-    [0, 0.05, 0.95],    /* Logo-Stern — mittig am CTA */
+    [0, 0, 1.0],        /* Galaxien-Ring — umschließt das CTA-Statement */
   ];
   function applyPose(m) {
     const i = Math.min(2, Math.floor(m));
