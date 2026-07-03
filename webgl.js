@@ -251,7 +251,9 @@ import * as THREE from "three";
         for (let x = 0; x < S; x++) {
           const i = (y * S + x) * 4;
           const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
-          if (a > 100 && g > 72 && g >= r * 0.82 && g >= b * 0.88) pts.push(x, y);
+          /* Nur das Salbeigrün von Blatt und Ring: Grün klar über Rot und
+             Blau — Creme-Hintergrund (g<r) und weiße Adern fallen raus */
+          if (a > 100 && g > r + 6 && g > b + 14 && g > 90 && r < 220) pts.push(x, y);
         }
       }
       if (pts.length < 200) return;
