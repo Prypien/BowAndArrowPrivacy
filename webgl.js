@@ -81,7 +81,8 @@ import * as THREE from "three";
     return p;
   }
 
-  /* 1 · Bogen + Pfeil (zeigt nach rechts, gespannt) */
+  /* 1 · Start-Fallback: Bogen + Pfeil — wird ersetzt, sobald das
+        Löwen-Wappen aus dem echten Spiel-Icon gesampelt ist */
   function shapeBow() {
     const p = new Float32Array(N * 3);
     const jitter = 0.028;
@@ -205,6 +206,41 @@ import * as THREE from "three";
   geo.setAttribute("aPos2", new THREE.BufferAttribute(shapeSignal(), 3));
   geo.setAttribute("aPos3", new THREE.BufferAttribute(shapeLogo(), 3));
 
+  /* Das Wappen von Bow & Arrow: goldene Pixel des App-Icons werden zu
+     Partikelzielen. Läuft asynchron — bis dahin gilt der Bogen-Fallback. */
+  (function loadLionShape() {
+    const img = new Image();
+    img.src = "BowAndArrowPrivacy/assets/ds/app-icon-dark.png";
+    img.onload = () => {
+      const S = 180;
+      const cv = document.createElement("canvas");
+      cv.width = S; cv.height = S;
+      const c2 = cv.getContext("2d", { willReadFrequently: true });
+      c2.drawImage(img, 0, 0, S, S);
+      const data = c2.getImageData(0, 0, S, S).data;
+      const pts = [];
+      for (let y = 0; y < S; y++) {
+        for (let x = 0; x < S; x++) {
+          const i = (y * S + x) * 4;
+          const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
+          /* goldene Pixel des Löwen isolieren */
+          if (a > 120 && r > 95 && g > 55 && b < r * 0.72) pts.push(x, y);
+        }
+      }
+      if (pts.length < 200) return; /* Sicherung: Bogen-Fallback bleibt */
+      const attr = geo.getAttribute("aPos1");
+      const H = 2.35; /* Welt-Höhe des Wappens */
+      for (let i = 0; i < N; i++) {
+        const k = ((Math.random() * (pts.length / 2)) | 0) * 2;
+        attr.array[i * 3] = (pts[k] / S - 0.5) * H + gauss() * 0.012;
+        attr.array[i * 3 + 1] = (0.5 - pts[k + 1] / S) * H + gauss() * 0.012;
+        attr.array[i * 3 + 2] = gauss() * 0.045;
+      }
+      attr.needsUpdate = true;
+      window.CDI_GL_DEBUG && (window.CDI_GL_DEBUG.lionLoaded = true);
+    };
+  })();
+
   const seeds = new Float32Array(N);
   const colors = new Float32Array(N * 3);
   for (let i = 0; i < N; i++) {
@@ -278,7 +314,9 @@ import * as THREE from "three";
       gl_PointSize = uSize * uPixelRatio * boost * tw * (2.6 / -mv.z);
       gl_Position = proj;
 
-      vColor = aColor;
+      /* In der Wappen-Phase färben sich die Partikel golden */
+      float lionW = 1.0 - min(1.0, abs(m - 1.0));
+      vColor = mix(aColor, vec3(0.88, 0.72, 0.30), lionW * 0.85);
       vAlpha = uReveal * (0.5 + 0.5 * tw) * min(1.6, boost) * 0.6;
     }
   `;

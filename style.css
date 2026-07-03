@@ -106,18 +106,16 @@ body::after {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   text-decoration: none;
 }
-.brand-mark { width: 26px; height: 26px; flex: none; }
 .brand-word {
   font-family: var(--font-display);
-  font-weight: 480;
+  font-weight: 420;
   font-size: 1.05rem;
-  letter-spacing: .01em;
+  letter-spacing: .035em;
   color: var(--ink);
+  white-space: nowrap;
 }
-.brand-word em { font-style: italic; font-weight: 340; color: var(--lav); }
 
 .site-nav { display: flex; gap: clamp(14px, 3vw, 34px); }
 .site-nav a {
@@ -529,14 +527,12 @@ body::after {
   gap: 26px 40px;
   align-items: start;
 }
-.foot-brand .brand-mark { width: 30px; height: 30px; }
 .foot-name {
-  margin-top: 12px;
   font-family: var(--font-display);
-  font-weight: 480;
+  font-weight: 420;
   font-size: 1.15rem;
+  letter-spacing: .035em;
 }
-.foot-name em { font-style: italic; font-weight: 340; color: var(--lav); }
 .foot-claim {
   margin-top: 6px;
   font-size: .82rem;
@@ -598,11 +594,12 @@ body::after {
 @media (max-width: 760px) {
   .site-nav a { font-size: .64rem; letter-spacing: .16em; }
   .brand-word { font-size: .95rem; }
+  .brand-tail { display: none; } /* nur "Chasing Dreams" */
   .work-year { display: none; }
 }
 
 @media (max-width: 480px) {
-  .brand-word { display: none; } /* nur das Kometen-Mark */
+  .brand-word { font-size: .88rem; }
   .site-nav { gap: 18px; }
 
   #site-foot { grid-template-columns: 1fr; }
