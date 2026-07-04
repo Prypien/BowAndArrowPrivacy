@@ -8,14 +8,12 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" />
   <style>
     :root {
-      --ba-gold: #BF993F;
-      --ba-gold-pale: #E0C266;
       --bg-0: #04070f;
-      --bg-1: #12264a;
-      --ink: #f2efe6;
-      --muted: #a09db3;
-      --lav: #c4b5fd;
-      --line: rgba(242, 239, 230, .1);
+      --bg-1: #142c54;
+      --ink: #e9edf4;
+      --muted: #93a0b8;
+      --lav: #9db8ff;
+      --line: rgba(233, 237, 244, .1);
       --font-display: "Lora", Georgia, "Times New Roman", serif;
       --font-body: "Inter", system-ui, -apple-system, sans-serif;
     }
@@ -26,16 +24,16 @@
       font-family: var(--font-body);
       font-size: 16.5px;
       line-height: 1.7;
-      color: var(--ink);
-      background: radial-gradient(120vmax 90vmax at 50% 0%, var(--bg-1) 0%, #0a1730 50%, var(--bg-0) 100%) fixed;
+      color: var(--muted);
+      background: radial-gradient(120vmax 90vmax at 50% 0%, var(--bg-1) 0%, #0a1730 48%, var(--bg-0) 100%) fixed;
       -webkit-font-smoothing: antialiased;
     }
-    ::selection { background: rgba(196, 181, 253, .35); }
+    ::selection { background: rgba(157, 184, 255, .35); }
     :focus-visible { outline: 2px solid var(--lav); outline-offset: 3px; border-radius: 6px; }
     .wrap { max-width: 46rem; margin: 0 auto; padding: 48px 22px 90px; }
     header.bar {
       position: sticky; top: 0; z-index: 5;
-      background: rgba(6, 5, 16, .6);
+      background: rgba(5, 10, 22, .55);
       border-bottom: 1px solid var(--line);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
@@ -46,70 +44,75 @@
     }
     header.bar a.home {
       font-family: var(--font-display);
-      font-weight: 480;
-      font-size: 1.05rem;
-      letter-spacing: .02em;
-      color: var(--ba-gold-pale);
+      font-weight: 420;
+      font-size: 1.02rem;
+      letter-spacing: .035em;
+      color: var(--ink);
       text-decoration: none;
+      white-space: nowrap;
     }
-    header.bar a.home:hover { color: var(--ink); }
+    header.bar a.home:hover { color: var(--lav); }
     nav.legal-tabs { margin-left: auto; display: flex; gap: 8px; }
     nav.legal-tabs a {
-      font-size: .68rem; font-weight: 500;
+      font-size: .66rem; font-weight: 500;
       letter-spacing: .18em;
       padding: 8px 16px;
-      border: 1px solid rgba(242, 239, 230, .18);
+      border: 1px solid rgba(233, 237, 244, .18);
       border-radius: 999px;
       color: var(--muted); text-decoration: none;
       transition: color .2s ease, border-color .2s ease;
     }
     nav.legal-tabs a.active {
-      color: #16131f; border-color: var(--ba-gold);
-      background: linear-gradient(180deg, var(--ba-gold-pale), var(--ba-gold));
+      color: #0c1322; border-color: var(--ink);
+      background: var(--ink);
     }
-    nav.legal-tabs a:hover { color: var(--ink); border-color: rgba(242, 239, 230, .4); }
-    nav.legal-tabs a.active:hover { color: #16131f; filter: brightness(1.06); }
+    nav.legal-tabs a:hover { color: var(--ink); border-color: rgba(233, 237, 244, .4); }
+    nav.legal-tabs a.active:hover { color: #0c1322; }
     h1 {
       font-family: var(--font-display);
-      font-weight: 480;
-      font-size: clamp(2rem, 6vw, 2.9rem);
-      line-height: 1.1; margin: 26px 0 8px;
-      letter-spacing: -0.01em;
-      color: var(--ba-gold-pale);
+      font-weight: 500;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      line-height: 1.12; margin: 26px 0 8px;
+      letter-spacing: .01em;
+      color: #c6cdd9;
     }
     h2 {
       font-family: var(--font-display);
-      font-weight: 480;
-      font-size: 1.35rem;
+      font-weight: 500;
+      font-size: 1.3rem;
       margin: 40px 0 10px;
       color: var(--ink);
     }
     p, li { color: var(--muted); }
     strong { color: var(--ink); font-weight: 600; }
-    small { color: rgba(160, 157, 179, .8); font-size: .82rem; }
-    a { color: var(--ba-gold-pale); text-underline-offset: 3px; }
+    small { color: rgba(147, 160, 184, .85); font-size: .82rem; }
+    a { color: var(--lav); text-underline-offset: 3px; }
     a:hover { color: var(--ink); }
     ul { padding-left: 1.3rem; }
     li { margin: 6px 0; }
     hr { border: none; border-top: 1px solid var(--line); margin: 56px 0; }
     .lang-switch { display: flex; align-items: center; gap: 10px; margin: 18px 0 0; color: var(--muted); }
     .lang-switch a {
-      font-size: .68rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+      font-size: .66rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
       text-decoration: none; padding: 7px 14px;
-      border: 1px solid rgba(242, 239, 230, .18); border-radius: 999px; color: var(--muted);
+      border: 1px solid rgba(233, 237, 244, .18); border-radius: 999px; color: var(--muted);
     }
-    .lang-switch a:hover { color: var(--ink); border-color: rgba(242, 239, 230, .4); }
+    .lang-switch a:hover { color: var(--ink); border-color: rgba(233, 237, 244, .4); }
     footer.foot {
       max-width: 46rem; margin: 0 auto; padding: 0 22px 60px;
-      color: rgba(160, 157, 179, .8); font-size: .82rem;
+      color: rgba(147, 160, 184, .85); font-size: .82rem;
     }
-    footer.foot a { color: var(--ba-gold-pale); }
+    footer.foot a { color: var(--lav); }
+    @media (max-width: 560px) {
+      header.bar .inner { flex-wrap: wrap; gap: 10px; }
+      nav.legal-tabs { margin-left: 0; }
+    }
   </style>
 </head>
 <body>
   <header class="bar">
     <div class="inner">
-      <a class="home" href="index.html">BOW &amp; ARROW</a>
+      <a class="home" href="../">Chasing Dreams Interactive</a>
       <nav class="legal-tabs">
         <a href="privacy.html">PRIVACY</a>
         <a class="active" href="impressum.html">IMPRESSUM</a>

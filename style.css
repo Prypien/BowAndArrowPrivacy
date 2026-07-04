@@ -11,10 +11,6 @@
   --ink: #e9edf4;          /* kühles Weiß */
   --muted: #93a0b8;
   --lav: #9db8ff;          /* Eisblau */
-  --aqua: #8fd8e8;
-  --rose: #b4a8ff;
-  --peach: #cfe0ff;
-  --error: #ff8fa3;
   --font-display: "Lora", Georgia, "Times New Roman", serif;
   --font-body: "Inter", system-ui, -apple-system, sans-serif;
 }
@@ -126,6 +122,7 @@ body::after {
   color: var(--muted);
   text-decoration: none;
   transition: color .25s ease;
+  padding: 10px 2px; /* Touch-Fläche */
 }
 .site-nav a:hover { color: var(--ink); }
 
@@ -247,12 +244,13 @@ body::after {
   padding-top: clamp(22vh, 28vh, 34vh);
   padding-bottom: clamp(18vh, 24vh, 30vh);
 }
+/* bleibt in der Sektionsbreite — kein horizontales Overflow */
 .statement--cta::before {
   content: "";
   position: absolute;
-  inset: -12% -30%;
+  inset: -12% 0;
   pointer-events: none;
-  background: radial-gradient(46% 56% at 50% 48%,
+  background: radial-gradient(70% 56% at 50% 48%,
     rgba(36, 68, 128, .34),
     rgba(20, 42, 84, .12) 55%,
     transparent 76%);
@@ -360,118 +358,6 @@ body::after {
   background: linear-gradient(180deg, rgba(5, 6, 8, .12) 25%, rgba(3, 4, 6, .55) 100%);
 }
 
-/* Auf dem Bild steht nur der Hauptschriftzug des Projekts */
-.work-name {
-  font-family: var(--font-display);
-  font-weight: 480;
-  font-size: clamp(2rem, 4.2vw, 3.2rem);
-  letter-spacing: .01em;
-  color: var(--ink);
-  text-align: center;
-  text-shadow: 0 4px 30px rgba(0, 0, 0, .65);
-  transition: letter-spacing .6s ease;
-}
-.work-link:hover .work-name { letter-spacing: .035em; }
-
-/* Bow & Arrow: das Pixel-Wordmark des Spiels (Press Start 2P, Gold) */
-.work-name--pixel {
-  font-family: "Press Start 2P", "Courier New", monospace;
-  font-weight: 400;
-  font-size: clamp(1.15rem, 2.6vw, 2rem);
-  line-height: 1.5;
-  text-align: left;
-  text-transform: uppercase;
-  color: #d2a648;
-  text-shadow: 3px 3px 0 rgba(0, 0, 0, .8), 0 0 30px rgba(210, 166, 72, .25);
-  transition: transform .5s ease;
-}
-.work-link:hover .work-name--pixel {
-  letter-spacing: normal;      /* Pixel-Schrift nicht spreizen */
-  transform: translateY(-3px);
-}
-
-/* "Projekt ansehen"-Pille erscheint beim Hover */
-.work-open {
-  position: absolute;
-  right: clamp(14px, 2.5vw, 26px);
-  bottom: clamp(14px, 2.5vw, 26px);
-  padding: 12px 22px;
-  border-radius: 999px;
-  background: var(--ink);
-  color: #0c1322;
-  font-size: .7rem;
-  font-weight: 600;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity .4s ease, transform .4s ease;
-}
-.work-link:hover .work-open,
-.work-link:focus-visible .work-open {
-  opacity: 1;
-  transform: translateY(0);
-}
-@media (hover: none) {
-  .work-open { opacity: 1; transform: none; }
-}
-
-/* Meta unter dem Panel: großer Titel, Tags-Zeile, kurze Beschreibung */
-.work-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 24px 4px 0;
-}
-.work-meta-top {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 18px;
-}
-.work-index {
-  font-family: var(--font-body);
-  font-size: .72rem;
-  font-weight: 500;
-  letter-spacing: .14em;
-  color: var(--muted);
-  vertical-align: super;
-  margin-right: 14px;
-}
-.work-year {
-  font-family: var(--font-display);
-  font-style: italic;
-  color: var(--muted);
-}
-.work-tags {
-  font-size: .66rem;
-  font-weight: 500;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.work-desc {
-  max-width: 52ch;
-  font-size: .88rem;
-  line-height: 1.65;
-  color: var(--muted);
-}
-
-.work-visual--grow::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(245, 240, 232, 0) 55%, rgba(245, 240, 232, .18) 100%);
-}
-
-/* ===== Grow into Life: sanftes, organisches Panel ===== */
-
-.work-visual--grow {
-  background: #f5f0e8;
-  overflow: hidden;
-}
-
 /* "Nur der Baum": cover + Fokus auf die Krone schneidet den
    Schriftzug unten im Bild weg und zoomt angenehm hinein */
 .work-screenshot--grow {
@@ -549,6 +435,7 @@ body::after {
   color: var(--muted);
   text-decoration: none;
   transition: color .25s ease;
+  padding: 8px 0; /* Touch-Fläche */
 }
 .foot-nav a:hover { color: var(--ink); }
 .foot-copy {
