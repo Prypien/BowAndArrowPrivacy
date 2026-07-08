@@ -171,52 +171,7 @@
   onScroll();
 
   /* ============================================================
-     6) Projekt öffnen: die Kachel wächst auf, füllt den ganzen
-        Schirm und man "geht hinein" — dann lädt die Projektseite.
+     6) Projekt öffnen: Der Klick folgt direkt dem Link — kein
+        Fullscreen-Aufwachsen der Kachel mehr.
      ============================================================ */
-  let opening = false;
-  document.querySelectorAll(".work-link[href]").forEach((link) => {
-    link.addEventListener("click", (e) => {
-      /* Neue-Tab-Klicks nicht kapern; reduzierte Bewegung: direkt hin */
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-      if (prefersReduced) return;
-      e.preventDefault();
-      if (opening) return;
-      opening = true;
-
-      const href = link.href;
-      const media = link.querySelector(".work-media");
-      const r = media.getBoundingClientRect();
-
-      /* Klon an exakt derselben Stelle fixieren, Original verstecken */
-      const clone = media.cloneNode(true);
-      Object.assign(clone.style, {
-        position: "fixed",
-        top: r.top + "px",
-        left: r.left + "px",
-        width: r.width + "px",
-        height: r.height + "px",
-        margin: "0",
-        zIndex: 80,
-        aspectRatio: "auto",
-        pointerEvents: "none",
-      });
-      document.body.appendChild(clone);
-      media.style.visibility = "hidden";
-
-      gsap.timeline({
-        defaults: { ease: "power3.inOut" },
-        onComplete: () => { window.location.href = href; },
-      })
-        .to([head, "#scene"], { autoAlpha: 0, duration: 0.45 }, 0)
-        .to(clone.querySelector(".work-open"), { autoAlpha: 0, duration: 0.25 }, 0)
-        .to(clone, {
-          top: 0, left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-          borderRadius: 0,
-          duration: 0.95,
-        }, 0.05);
-    });
-  });
 })();
