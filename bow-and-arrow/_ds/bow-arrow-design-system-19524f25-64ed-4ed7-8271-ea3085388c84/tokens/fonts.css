@@ -1,0 +1,6 @@
+/* Fonts — Bow & Arrow uses VT323, a monospaced pixel/terminal typeface,
+   for ALL in-game UI text (the SwiftUI app uses .custom("VT323") everywhere).
+   Press Start 2P is reserved for tiny hero wordmarks / badges; VT323 is the
+   default. Self-hosted under assets/fonts/ (formerly Google Fonts) so no
+   visitor IPs are sent to Google (GDPR). */
+@import url("../../../assets/fonts/fonts.css");

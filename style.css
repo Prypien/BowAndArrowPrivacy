@@ -375,6 +375,32 @@ body::after {
   transform: scale(1.03);
 }
 
+/* "Projekt ansehen"-Pille erscheint beim Hover */
+.work-open {
+  position: absolute;
+  right: clamp(14px, 2.5vw, 26px);
+  bottom: clamp(14px, 2.5vw, 26px);
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #0c1322;
+  font-size: .7rem;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+.work-link:hover .work-open,
+.work-link:focus-visible .work-open {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (hover: none) {
+  .work-open { opacity: 1; transform: none; }
+}
+
 .work-open--muted {
   opacity: 1;
   transform: translateY(0);
@@ -382,6 +408,46 @@ body::after {
   color: #5c6b52;
   border: 1px solid rgba(92, 107, 82, .22);
   letter-spacing: .16em;
+}
+
+/* Meta unter dem Panel: Tags-Zeile, Jahr, kurze Beschreibung */
+.work-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 4px 0;
+}
+.work-meta-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 18px;
+}
+.work-index {
+  font-family: var(--font-body);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  color: var(--muted);
+  margin-right: 14px;
+}
+.work-year {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--muted);
+}
+.work-tags {
+  font-size: .66rem;
+  font-weight: 500;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.work-desc {
+  max-width: 52ch;
+  font-size: .88rem;
+  line-height: 1.65;
+  color: var(--muted);
 }
 
 /* ---------- CTA-Button (Creme-Pille) ---------- */
@@ -447,9 +513,6 @@ body::after {
   color: rgba(147, 160, 184, .7);
 }
 
-/* ---------- Overlays ---------- */
-
-
 /* ---------- Responsive ---------- */
 
 @media (max-width: 980px) {
@@ -473,17 +536,12 @@ body::after {
 
   #site-foot { grid-template-columns: 1fr; }
   .foot-nav { text-align: left; }
-
-  #glitch-toast { white-space: normal; text-align: center; max-width: 86vw; }
 }
 
 /* ---------- Reduzierte Bewegung ---------- */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .work-visual--pending::before,
-  .work-visual--pending::after,
-  .glitch::before, .glitch::after,
   .scroll-cue-arrow { animation: none !important; }
   .work-visual, .work-media, .cta-btn { transition: none; }
 }

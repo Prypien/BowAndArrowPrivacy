@@ -10,13 +10,14 @@
   <meta property="og:title" content="Chasing Dreams Interactive">
   <meta property="og:description" content="Ein unabhängiges App-Studio. Wir jagen Träumen hinterher – und gießen sie in Apps.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://chasingdreamsinteractive.com/assets/bow-arrow-splash.png">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
-  <!-- Fonts: Lora (Display) + Inter (Text) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <!-- Fonts: Lora (Display) + Inter (Text) — selbst gehostet (DSGVO) -->
+  <link rel="preload" href="assets/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -93,7 +94,7 @@
 
       <!-- 01 · Bow & Arrow — Kachel rechts, der Partikel-Bogen formt sich links daneben -->
       <article class="work work--bow" id="work-bow" data-reveal>
-        <a class="work-link" href="BowAndArrowPrivacy/" aria-label="Bow and Arrow – Projekt ansehen">
+        <a class="work-link" href="bow-and-arrow/" aria-label="Bow and Arrow – Projekt ansehen">
           <span class="work-media">
             <span class="work-visual work-visual--bow" role="img" aria-label="Bow and Arrow — Splash-Screen">
               <img class="work-screenshot" src="assets/bow-arrow-splash.png" alt="" width="1920" height="1080" decoding="async" loading="lazy">
@@ -143,16 +144,14 @@
         <p class="foot-claim">Handgemachte Apps aus Deutschland.</p>
       </div>
       <nav class="foot-nav" aria-label="Seiten und Rechtliches">
-        <a href="BowAndArrowPrivacy/">Bow &amp; Arrow</a>
-        <a href="BowAndArrowPrivacy/impressum.html">Impressum</a>
-        <a href="BowAndArrowPrivacy/privacy.html">Datenschutz</a>
+        <a href="bow-and-arrow/">Bow &amp; Arrow</a>
+        <a href="bow-and-arrow/impressum.html">Impressum</a>
+        <a href="bow-and-arrow/privacy.html">Datenschutz</a>
         <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>
       </nav>
       <p class="foot-copy">© 2026 Chasing Dreams Interactive</p>
     </footer>
   </main>
-
-  <!-- ============ Overlays ============ -->
 
   <!-- ============ Bibliotheken (CDN) ============ -->
   <!-- GSAP + ScrollTrigger — Intro-Choreografie & Scroll-Reveals -->

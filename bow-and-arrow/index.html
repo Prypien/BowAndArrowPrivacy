@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bow &amp; Arrow — Retro Tower Defense für iPhone</title>
+<meta name="description" content="Bow & Arrow ist ein Retro-Tower-Defense für iPhone: verteidige den Keep, meistere Bögen und Zauber, rekrutiere vier Begleiter-Helden. Gratis im App Store.">
+<meta name="theme-color" content="#0A0E18">
+<meta property="og:title" content="Bow &amp; Arrow — Retro Tower Defense für iPhone">
+<meta property="og:description" content="Verteidige den Keep gegen die Ork-Horde. Gratis im App Store.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://chasingdreamsinteractive.com/assets/bow-arrow-splash.png">
+<link rel="icon" type="image/png" href="assets/ds/app-icon-dark.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/bow-arrow-design-system-19524f25-64ed-4ed7-8271-ea3085388c84/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/bow-arrow-design-system-19524f25-64ed-4ed7-8271-ea3085388c84/tokens/colors.css">
+<link rel="stylesheet" href="_ds/bow-arrow-design-system-19524f25-64ed-4ed7-8271-ea3085388c84/tokens/typography.css">
+<link rel="stylesheet" href="_ds/bow-arrow-design-system-19524f25-64ed-4ed7-8271-ea3085388c84/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/bow-arrow-design-system-19524f25-64ed-4ed7-8271-ea3085388c84/tokens/effects.css">
+<link rel="stylesheet" href="_ds/bow-arrow-design-system-19524f25-64ed-4ed7-8271-ea3085388c84/styles.css">
+<script src="_ds/bow-arrow-design-system-19524f25-64ed-4ed7-8271-ea3085388c84/_ds_bundle.js"></script>
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#0A0E18;}
+  img{image-rendering:pixelated;-webkit-user-drag:none;user-select:none;max-width:100%;}
+  ::selection{background:#BF993F;color:#0A0E18;}
+  a{color:inherit;text-decoration:none;}
+  @keyframes ba-kenburns{0%{transform:scale(1.05)}100%{transform:scale(1.13)}}
+  @keyframes ba-hint{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:.95}}
+  .ba-scroll::-webkit-scrollbar{height:10px;width:10px;}
+  .ba-scroll::-webkit-scrollbar-track{background:#14141A;}
+  .ba-scroll::-webkit-scrollbar-thumb{background:#473D38;border-radius:5px;}
+  .ba-scroll{scrollbar-width:thin;scrollbar-color:#473D38 #14141A;}
+
+  /* Layout */
+  .ba-wrap{max-width:1180px;margin:0 auto;}
+  .ba-section{padding:96px 28px;}
+  .ba-section-wide{padding:90px 28px;}
+  .ba-section-narrow{max-width:880px;margin:0 auto;padding:96px 28px;}
+  .ba-grid-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+  .ba-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+  .ba-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .ba-grid-forge{display:grid;grid-template-columns:0.85fr 1.15fr;gap:40px;align-items:center;}
+  .ba-grid-modal{display:grid;grid-template-columns:minmax(0,300px) 1fr;gap:24px;align-items:start;}
+  .ba-grid-hero-modal{display:grid;grid-template-columns:minmax(0,320px) 1fr;gap:26px;align-items:start;}
+  .ba-grid-codex{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:14px;}
+  .ba-grid-arsenal{display:grid;grid-template-columns:repeat(auto-fill,minmax(146px,1fr));gap:16px;}
+  .ba-hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;}
+  .ba-footer-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+  .ba-footer-links{margin-left:auto;display:flex;gap:18px;align-items:center;flex-wrap:wrap;}
+  .ba-comp-header{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:28px;}
+  .ba-codex-header{display:flex;align-items:flex-end;gap:20px;flex-wrap:wrap;margin-bottom:30px;}
+  .ba-modal-nav{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .ba-modal-nav button{flex:1;min-width:0;}
+  .ba-forge-panel{min-width:0;}
+  .ba-modal-overlay{padding:24px;}
+  .ba-hero-overlay-side{background:linear-gradient(90deg,rgba(8,12,20,.93) 0%,rgba(8,12,20,.72) 40%,rgba(8,12,20,.3) 72%,rgba(8,12,20,.55) 100%);}
+
+  /* Icon strip inside feature cards */
+  .ba-feat-icons{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:16px;min-height:74px;}
+  .ba-feat-icons>div{flex-shrink:0;}
+
+  /* Loot-Kisten: sanfter Hover-Pop (Desktop) */
+  .ba-loot-card{transition:transform .25s ease;}
+  .ba-loot-card img{transition:filter .25s ease;}
+  .ba-loot-card:hover{transform:translateY(-6px);}
+  .ba-loot-card:hover img{filter:drop-shadow(0 14px 0 rgba(0,0,0,.35)) drop-shadow(0 0 18px rgba(224,194,102,.4));}
+
+  /* Horizontal scroll rails (mobile) */
+  .ba-rail-hint{
+    display:none;
+    font-size:16px;
+    letter-spacing:2px;
+    color:var(--ba-parchment-dim);
+    margin-top:8px;
+    text-align:center;
+  }
+
+  @media (max-width:1024px){
+    .ba-section,.ba-section-wide,.ba-section-narrow{padding:72px 24px;}
+    .ba-grid-forge{grid-template-columns:1fr;gap:32px;}
+    .ba-forge-panel{display:none !important;}
+    .ba-grid-hero-modal,.ba-grid-modal{grid-template-columns:1fr;}
+    .ba-grid-3:not(.ba-rail){grid-template-columns:repeat(2,1fr);}
+    .ba-hero-overlay-side{background:linear-gradient(180deg,rgba(8,12,20,.88) 0%,rgba(8,12,20,.72) 45%,rgba(8,12,20,.5) 100%);}
+  }
+
+  @media (max-width:768px){
+    #ba-site{font-size:19px;}
+    .ba-section,.ba-section-wide,.ba-section-narrow{padding:56px 18px;}
+    .ba-nav-inner{padding:10px 16px !important;}
+    .ba-nav-title{font-size:20px !important;letter-spacing:.5px !important;}
+    .ba-nav-get{font-size:16px !important;padding:6px 11px !important;}
+    #ba-hero{min-height:max(520px,85vh) !important;}
+    .ba-hero-inner{padding:64px 18px 88px !important;}
+    .ba-hero-sub{font-size:22px !important;}
+    .ba-hero-actions{flex-direction:column;align-items:stretch;}
+    .ba-hero-actions>button,.ba-hero-actions>a{text-align:center;font-size:22px !important;padding:13px 20px !important;}
+    .ba-grid-stats{grid-template-columns:repeat(2,1fr);gap:14px;}
+    .ba-stat-v{font-size:36px !important;}
+    .ba-grid-2:not(.ba-rail){grid-template-columns:1fr;}
+
+    /* Switch grids to swipeable rails instead of stacking */
+    .ba-grid-3.ba-rail,.ba-grid-arsenal.ba-rail,.ba-grid-codex.ba-rail,.ba-grid-2.ba-rail,.ba-loot-rail{
+      display:flex !important;
+      grid-template-columns:unset !important;
+      gap:16px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding:4px 2px 14px;
+    }
+    .ba-feat-cards>.ba-feat-card{flex:0 0 min(88vw,340px);}
+    .ba-steps-rail>.ba-step-card{flex:0 0 min(88vw,300px);}
+    .ba-reviews-rail>.ba-review-card{flex:0 0 min(88vw,320px);}
+    .ba-arsenal-rail>.ba-arsenal-item{flex:0 0 132px;}
+    .ba-codex-rail>.ba-codex-card{flex:0 0 156px;}
+    .ba-loot-rail>.ba-loot-card{flex:0 0 150px;width:auto !important;max-width:none !important;}
+    .ba-loot-rail{flex-wrap:nowrap !important;justify-content:flex-start !important;}
+
+    .ba-feat-icons{
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding:4px 2px 10px;
+      margin-bottom:16px;
+      min-height:74px;
+    }
+    .ba-feat-icons>div{scroll-snap-align:start;}
+    .ba-rail-hint{display:block;}
+
+    .ba-codex-header{flex-direction:column;align-items:flex-start;}
+    .ba-codex-mascot{height:100px !important;align-self:center;}
+    .ba-comp-header{flex-direction:column;align-items:stretch;}
+    .ba-comp-nav{align-self:flex-end;}
+    .ba-footer-row{flex-direction:column;align-items:stretch;}
+    .ba-footer-links{margin-left:0;}
+    .ba-feat-card-title{font-size:24px !important;}
+    .ba-step-num{font-size:42px !important;}
+    .ba-step-title{font-size:23px !important;}
+    .ba-cta-inner{padding:56px 18px !important;}
+    .ba-cta-btn{font-size:22px !important;padding:13px 24px !important;width:100%;max-width:360px;}
+    .ba-faq-q{font-size:20px !important;padding:14px 16px !important;}
+    .ba-modal-panel{padding:20px 16px !important;}
+    .ba-modal-title{font-size:34px !important;}
+    .ba-modal-role{font-size:19px !important;}
+    .ba-modal-body{font-size:19px !important;}
+    .ba-hero-modal-portrait{height:260px !important;}
+    .ba-codex-modal-portrait{height:220px !important;}
+    .ba-stats-strip{padding:28px 18px !important;}
+    .ba-gameplay-inner{padding:56px 18px !important;}
+    .ba-reviews-inner{padding:56px 18px !important;}
+    .ba-loot-inner{padding:56px 18px !important;}
+    .ba-legal-tabs button{font-size:17px !important;padding:7px 12px !important;}
+    .ba-modal-overlay{padding:12px !important;align-items:flex-end !important;}
+    .ba-modal-panel{max-height:92vh !important;border-bottom-left-radius:0 !important;border-bottom-right-radius:0 !important;}
+    footer{padding:24px 18px !important;}
+    #ba-captain{height:180px !important;}
+    .ba-forge-copy{text-align:center;}
+    .ba-forge-copy p{margin-left:auto;margin-right:auto;}
+  }
+
+  @media (max-width:480px){
+    #ba-site{font-size:17px;}
+    .ba-section,.ba-section-wide,.ba-section-narrow{padding:44px 14px;}
+    .ba-nav-inner{padding:8px 12px !important;gap:10px !important;}
+    .ba-nav-title{font-size:15px !important;letter-spacing:0 !important;}
+    .ba-nav-get{font-size:14px !important;padding:5px 9px !important;}
+    .ba-hero-inner{padding:48px 14px 76px !important;}
+    .ba-hero-title{font-size:clamp(44px,15vw,72px) !important;}
+    .ba-hero-sub{font-size:20px !important;}
+    .ba-grid-stats{gap:10px;}
+    .ba-stat-v{font-size:28px !important;}
+    .ba-stat-l{font-size:13px !important;letter-spacing:0 !important;}
+    .ba-modal-panel{padding:16px 12px !important;border-radius:10px !important;}
+    .ba-modal-title{font-size:28px !important;}
+    .ba-modal-nav{flex-direction:column;}
+    .ba-modal-nav button{width:100%;}
+    .ba-comp-card{flex:0 0 min(280px,88vw) !important;}
+    .ba-footer-rights{font-size:14px !important;line-height:1.45;}
+    .ba-kick{font-size:17px !important;letter-spacing:2px !important;}
+    .ba-arsenal-item-name{font-size:16px !important;}
+    .ba-feat-cards>.ba-feat-card{flex:0 0 92vw;}
+  }
+</style>
+</helmet>
+
+<div id="ba-site" style="font-family:var(--font-pixel);color:var(--ba-parchment);background:var(--ba-bg);min-height:100vh;overflow-x:hidden;font-size:22px;line-height:1.3;">
+
+  <!-- ============ NAV ============ -->
+  <div style="position:sticky;top:0;z-index:120;background:rgba(8,12,20,0.9);backdrop-filter:blur(7px);box-shadow:0 2px 0 var(--ba-panel-border);">
+    <div class="ba-wrap ba-nav-inner" style="max-width:1180px;margin:0 auto;padding:11px 24px;display:flex;align-items:center;gap:16px;">
+      <img src="assets/ds/app-icon-dark.png" width="40" height="40" style="border-radius:8px;box-shadow:0 0 0 2px var(--ba-gold),0 0 0 4px #1A1208;">
+      <span class="ba-nav-title" style="font-size:27px;color:var(--ba-gold);text-shadow:var(--text-outline);letter-spacing:1px;">BOW &amp; ARROW</span>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px;">
+        <button class="ba-nav-get" onClick="{{ openApp }}" style="font-family:var(--font-pixel);font-size:19px;letter-spacing:1px;color:var(--ba-ink);background:var(--ba-gradient-gold);border:2px solid #1A1208;border-radius:6px;padding:7px 15px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.5);" style-hover="filter:brightness(1.06)" style-active="transform:scale(.96)">{{ t.get }}</button>
+        <button onClick="{{ openMenu }}" aria-label="Menu" style="display:flex;flex-direction:column;gap:5px;justify-content:center;width:46px;height:42px;background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.5);padding:0 11px;" style-hover="filter:brightness(1.12)" style-active="transform:scale(.95)">
+          <span style="height:3px;background:var(--ba-gold);border-radius:2px;display:block;"></span>
+          <span style="height:3px;background:var(--ba-gold);border-radius:2px;display:block;"></span>
+          <span style="height:3px;background:var(--ba-gold);border-radius:2px;display:block;"></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ BURGER OVERLAY ============ -->
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeMenu }}" style="position:fixed;inset:0;z-index:300;background:var(--ba-overlay);backdrop-filter:blur(5px);display:flex;justify-content:flex-end;">
+      <div onClick="{{ stopClick }}" style="width:380px;max-width:88vw;height:100%;background:var(--ba-gradient-panel);border-left:2px solid var(--ba-gold);box-shadow:-8px 0 0 #1A1208,-30px 0 60px rgba(0,0,0,.6);padding:24px;display:flex;flex-direction:column;gap:6px;overflow-y:auto;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;">
+          <span style="font-size:22px;letter-spacing:2px;color:var(--ba-gold);text-shadow:var(--text-outline);">{{ t.menu.title }}</span>
+          <button onClick="{{ closeMenu }}" style="font-family:var(--font-pixel);font-size:24px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;width:40px;height:40px;cursor:pointer;line-height:1;" style-hover="filter:brightness(1.15)" style-active="transform:scale(.94)">✕</button>
+        </div>
+        <sc-for list="{{ menuLinks }}" as="m" hint-placeholder-count="6">
+          <a href="{{ m.href }}" onClick="{{ m.go }}" style="font-size:30px;letter-spacing:1px;color:var(--ba-parchment);padding:11px 6px;border-bottom:1px solid var(--ba-panel-border);" style-hover="color:var(--ba-gold)">{{ m.label }}</a>
+        </sc-for>
+        <div style="margin-top:18px;font-size:17px;letter-spacing:2px;color:var(--ba-parchment-dim);">{{ t.menu.lang }}</div>
+        <div style="display:flex;gap:0;border:2px solid var(--ba-panel-border);border-radius:6px;overflow:hidden;width:fit-content;margin-top:6px;">
+          <button onClick="{{ setDe }}" style="{{ deStyle }}">DEUTSCH</button>
+          <button onClick="{{ setEn }}" style="{{ enStyle }}">ENGLISH</button>
+        </div>
+        <div style="margin-top:20px;font-size:17px;letter-spacing:2px;color:var(--ba-parchment-dim);">{{ t.menu.legal }}</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+          <button onClick="{{ openPrivacy }}" style="text-align:left;font-family:var(--font-pixel);font-size:22px;letter-spacing:1px;color:var(--ba-parchment-dim);background:transparent;border:0;cursor:pointer;padding:2px;" style-hover="color:var(--ba-gold)">{{ t.legal.tabPrivacy }}</button>
+          <a href="terms.html" onClick="{{ closeMenu }}" style="text-align:left;font-family:var(--font-pixel);font-size:22px;letter-spacing:1px;color:var(--ba-parchment-dim);padding:2px;" style-hover="color:var(--ba-gold)">{{ t.legal.tabTerms }}</a>
+          <button onClick="{{ openImpressum }}" style="text-align:left;font-family:var(--font-pixel);font-size:22px;letter-spacing:1px;color:var(--ba-parchment-dim);background:transparent;border:0;cursor:pointer;padding:2px;" style-hover="color:var(--ba-gold)">{{ t.legal.tabImpressum }}</button>
+        </div>
+        <div style="margin-top:20px;font-size:17px;letter-spacing:2px;color:var(--ba-parchment-dim);">{{ t.menu.studio }}</div>
+        <a href="../" onClick="{{ closeMenu }}" style="display:block;margin-top:8px;font-family:var(--font-pixel);font-size:22px;letter-spacing:1px;color:var(--ba-parchment-dim);padding:2px;" style-hover="color:var(--ba-gold)">CHASING DREAMS INTERACTIVE&nbsp;↗</a>
+        <button onClick="{{ openApp }}" style="margin-top:24px;font-family:var(--font-pixel);font-size:25px;letter-spacing:1px;color:var(--ba-ink);background:var(--ba-gradient-gold);border:2px solid #1A1208;border-radius:8px;padding:13px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.5),var(--glow-gold);" style-hover="filter:brightness(1.07)" style-active="transform:scale(.97)">{{ t.hero.play }}</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ HERO ============ -->
+  <section id="ba-hero" data-screen-label="Hero" style="position:relative;overflow:hidden;min-height:max(620px,88vh);border-bottom:3px solid var(--ba-panel-border);">
+    <div id="ba-hero-bg" style="position:absolute;inset:0;background:url('uploads/CastleHub_Complete%20verbesserung.png') center/cover;"></div>
+    <div class="ba-hero-overlay-side" style="position:absolute;inset:0;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,12,20,.4) 0%,rgba(8,12,20,0) 30%,rgba(8,12,20,.15) 68%,var(--ba-bg) 100%);"></div>
+    <div class="ba-wrap ba-hero-inner" style="position:relative;z-index:10;max-width:1180px;margin:0 auto;padding:92px 28px 108px;">
+      <div data-reveal="0" style="max-width:600px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;">
+          <img src="assets/ds/app-icon-light.png" width="60" height="60" style="border-radius:14px;box-shadow:0 0 0 2px var(--ba-gold),var(--glow-gold);">
+          <div>
+            <div style="font-size:20px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);">{{ t.hero.kick }}</div>
+            <div style="font-size:18px;letter-spacing:1px;color:var(--ba-parchment-dim);">{{ t.hero.platform }}</div>
+          </div>
+        </div>
+        <h1 class="ba-hero-title" style="font-size:clamp(60px,11vw,124px);line-height:.82;color:var(--ba-gold);text-shadow:var(--text-outline);margin:0 0 22px;letter-spacing:1px;">BOW<br>&amp; ARROW</h1>
+        <p class="ba-hero-sub" style="font-size:26px;line-height:1.25;color:var(--ba-parchment);max-width:500px;margin:0 0 30px;text-shadow:var(--text-outline);">{{ t.hero.sub }}</p>
+        <div class="ba-hero-actions">
+          <button onClick="{{ openApp }}" style="font-family:var(--font-pixel);font-size:27px;letter-spacing:1px;color:var(--ba-ink);background:var(--ba-gradient-gold);border:2px solid #1A1208;border-radius:8px;padding:14px 30px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.55),var(--glow-gold);" style-hover="filter:brightness(1.07)" style-active="transform:scale(.96)">{{ t.hero.play }}</button>
+          <a href="#codex" style="font-family:var(--font-pixel);font-size:27px;letter-spacing:1px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:8px;padding:14px 26px;box-shadow:0 4px 0 rgba(0,0,0,.5);" style-hover="filter:brightness(1.12)" style-active="transform:scale(.96)">{{ t.hero.seeEnemies }}</a>
+        </div>
+        <div style="margin-top:24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+          <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Badge" variant="gold" size="md" hint-size="auto,28px">{{ t.hero.rateBadge }}</x-import>
+          <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Badge" variant="stone" size="md" hint-size="auto,28px">{{ t.hero.freeBadge }}</x-import>
+        </div>
+      </div>
+    </div>
+    <div style="position:absolute;left:50%;bottom:18px;transform:translateX(-50%);z-index:10;font-size:18px;letter-spacing:2px;color:var(--ba-parchment-dim);animation:ba-hint 1.8s ease-in-out infinite;">{{ t.hero.scroll }} ▼</div>
+  </section>
+
+  <!-- ============ STATS STRIP ============ -->
+  <div style="background:var(--ba-bg-deep);border-bottom:2px solid var(--ba-panel-border);">
+    <div class="ba-wrap ba-stats-strip" data-reveal="0" style="max-width:1180px;margin:0 auto;padding:34px 28px;">
+      <div class="ba-grid-stats">
+      <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+        <div style="text-align:center;">
+          <div class="ba-stat-v" style="font-size:46px;color:var(--ba-gold);text-shadow:var(--text-outline);line-height:1;">{{ s.v }}</div>
+          <div class="ba-stat-l" style="font-size:18px;letter-spacing:1px;color:var(--ba-parchment-dim);margin-top:6px;text-transform:uppercase;">{{ s.l }}</div>
+        </div>
+      </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ FEATURES ============ -->
+  <section id="features" data-screen-label="Features" class="ba-wrap ba-section" style="max-width:1180px;margin:0 auto;padding:96px 28px;">
+    <div data-reveal="0">
+      <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.feat.kick }}</div>
+      <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 36px;">{{ t.feat.t }}</h2>
+    </div>
+    <div class="ba-grid-3 ba-rail ba-feat-cards ba-scroll">
+      <sc-for list="{{ features }}" as="f" hint-placeholder-count="3">
+        <div data-reveal="{{ f.delay }}" class="ba-feat-card" style="height:100%;">
+          <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Panel" hint-size="100%,280px">
+            <div style="display:flex;flex-direction:column;height:100%;">
+              <div class="ba-feat-icons ba-scroll">
+                <sc-for list="{{ f.icons }}" as="ic" hint-placeholder-count="3">
+                  <div style="width:66px;height:66px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#20202a,#0b0b10);border:2px solid var(--ba-panel-border);border-radius:10px;box-shadow:var(--shadow-inset);">
+                    <sc-if value="{{ ic }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ ic }}" style="max-width:48px;max-height:48px;object-fit:contain;"></sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <div class="ba-feat-card-title" style="font-size:29px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:8px;">{{ f.t }}</div>
+              <p style="font-size:21px;line-height:1.28;color:var(--ba-parchment);margin:0;">{{ f.b }}</p>
+            </div>
+          </x-import>
+        </div>
+      </sc-for>
+    </div>
+    <div class="ba-rail-hint">{{ t.railHint }}</div>
+
+    <!-- ARSENAL: Master the Weapon, border slots -->
+    <div data-reveal="0" style="margin-top:56px;">
+      <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:6px;">{{ t.arsenal.kick }}</div>
+      <h3 style="font-size:clamp(28px,4vw,44px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 8px;">{{ t.arsenal.t }}</h3>
+      <p style="font-size:21px;color:var(--ba-parchment-dim);margin:0 0 28px;max-width:640px;">{{ t.arsenal.sub }}</p>
+      <div class="ba-grid-arsenal ba-rail ba-arsenal-rail ba-scroll">
+        <sc-for list="{{ arsenal }}" as="it" hint-placeholder-count="7">
+          <div class="ba-arsenal-item" style="text-align:center;">
+            <div style="position:relative;aspect-ratio:1;max-width:128px;margin:0 auto;display:flex;align-items:center;justify-content:center;transition:transform .14s cubic-bezier(.2,.8,.2,1),filter .14s;" style-hover="transform:translateY(-6px);filter:drop-shadow(0 0 11px rgba(191,153,63,.55))">
+              <sc-if value="{{ it.border }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ it.border }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;"></sc-if>
+              <sc-if value="{{ it.icon }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ it.icon }}" style="position:relative;width:54%;height:54%;object-fit:contain;z-index:2;filter:drop-shadow(0 2px 2px rgba(0,0,0,.65));"></sc-if>
+            </div>
+            <div class="ba-arsenal-item-name" style="margin-top:8px;font-size:19px;color:var(--ba-parchment);text-shadow:var(--text-outline);line-height:1.05;">{{ it.name }}</div>
+            <div style="font-size:16px;letter-spacing:1px;color:{{ it.rc }};text-transform:uppercase;margin-top:2px;">{{ it.rarity }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="ba-rail-hint">{{ t.railHint }}</div>
+    </div>
+  </section>
+
+  <!-- ============ GAMEPLAY ============ -->
+  <section data-screen-label="Gameplay" style="background:var(--ba-bg-deep);border-top:2px solid var(--ba-panel-border);border-bottom:2px solid var(--ba-panel-border);">
+    <div class="ba-wrap ba-gameplay-inner" style="max-width:1180px;margin:0 auto;padding:96px 28px;">
+      <div data-reveal="0" style="text-align:center;margin-bottom:40px;">
+        <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.play.kick }}</div>
+        <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 12px;">{{ t.play.t }}</h2>
+        <p style="font-size:23px;color:var(--ba-parchment-dim);margin:0 auto;max-width:560px;">{{ t.play.sub }}</p>
+      </div>
+      <div class="ba-grid-3 ba-rail ba-steps-rail ba-scroll">
+        <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+          <div data-reveal="{{ st.delay }}" class="ba-step-card" style="position:relative;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,0 4px 0 rgba(0,0,0,.5);border-radius:8px;padding:28px 24px;">
+            <div class="ba-step-num" style="font-size:54px;color:var(--ba-gold);opacity:.5;text-shadow:var(--text-outline);line-height:1;">{{ st.n }}</div>
+            <div class="ba-step-title" style="font-size:27px;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:8px 0 8px;">{{ st.t }}</div>
+            <p style="font-size:21px;line-height:1.28;color:var(--ba-parchment-dim);margin:0;">{{ st.b }}</p>
+          </div>
+        </sc-for>
+      </div>
+      <div class="ba-rail-hint">{{ t.railHint }}</div>
+    </div>
+  </section>
+
+  <!-- ============ FORGE ============ -->
+  <section id="forge" data-screen-label="Forge" class="ba-wrap ba-section" style="max-width:1180px;margin:0 auto;padding:96px 28px;">
+    <div class="ba-grid-forge">
+      <div data-reveal="0" class="ba-forge-copy">
+        <div style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.forge.kick }}</div>
+        <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 16px;">{{ t.forge.t }}</h2>
+        <p style="font-size:23px;line-height:1.28;color:var(--ba-parchment-dim);margin:0 0 22px;">{{ t.forge.sub }}</p>
+        <div style="display:flex;align-items:flex-end;gap:16px;justify-content:center;">
+          <img id="ba-captain" src="assets/captain/idle_0.png" style="height:150px;filter:drop-shadow(0 8px 0 rgba(0,0,0,.45));">
+          <div style="padding-bottom:14px;">
+            <div style="font-size:24px;color:var(--ba-gold);text-shadow:var(--text-outline);line-height:1;">{{ t.forge.captainName }}</div>
+            <div style="font-size:18px;letter-spacing:1px;color:var(--ba-parchment-dim);margin-top:4px;">{{ t.forge.captainRole }}</div>
+          </div>
+        </div>
+      </div>
+      <div data-reveal="120" class="ba-forge-panel">
+        <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Panel" hint-size="100%,360px">
+          <div style="display:flex;flex-direction:column;gap:12px;">
+            <sc-for list="{{ forgeRows }}" as="r" hint-placeholder-count="4">
+              <x-import component-from-global-scope="BowArrowDesignSystem_19524f.StatUpgradeRow" icon="{{ r.icon }}" name="{{ r.n }}" level="{{ r.lv }}" max-level="{{ r.mx }}" cost="{{ r.cost }}" currency="gold" hint-size="100%,72px"></x-import>
+            </sc-for>
+          </div>
+        </x-import>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ COMPANIONS ============ -->
+  <section id="companions" data-screen-label="Companions" style="position:relative;overflow:hidden;background:var(--ba-bg-deep);border-top:2px solid var(--ba-panel-border);border-bottom:2px solid var(--ba-panel-border);">
+    <div style="position:absolute;inset:0;background:url(assets/ds/battlefield-bg.png) center/cover;opacity:.13;"></div>
+    <div class="ba-wrap ba-section-wide" style="position:relative;max-width:1180px;margin:0 auto;padding:90px 28px;">
+      <div data-reveal="0" class="ba-comp-header">
+        <div style="flex:1;min-width:0;">
+          <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.comp.kick }}</div>
+          <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 8px;">{{ t.comp.t }}</h2>
+          <p style="font-size:22px;color:var(--ba-parchment-dim);margin:0;max-width:560px;">{{ t.comp.sub }}</p>
+        </div>
+        <div class="ba-comp-nav" style="display:flex;gap:10px;">
+          <button onClick="{{ compPrev }}" style="font-family:var(--font-pixel);font-size:24px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;width:48px;height:48px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.5);" style-hover="filter:brightness(1.12)" style-active="transform:scale(.94)">◄</button>
+          <button onClick="{{ compNext }}" style="font-family:var(--font-pixel);font-size:24px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;width:48px;height:48px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.5);" style-hover="filter:brightness(1.12)" style-active="transform:scale(.94)">►</button>
+        </div>
+      </div>
+      <div data-reveal="0" id="ba-comp-scroll" class="ba-scroll" style="display:flex;gap:20px;overflow-x:auto;padding:6px 2px 18px;scroll-snap-type:x mandatory;">
+        <sc-for list="{{ companions }}" as="c" hint-placeholder-count="4">
+          <div onClick="{{ c.select }}" class="ba-comp-card" style="flex:0 0 300px;max-width:80vw;scroll-snap-align:start;cursor:pointer;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,0 4px 0 rgba(0,0,0,.5);border-radius:10px;overflow:hidden;transition:transform .14s cubic-bezier(.2,.8,.2,1),filter .14s;" style-hover="transform:translateY(-6px);filter:brightness(1.07)" style-active="transform:scale(.98)">
+            <div style="position:relative;height:280px;display:flex;align-items:flex-end;justify-content:center;overflow:hidden;">
+              <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 32%,#26262f,#0c0c11);"></div>
+              <div style="position:absolute;inset:0;background:url(assets/ds/battlefield-bg.png) center/cover;opacity:.28;"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,24,.1),rgba(10,14,24,.55));"></div>
+              <sc-if value="{{ c.frame0 }}" hint-placeholder-val="{{ false }}"><img loading="lazy" id="ba-comp-{{ c.id }}" src="{{ c.frame0 }}" style="position:relative;max-height:244px;max-width:86%;margin-bottom:6px;filter:drop-shadow(0 8px 0 rgba(0,0,0,.45));"></sc-if>
+            </div>
+            <div style="padding:18px 20px 20px;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+                <span style="font-size:30px;color:var(--ba-gold);text-shadow:var(--text-outline);">{{ c.name }}</span>
+                <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Badge" variant="{{ c.variant }}" size="sm" hint-size="auto,24px">{{ c.role }}</x-import>
+              </div>
+              <p style="font-size:19px;line-height:1.3;color:var(--ba-parchment-dim);margin:0 0 12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">{{ c.b }}</p>
+              <div style="display:flex;align-items:center;justify-content:center;gap:8px;font-size:18px;letter-spacing:1px;color:var(--ba-ink);background:var(--ba-gradient-gold);border:2px solid #1A1208;border-radius:6px;padding:8px;box-shadow:0 3px 0 rgba(0,0,0,.5);">{{ t.comp.cardCta }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-size:18px;letter-spacing:2px;color:var(--ba-parchment-dim);margin-top:8px;">{{ t.comp.hint }}</div>
+    </div>
+  </section>
+
+  <!-- ============ HERO DETAIL MODAL ============ -->
+  <sc-if value="{{ selHero }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeHero }}" class="ba-modal-overlay" style="position:fixed;inset:0;z-index:210;background:var(--ba-overlay);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;">
+      <div onClick="{{ stopClick }}" class="ba-modal-panel" style="position:relative;width:100%;max-width:880px;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,var(--glow-gold),0 30px 60px rgba(0,0,0,.7);border-radius:12px;padding:26px;max-height:90vh;overflow:auto;">
+        <button onClick="{{ closeHero }}" style="position:absolute;top:14px;right:14px;z-index:5;font-family:var(--font-pixel);font-size:24px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;width:40px;height:40px;cursor:pointer;line-height:1;" style-hover="filter:brightness(1.15)" style-active="transform:scale(.94)">✕</button>
+        <div class="ba-grid-hero-modal">
+          <div>
+            <div class="ba-hero-modal-portrait" style="position:relative;height:340px;display:flex;align-items:flex-end;justify-content:center;border-radius:8px;box-shadow:var(--shadow-inset);overflow:hidden;">
+              <div style="position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,#26262f,#0b0b10);"></div>
+              <div style="position:absolute;inset:0;background:url(assets/ds/battlefield-bg.png) center/cover;opacity:.3;"></div>
+              <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,24,.05),rgba(10,14,24,.55));"></div>
+              <img loading="lazy" id="ba-herobig-{{ selHero.id }}" src="{{ selHero.frame0 }}" style="position:relative;max-height:310px;max-width:90%;margin-bottom:8px;filter:drop-shadow(0 8px 0 rgba(0,0,0,.45));">
+            </div>
+            <div style="display:flex;gap:10px;margin-top:14px;">
+              <button onClick="{{ heroPrev }}" style="flex:1;font-family:var(--font-pixel);font-size:20px;letter-spacing:1px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;padding:9px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.5);" style-hover="filter:brightness(1.12)" style-active="transform:scale(.96)">◄ {{ t.codex.prev }}</button>
+              <button onClick="{{ heroNext }}" style="flex:1;font-family:var(--font-pixel);font-size:20px;letter-spacing:1px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;padding:9px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.5);" style-hover="filter:brightness(1.12)" style-active="transform:scale(.96)">{{ t.codex.next }} ►</button>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:18px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:4px;">{{ selHero.origin }}</div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+              <h3 class="ba-modal-title" style="font-size:42px;line-height:.95;color:var(--ba-gold);text-shadow:var(--text-outline);margin:0;">{{ selHero.name }}</h3>
+              <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Badge" variant="{{ selHero.variant }}" size="md" hint-size="auto,28px">{{ selHero.role }}</x-import>
+            </div>
+            <p class="ba-modal-body" style="font-size:21px;line-height:1.32;color:var(--ba-parchment);margin:0 0 18px;">{{ selHero.lore }}</p>
+            <div style="font-size:18px;letter-spacing:2px;color:var(--ba-parchment-dim);margin-bottom:10px;">{{ t.comp.abilities }}</div>
+            <div style="display:flex;flex-direction:column;gap:12px;">
+              <sc-for list="{{ selHero.abilities }}" as="ab" hint-placeholder-count="3">
+                <div style="display:flex;gap:14px;align-items:flex-start;background:var(--ba-panel-raised);border:2px solid var(--ba-panel-border);border-radius:8px;padding:12px;box-shadow:var(--shadow-inset);">
+                  <div style="flex-shrink:0;width:56px;height:56px;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#20202a,#0b0b10);border-radius:8px;box-shadow:var(--shadow-inset);">
+                    <img loading="lazy" src="{{ ab.icon }}" style="width:42px;height:42px;object-fit:contain;">
+                  </div>
+                  <div style="flex:1;">
+                    <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                      <span style="font-size:24px;color:var(--ba-gold);text-shadow:var(--text-outline);">{{ ab.name }}</span>
+                      <span style="font-size:14px;letter-spacing:1px;color:var(--ba-ink);background:var(--ba-gradient-gold);border-radius:4px;padding:2px 7px;">{{ ab.type }}</span>
+                    </div>
+                    <p style="font-size:19px;line-height:1.28;color:var(--ba-parchment-dim);margin:4px 0 0;">{{ ab.desc }}</p>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ CODEX ============ -->
+  <section id="codex" data-screen-label="Codex" class="ba-wrap ba-section" style="max-width:1180px;margin:0 auto;padding:96px 28px;">
+    <div data-reveal="0" class="ba-codex-header">
+      <div style="flex:1;min-width:0;">
+        <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.codex.kick }}</div>
+        <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 12px;">{{ t.codex.t }}</h2>
+        <p style="font-size:22px;color:var(--ba-parchment-dim);margin:0;max-width:620px;">{{ t.codex.sub }}</p>
+      </div>
+      <img class="ba-codex-mascot" src="assets/enemy/berserker_idle.gif" style="height:140px;filter:drop-shadow(0 6px 0 rgba(0,0,0,.45));">
+    </div>
+    <div data-reveal="0" class="ba-grid-codex ba-rail ba-codex-rail ba-scroll">
+      <sc-for list="{{ enemies }}" as="e" hint-placeholder-count="18">
+        <div onClick="{{ e.select }}" class="ba-codex-card" style="cursor:pointer;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,0 3px 0 rgba(0,0,0,.5);border-radius:8px;padding:12px;transition:transform .14s cubic-bezier(.2,.8,.2,1),filter .14s;" style-hover="transform:translateY(-6px);filter:brightness(1.08)" style-active="transform:scale(.97)">
+          <div style="position:relative;height:120px;display:flex;align-items:flex-end;justify-content:center;background:url(assets/ds/battlefield-bg.png) center/cover;border-radius:6px;box-shadow:var(--shadow-inset);overflow:hidden;">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,24,.1),rgba(10,14,24,.5));"></div>
+            <sc-if value="{{ e.img }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ e.img }}" style="position:relative;max-height:104px;max-width:90%;margin-bottom:4px;filter:drop-shadow(0 4px 0 rgba(0,0,0,.4));"></sc-if>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:6px;margin-top:10px;">
+            <span style="font-size:19px;color:var(--ba-parchment);text-shadow:var(--text-outline);line-height:1.05;">{{ e.name }}</span>
+          </div>
+          <div style="margin-top:7px;">
+            <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Badge" variant="{{ e.variant }}" size="sm" hint-size="auto,22px">{{ e.rank }}</x-import>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div class="ba-rail-hint">{{ t.railHint }}</div>
+    <div style="text-align:center;margin-top:16px;font-size:19px;letter-spacing:2px;color:var(--ba-gold);">{{ t.codex.hint }}</div>
+  </section>
+
+  <!-- ============ CODEX DETAIL MODAL ============ -->
+  <sc-if value="{{ sel }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" class="ba-modal-overlay" style="position:fixed;inset:0;z-index:200;background:var(--ba-overlay);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;">
+      <div onClick="{{ stopClick }}" class="ba-modal-panel" style="position:relative;width:100%;max-width:780px;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,var(--glow-gold),0 30px 60px rgba(0,0,0,.7);border-radius:12px;padding:26px;max-height:90vh;overflow:auto;">
+        <button onClick="{{ close }}" style="position:absolute;top:14px;right:14px;z-index:5;font-family:var(--font-pixel);font-size:24px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;width:40px;height:40px;cursor:pointer;line-height:1;" style-hover="filter:brightness(1.15)" style-active="transform:scale(.94)">✕</button>
+        <div class="ba-grid-modal">
+          <div class="ba-codex-modal-portrait" style="position:relative;height:300px;display:flex;align-items:flex-end;justify-content:center;background:url(assets/ds/battlefield-bg.png) center/cover;border-radius:8px;box-shadow:var(--shadow-inset);overflow:hidden;">
+            <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,24,.05),rgba(10,14,24,.55));"></div>
+            <img loading="lazy" src="{{ sel.big }}" style="position:relative;max-height:270px;max-width:92%;margin-bottom:6px;filter:drop-shadow(0 8px 0 rgba(0,0,0,.45));">
+          </div>
+          <div>
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap;">
+              <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Badge" variant="{{ sel.variant }}" size="md" hint-size="auto,28px">{{ sel.rank }}</x-import>
+            </div>
+            <h3 class="ba-modal-title" style="font-size:42px;line-height:.95;color:var(--ba-gold);text-shadow:var(--text-outline);margin:0 0 4px;">{{ sel.name }}</h3>
+            <div class="ba-modal-role" style="font-size:22px;letter-spacing:1px;color:var(--ba-parchment-dim);margin-bottom:14px;">{{ sel.role }}</div>
+            <p class="ba-modal-body" style="font-size:22px;line-height:1.3;color:var(--ba-parchment);margin:0 0 20px;">{{ sel.blurb }}</p>
+            <div style="display:flex;flex-direction:column;gap:11px;">
+              <sc-for list="{{ sel.statRows }}" as="b" hint-placeholder-count="4">
+                <div>
+                  <div style="display:flex;justify-content:space-between;font-size:18px;letter-spacing:1px;color:var(--ba-parchment-dim);margin-bottom:3px;">
+                    <span>{{ b.label }}</span><span style="color:var(--ba-gold);">{{ b.value }}</span>
+                  </div>
+                  <div style="height:14px;background:var(--ba-panel-raised);border:1px solid #000;border-radius:4px;box-shadow:var(--shadow-inset);overflow:hidden;">
+                    <div style="height:100%;width:{{ b.value }}%;background:{{ b.fill }};box-shadow:0 0 6px rgba(0,0,0,.3);"></div>
+                  </div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div class="ba-modal-nav" style="margin-top:22px;">
+          <button onClick="{{ prev }}" style="font-family:var(--font-pixel);font-size:21px;letter-spacing:1px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;padding:9px 18px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.5);" style-hover="filter:brightness(1.12)" style-active="transform:scale(.96)">◄ {{ t.codex.prev }}</button>
+          <button onClick="{{ next }}" style="font-family:var(--font-pixel);font-size:21px;letter-spacing:1px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;padding:9px 18px;cursor:pointer;box-shadow:0 3px 0 rgba(0,0,0,.5);" style-hover="filter:brightness(1.12)" style-active="transform:scale(.96)">{{ t.codex.next }} ►</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <!-- ============ LOOT ============ -->
+  <section id="loot" data-screen-label="Loot" style="background:var(--ba-bg-deep);border-top:2px solid var(--ba-panel-border);border-bottom:2px solid var(--ba-panel-border);">
+    <div class="ba-wrap ba-loot-inner" style="max-width:1180px;margin:0 auto;padding:90px 28px;">
+      <div data-reveal="0" style="text-align:center;margin-bottom:42px;">
+        <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.loot.kick }}</div>
+        <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0 0 12px;">{{ t.loot.t }}</h2>
+        <p style="font-size:23px;color:var(--ba-parchment-dim);margin:0 auto;max-width:560px;">{{ t.loot.sub }}</p>
+      </div>
+      <div class="ba-loot-rail ba-rail ba-scroll" style="display:flex;justify-content:center;gap:28px;flex-wrap:nowrap;">
+        <sc-for list="{{ chests }}" as="c" hint-placeholder-count="4">
+          <div data-reveal="{{ c.delay }}" class="ba-loot-card" style="text-align:center;width:168px;">
+            <sc-if value="{{ c.img }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ c.img }}" style="height:118px;filter:drop-shadow(0 10px 0 rgba(0,0,0,.4));"></sc-if>
+            <div style="margin-top:16px;margin-bottom:6px;">
+              <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Badge" variant="{{ c.variant }}" size="md" hint-size="auto,28px">{{ c.n }}</x-import>
+            </div>
+            <div style="font-size:19px;color:var(--ba-parchment-dim);">{{ c.s }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div class="ba-rail-hint">{{ t.railHint }}</div>
+    </div>
+  </section>
+
+  <!-- ============ SCREENSHOTS ============ -->
+  <section data-screen-label="Screenshots" class="ba-wrap ba-section" style="max-width:1180px;margin:0 auto;padding:96px 28px;">
+    <div data-reveal="0" style="text-align:center;margin-bottom:40px;">
+      <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.shots.kick }}</div>
+      <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0;">{{ t.shots.t }}</h2>
+    </div>
+    <div class="ba-grid-2">
+      <sc-for list="{{ shots }}" as="sh" hint-placeholder-count="6">
+        <div data-reveal="{{ sh.delay }}" style="position:relative;border:3px solid #1A1208;border-radius:12px;box-shadow:0 0 0 2px var(--ba-gold),0 14px 32px rgba(0,0,0,.55);overflow:hidden;background:#0A0E18;">
+          <sc-if value="{{ sh.src }}" hint-placeholder-val="{{ false }}"><img loading="lazy" src="{{ sh.src }}" style="display:block;width:100%;height:auto;image-rendering:auto;"></sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ REVIEWS ============ -->
+  <section data-screen-label="Reviews" style="background:var(--ba-bg-deep);border-top:2px solid var(--ba-panel-border);border-bottom:2px solid var(--ba-panel-border);">
+    <div class="ba-wrap ba-reviews-inner" style="max-width:1180px;margin:0 auto;padding:90px 28px;">
+      <div data-reveal="0" style="text-align:center;margin-bottom:40px;">
+        <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.rev.kick }}</div>
+        <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0;">{{ t.rev.t }}</h2>
+      </div>
+      <div class="ba-grid-3 ba-rail ba-reviews-rail ba-scroll">
+        <sc-for list="{{ reviews }}" as="rv" hint-placeholder-count="3">
+          <div data-reveal="{{ rv.delay }}" class="ba-review-card" style="height:100%;">
+            <x-import component-from-global-scope="BowArrowDesignSystem_19524f.Panel" hint-size="100%,220px">
+              <div style="display:flex;flex-direction:column;height:100%;">
+                <div style="font-size:24px;color:var(--ba-gold);letter-spacing:2px;margin-bottom:8px;">{{ rv.stars }}</div>
+                <div style="font-size:26px;color:var(--ba-parchment);text-shadow:var(--text-outline);margin-bottom:8px;">{{ rv.t }}</div>
+                <p style="font-size:21px;line-height:1.28;color:var(--ba-parchment-dim);margin:0 0 14px;flex:1;">{{ rv.b }}</p>
+                <div style="font-size:18px;color:var(--ba-gold);letter-spacing:1px;">{{ rv.meta }}</div>
+              </div>
+            </x-import>
+          </div>
+        </sc-for>
+      </div>
+      <div class="ba-rail-hint">{{ t.railHint }}</div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq" data-screen-label="FAQ" class="ba-section-narrow" style="max-width:880px;margin:0 auto;padding:96px 28px;">
+    <div data-reveal="0" style="text-align:center;margin-bottom:36px;">
+      <div class="ba-kick" style="font-size:21px;letter-spacing:3px;color:var(--ba-gold);text-shadow:var(--text-outline);margin-bottom:10px;">{{ t.faq.kick }}</div>
+      <h2 style="font-size:clamp(34px,5vw,56px);line-height:.95;color:var(--ba-parchment);text-shadow:var(--text-outline);margin:0;">{{ t.faq.t }}</h2>
+    </div>
+    <div data-reveal="0" style="display:flex;flex-direction:column;gap:12px;">
+      <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="5">
+        <div style="background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,0 3px 0 rgba(0,0,0,.5);border-radius:8px;overflow:hidden;">
+          <button class="ba-faq-q" onClick="{{ q.toggle }}" style="width:100%;text-align:left;font-family:var(--font-pixel);font-size:25px;color:var(--ba-parchment);background:transparent;border:0;padding:18px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:14px;" style-hover="color:var(--ba-gold)">
+            <span>{{ q.q }}</span>
+            <span style="color:var(--ba-gold);font-size:30px;flex-shrink:0;">{{ q.sign }}</span>
+          </button>
+          <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size:22px;line-height:1.3;color:var(--ba-parchment-dim);margin:0;padding:0 20px 20px;">{{ q.a }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ============ CTA ============ -->
+  <section data-screen-label="CTA" style="position:relative;overflow:hidden;border-top:2px solid var(--ba-panel-border);">
+    <div style="position:absolute;inset:0;background:url(assets/ds/battlefield-bg.png) center/cover;opacity:.3;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,24,.55),var(--ba-bg));"></div>
+    <div data-reveal="0" class="ba-cta-inner" style="position:relative;text-align:center;max-width:760px;margin:0 auto;padding:96px 28px;">
+      <img src="assets/ds/coat-of-arms.png" style="height:92px;margin-bottom:20px;">
+      <h2 style="font-size:clamp(38px,6vw,64px);line-height:.92;color:var(--ba-gold);text-shadow:var(--text-outline);margin:0 0 14px;">{{ t.cta.t }}</h2>
+      <p style="font-size:26px;color:var(--ba-parchment);margin:0 0 30px;text-shadow:var(--text-outline);">{{ t.cta.sub }}</p>
+      <button class="ba-cta-btn" onClick="{{ openApp }}" style="font-family:var(--font-pixel);font-size:28px;letter-spacing:1px;color:var(--ba-ink);background:var(--ba-gradient-gold);border:2px solid #1A1208;border-radius:8px;padding:15px 34px;cursor:pointer;box-shadow:0 5px 0 rgba(0,0,0,.55),var(--glow-gold);" style-hover="filter:brightness(1.07)" style-active="transform:scale(.96)">{{ t.cta.b }}</button>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer style="background:var(--ba-bg-deep);border-top:2px solid var(--ba-panel-border);padding:32px 28px;">
+    <div class="ba-wrap ba-footer-row" style="max-width:1180px;margin:0 auto;">
+      <img src="assets/ds/app-icon-dark.png" width="36" style="border-radius:6px;box-shadow:0 0 0 2px var(--ba-gold);">
+      <div>
+        <div style="font-size:24px;color:var(--ba-gold);text-shadow:var(--text-outline);">BOW &amp; ARROW</div>
+        <div style="font-size:18px;color:var(--ba-parchment-dim);">{{ t.foot.tag }}</div>
+      </div>
+      <div class="ba-footer-links">
+        <a href="mailto:support@chasingdreamsinteractive.com" style="font-size:18px;color:var(--ba-parchment-dim);letter-spacing:1px;text-decoration:none;" onmouseover="this.style.color='var(--ba-gold)'" onmouseout="this.style.color='var(--ba-parchment-dim)'">support@chasingdreamsinteractive.com</a>
+        <a href="../" style="font-size:18px;color:var(--ba-parchment-dim);letter-spacing:1px;" style-hover="color:var(--ba-gold)">Chasing Dreams Interactive&nbsp;↗</a>
+        <span onClick="{{ openPrivacy }}" style="font-size:18px;color:var(--ba-parchment-dim);letter-spacing:1px;cursor:pointer;" style-hover="color:var(--ba-gold)">{{ t.legal.tabPrivacy }}</span>
+        <a href="terms.html" style="font-size:18px;color:var(--ba-parchment-dim);letter-spacing:1px;" style-hover="color:var(--ba-gold)">{{ t.legal.tabTerms }}</a>
+        <span onClick="{{ openImpressum }}" style="font-size:18px;color:var(--ba-parchment-dim);letter-spacing:1px;cursor:pointer;" style-hover="color:var(--ba-gold)">{{ t.legal.tabImpressum }}</span>
+      </div>
+    </div>
+    <div class="ba-wrap ba-footer-rights" style="max-width:1180px;margin:18px auto 0;font-size:17px;color:var(--ba-parchment-dim);border-top:1px solid var(--ba-panel-border);padding-top:16px;">{{ t.foot.rights }}</div>
+  </footer>
+
+  <!-- ============ LEGAL MODAL ============ -->
+  <sc-if value="{{ legalOpen }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeLegal }}" class="ba-modal-overlay" style="position:fixed;inset:0;z-index:260;background:var(--ba-overlay);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:24px;">
+      <div onClick="{{ stopClick }}" class="ba-modal-panel" style="position:relative;width:100%;max-width:760px;max-height:88vh;display:flex;flex-direction:column;background:var(--ba-gradient-panel);border:2px solid var(--ba-gold);box-shadow:0 0 0 2px #1A1208,0 30px 60px rgba(0,0,0,.7);border-radius:12px;overflow:hidden;">
+        <div class="ba-legal-tabs" style="display:flex;align-items:center;gap:8px;padding:18px 18px 14px;flex-wrap:wrap;border-bottom:2px solid var(--ba-panel-border);">
+          <button onClick="{{ openPrivacy }}" style="{{ tabPrivacyStyle }}">{{ t.legal.tabPrivacy }}</button>
+          <button onClick="{{ openImpressum }}" style="{{ tabImpressumStyle }}">{{ t.legal.tabImpressum }}</button>
+          <button onClick="{{ closeLegal }}" style="margin-left:auto;font-family:var(--font-pixel);font-size:22px;color:var(--ba-parchment);background:var(--ba-panel-raised);border:2px solid var(--ba-gold);border-radius:6px;width:38px;height:38px;cursor:pointer;line-height:1;" style-hover="filter:brightness(1.15)" style-active="transform:scale(.94)">✕</button>
+        </div>
+        <div class="ba-scroll" style="padding:18px 24px 26px;overflow-y:auto;">
+          <h3 style="font-size:34px;line-height:1;color:var(--ba-gold);text-shadow:var(--text-outline);margin:6px 0 4px;">{{ legal.title }}</h3>
+          <div style="font-size:17px;color:var(--ba-parchment-dim);margin-bottom:18px;">{{ legal.meta }}</div>
+          <sc-for list="{{ legal.blocks }}" as="bl" hint-placeholder-count="12">
+            <div style="margin-bottom:16px;">
+              <div style="font-size:23px;color:var(--ba-parchment);text-shadow:var(--text-outline);margin-bottom:5px;">{{ bl.h }}</div>
+              <p style="font-size:19px;line-height:1.34;color:var(--ba-parchment-dim);margin:0;white-space:pre-line;">{{ bl.p }}</p>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:920},&quot;defaultLang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;de&quot;,&quot;en&quot;],&quot;default&quot;:&quot;de&quot;,&quot;tsType&quot;:&quot;'de'|'en'&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    let saved = null;
+    try { saved = localStorage.getItem('ba-lang'); } catch (e) {}
+    this.state = { lang: saved || props.defaultLang || 'de', sel: null, selHero: null, openFaq: 0, menuOpen: false, legalOpen: false, legalTab: 'privacy' };
+    this.appUrl = 'https://apps.apple.com/de/app/bow-arrow/id6764893835';
+    var D = 'assets/ds/', E = 'assets/enemy/', C = 'assets/companion/', I = 'assets/item/';
+    this.D = D; this.E = E;
+    this.RC = { common: '#9A9285', bronze: '#C77B3A', silver: '#C9CDD6', gold: '#E0C266', legend: '#B58BE8' };
+
+    this.STR = {
+      de: {
+        get: 'GRATIS LADEN',
+        railHint: '◄ Wischen ►',
+        menu: { title: 'MENÜ', lang: 'SPRACHE', legal: 'RECHTLICHES', studio: 'STUDIO' },
+        nav: [
+          { label: 'FEATURES', href: '#features' }, { label: 'GEGNER-CODEX', href: '#codex' },
+          { label: 'BEGLEITER', href: '#companions' }, { label: 'SCHMIEDE', href: '#forge' },
+          { label: 'BEUTE', href: '#loot' }, { label: 'FAQ', href: '#faq' }
+        ],
+        hero: { kick: '★ RETRO TOWER-DEFENSE', platform: 'FÜR IPHONE', sub: 'Ein Bogen. Eine Burg.', play: '▶ IM APP STORE', seeEnemies: 'GEGNER ANSEHEN', scroll: 'SCROLLEN', rateBadge: '5,0 ★ APP STORE', freeBadge: 'GRATIS SPIELBAR' },
+        stats: [{ v: '5,0★', l: 'App-Store-Wertung' }, { v: '18', l: 'Gegnertypen' }, { v: '4', l: 'Begleiter-Helden' }, { v: '∞', l: 'Endlos-Belagerung' }],
+        feat: { kick: 'WAS DICH ERWARTET', t: 'Gebaut für die Belagerung', items: [
+          { icons: [I + 'longbow.png', I + 'dragonbow.png', I + 'staff.png'], t: 'MEISTERE DIE WAFFEN', b: 'Schmiede und verbessere Langbogen, Drachenfeuer-Bogen und Zauberstab. Stimme Krit, Angriffstempo und Rückstoß auf deinen Kampfstil ab.' },
+          { icons: [I + 'healingwave.png', I + 'blizzard.png', I + 'meteor.png'], t: 'WIRKE ZAUBER', b: 'Setze Mana für Heilwelle, Blizzard und Meteorschlag ein und wende jede Welle zu deinen Gunsten.' },
+          { icons: [C + 'lemmrich_logo.png', C + 'misswolf_logo.png', C + 'arthur_logo.png', C + 'sergio_logo.png'], t: 'RUFE BEGLEITER', b: 'Rekrutiere vier Helden — Lemmrich, Miss Wolf, Sir Arthur und Sergio — verbünde dich mit ihnen und entfessle verheerende Ultimates.' } ] },
+        arsenal: { kick: 'MASTER THE WEAPON', t: 'Dein Arsenal', sub: 'Sammle Bögen und Zauber in fünf Seltenheitsstufen.', items: [
+          { icon: I + 'longbow.png', border: I + 'border-bronze.png', name: 'LANGBOGEN', rarity: 'Bronze', rk: 'bronze' },
+          { icon: I + 'dragonbow.png', border: I + 'border-platin.png', name: 'DRACHENFEUER-BOGEN', rarity: 'Legendär', rk: 'legend' },
+          { icon: I + 'staff.png', border: I + 'border-gold.png', name: 'ZAUBERSTAB', rarity: 'Gold', rk: 'gold' },
+          { icon: I + 'healingwave.png', border: I + 'border-silver.png', name: 'HEILWELLE', rarity: 'Silber', rk: 'silver' },
+          { icon: I + 'blizzard.png', border: I + 'border-gold.png', name: 'BLIZZARD', rarity: 'Gold', rk: 'gold' },
+          { icon: I + 'meteor.png', border: I + 'border-platin.png', name: 'METEORSCHLAG', rarity: 'Legendär', rk: 'legend' },
+          { icon: I + 'wind.png', border: I + 'border-bronze.png', name: 'WINDSCHILD', rarity: 'Bronze', rk: 'bronze' } ] },
+        play: { kick: 'DIE WELLEN-MECHANIK', t: 'Halte die Linie', sub: 'Welle um Welle.', steps: [
+          { n: '01', t: 'ZIELE & SCHIESSE', b: 'Spanne den Bogen, führe vor und lass Pfeile auf die anrückende Horde regnen.' },
+          { n: '02', t: 'ÜBERLEBE DIE WELLE', b: 'Jede Welle wird härter — Schildträger blocken, Schamanen heilen, Bomber explodieren.' },
+          { n: '03', t: 'STÜRZE DEN BOSS', b: 'Am Ende jeder Etappe wartet ein Boss. Besiege ihn und rücke vor.' } ] },
+        forge: { kick: 'DIE KÖNIGLICHE SCHMIEDE', t: 'Rüste dich, Bogenschütze', sub: 'Verbessere deine Werte am Trainingsplatz und in der Schmiede zwischen den Schlachten.', captainName: 'DER HAUPTMANN', captainRole: 'HÜTER DER BURG', rows: [
+          { icon: D + 'stat-defense.png', n: 'VERTEIDIGUNG', lv: 5, mx: 8, cost: 1500 },
+          { icon: D + 'stat-crit.png', n: 'KRITISCHE TREFFER', lv: 4, mx: 8, cost: 1250 },
+          { icon: D + 'stat-attack-speed.png', n: 'ANGRIFFSTEMPO', lv: 6, mx: 8, cost: 2400 },
+          { icon: D + 'stat-knockback.png', n: 'RÜCKSTOSS', lv: 3, mx: 8, cost: 900 } ] },
+        comp: { kick: 'DIE TAVERNE', t: 'Kämpfe nie allein', sub: 'Rekrutiere vier einzigartige Helden, stärke euer Band und entfessle ihre Spezialfähigkeiten, wenn die Horde am dichtesten steht.', hint: '◄ DURCH DIE HELDEN SCROLLEN — KARTE ANTIPPEN FÜR FÄHIGKEITEN ►', cardCta: '▶ FÄHIGKEITEN ANSEHEN', abilities: 'FÄHIGKEITEN', heroes: [
+          { img: D + 'companion-lemmrich-portrait.png', name: 'LEMMRICH', role: 'TREUER GEFÄHRTE', variant: 'gold', b: 'Der erste Verbündete an deiner Seite — zuverlässig, mutig und immer bereit für den nächsten Sturm.' },
+          { img: C + 'misswolf.png', name: 'MISS WOLF', role: 'ELFEN-JÄGERIN', variant: 'sapphire', b: 'Eine Elfe an der Seite ihres treuen Wolfs. Schnell, präzise und tödlich aus der Distanz.' },
+          { img: C + 'arthur.png', name: 'SIR ARTHUR', role: 'RITTER', variant: 'bronze', b: 'Ein gepanzerter Ritter, der die vorderste Linie hält und schwere Schläge austeilt.' },
+          { img: C + 'sergio.png', name: 'SERGIO', role: 'STREITER', variant: 'stone', b: 'Ein wendiger Kämpfer, der sich blitzschnell durch die Reihen der Orks schneidet.' } ] },
+        loot: { kick: 'KRIEGSBEUTE', t: 'Knacke die Truhen', sub: 'Besiegte Feinde lassen Truhen fallen — je seltener, desto mächtiger die Belohnung.', chests: [
+          { img: D + 'bronze-chest.png', n: 'BRONZE', s: 'Alltägliche Beute', variant: 'bronze' },
+          { img: D + 'silver-chest.png', n: 'SILBER', s: 'Solide Funde', variant: 'stone' },
+          { img: D + 'gold-chest.png', n: 'GOLD', s: 'Seltene Schätze', variant: 'gold' },
+          { img: D + 'legendary-chest.png', n: 'LEGENDÄR', s: 'Mythische Beute', variant: 'epic' } ] },
+        codex: { kick: 'KENNE DEINEN FEIND', t: 'Das Gegner-Codex', sub: 'Achtzehn Bestien marschieren auf deinen Keep. Tippe auf eine Karte für den vollständigen Steckbrief.', hint: '▶ KARTE ANTIPPEN FÜR DETAILS', threat: 'BEDROHUNG', health: 'LEBEN', speed: 'TEMPO', dmg: 'SCHADEN', size: 'GRÖSSE', prev: 'ZURÜCK', next: 'WEITER' },
+        shots: { kick: 'AUS DEM SPIEL', t: 'Bilder von der Front' },
+        rev: { kick: 'STIMMEN VON DER MAUER', t: '5,0 ★ im App Store', items: [
+          { stars: '★★★★★', t: 'Mega Spiel!', b: 'Macht richtig Spaß! Gerne weiter so!', meta: 'Tim · 18. Juni' },
+          { stars: '★★★★★', t: 'Just awesome', b: 'Schon in der Beta gespielt und jetzt erst recht — die Progression macht riesig Laune!', meta: 'nadi187 · 10. Juni' },
+          { stars: '★★★★★', t: 'Finally a good Bow game!', b: 'Endlich ein richtig gutes Bogen-Spiel mit einem wunderschönen Setting zum Wachsen.', meta: 'Thomate93 · 10. Juni' } ] },
+        faq: { kick: 'FRAGEN VON DER WACHE', t: 'Häufige Fragen', items: [
+          { q: 'Was kostet Bow & Arrow?', a: 'Das Spiel ist gratis. Optionale In-App-Käufe (Gold-Booster, Saphire) beschleunigen den Fortschritt.' },
+          { q: 'Auf welchen Geräten läuft es?', a: 'Auf dem iPhone mit iOS 26 oder neuer. Erhältlich im App Store.' },
+          { q: 'Brauche ich eine Internetverbindung?', a: 'Die Kampagne lässt sich offline spielen. Verteidige den Keep, wo immer du bist.' } ] },
+        cta: { t: 'Der Keep braucht dich, Bogenschütze.', sub: 'Gratis spielbar. Endlos zu meistern.', b: '▶ IM APP STORE LADEN' },
+        foot: { tag: 'Ein Bogenschütze. Eine Burg. Tausend Feinde.', rights: '© 2026 Jen Eric Preißer. Alle Rechte vorbehalten. Nicht mit Apple Inc. verbunden.' },
+        legal: { tabPrivacy: 'DATENSCHUTZ', tabImpressum: 'IMPRESSUM', tabTerms: 'NUTZUNGSHINWEISE' }
+      },
+      en: {
+        get: 'GET IT FREE',
+        railHint: '◄ Swipe ►',
+        menu: { title: 'MENU', lang: 'LANGUAGE', legal: 'LEGAL', studio: 'STUDIO' },
+        nav: [
+          { label: 'FEATURES', href: '#features' }, { label: 'ENEMY CODEX', href: '#codex' },
+          { label: 'COMPANIONS', href: '#companions' }, { label: 'FORGE', href: '#forge' },
+          { label: 'LOOT', href: '#loot' }, { label: 'FAQ', href: '#faq' }
+        ],
+        hero: { kick: '★ RETRO TOWER DEFENSE', platform: 'FOR IPHONE', sub: 'One bow. One castle.', play: '▶ ON THE APP STORE', seeEnemies: 'SEE THE ENEMIES', scroll: 'SCROLL', rateBadge: '5.0 ★ APP STORE', freeBadge: 'FREE TO PLAY' },
+        stats: [{ v: '5.0★', l: 'App Store Rating' }, { v: '18', l: 'Enemy Types' }, { v: '4', l: 'Companion Heroes' }, { v: '∞', l: 'Endless Siege' }],
+        feat: { kick: 'WHAT AWAITS YOU', t: 'Built for the siege', items: [
+          { icons: [I + 'longbow.png', I + 'dragonbow.png', I + 'staff.png'], t: 'MASTER THE WEAPONS', b: 'Forge and upgrade longbow, dragonfire bow and wizard staff. Tune crit, attack speed, and knockback to your battle style.' },
+          { icons: [I + 'healingwave.png', I + 'blizzard.png', I + 'meteor.png'], t: 'CAST SPELLS', b: 'Spend mana on healing wave, blizzard and meteor strike to turn the tide of any wave.' },
+          { icons: [C + 'lemmrich_logo.png', C + 'misswolf_logo.png', C + 'arthur_logo.png', C + 'sergio_logo.png'], t: 'RALLY COMPANIONS', b: 'Recruit four heroes — Lemmrich, Miss Wolf, Sir Arthur and Sergio — bond with them, and unleash devastating ultimate abilities.' } ] },
+        arsenal: { kick: 'MASTER THE WEAPON', t: 'Your arsenal', sub: 'Collect bows and spells across five rarity tiers.', items: [
+          { icon: I + 'longbow.png', border: I + 'border-bronze.png', name: 'LONGBOW', rarity: 'Bronze', rk: 'bronze' },
+          { icon: I + 'dragonbow.png', border: I + 'border-platin.png', name: 'DRAGONFIRE BOW', rarity: 'Legendary', rk: 'legend' },
+          { icon: I + 'staff.png', border: I + 'border-gold.png', name: 'WIZARD STAFF', rarity: 'Gold', rk: 'gold' },
+          { icon: I + 'healingwave.png', border: I + 'border-silver.png', name: 'HEALING WAVE', rarity: 'Silver', rk: 'silver' },
+          { icon: I + 'blizzard.png', border: I + 'border-gold.png', name: 'BLIZZARD', rarity: 'Gold', rk: 'gold' },
+          { icon: I + 'meteor.png', border: I + 'border-platin.png', name: 'METEOR STRIKE', rarity: 'Legendary', rk: 'legend' },
+          { icon: I + 'wind.png', border: I + 'border-bronze.png', name: 'WIND SHIELD', rarity: 'Bronze', rk: 'bronze' } ] },
+        play: { kick: 'THE WAVE MECHANIC', t: 'Hold the line', sub: 'Wave after wave.', steps: [
+          { n: '01', t: 'AIM & FIRE', b: 'Draw the bow, lead your shot, and rain arrows on the advancing horde.' },
+          { n: '02', t: 'SURVIVE THE WAVE', b: 'Every wave bites harder — shieldbearers block, shamans heal, bombers explode.' },
+          { n: '03', t: 'FELL THE BOSS', b: 'A boss waits at the end of each stage. Bring it down and press on.' } ] },
+        forge: { kick: 'THE ROYAL FORGE', t: 'Gear up, archer', sub: 'Upgrade your stats at the training grounds and the forge between battles.', captainName: 'THE CAPTAIN', captainRole: 'KEEPER OF THE KEEP', rows: [
+          { icon: D + 'stat-defense.png', n: 'DEFENSE', lv: 5, mx: 8, cost: 1500 },
+          { icon: D + 'stat-crit.png', n: 'CRITICAL HIT', lv: 4, mx: 8, cost: 1250 },
+          { icon: D + 'stat-attack-speed.png', n: 'ATTACK SPEED', lv: 6, mx: 8, cost: 2400 },
+          { icon: D + 'stat-knockback.png', n: 'KNOCKBACK', lv: 3, mx: 8, cost: 900 } ] },
+        comp: { kick: 'THE TAVERN', t: 'Never fight alone', sub: 'Recruit four unique heroes, deepen your bond, and unleash their special abilities when the horde presses hardest.', hint: '◄ SCROLL THROUGH THE HEROES — TAP A CARD FOR ABILITIES ►', cardCta: '▶ VIEW ABILITIES', abilities: 'ABILITIES', heroes: [
+          { img: D + 'companion-lemmrich-portrait.png', name: 'LEMMRICH', role: 'LOYAL COMPANION', variant: 'gold', b: 'The first ally at your side — reliable, brave, and always ready for the next charge.' },
+          { img: C + 'misswolf.png', name: 'MISS WOLF', role: 'ELVEN HUNTER', variant: 'sapphire', b: 'An elf at the side of her loyal wolf. Fast, precise, and deadly from a distance.' },
+          { img: C + 'arthur.png', name: 'SIR ARTHUR', role: 'KNIGHT', variant: 'bronze', b: 'An armored knight who holds the front line and deals heavy blows.' },
+          { img: C + 'sergio.png', name: 'SERGIO', role: 'BRAWLER', variant: 'stone', b: 'A nimble fighter who cuts through the orc ranks in a flash.' } ] },
+        loot: { kick: 'SPOILS OF WAR', t: 'Crack open the loot', sub: 'Fallen foes drop chests — the rarer the chest, the mightier the reward.', chests: [
+          { img: D + 'bronze-chest.png', n: 'BRONZE', s: 'Everyday spoils', variant: 'bronze' },
+          { img: D + 'silver-chest.png', n: 'SILVER', s: 'Solid finds', variant: 'stone' },
+          { img: D + 'gold-chest.png', n: 'GOLD', s: 'Rare treasures', variant: 'gold' },
+          { img: D + 'legendary-chest.png', n: 'LEGENDARY', s: 'Mythic loot', variant: 'epic' } ] },
+        codex: { kick: 'KNOW YOUR ENEMY', t: 'The Enemy Codex', sub: 'Eighteen beasts march on your keep. Tap a card for the full dossier.', hint: '▶ TAP A CARD FOR DETAILS', threat: 'THREAT', health: 'HEALTH', speed: 'SPEED', dmg: 'DAMAGE', size: 'SIZE', prev: 'PREV', next: 'NEXT' },
+        shots: { kick: 'FROM THE GAME', t: 'Scenes from the front' },
+        rev: { kick: 'VOICES FROM THE WALL', t: '5.0 ★ on the App Store', items: [
+          { stars: '★★★★★', t: 'Mega Spiel!', b: 'So much fun! Keep it up — exactly the kind of game I was hoping for.', meta: 'Tim · Jun 18' },
+          { stars: '★★★★★', t: 'Just awesome', b: 'Played it in the beta and of course now too — love the progression in the game!', meta: 'nadi187 · Jun 10' },
+          { stars: '★★★★★', t: 'Finally a good Bow game!', b: 'A beautiful setting to grow and expand in. Finally a bow game done right.', meta: 'Thomate93 · Jun 10' } ] },
+        faq: { kick: 'QUESTIONS FROM THE WATCH', t: 'Frequently asked', items: [
+          { q: 'What does Bow & Arrow cost?', a: 'The game is free. Optional in-app purchases (gold boosters, sapphires) speed up your progress.' },
+          { q: 'Which devices does it run on?', a: 'iPhone running iOS 26 or newer. Available on the App Store.' },
+          { q: 'Do I need an internet connection?', a: 'The campaign is playable offline. Defend the keep wherever you are.' } ] },
+        cta: { t: 'The keep needs you, archer.', sub: 'Free to play. Endless to master.', b: '▶ DOWNLOAD ON THE APP STORE' },
+        foot: { tag: 'One archer. One castle. A thousand foes.', rights: '© 2026 Jen Eric Preißer. All rights reserved. Not affiliated with Apple Inc.' },
+        legal: { tabPrivacy: 'PRIVACY', tabImpressum: 'IMPRESSUM', tabTerms: 'TERMS OF USE' }
+      }
+    };
+
+    // Legal content (privacy / impressum) per language
+    this.LEGAL = {
+      de: {
+        privacy: { title: 'Datenschutzerklärung', meta: 'Stand: Juli 2026 — App „Bow & Arrow" (iOS) und diese Website', blocks: [
+          { h: '1. Verantwortlicher', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen\nDeutschland\nE-Mail: support@chasingdreamsinteractive.com' },
+          { h: '2. Überblick', p: '„Bow & Arrow" ist ein Spiel für iOS (ab 13 Jahren). Der Spielstand wird primär auf deinem Gerät gespeichert. Optional kannst du iCloud-Synchronisation und Game Center nutzen — beides läuft über Apple, nicht über eigene Server des Entwicklers.\n\nEs gibt kein Werbe-Tracking, keine Analytics-Dienste (z. B. Firebase) und keinen Verkauf personenbezogener Daten. Es wird kein eigenes Backend betrieben, das Spielerdaten außerhalb von Apple-Diensten speichert.' },
+          { h: '3. Welche Daten werden verarbeitet?', p: 'Spielstand und Einstellungen (lokal): Fortschritt, Inventar, Einstellungen und vergleichbare Spieldaten werden auf deinem iPhone gespeichert.\n\niCloud / CloudKit (optional): Wenn du mit deiner Apple-ID angemeldet bist und iCloud verfügbar ist, kann der Spielstand in deiner privaten iCloud-Datenbank synchronisiert werden (Standard-CloudKit von Apple, gleicher Account auf mehreren Geräten). Der Entwickler betreibt hierfür keine eigenen Server.\n\nGame Center (optional): Trophäen-Fortschritt, Erfolge und eine globale Rangliste (Trophäen-Anzahl) über Apple Game Center. In der App können Anzeigenamen und Avatare anderer Spieler in der Rangliste sichtbar sein — bereitgestellt von Apple.\n\nIn-App-Käufe: Einmalkäufe werden ausschließlich über den Apple App Store abgewickelt. Zahlungsdaten erhält der Entwickler nicht; Apple stellt ggf. Kaufinformationen/Entitlements bereit.\n\nTechnische Daten bei Apple: Sturz- oder Diagnosedaten können, wie bei jeder iOS-App, über Apple (z. B. wenn du Fehlerberichte teilst) verarbeitet werden — nicht über separate Drittanbieter-Dienste des Entwicklers.' },
+          { h: '4. Zwecke', p: 'Bereitstellung des Spiels, Speicherung und Wiederherstellung des Fortschritts, optionale Geräte-Synchronisation, optionale Ranglisten und Erfolge, Abwicklung von Käufen über Apple sowie Stabilität und Support.' },
+          { h: '5. Rechtsgrundlagen (EU/EWR)', p: 'Art. 6 Abs. 1 lit. b DSGVO — Vertragserfüllung (Spielnutzung, Käufe über Apple).\nArt. 6 Abs. 1 lit. f DSGVO — berechtigtes Interesse an technisch stabiler App und Support.\nArt. 6 Abs. 1 lit. a DSGVO — nur soweit du optionale Apple-Dienste (iCloud, Game Center) aktiv nutzt bzw. einwilligst, soweit erforderlich.' },
+          { h: '6. Speicherdauer', p: 'Lokale Daten: bis zur Deinstallation der App oder „Fortschritt zurücksetzen" in den Einstellungen.\niCloud-Daten: gemäß deinen Apple-Konto-Einstellungen und Apples Löschfristen.\nGame Center: gemäß Apple Game Center und deinen Apple-Einstellungen.' },
+          { h: '7. Empfänger und Drittländer', p: 'Empfänger ist im Wesentlichen Apple Inc. (iCloud, CloudKit, Game Center, App Store). Apple kann Daten auch außerhalb der EU/EWR verarbeiten (z. B. USA). Apple stellt hierfür geeignete Garantien ein (u. a. Standardvertragsklauseln); Details in der Datenschutzerklärung von Apple.' },
+          { h: '8. Deine Rechte', p: 'Du hast nach der DSGVO u. a. Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Widerspruch und Datenübertragbarkeit, soweit anwendbar. Wende dich an support@chasingdreamsinteractive.com.\n\nDu kannst dich bei einer Datenschutz-Aufsichtsbehörde beschweren, z. B. beim LfDI Baden-Württemberg.' },
+          { h: '9. Kinder', p: 'Die App richtet sich an Nutzer ab 13 Jahren. Es wird nicht wissentlich Daten von Kindern unter 13 Jahren erhoben. Wenn du als Erziehungsberechtigte*r annimmst, dass ein Kind uns Daten gesendet hat, kontaktiere uns bitte per E-Mail.' },
+          { h: '10. Diese Website', p: 'Diese Website wird über GitHub Pages (GitHub, Inc., USA) gehostet. Beim Aufruf verarbeitet GitHub technisch notwendige Daten (u. a. deine IP-Adresse) in Server-Logs (Art. 6 Abs. 1 lit. f DSGVO). Schriftarten werden lokal ausgeliefert — keine Verbindung zu Google Fonts. Einzelne Skript-Bibliotheken werden von CDNs (jsDelivr, unpkg) geladen; dabei wird deine IP-Adresse an den jeweiligen CDN-Betreiber übertragen. Die Website setzt keine Cookies und kein Tracking ein; lediglich die Sprachauswahl dieser Seite wird lokal in deinem Browser gespeichert (localStorage) und nicht übertragen.' },
+          { h: '11. Änderungen', p: 'Diese Erklärung kann bei neuen Funktionen oder rechtlichen Anforderungen angepasst werden. Das Datum oben gilt als letzte Aktualisierung.' } ] },
+        impressum: { title: 'Impressum', meta: 'Angaben gemäß § 5 DDG (Digitale-Dienste-Gesetz)', blocks: [
+          { h: 'Anbieter', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen\nDeutschland' },
+          { h: 'Kontakt', p: 'E-Mail: support@chasingdreamsinteractive.com' },
+          { h: 'Verantwortlich für den Inhalt', p: 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV: Jen Eric Preißer (Anschrift wie oben).' },
+          { h: 'Hinweis', p: '„Bow & Arrow" wird als Privatperson angeboten. Umsatzsteuer-Identifikationsnummer: nicht vorhanden (Kleinunternehmer/Privatperson).' },
+          { h: 'Streitbeilegung', p: 'Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen (§ 36 VSBG), sofern nicht gesetzlich zwingend.' } ] }
+      },
+      en: {
+        privacy: { title: 'Privacy Policy (English)', meta: 'Last updated: July 2026 — "Bow & Arrow" (iOS) and this website', blocks: [
+          { h: '1. Controller', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen, Germany\nEmail: support@chasingdreamsinteractive.com' },
+          { h: '2. Overview', p: '"Bow & Arrow" is a game for iOS (ages 13+). Save data is stored primarily on your device. You may optionally use iCloud sync and Game Center — both are provided by Apple; the developer does not run separate game servers.\n\nThere is no ad tracking, no analytics SDKs (e.g. Firebase), and no sale of personal data. No developer-operated backend stores player data outside Apple services.' },
+          { h: '3. Data we process', p: 'Local save: progress, inventory, settings, and similar game data on your device.\n\niCloud / CloudKit (optional): private iCloud database sync via Apple\'s standard CloudKit when iCloud is enabled.\n\nGame Center (optional): trophies, achievements, and a global leaderboard; other players\' display names and avatars may appear in the leaderboard via Apple.\n\nIn-app purchases: one-time purchases only, processed by the Apple App Store; we do not receive payment card data.\n\nTechnical data via Apple: crash/diagnostic data may be processed by Apple if you share reports — not via separate third-party analytics from the developer.' },
+          { h: '4. Purposes & legal bases', p: 'Providing the game, saving progress, optional sync and leaderboards, purchases via Apple, stability and support. Legal bases under GDPR: contract (Art. 6(1)(b)), legitimate interests (Art. 6(1)(f)), consent where required for optional Apple services (Art. 6(1)(a)).' },
+          { h: '5. Retention', p: 'Local data until uninstall or in-app reset; iCloud and Game Center data per your Apple account and Apple\'s policies.' },
+          { h: '6. Recipients', p: 'Main recipient: Apple Inc. (iCloud, Game Center, App Store). Data may be processed outside the EEA; see Apple\'s Privacy Policy.' },
+          { h: '7. Your rights', p: 'You may request access, rectification, erasure, restriction, objection, and portability where applicable by emailing support@chasingdreamsinteractive.com. You may lodge a complaint with a supervisory authority.' },
+          { h: '8. Children', p: 'The app is intended for users aged 13+. We do not knowingly collect data from children under 13.' },
+          { h: '9. This website', p: 'This website is hosted on GitHub Pages (GitHub, Inc., USA); GitHub processes technically necessary data (including your IP address) in server logs (Art. 6(1)(f) GDPR). Fonts are served locally — no connection to Google Fonts. Some script libraries are loaded from CDNs (jsDelivr, unpkg), which transmits your IP address to the CDN provider. The site sets no cookies and uses no tracking; only your language choice on this page is stored locally in your browser (localStorage) and never transmitted.' } ] },
+        impressum: { title: 'Impressum (German legal notice)', meta: 'Legal notice pursuant to German law', blocks: [
+          { h: 'Provider', p: 'Jen Eric Preißer\nSchellingstraße 18/1\n72622 Nürtingen, Germany' },
+          { h: 'Contact', p: 'Email: support@chasingdreamsinteractive.com' },
+          { h: 'Content responsibility', p: 'Responsible for content pursuant to § 18 (2) MStV: Jen Eric Preißer (address as above).' },
+          { h: 'Note', p: '"Bow & Arrow" is offered as a private individual. VAT identification number: not applicable (small business/private individual).' },
+          { h: 'Dispute resolution', p: 'We are not obliged and not willing to participate in dispute resolution proceedings before a consumer arbitration board (§ 36 VSBG), unless legally mandatory.' } ] }
+      }
+    };
+
+    this.ENEMIES = [
+      { id: 'larry', img: E + 'larry.png', variant: 'stone', size: 112, threat: 12, health: 16, speed: 45, damage: 14,
+        de: { name: 'ORK LARRY', role: 'FUSSSOLDAT', rank: 'GEWÖHNLICH', blurb: 'Der schwächste der Horde — Kanonenfutter, das in schierer Masse anrennt.' },
+        en: { name: 'ORK LARRY', role: 'FOOT SOLDIER', rank: 'COMMON', blurb: 'The weakest of the horde — cannon fodder that charges in sheer numbers.' } },
+      { id: 'warrior', img: E + 'warrior.png', big: D + 'enemy-ork-warrior.png', variant: 'stone', size: 128, threat: 30, health: 38, speed: 40, damage: 36,
+        de: { name: 'ORK KRIEGER', role: 'NAHKÄMPFER', rank: 'GEWÖHNLICH', blurb: 'Standard-Schläger mit Drei-Treffer-Schwung. Das Rückgrat jeder Welle.' },
+        en: { name: 'ORK WARRIOR', role: 'MELEE BRUTE', rank: 'COMMON', blurb: 'A standard bruiser with a three-hit swing. The backbone of every wave.' } },
+      { id: 'shieldwarrior', img: E + 'shieldwarrior.png', variant: 'bronze', size: 128, threat: 46, health: 62, speed: 30, damage: 40,
+        de: { name: 'ORK SCHILDKRIEGER', role: 'BLOCKER', rank: 'ELITE', blurb: 'Fängt deine Pfeile mit dem Schild ab. Triff ihn, bis der Schild zerbricht.' },
+        en: { name: 'SHIELD WARRIOR', role: 'BLOCKER', rank: 'ELITE', blurb: 'Blocks your arrows with his shield. Hammer him until it shatters.' } },
+      { id: 'marksman', img: E + 'marksman.png', variant: 'bronze', size: 124, threat: 42, health: 30, speed: 35, damage: 52,
+        de: { name: 'ORK SCHÜTZE', role: 'FERNKÄMPFER', rank: 'ELITE', blurb: 'Erwidert dein Feuer mit eigenem Bogen. Schalte ihn zuerst aus.' },
+        en: { name: 'ORK MARKSMAN', role: 'RANGED', rank: 'ELITE', blurb: 'Answers your fire with a bow of his own. Take him out first.' } },
+      { id: 'bomber', img: E + 'bomber.png', variant: 'danger', size: 120, threat: 56, health: 20, speed: 72, damage: 86,
+        de: { name: 'KAMIKAZE-BOMBER', role: 'SELBSTMORD-LÄUFER', rank: 'SPEZIAL', blurb: 'Rennt mit glühenden Bomben heran und explodiert an deiner Mauer.' },
+        en: { name: 'KAMIKAZE BOMBER', role: 'SUICIDE RUSHER', rank: 'SPECIAL', blurb: 'Sprints in with glowing bombs and detonates against your wall.' } },
+      { id: 'chariot', img: E + 'chariot.png', variant: 'bronze', size: 158, threat: 62, health: 56, speed: 64, damage: 82,
+        de: { name: 'KAMIKAZE-STREITWAGEN', role: 'BOMBEN-WAGEN', rank: 'ELITE', blurb: 'Ein gepanzerter Wagen voller Sprengstoff — schwer und tödlich.' },
+        en: { name: 'KAMIKAZE CHARIOT', role: 'BOMB WAGON', rank: 'ELITE', blurb: 'An armored cart packed with explosives — heavy and deadly.' } },
+      { id: 'leader', img: E + 'leader.png', variant: 'bronze', size: 200, threat: 70, health: 76, speed: 35, damage: 56,
+        de: { name: 'ORK ANFÜHRER', role: 'KOMMANDANT', rank: 'ELITE', blurb: 'Der größte Ork der Horde. Stärkt und sammelt seine Truppen.' },
+        en: { name: 'ORC LEADER', role: 'COMMANDER', rank: 'ELITE', blurb: 'The largest orc of the horde. Buffs and rallies his troops.' } },
+      { id: 'shaman', img: E + 'shaman.png', variant: 'sapphire', size: 124, threat: 50, health: 40, speed: 40, damage: 16,
+        de: { name: 'ORK SCHAMANE', role: 'HEILER', rank: 'MAGIER', blurb: 'Hält die Horde mit Heilzaubern am Leben. Brich die Stütze.' },
+        en: { name: 'ORC SHAMAN', role: 'HEALER', rank: 'CASTER', blurb: 'Keeps the horde alive with healing spells. Break their support.' } },
+      { id: 'grandshaman', img: E + 'grandshaman.png', variant: 'sapphire', size: 158, threat: 66, health: 56, speed: 35, damage: 26,
+        de: { name: 'GROSS-SCHAMANE', role: 'BUFF-MAGIER', rank: 'MAGIER', blurb: 'Webt eine mächtige Aura, die alle seine Verbündeten verstärkt.' },
+        en: { name: 'GRAND SHAMAN', role: 'BUFFER', rank: 'CASTER', blurb: 'Weaves a powerful aura that empowers all his allies.' } },
+      { id: 'shadowwalker', img: E + 'shadowwalker.png', variant: 'epic', size: 100, threat: 60, health: 36, speed: 86, damage: 60,
+        de: { name: 'SCHATTENLÄUFER', role: 'ASSASSINE', rank: 'ASSASSINE', blurb: 'Wird unsichtbar und schlägt aus dem Dunkeln zu. Bleib wachsam.' },
+        en: { name: 'SHADOWWALKER', role: 'ASSASSIN', rank: 'ASSASSIN', blurb: 'Turns invisible and strikes from the dark. Stay sharp.' } },
+      { id: 'berserker', img: E + 'berserker.png', variant: 'bronze', size: 138, threat: 68, health: 56, speed: 76, damage: 74,
+        de: { name: 'ORK BERSERKER', role: 'RASEREI-KÄMPFER', rank: 'ELITE', blurb: 'Verfällt im Kampf in Raserei — wird schneller und tödlicher.' },
+        en: { name: 'BERSERKER', role: 'RAGER', rank: 'ELITE', blurb: 'Flies into a rage mid-fight — growing faster and deadlier.' } },
+      { id: 'wizard', img: E + 'wizard.png', variant: 'sapphire', size: 130, threat: 56, health: 40, speed: 35, damage: 62,
+        de: { name: 'ORK MAGIER', role: 'ARKAN-WERFER', rank: 'MAGIER', blurb: 'Schleudert arkane Geschosse über deine Mauer.' },
+        en: { name: 'ORC WIZARD', role: 'CASTER', rank: 'CASTER', blurb: 'Hurls arcane bolts over your wall.' } },
+      { id: 'grandwizard', img: E + 'grandwizard.png', variant: 'sapphire', size: 142, threat: 72, health: 56, speed: 35, damage: 80,
+        de: { name: 'GROSS-MAGIER', role: 'ERZMAGIER', rank: 'MAGIER', blurb: 'Entfesselt verheerende arkane Magie aus sicherer Distanz.' },
+        en: { name: 'GRAND WIZARD', role: 'ARCHMAGE', rank: 'CASTER', blurb: 'Unleashes devastating arcane magic from afar.' } },
+      { id: 'warriorboss', img: E + 'warriorboss.png', variant: 'danger', size: 168, threat: 86, health: 90, speed: 46, damage: 82,
+        de: { name: 'KRIEGER-BOSS', role: 'STUFE-10-BOSS', rank: 'BOSS', blurb: 'Stürzt sich mit einem Sprungangriff auf deine Linie.' },
+        en: { name: 'WARRIOR BOSS', role: 'LEVEL 10 BOSS', rank: 'BOSS', blurb: 'Crashes into your line with a leaping strike.' } },
+      { id: 'shieldboss', img: E + 'shieldboss.png', variant: 'danger', size: 172, threat: 88, health: 95, speed: 34, damage: 76,
+        de: { name: 'SCHILD-BOSS', role: 'BLOCK-BOSS', rank: 'BOSS', blurb: 'Trägt Schilde vorn und hinten — kaum eine Lücke zum Treffen.' },
+        en: { name: 'SHIELD BOSS', role: 'BLOCK BOSS', rank: 'BOSS', blurb: 'Carries shields front and back — barely a gap to hit.' } },
+      { id: 'bigsword', img: E + 'bigsword.png', variant: 'danger', size: 168, threat: 100, health: 100, speed: 40, damage: 96,
+        de: { name: 'GROSSSCHWERT-BOSS', role: 'FINALER BOSS', rank: 'BOSS', blurb: 'Errichtet eine Barriere und schwingt ein gewaltiges Schwert. Das große Finale.' },
+        en: { name: 'BIG SWORD BOSS', role: 'FINAL BOSS', rank: 'BOSS', blurb: 'Raises a barrier and swings a massive blade. The grand finale.' } },
+      { id: 'dragon', img: E + 'dragon.png', big: D + 'enemy-dragon.png', variant: 'gold', size: 248, threat: 100, health: 98, speed: 82, damage: 100,
+        de: { name: 'DRACHE', role: 'APEX-BOSS', rank: 'APEX', blurb: 'Fliegt über das Schlachtfeld und versengt den Keep mit Feueratem.' },
+        en: { name: 'DRAGON', role: 'APEX BOSS', rank: 'APEX', blurb: 'Soars over the field and scorches the keep with fire breath.' } },
+      { id: 'goblin', img: E + 'goblin.png', variant: 'gold', size: 128, threat: 30, health: 46, speed: 96, damage: 6,
+        de: { name: 'SCHATZ-GOBLIN', role: 'BEUTE-DIEB', rank: 'SPEZIAL', blurb: 'Flieht statt zu kämpfen — erlege ihn und er platzt vor Beute.' },
+        en: { name: 'TREASURE GOBLIN', role: 'LOOT THIEF', rank: 'SPECIAL', blurb: 'Flees instead of fighting — fell him and he bursts with loot.' } }
+    ];
+
+    // ===== HEROES (animated idle + abilities) =====
+    function idle(id) { var a = []; for (var i = 0; i < 8; i++) a.push(C + id + '_idle_' + i + '.png'); return a; }
+    var SK = C + 'skill/';
+    this.CAPTAIN = []; for (var ci = 0; ci < 8; ci++) this.CAPTAIN.push('assets/captain/idle_' + ci + '.png');
+    this.HEROES = [
+      { id: 'lemmrich', frames: idle('lemmrich'), variant: 'gold', scale: 244,
+        skillIcons: [SK + 'lemmrich_1.png', SK + 'lemmrich_2.png', SK + 'lemmrich_3.png'],
+        de: { name: 'LEMMRICH', role: 'FROST-ORK', origin: 'AUS DEM EISIGEN NORDEN', lore: 'Ein schweigsamer Krieger, der eine Kälte mit sich trägt, die ihn nie verlässt; Frost kriecht aus jeder seiner Spuren. Er kam zusammen mit dem Hofmagier, der nie erklärt hat, was Lemmrich hier will. Was auch immer sein Ziel ist, eines ist sicher: Wenn die Horde kommt, schwingt er seine Axt, als hege die Kälte selbst einen Groll.',
+          abilities: [
+            { type: 'PASSIV', name: 'Frost-Zorn', desc: 'Nahkampftreffer richten Bonusschaden gegen gefrorene oder durch Eis verlangsamte Gegner an; Schläge verlangsamen mit Eis, Combo-Abschlüsse können einfrieren.' },
+            { type: 'PRIMÄR', name: 'Frost-Schnitter', desc: 'Wirft die Axt nach vorn — sie durchschlägt alle Gegner, hinterlässt eine Eisspur und friert beim Zurückkehren ein.' },
+            { type: 'ULTIMATE', name: 'Frost-Mahlstrom', desc: 'Ein gewaltiger Eiswirbel zieht jeden Feind nach innen und explodiert dann in einer weißen Schockwelle, die die Überlebenden einfriert.' } ] },
+        en: { name: 'LEMMRICH', role: 'FROST ORC', origin: 'FROM THE FROZEN NORTH', lore: 'A silent warrior who carries a cold that never leaves him; frost creeps from every step he takes. He arrived alongside the court wizard, who has never explained what Lemmrich wants here. Whatever his purpose, one thing is certain: when the horde comes, he swings that axe like the cold itself holds a grudge.',
+          abilities: [
+            { type: 'PASSIVE', name: 'Frozen Wrath', desc: 'Melee hits deal bonus damage against frozen or ice-slowed enemies; strikes apply ice-slow, and combo finishers can freeze.' },
+            { type: 'PRIMARY', name: 'Frozen Reaper', desc: 'Throws the axe forward — it pierces through every enemy, leaves an ice trail, and freezes on its return.' },
+            { type: 'ULTIMATE', name: 'Frozen Maelstrom', desc: 'A massive ice vortex pulls every foe inward, then explodes outward in a white shockwave that freezes the survivors.' } ] } },
+      { id: 'misswolf', frames: idle('misswolf'), variant: 'sapphire', scale: 240,
+        skillIcons: [SK + 'misswolf_2.png', SK + 'misswolf_1.png', SK + 'misswolf_3.png'],
+        de: { name: 'MISS WOLF', role: 'ELFEN-JÄGERIN', origin: 'AUS DEM WALD IM OSTEN', lore: 'Sie kam aus dem Wald im Osten. Eines Morgens stand sie am Tor und bat um Unterschlupf. Der Hauptmann verfiel ihr auf der Stelle. Niemand weiß so genau, was sie ist — solange sie weiter Pfeile verschießt, sind die meisten von uns damit zufrieden.',
+          abilities: [
+            { type: 'PASSIV', name: 'Wilde Stille', desc: 'Grüne Dornenpfeile stapeln sich auf Gegnern — bei Maximum wurzeln sie fest — und Waldwölfe streifen an ihrer Seite über die Bahnen.' },
+            { type: 'PRIMÄR', name: 'Zwillingsrhythmus', desc: 'Starker Pfeil — ein Trichter aus grünem Licht schießt nach Osten, richtet Schaden an und fügt in einem breiter werdenden Kegel Dornen hinzu.' },
+            { type: 'ULTIMATE', name: 'Waldaufstieg', desc: 'Sie löst ihre Wölfe auf, steigt in einem dunklen Sturm empor, und eine bildschirmweite Welle trifft jeden Feind — und heilt die Mauer.' } ] },
+        en: { name: 'MISS WOLF', role: 'ELVEN HUNTER', origin: 'FROM THE EASTERN FOREST', lore: 'She came from the forest in the east. One morning she stood at the gate asking for shelter. The captain fell for her at once. Nobody quite knows what she is — as long as she keeps shooting arrows, most of us are fine with that.',
+          abilities: [
+            { type: 'PASSIVE', name: 'Wild Stillness', desc: 'Green thorn arrows stack on enemies — at max they root — and forest wolves prowl the lanes at her side.' },
+            { type: 'PRIMARY', name: 'Twin Rhythm', desc: 'Strong Arrow — a funnel of green light fires east, dealing damage and adding thorn stacks across a widening cone.' },
+            { type: 'ULTIMATE', name: 'Forest Ascent', desc: 'She dissolves her wolves, ascends in a dark storm, and a screen-wide wave strikes every foe — healing the wall.' } ] } },
+      { id: 'arthur', frames: idle('arthur'), variant: 'bronze', scale: 220,
+        skillIcons: [SK + 'arthur_2.png', SK + 'arthur_1.png', SK + 'arthur_3.png'],
+        de: { name: 'SIR ARTHUR', role: 'RITTER', origin: 'GESANDTER AUS DEM WESTEN', lore: 'Ein Gesandter aus den verbündeten Reichen im Westen. Eines Tages stand er einfach da. Ich glaube, ich habe ihn nie sprechen hören.',
+          abilities: [
+            { type: 'PASSIV', name: 'Unbeugsame Wacht', desc: 'Hält die Front mit Sprungangriffen und Duell-Bindungen; ab ★1 springt von seinen Treffern Kettenblitz zwischen Feinden über.' },
+            { type: 'PRIMÄR', name: 'Stahl-Wirbel', desc: 'Sturm-Ansturm — lädt nach Osten auf und prescht durch die Bahn, wirft zurück und schockt alles im Weg.' },
+            { type: 'ULTIMATE', name: 'Göttlicher Niedergang', desc: 'Springt himmelwärts und schlägt mit bildschirmfüllender Wucht auf; bei ★3 verdunkelt sich der Bildschirm und Blitze knistern um ihn.' } ] },
+        en: { name: 'SIR ARTHUR', role: 'KNIGHT', origin: 'ENVOY FROM THE WEST', lore: 'An envoy from the allied realms in the west. He simply appeared one day. I do not think I have ever heard him speak.',
+          abilities: [
+            { type: 'PASSIVE', name: 'Unyielding Guard', desc: 'Holds the front with leaping melee and duel locks; from ★1 his strikes chain lightning between foes.' },
+            { type: 'PRIMARY', name: 'Steel Flurry', desc: 'Storm Dash — charge east, then rush through the lane, knocking back and shocking everything in the way.' },
+            { type: 'ULTIMATE', name: 'Divine Descent', desc: 'Leaps skyward and crashes down with a full-screen impact; at ★3 the screen darkens and lightning crackles around him.' } ] } },
+      { id: 'sergio', frames: idle('sergio'), variant: 'danger', scale: 230,
+        skillIcons: [SK + 'sergio_3.png', SK + 'sergio_2.png', SK + 'sergio_1.png'],
+        de: { name: 'SERGIO', role: 'REVOLVERHELD', origin: 'AUS DEM SÜDEN', lore: 'Ein Revolverheld aus dem Süden. Er kommt mir finster vor. Ich will nicht wissen, was er durchgemacht hat. Seit er hier ist, verschwinden die Leute, einer nach dem anderen — ich glaube, der Hauptmann hat zu viel Angst, etwas zu sagen.',
+          abilities: [
+            { type: 'PASSIV', name: 'Höllenmal', desc: 'Sergios Schüsse richten schweren Bonusschaden gegen brennende Feinde an — und ab ★1 entzünden seine Revolvertreffer sie.' },
+            { type: 'PRIMÄR', name: 'Lauffeuer-Erlass', desc: 'Hebt jeden Feind auf dem Bildschirm an und entzündet ihn; auch neue Gegner fangen Sekunden später noch Feuer.' },
+            { type: 'ULTIMATE', name: 'High Noon', desc: 'Markiert die stärksten Feinde, hält kurz inne und feuert Hinrichtungsschüsse ab — bei ★3 verdunkelt sich der Bildschirm und jedes Ziel fällt.' } ] },
+        en: { name: 'SERGIO', role: 'GUNSLINGER', origin: 'FROM THE SOUTH', lore: 'A gunslinger from the South. He feels dark to me. I do not want to know what he has been through. Since he arrived, people vanish one by one — I think the captain is too afraid to say anything.',
+          abilities: [
+            { type: 'PASSIVE', name: 'Hellmarked', desc: "Sergio's shots deal heavy bonus damage to burning foes — and from ★1 his revolver hits set them alight." },
+            { type: 'PRIMARY', name: 'Wildfire Edict', desc: 'Lifts and ignites every foe on screen, with new spawns catching fire for seconds after.' },
+            { type: 'ULTIMATE', name: 'High Noon', desc: 'Marks the strongest foes, holds a brief aim, then fires execution shots — at ★3 the screen darkens and every target falls.' } ] } }
+    ];
+
+    // screenshot pairs available (05 & 06 missing)
+    this.SHOTS = ['01', '02', '03', '04', '07', '08'];
+  }
+
+  get reduce() { return !!this.props.reduceMotion; }
+  openApp() { try { window.open(this.appUrl, '_blank', 'noopener'); } catch (e) {} }
+  setLang(l) { try { localStorage.setItem('ba-lang', l); } catch (e) {} this.syncTitle(l); this.setState({ lang: l }); }
+  syncTitle(l) { document.title = l === 'en' ? 'Bow & Arrow — Retro Tower Defense for iPhone' : 'Bow & Arrow — Retro Tower Defense für iPhone'; }
+  select(id) { this.setState({ sel: id }); }
+  close() { this.setState({ sel: null }); }
+  stopClick(e) { if (e && e.stopPropagation) e.stopPropagation(); }
+  toggleFaq(i) { this.setState(s => ({ openFaq: s.openFaq === i ? -1 : i })); }
+  openMenu() { this.setState({ menuOpen: true }); }
+  closeMenu() { this.setState({ menuOpen: false }); }
+  openLegal(tab) { this.setState({ legalOpen: true, legalTab: tab, menuOpen: false }); }
+  closeLegal() { this.setState({ legalOpen: false }); }
+  step(dir) {
+    var ids = this.ENEMIES.map(e => e.id);
+    var i = ids.indexOf(this.state.sel);
+    if (i < 0) return;
+    this.setState({ sel: ids[(i + dir + ids.length) % ids.length] });
+  }
+  scrollComp(dir) {
+    var el = document.getElementById('ba-comp-scroll');
+    if (el) el.scrollBy({ left: dir * 320, behavior: 'smooth' });
+  }
+  selectHero(id) { this.setState({ selHero: id }); }
+  closeHero() { this.setState({ selHero: null }); }
+  stepHero(dir) {
+    var ids = this.HEROES.map(h => h.id);
+    var i = ids.indexOf(this.state.selHero);
+    if (i < 0) return;
+    this.setState({ selHero: ids[(i + dir + ids.length) % ids.length] });
+  }
+
+  componentDidMount() {
+    var self = this;
+    this.syncTitle(this.state.lang);
+    var bg = document.getElementById('ba-hero-bg');
+    if (bg && !this.reduce) bg.style.animation = 'ba-kenburns 22s ease-out forwards';
+    this.initReveal();
+    this._onKey = function (e) {
+      if (e.key !== 'Escape') return;
+      if (self.state.sel) self.close();
+      else if (self.state.selHero) self.closeHero();
+      else if (self.state.legalOpen) self.closeLegal();
+      else if (self.state.menuOpen) self.closeMenu();
+    };
+    window.addEventListener('keydown', this._onKey);
+    // companion idle frame-cycle
+    if (!this.reduce) {
+      var f = 0;
+      this._compTimer = setInterval(function () {
+        f = (f + 1) % 8;  // faster idle playback
+        self.HEROES.forEach(function (h) {
+          var ids = ['ba-comp-' + h.id, 'ba-herobig-' + h.id];
+          ids.forEach(function (eid) {
+            var el = document.getElementById(eid);
+            if (el) el.src = h.frames[f];
+          });
+        });
+        var cap = document.getElementById('ba-captain');
+        if (cap) cap.src = self.CAPTAIN[f];
+      }, 80);
+    }
+  }
+  componentWillUnmount() {
+    if (this._io) this._io.disconnect();
+    if (this._onKey) window.removeEventListener('keydown', this._onKey);
+    if (this._compTimer) clearInterval(this._compTimer);
+  }
+
+  initReveal() {
+    var els = Array.prototype.slice.call(document.querySelectorAll('[data-reveal]'));
+    if (this.reduce || !('IntersectionObserver' in window)) {
+      els.forEach(function (e) { e.style.opacity = '1'; });
+      return;
+    }
+    els.forEach(function (e) {
+      e.style.opacity = '0';
+      e.style.transform = 'translateY(24px)';
+      e.style.transition = 'opacity .55s cubic-bezier(.2,.8,.2,1), transform .55s cubic-bezier(.2,.8,.2,1)';
+    });
+    this._io = new IntersectionObserver(function (ents, obs) {
+      ents.forEach(function (en) {
+        if (en.isIntersecting) {
+          var el = en.target;
+          var d = parseFloat(el.getAttribute('data-reveal')) || 0;
+          setTimeout(function () { el.style.opacity = '1'; el.style.transform = 'none'; }, d);
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    els.forEach(e => this._io.observe(e));
+  }
+
+  renderVals() {
+    var lang = this.state.lang;
+    var t = this.STR[lang];
+    var self = this;
+
+    var features = t.feat.items.map(function (f, i) { return Object.assign({}, f, { delay: i * 80 }); });
+    var steps = t.play.steps.map(function (s, i) { return Object.assign({}, s, { delay: i * 80 }); });
+    var chests = t.loot.chests.map(function (c, i) { return Object.assign({}, c, { delay: i * 90 }); });
+    var reviews = t.rev.items.map(function (r, i) { return Object.assign({}, r, { delay: i * 80 }); });
+    var arsenal = t.arsenal.items.map(function (it) { return Object.assign({}, it, { rc: self.RC[it.rk] }); });
+
+    var companions = this.HEROES.map(function (h) {
+      var loc = h[lang];
+      return { id: h.id, frame0: h.frames[0], variant: h.variant, name: loc.name, role: loc.role, b: loc.lore,
+        select: function () { self.selectHero(h.id); } };
+    });
+
+    var selHero = null;
+    var fh = this.HEROES.filter(function (h) { return h.id === self.state.selHero; })[0];
+    if (fh) {
+      var hl = fh[lang];
+      selHero = { id: fh.id, frame0: fh.frames[0], variant: fh.variant, name: hl.name, role: hl.role,
+        origin: hl.origin, lore: hl.lore,
+        abilities: hl.abilities.map(function (a, i) { return Object.assign({}, a, { icon: fh.skillIcons[i] }); }) };
+    }
+
+    var shots = this.SHOTS.map(function (n, i) {
+      return { src: 'uploads/screenshot_' + n + '_' + lang + '.png', delay: (i % 2) * 80 };
+    });
+
+    var enemies = this.ENEMIES.map(function (e) {
+      var loc = e[lang];
+      return { id: e.id, img: e.img, variant: e.variant, name: loc.name, rank: loc.rank, select: function () { self.select(e.id); } };
+    });
+
+    var faqs = t.faq.items.map(function (q, i) {
+      return { q: q.q, a: q.a, open: self.state.openFaq === i, sign: self.state.openFaq === i ? '−' : '+', toggle: function () { self.toggleFaq(i); } };
+    });
+
+    var menuLinks = t.nav.map(function (m) {
+      return { label: m.label, href: m.href, go: function () { self.closeMenu(); } };
+    });
+
+    var sel = null;
+    var found = this.ENEMIES.filter(function (e) { return e.id === self.state.sel; })[0];
+    if (found) {
+      var loc = found[lang];
+      sel = {
+        big: found.big || found.img, variant: found.variant, rank: loc.rank, name: loc.name, role: loc.role, blurb: loc.blurb, size: found.size,
+        statRows: [
+          { label: t.codex.threat, value: found.threat, fill: 'linear-gradient(180deg,#E0C266,#B3852E)' },
+          { label: t.codex.health, value: found.health, fill: 'linear-gradient(180deg,#B33,#8C1414)' },
+          { label: t.codex.speed, value: found.speed, fill: 'linear-gradient(180deg,#6FA8FF,#3359A6)' },
+          { label: t.codex.dmg, value: found.damage, fill: 'linear-gradient(180deg,#E08A3A,#A85A14)' }
+        ]
+      };
+    }
+
+    var L = this.LEGAL[lang][this.state.legalTab];
+    var legal = { title: L.title, meta: L.meta, blocks: L.blocks };
+
+    var tab = this.state.legalTab;
+    function tabStyle(on) {
+      return 'font-family:var(--font-pixel);font-size:20px;letter-spacing:1px;padding:8px 16px;cursor:pointer;border-radius:6px;border:2px solid ' +
+        (on ? 'var(--ba-gold)' : 'var(--ba-panel-border)') + ';color:' + (on ? 'var(--ba-ink)' : 'var(--ba-parchment-dim)') +
+        ';background:' + (on ? 'var(--ba-gradient-gold)' : 'transparent') + ';box-shadow:' + (on ? '0 3px 0 rgba(0,0,0,.5)' : 'none') + ';';
+    }
+
+    var activeBtn = 'font-family:var(--font-pixel);font-size:19px;padding:7px 14px;cursor:pointer;border:0;letter-spacing:1px;color:var(--ba-ink);background:var(--ba-gradient-gold);';
+    var idleBtn = 'font-family:var(--font-pixel);font-size:19px;padding:7px 14px;cursor:pointer;border:0;letter-spacing:1px;color:var(--ba-parchment-dim);background:transparent;';
+
+    return {
+      t: t,
+      lang: lang,
+      stats: t.stats,
+      features: features,
+      arsenal: arsenal,
+      steps: steps,
+      forgeRows: t.forge.rows,
+      companions: companions,
+      chests: chests,
+      shots: shots,
+      reviews: reviews,
+      enemies: enemies,
+      faqs: faqs,
+      menuLinks: menuLinks,
+      sel: sel,
+      legal: legal,
+      menuOpen: this.state.menuOpen,
+      legalOpen: this.state.legalOpen,
+      tabPrivacyStyle: tabStyle(tab === 'privacy'),
+      tabImpressumStyle: tabStyle(tab === 'impressum'),
+      openApp: function () { self.openApp(); },
+      setDe: function () { self.setLang('de'); },
+      setEn: function () { self.setLang('en'); },
+      deStyle: lang === 'de' ? activeBtn : idleBtn,
+      enStyle: lang === 'en' ? activeBtn : idleBtn,
+      close: function () { self.close(); },
+      stopClick: function (e) { self.stopClick(e); },
+      prev: function () { self.step(-1); },
+      next: function () { self.step(1); },
+      compPrev: function () { self.scrollComp(-1); },
+      compNext: function () { self.scrollComp(1); },
+      selHero: selHero,
+      closeHero: function () { self.closeHero(); },
+      heroPrev: function () { self.stepHero(-1); },
+      heroNext: function () { self.stepHero(1); },
+      openMenu: function () { self.openMenu(); },
+      closeMenu: function () { self.closeMenu(); },
+      openPrivacy: function () { self.openLegal('privacy'); },
+      openImpressum: function () { self.openLegal('impressum'); },
+      closeLegal: function () { self.closeLegal(); }
+    };
+  }
+}
+</script>
+</body>
+</html>

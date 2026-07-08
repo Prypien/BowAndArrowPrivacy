@@ -204,7 +204,7 @@ import * as THREE from "three";
      Partikelzielen. Läuft asynchron — bis dahin gilt der Bogen-Fallback. */
   (function loadLionShape() {
     const img = new Image();
-    img.src = "BowAndArrowPrivacy/assets/ds/app-icon-dark.png";
+    img.src = "bow-and-arrow/assets/ds/app-icon-dark.png";
     img.onload = () => {
       const S = 180;
       const cv = document.createElement("canvas");

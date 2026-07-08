@@ -48,14 +48,17 @@ angezeigten TXT-Record beim DNS-Anbieter setzen. Schützt vor Domain-Takeover.
 Die bei Apple hinterlegte URL `https://prypien.github.io/BowAndArrowPrivacy/privacy.html`
 wird von GitHub zu `https://chasingdreamsinteractive.com/privacy.html` umgeleitet
 (der Repo-Name fällt aus dem Pfad!). Dort liegt ein Redirect-Stub, der sofort auf
-`/BowAndArrowPrivacy/privacy.html` weiterleitet — die Kette funktioniert also nahtlos:
+`/bow-and-arrow/privacy.html` weiterleitet — die Kette funktioniert also nahtlos:
 
 ```
 prypien.github.io/BowAndArrowPrivacy/privacy.html
   → 301 → chasingdreamsinteractive.com/privacy.html   (Stub)
-  → chasingdreamsinteractive.com/BowAndArrowPrivacy/privacy.html   (Ziel)
+  → chasingdreamsinteractive.com/bow-and-arrow/privacy.html   (Ziel)
 ```
 
+Die von der iOS-App verlinkten `chasingdreamsinteractive.com/BowAndArrowPrivacy/…`-URLs
+bedient der Legacy-Stub-Ordner `BowAndArrowPrivacy/`, der auf `/bow-and-arrow/…` weiterleitet.
+
 Nach dem Go-Live der Domain empfiehlt es sich trotzdem, in App Store Connect die
-Privacy-URL direkt auf `https://chasingdreamsinteractive.com/BowAndArrowPrivacy/privacy.html`
-zu aktualisieren.
+Privacy-URL direkt auf `https://chasingdreamsinteractive.com/bow-and-arrow/privacy.html`
+zu aktualisieren (und `LegalDocumentURLs.swift` in der App beim nächsten Update ebenfalls).
