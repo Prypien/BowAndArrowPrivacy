@@ -1,0 +1,255 @@
+/* ===========================================================
+   Grow Into Life — eigenes Erscheinungsbild
+   ===========================================================
+   Diese Seiten gehören zur App, nicht zum Studio. Chasing Dreams
+   Interactive ist nur die Über-Seite und behält sein dunkles Blau;
+   hier gelten die Farben aus der App.
+
+   Die Werte spiegeln AppTheme.swift bzw. den Asset-Katalog:
+     AppBackground  #FFF8F1   warmes Creme
+     AppCard        #FFFFFF
+     AppText        #3E442E   dunkles Oliv
+     AppAccent      #98A68F   Salbeigrün
+     AppBrown       #8B7355
+     leafGreen      #2EB859
+     blossom        #E68599   (Vollversion / warmer Akzent)
+   Ändert sich AppTheme, ändert sich diese Datei mit.
+
+   Die App läuft bewusst nur in Hell (preferredColorScheme(.light)) —
+   deshalb gibt es hier keinen Dark-Mode, sondern dasselbe warme Papier
+   wie im Produkt.
+   =========================================================== */
+
+:root {
+  --bg: #fff8f1;
+  --card: #ffffff;
+  --ink: #3e442e;
+  --ink-soft: #6b7159;
+  --muted: #8b8c7c;
+  --accent: #98a68f;
+  --accent-deep: #6f8064;
+  --brown: #8b7355;
+  --leaf: #2eb859;
+  --leaf-light: #ebfaed;
+  --blossom: #e68599;
+  --blossom-light: #fcf2f0;
+  --line: rgba(62, 68, 46, .12);
+  --line-soft: rgba(62, 68, 46, .07);
+  --shadow: 0 1px 2px rgba(62, 68, 46, .04), 0 8px 24px rgba(62, 68, 46, .05);
+  --radius: 20px;
+  --font-display: "Lora", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { color-scheme: light; scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+::selection { background: rgba(152, 166, 143, .3); }
+:focus-visible { outline: 2px solid var(--accent-deep); outline-offset: 3px; border-radius: 8px; }
+
+/* ---------- Kopfleiste ---------- */
+
+header.bar {
+  position: sticky; top: 0; z-index: 5;
+  background: rgba(255, 248, 241, .88);
+  border-bottom: 1px solid var(--line-soft);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+header.bar .inner {
+  max-width: 46rem; margin: 0 auto; padding: 14px 22px;
+  display: flex; align-items: center; gap: 14px;
+}
+header.bar a.home {
+  font-family: var(--font-display);
+  font-weight: 500; font-size: 1.02rem; letter-spacing: .01em;
+  color: var(--ink); text-decoration: none; white-space: nowrap;
+}
+header.bar a.home:hover { color: var(--accent-deep); }
+
+nav.legal-tabs { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+nav.legal-tabs a {
+  font-size: .66rem; font-weight: 600; letter-spacing: .16em;
+  padding: 8px 16px; border: 1px solid var(--line);
+  border-radius: 999px; color: var(--muted); text-decoration: none;
+  transition: color .2s ease, border-color .2s ease, background-color .2s ease;
+}
+nav.legal-tabs a:hover { color: var(--ink); border-color: var(--accent); }
+nav.legal-tabs a.active {
+  color: #fff; background: var(--accent-deep); border-color: var(--accent-deep);
+}
+nav.legal-tabs a.active:hover { color: #fff; }
+
+/* ---------- Textfluss ---------- */
+
+.wrap { max-width: 46rem; margin: 0 auto; padding: 48px 22px 90px; }
+
+h1 {
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(2rem, 6vw, 2.7rem); line-height: 1.14;
+  margin: 26px 0 8px; letter-spacing: -.005em; color: var(--ink);
+}
+h2 {
+  font-family: var(--font-display); font-weight: 600; font-size: 1.32rem;
+  margin: 44px 0 10px; color: var(--ink);
+}
+h3 {
+  font-family: var(--font-body); font-weight: 650; font-size: 1rem;
+  margin: 26px 0 6px; color: var(--ink);
+}
+p, li, td { color: var(--ink-soft); }
+strong { color: var(--ink); font-weight: 650; }
+small { color: var(--muted); font-size: .82rem; }
+
+a { color: var(--accent-deep); text-underline-offset: 3px; }
+a:hover { color: var(--ink); }
+
+ul { padding-left: 1.3rem; }
+li { margin: 6px 0; }
+hr { border: none; border-top: 1px solid var(--line-soft); margin: 56px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .92rem;
+  display: block; overflow-x: auto;
+}
+th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+th {
+  color: var(--muted); font-size: .68rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+}
+
+.card {
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  background: var(--card); box-shadow: var(--shadow);
+  padding: 20px 22px; margin: 18px 0;
+}
+
+.lang-switch { display: flex; align-items: center; gap: 10px; margin: 18px 0 0; color: var(--muted); }
+.lang-switch a {
+  font-size: .66rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  text-decoration: none; padding: 7px 14px;
+  border: 1px solid var(--line); border-radius: 999px; color: var(--muted);
+}
+.lang-switch a:hover { color: var(--ink); border-color: var(--accent); }
+
+/* Auf den Rechtsseiten ein <footer>, auf der Einladungsseite ein <p> —
+   die Klasse trägt die Gestaltung, nicht das Element. */
+.foot {
+  max-width: 46rem; margin: 0 auto; padding: 0 22px 60px;
+  color: var(--muted); font-size: .82rem;
+}
+.foot a { color: var(--accent-deep); }
+.join .foot { padding-bottom: 0; margin-top: 44px; }
+
+/* ---------- Startseite des Projekts ---------- */
+
+.hero { display: grid; gap: 34px; align-items: center; margin: 12px 0 8px; }
+.kicker {
+  font-size: .68rem; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--accent-deep); margin: 0 0 10px;
+}
+.lede { font-size: 1.06rem; max-width: 34rem; }
+.hero-visual { display: flex; justify-content: center; }
+.hero-visual img {
+  width: 100%; max-width: 320px; height: auto;
+  border-radius: 28px;
+}
+
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; }
+.pill {
+  font-size: .72rem; font-weight: 650; letter-spacing: .02em;
+  padding: 7px 14px; border-radius: 999px;
+  background: var(--leaf-light); color: #1d7a3a;
+  border: 1px solid rgba(46, 184, 89, .22);
+}
+.pill--muted {
+  background: rgba(152, 166, 143, .14); color: var(--accent-deep);
+  border-color: rgba(152, 166, 143, .3);
+}
+
+.features { display: grid; gap: 14px; margin: 18px 0 0; }
+.feature {
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  background: var(--card); box-shadow: var(--shadow);
+  padding: 20px 22px;
+}
+.feature h3 { margin-top: 0; }
+.feature p { margin-bottom: 0; font-size: .94rem; }
+
+.promise { border-left: 3px solid var(--accent); padding-left: 18px; margin: 18px 0; }
+.promise p { margin: 10px 0; }
+
+.backlink { display: inline-block; margin-top: 12px; font-size: .9rem; }
+
+/* ---------- Einladungsseite ---------- */
+
+.join { max-width: 34rem; text-align: center; }
+.join .home { display: inline-block; margin-bottom: 36px; text-decoration: none; }
+.join h1 { margin-top: 0; }
+.join .lede { margin: 0 auto 32px; }
+
+.code-card {
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  background: var(--card); box-shadow: var(--shadow);
+  padding: 26px 20px; margin: 0 0 20px;
+}
+.code-label {
+  font-size: .66rem; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--muted); margin: 0 0 12px;
+}
+.code {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: clamp(1.6rem, 7vw, 2.1rem); font-weight: 650;
+  letter-spacing: .12em; color: var(--ink); margin: 0; word-break: break-all;
+}
+
+.btn {
+  display: block; width: 100%; margin: 0 0 12px;
+  padding: 15px 22px; border-radius: 999px; border: 1px solid transparent;
+  font: inherit; font-weight: 650; text-decoration: none; cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, color .18s ease;
+}
+.btn--primary { background: var(--accent-deep); color: #fff; }
+.btn--primary:hover { background: var(--ink); color: #fff; }
+.btn--ghost { background: transparent; color: var(--ink-soft); border-color: var(--line); }
+.btn--ghost:hover { color: var(--ink); border-color: var(--accent); }
+
+.steps {
+  text-align: left; margin: 34px 0 0; padding: 20px 22px;
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  background: var(--card); box-shadow: var(--shadow);
+}
+.steps h2 {
+  font-family: var(--font-body); font-size: .66rem; font-weight: 700;
+  letter-spacing: .18em; text-transform: uppercase;
+  color: var(--muted); margin: 0 0 12px;
+}
+.steps ol { margin: 0; padding-left: 1.2rem; }
+.steps li { margin: 8px 0; }
+
+.note { font-size: .85rem; margin: 24px 0 0; color: var(--muted); }
+
+[hidden] { display: none !important; }
+
+/* ---------- Breite Darstellung ---------- */
+
+@media (min-width: 720px) {
+  .hero { grid-template-columns: 1.15fr .85fr; }
+  .features { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  header.bar .inner { flex-wrap: wrap; gap: 10px; }
+  nav.legal-tabs { margin-left: 0; }
+}
