@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grow Into Life — Nutzungsbedingungen</title>
+  <meta name="description" content="Nutzungsbedingungen für die iOS-App Grow Into Life." />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <style>
+    :root {
+      --bg-0: #04070f;
+      --bg-1: #142c54;
+      --ink: #e9edf4;
+      --muted: #93a0b8;
+      --lav: #9db8ff;
+      --leaf: #8fd8b4;
+      --line: rgba(233, 237, 244, .1);
+      --font-display: "Lora", Georgia, "Times New Roman", serif;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { color-scheme: dark; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16.5px;
+      line-height: 1.7;
+      color: var(--muted);
+      background: radial-gradient(120vmax 90vmax at 50% 0%, var(--bg-1) 0%, #0a1730 48%, var(--bg-0) 100%) fixed;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(143, 216, 180, .35); }
+    :focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; border-radius: 6px; }
+    .wrap { max-width: 46rem; margin: 0 auto; padding: 48px 22px 90px; }
+    header.bar {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(5, 10, 22, .55);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    header.bar .inner {
+      max-width: 46rem; margin: 0 auto; padding: 14px 22px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    header.bar a.home {
+      font-family: var(--font-display);
+      font-weight: 420; font-size: 1.02rem; letter-spacing: .035em;
+      color: var(--ink); text-decoration: none; white-space: nowrap;
+    }
+    header.bar a.home:hover { color: var(--leaf); }
+    nav.legal-tabs { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    nav.legal-tabs a {
+      font-size: .66rem; font-weight: 500; letter-spacing: .18em;
+      padding: 8px 16px; border: 1px solid rgba(233, 237, 244, .18);
+      border-radius: 999px; color: var(--muted); text-decoration: none;
+      transition: color .2s ease, border-color .2s ease;
+    }
+    nav.legal-tabs a.active { color: #0c1322; border-color: var(--ink); background: var(--ink); }
+    nav.legal-tabs a:hover { color: var(--ink); border-color: rgba(233, 237, 244, .4); }
+    nav.legal-tabs a.active:hover { color: #0c1322; }
+    h1 {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.12;
+      margin: 26px 0 8px; letter-spacing: .01em; color: #c6cdd9;
+    }
+    h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.3rem; margin: 40px 0 10px; color: var(--ink); }
+    h3 { font-family: var(--font-body); font-weight: 600; font-size: 1rem; margin: 26px 0 6px; color: var(--ink); }
+    p, li, td { color: var(--muted); }
+    strong { color: var(--ink); font-weight: 600; }
+    small { color: rgba(147, 160, 184, .85); font-size: .82rem; }
+    a { color: var(--leaf); text-underline-offset: 3px; }
+    a:hover { color: var(--ink); }
+    ul { padding-left: 1.3rem; }
+    li { margin: 6px 0; }
+    hr { border: none; border-top: 1px solid var(--line); margin: 56px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .92rem; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: rgba(147,160,184,.8); font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+    .card {
+      border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(233, 237, 244, .03); padding: 18px 20px; margin: 18px 0;
+    }
+    .lang-switch { display: flex; align-items: center; gap: 10px; margin: 18px 0 0; color: var(--muted); }
+    .lang-switch a {
+      font-size: .66rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+      text-decoration: none; padding: 7px 14px;
+      border: 1px solid rgba(233, 237, 244, .18); border-radius: 999px; color: var(--muted);
+    }
+    .lang-switch a:hover { color: var(--ink); border-color: rgba(233, 237, 244, .4); }
+    footer.foot { max-width: 46rem; margin: 0 auto; padding: 0 22px 60px; color: rgba(147, 160, 184, .85); font-size: .82rem; }
+    footer.foot a { color: var(--leaf); }
+    @media (max-width: 560px) {
+      header.bar .inner { flex-wrap: wrap; gap: 10px; }
+      nav.legal-tabs { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <div class="inner">
+      <a class="home" href="../">Chasing Dreams Interactive</a>
+      <nav class="legal-tabs">
+        <a href="privacy.html">PRIVACY</a>
+        <a class="active" href="terms.html">TERMS</a>
+        <a href="impressum.html">IMPRESSUM</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="lang-switch"><a href="#de">Deutsch</a> &middot; <a href="#en">English</a></div>
+
+    <h1 id="de">Nutzungsbedingungen</h1>
+    <p><small>Grow Into Life (iOS) &middot; Stand: 26. Juli 2026</small></p>
+
+    <h2>1. Anbieter und Geltungsbereich</h2>
+    <div class="card">
+      <strong>Jen Eric Prei&szlig;er</strong><br />
+      Schellingstra&szlig;e 18/1<br />
+      72622 N&uuml;rtingen, Deutschland<br />
+      E-Mail: <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>
+    </div>
+    <p>Diese Bedingungen gelten f&uuml;r die Nutzung der iOS-App &bdquo;Grow Into Life&ldquo;. Mit der
+    Erstellung eines Kontos erkl&auml;rst du dich mit ihnen einverstanden.</p>
+
+    <h2>2. Was die App leistet</h2>
+    <p>Grow Into Life ist ein digitales Babytagebuch: Meilensteine, Fotos, K&ouml;rperma&szlig;e, Zahnkarte,
+    Stammbaum und das Teilen des Tagebuchs mit Personen, die du einl&auml;dst. Die Nutzung setzt ein
+    pers&ouml;nliches Konto voraus, damit deine Eintr&auml;ge einen Ger&auml;tewechsel &uuml;berstehen und
+    geteilt werden k&ouml;nnen.</p>
+
+    <h2>3. Keine medizinische Beratung</h2>
+    <p>Die Wachstumskurven beruhen auf den Referenzwerten der Weltgesundheitsorganisation und dienen
+    ausschlie&szlig;lich der Veranschaulichung. Sie sind <strong>keine medizinische Diagnose und kein Ersatz
+    f&uuml;r &auml;rztlichen Rat</strong>. Bei Fragen zur Entwicklung deines Kindes wende dich bitte an deine
+    Kinder&auml;rztin oder deinen Kinderarzt.</p>
+
+    <h2>4. Dein Konto</h2>
+    <p>Du bist f&uuml;r die Vertraulichkeit deiner Zugangsdaten verantwortlich. Gib Einladungscodes nur an
+    Personen weiter, denen du Zugriff auf das Tagebuch deines Kindes geben m&ouml;chtest. Eine Freigabe kannst
+    du jederzeit in der App zur&uuml;cknehmen.</p>
+
+    <h2>5. Deine Inhalte</h2>
+    <p>Alle Inhalte, die du eintr&auml;gst &mdash; Fotos, Notizen, Ma&szlig;e &mdash; bleiben deine. Du
+    r&auml;umst uns kein Nutzungsrecht daran ein, das &uuml;ber das f&uuml;r den Betrieb der App technisch
+    Erforderliche hinausgeht (Speicherung, &Uuml;bertragung, Anzeige auf deinen und den von dir freigegebenen
+    Ger&auml;ten). Du sicherst zu, dass du berechtigt bist, die eingestellten Inhalte zu verwenden.</p>
+
+    <h2>6. Vollversion, Testphase und Abo</h2>
+    <p>Ein Teil der Funktionen &mdash; Zahnkarte, Stammbaum, WHO-Wachstumskurven und mehr als ein Kind &mdash;
+    geh&ouml;rt zur Vollversion. Nach der Installation l&auml;uft eine <strong>kostenlose Testphase von
+    14 Tagen</strong>. Danach stehen zwei M&ouml;glichkeiten zur Wahl:</p>
+    <ul>
+      <li><strong>Jahresabo</strong> &mdash; verl&auml;ngert sich automatisch um jeweils ein Jahr, sofern es
+          nicht mindestens 24 Stunden vor Ablauf der laufenden Periode gek&uuml;ndigt wird. Die Belastung
+          erfolgt &uuml;ber deinen Apple-Account bei Kaufbest&auml;tigung und danach bei jeder
+          Verl&auml;ngerung.</li>
+      <li><strong>Lifetime</strong> &mdash; einmaliger Kauf, keine Verl&auml;ngerung.</li>
+    </ul>
+    <p>Verwalten und k&uuml;ndigen kannst du das Abo jederzeit in den Einstellungen deines Apple-Accounts
+    (<a href="https://apps.apple.com/account/subscriptions">apps.apple.com/account/subscriptions</a>); eine
+    K&uuml;ndigung &uuml;ber uns ist nicht m&ouml;glich. Zahlungsabwicklung, Rechnungsstellung und
+    Erstattungen liegen vollst&auml;ndig bei Apple; zus&auml;tzlich gelten Apples Nutzungsbedingungen f&uuml;r
+    den App Store. Die jeweils aktuellen Preise stehen auf der Kaufseite in der App.</p>
+
+    <h2>7. Widerrufsrecht</h2>
+    <p>Als Verbraucherin oder Verbraucher steht dir grunds&auml;tzlich ein 14-t&auml;giges Widerrufsrecht zu.
+    Da der Kauf &uuml;ber den App Store abgewickelt wird, richtet sich die Aus&uuml;bung nach den Bedingungen
+    von Apple; Erstattungsanfragen stellst du unter
+    <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
+
+    <h2>8. Verf&uuml;gbarkeit</h2>
+    <p>Wir bem&uuml;hen uns um einen zuverl&auml;ssigen Betrieb, k&ouml;nnen aber keine ununterbrochene
+    Verf&uuml;gbarkeit zusichern &mdash; die Synchronisierung h&auml;ngt von Diensten Dritter und deiner
+    Internetverbindung ab. Offline erfasste Eintr&auml;ge werden bei bestehender Verbindung nachgeladen.</p>
+
+    <h2>9. Datensicherung</h2>
+    <p>Deine Daten werden verschl&uuml;sselt &uuml;bertragen und in der EU gespeichert. Bitte verlasse dich
+    dennoch nicht ausschlie&szlig;lich auf die App als Archiv f&uuml;r unersetzliche Fotos.</p>
+
+    <h2>10. Haftung</h2>
+    <p>Wir haften unbeschr&auml;nkt f&uuml;r Vorsatz und grobe Fahrl&auml;ssigkeit sowie f&uuml;r Sch&auml;den
+    aus der Verletzung des Lebens, des K&ouml;rpers oder der Gesundheit. Bei einfacher Fahrl&auml;ssigkeit
+    haften wir nur bei Verletzung einer wesentlichen Vertragspflicht und begrenzt auf den
+    vertragstypischen, vorhersehbaren Schaden. Die Haftung nach dem Produkthaftungsgesetz bleibt
+    unber&uuml;hrt.</p>
+
+    <h2>11. Beendigung</h2>
+    <p>Du kannst dein Konto jederzeit in der App l&ouml;schen (<em>Profil &rarr; Einstellungen &rarr; Konto
+    l&ouml;schen</em>). Damit endet dieser Vertrag. Bereits gezahlte Betr&auml;ge f&uuml;r einen laufenden
+    Abrechnungszeitraum erstatten wir nicht anteilig &mdash; Erstattungen liegen bei Apple.</p>
+
+    <h2>12. &Auml;nderungen</h2>
+    <p>Wir d&uuml;rfen diese Bedingungen &auml;ndern, wenn daf&uuml;r ein sachlicher Grund besteht. &Uuml;ber
+    wesentliche &Auml;nderungen informieren wir in der App.</p>
+
+    <h2>13. Anwendbares Recht</h2>
+    <p>Es gilt deutsches Recht unter Ausschluss des UN-Kaufrechts. Zwingende Verbraucherschutzrechte deines
+    Aufenthaltsstaates bleiben unber&uuml;hrt.</p>
+
+    <p><a href="privacy.html">Datenschutzerkl&auml;rung &rarr;</a></p>
+
+    <hr />
+
+    <h1 id="en">Terms of Use</h1>
+    <p><small>Grow Into Life (iOS) &middot; Last updated: 26 July 2026</small></p>
+
+    <h2>1. Provider</h2>
+    <div class="card">
+      <strong>Jen Eric Prei&szlig;er</strong><br />
+      Schellingstra&szlig;e 18/1<br />
+      72622 N&uuml;rtingen, Germany<br />
+      Email: <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>
+    </div>
+    <p>These terms govern the use of the iOS app &ldquo;Grow Into Life&rdquo;. By creating an account you
+    agree to them.</p>
+
+    <h2>2. What the app does</h2>
+    <p>Grow Into Life is a digital baby journal: milestones, photos, body measurements, a tooth chart, a
+    family tree, and sharing the journal with people you invite. A personal account is required so your
+    entries survive a change of device and can be shared.</p>
+
+    <h2>3. Not medical advice</h2>
+    <p>The growth curves are based on World Health Organization reference data and are for illustration only.
+    They are <strong>not a medical diagnosis and no substitute for professional advice</strong>. Please talk
+    to your paediatrician about your child&rsquo;s development.</p>
+
+    <h2>4. Your account</h2>
+    <p>You are responsible for keeping your credentials confidential. Share invitation codes only with people
+    you want to have access to your child&rsquo;s journal. You can revoke access at any time in the app.</p>
+
+    <h2>5. Your content</h2>
+    <p>Everything you enter &mdash; photos, notes, measurements &mdash; remains yours. You grant us no rights
+    beyond what is technically necessary to operate the app (storing, transmitting and displaying it on your
+    devices and those you have shared with). You confirm you are entitled to use the content you upload.</p>
+
+    <h2>6. Full version, trial and subscription</h2>
+    <p>Some features &mdash; tooth chart, family tree, WHO growth curves and more than one child &mdash; are
+    part of the full version. A <strong>free 14-day trial</strong> starts after installation. After that you
+    can choose:</p>
+    <ul>
+      <li><strong>Yearly subscription</strong> &mdash; renews automatically for a further year unless
+          cancelled at least 24 hours before the end of the current period. Your Apple Account is charged at
+          confirmation of purchase and on each renewal.</li>
+      <li><strong>Lifetime</strong> &mdash; a one-time purchase that does not renew.</li>
+    </ul>
+    <p>Manage or cancel your subscription in your Apple Account settings
+    (<a href="https://apps.apple.com/account/subscriptions">apps.apple.com/account/subscriptions</a>); we
+    cannot cancel it for you. Payment, invoicing and refunds are handled entirely by Apple, and Apple&rsquo;s
+    App Store terms apply in addition. Current prices are shown on the purchase screen in the app.</p>
+
+    <h2>7. Right of withdrawal</h2>
+    <p>As a consumer you generally have a 14-day right of withdrawal. Since the purchase is made through the
+    App Store, it is exercised under Apple&rsquo;s terms; request refunds at
+    <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
+
+    <h2>8. Availability</h2>
+    <p>We aim for reliable operation but cannot guarantee uninterrupted availability &mdash; syncing depends
+    on third-party services and your internet connection. Entries made offline are uploaded once a connection
+    is available.</p>
+
+    <h2>9. Backups</h2>
+    <p>Your data is transmitted encrypted and stored in the EU. Even so, please do not rely on the app as the
+    only archive for irreplaceable photos.</p>
+
+    <h2>10. Liability</h2>
+    <p>We are fully liable for intent and gross negligence and for damage to life, body or health. For
+    ordinary negligence we are liable only for breach of a material contractual obligation, limited to the
+    foreseeable damage typical for this type of contract. Liability under the German Product Liability Act is
+    unaffected.</p>
+
+    <h2>11. Termination</h2>
+    <p>You can delete your account at any time in the app (<em>Profile &rarr; Settings &rarr; Delete
+    account</em>), which ends this agreement. We do not refund amounts already paid for a current billing
+    period &mdash; refunds are handled by Apple.</p>
+
+    <h2>12. Changes</h2>
+    <p>We may amend these terms where there is a valid reason to do so and will notify you in the app of
+    material changes.</p>
+
+    <h2>13. Governing law</h2>
+    <p>German law applies, excluding the UN Convention on Contracts for the International Sale of Goods.
+    Mandatory consumer protection rules of your country of residence remain unaffected.</p>
+
+    <p><a href="privacy.html">Privacy Policy &rarr;</a></p>
+  </div>
+
+  <footer class="foot">
+    <p>&copy; 2026 Jen Eric Prei&szlig;er &middot; <a href="index.html">Grow Into Life</a> &middot;
+      <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a></p>
+  </footer>
+</body>
+</html>

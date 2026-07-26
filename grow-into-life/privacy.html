@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grow Into Life — Datenschutzerklärung</title>
+  <meta name="description" content="Datenschutzerklärung für die iOS-App Grow Into Life." />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <style>
+    :root {
+      --bg-0: #04070f;
+      --bg-1: #142c54;
+      --ink: #e9edf4;
+      --muted: #93a0b8;
+      --lav: #9db8ff;
+      --leaf: #8fd8b4;
+      --line: rgba(233, 237, 244, .1);
+      --font-display: "Lora", Georgia, "Times New Roman", serif;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { color-scheme: dark; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16.5px;
+      line-height: 1.7;
+      color: var(--muted);
+      background: radial-gradient(120vmax 90vmax at 50% 0%, var(--bg-1) 0%, #0a1730 48%, var(--bg-0) 100%) fixed;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::selection { background: rgba(143, 216, 180, .35); }
+    :focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; border-radius: 6px; }
+    .wrap { max-width: 46rem; margin: 0 auto; padding: 48px 22px 90px; }
+    header.bar {
+      position: sticky; top: 0; z-index: 5;
+      background: rgba(5, 10, 22, .55);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    header.bar .inner {
+      max-width: 46rem; margin: 0 auto; padding: 14px 22px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    header.bar a.home {
+      font-family: var(--font-display);
+      font-weight: 420; font-size: 1.02rem; letter-spacing: .035em;
+      color: var(--ink); text-decoration: none; white-space: nowrap;
+    }
+    header.bar a.home:hover { color: var(--leaf); }
+    nav.legal-tabs { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+    nav.legal-tabs a {
+      font-size: .66rem; font-weight: 500; letter-spacing: .18em;
+      padding: 8px 16px; border: 1px solid rgba(233, 237, 244, .18);
+      border-radius: 999px; color: var(--muted); text-decoration: none;
+      transition: color .2s ease, border-color .2s ease;
+    }
+    nav.legal-tabs a.active { color: #0c1322; border-color: var(--ink); background: var(--ink); }
+    nav.legal-tabs a:hover { color: var(--ink); border-color: rgba(233, 237, 244, .4); }
+    nav.legal-tabs a.active:hover { color: #0c1322; }
+    h1 {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: clamp(2rem, 6vw, 2.8rem); line-height: 1.12;
+      margin: 26px 0 8px; letter-spacing: .01em; color: #c6cdd9;
+    }
+    h2 { font-family: var(--font-display); font-weight: 500; font-size: 1.3rem; margin: 40px 0 10px; color: var(--ink); }
+    h3 { font-family: var(--font-body); font-weight: 600; font-size: 1rem; margin: 26px 0 6px; color: var(--ink); }
+    p, li, td { color: var(--muted); }
+    strong { color: var(--ink); font-weight: 600; }
+    small { color: rgba(147, 160, 184, .85); font-size: .82rem; }
+    a { color: var(--leaf); text-underline-offset: 3px; }
+    a:hover { color: var(--ink); }
+    ul { padding-left: 1.3rem; }
+    li { margin: 6px 0; }
+    hr { border: none; border-top: 1px solid var(--line); margin: 56px 0; }
+    table { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .92rem; }
+    th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: rgba(147,160,184,.8); font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; }
+    .card {
+      border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(233, 237, 244, .03); padding: 18px 20px; margin: 18px 0;
+    }
+    .lang-switch { display: flex; align-items: center; gap: 10px; margin: 18px 0 0; color: var(--muted); }
+    .lang-switch a {
+      font-size: .66rem; font-weight: 500; letter-spacing: .18em; text-transform: uppercase;
+      text-decoration: none; padding: 7px 14px;
+      border: 1px solid rgba(233, 237, 244, .18); border-radius: 999px; color: var(--muted);
+    }
+    .lang-switch a:hover { color: var(--ink); border-color: rgba(233, 237, 244, .4); }
+    footer.foot { max-width: 46rem; margin: 0 auto; padding: 0 22px 60px; color: rgba(147, 160, 184, .85); font-size: .82rem; }
+    footer.foot a { color: var(--leaf); }
+    @media (max-width: 560px) {
+      header.bar .inner { flex-wrap: wrap; gap: 10px; }
+      nav.legal-tabs { margin-left: 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <div class="inner">
+      <a class="home" href="../">Chasing Dreams Interactive</a>
+      <nav class="legal-tabs">
+        <a class="active" href="privacy.html">PRIVACY</a>
+        <a href="terms.html">TERMS</a>
+        <a href="impressum.html">IMPRESSUM</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="lang-switch"><a href="#de">Deutsch</a> &middot; <a href="#en">English</a></div>
+
+    <h1 id="de">Datenschutzerkl&auml;rung</h1>
+    <p><small>Grow Into Life (iOS) &middot; Stand: 26. Juli 2026</small></p>
+
+    <h2>1. Verantwortlicher</h2>
+    <div class="card">
+      <strong>Jen Eric Prei&szlig;er</strong><br />
+      Schellingstra&szlig;e 18/1<br />
+      72622 N&uuml;rtingen, Deutschland<br />
+      E-Mail: <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>
+    </div>
+    <p><small>Ein Datenschutzbeauftragter ist nicht bestellt, da die gesetzlichen Voraussetzungen daf&uuml;r
+    nicht vorliegen.</small></p>
+
+    <h2>2. Worum es geht</h2>
+    <p>Grow Into Life ist ein digitales Babytagebuch. Du h&auml;ltst darin die Entwicklung deines Kindes fest
+    &mdash; Meilensteine, Fotos, Ma&szlig;e, Z&auml;hne, Stammbaum &mdash; und kannst das Tagebuch mit Menschen
+    teilen, die du selbst einl&auml;dst. Die Daten liegen in deinem pers&ouml;nlichen Konto. Sie werden nicht
+    verkauft, nicht an Dritte weitergegeben, nicht ausgewertet und nicht f&uuml;r Werbung genutzt.</p>
+    <p><strong>Es findet kein Tracking statt.</strong> Die App enth&auml;lt keine Analyse-SDKs, kein
+    Crash-Reporting an Dritte, keine Werbe-IDs und keine Werbenetzwerke.</p>
+
+    <h2>3. Welche Daten verarbeitet werden</h2>
+    <table>
+      <tr><th>Kategorie</th><th>Konkret</th><th>Zweck</th><th>Rechtsgrundlage</th></tr>
+      <tr><td>Kontodaten</td>
+          <td>E-Mail-Adresse, Anzeigename, eine von Firebase vergebene Nutzer-ID; bei &bdquo;Anmelden mit
+              Apple&ldquo; ggf. eine anonymisierte Weiterleitungsadresse</td>
+          <td>Konto anlegen, anmelden, Tagebuch ger&auml;te&uuml;bergreifend synchronisieren</td>
+          <td>Art. 6 Abs. 1 lit. b DSGVO (Vertrag)</td></tr>
+      <tr><td>Angaben zum Kind</td>
+          <td>Vorname, Geburtsdatum, optional Geschlecht, Profilfoto</td>
+          <td>Darstellung des Tagebuchs, Altersberechnung</td>
+          <td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+      <tr><td>Inhalte</td>
+          <td>Meilensteine mit Titel, Datum, Notizen und Fotos; Kommentare und Reaktionen; Eintr&auml;ge im
+              Stammbaum</td>
+          <td>Kernfunktion der App</td>
+          <td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+      <tr><td><strong>Gesundheitsdaten</strong></td>
+          <td>Gewicht, K&ouml;rpergr&ouml;&szlig;e, Kopfumfang, Zahndurchbr&uuml;che</td>
+          <td>Wachstumskurven, Zahnkarte</td>
+          <td>Art. 9 Abs. 2 lit. a DSGVO &mdash; <strong>ausdr&uuml;ckliche Einwilligung</strong>, erteilt
+              durch die freiwillige Eingabe. Ohne diese Angaben funktioniert die App im &Uuml;brigen
+              vollst&auml;ndig.</td></tr>
+      <tr><td>Freigaben</td>
+          <td>Einladungscodes, Mitgliedschaften und Rollen (Inhaber / Mitbetreuung / Lesezugriff)</td>
+          <td>Teilen des Tagebuchs mit von dir eingeladenen Personen</td>
+          <td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+      <tr><td>Kaufstatus</td>
+          <td>Ob die Vollversion gekauft ist bzw. wann die Testphase endet</td>
+          <td>Freischaltung der kostenpflichtigen Funktionen</td>
+          <td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+    </table>
+
+    <h3>Daten von Kindern</h3>
+    <p>Die App richtet sich ausschlie&szlig;lich an Erwachsene. Die Angaben &uuml;ber das Kind gibst du als
+    sorgeberechtigte Person ein und erteilst damit zugleich die Einwilligung nach Art. 8 DSGVO f&uuml;r dein
+    Kind. Kinder selbst k&ouml;nnen sich nicht registrieren und die App nicht eigenst&auml;ndig nutzen.</p>
+
+    <h2>4. Wo die Daten liegen</h2>
+    <p>Die App nutzt Google Firebase als Auftragsverarbeiter (Google Ireland Limited, Gordon House, Barrow
+    Street, Dublin 4, Irland):</p>
+    <ul>
+      <li><strong>Firebase Authentication</strong> &mdash; Anmeldung per E-Mail/Passwort und
+          &bdquo;Anmelden mit Apple&ldquo;.</li>
+      <li><strong>Cloud Firestore</strong> &mdash; Tagebuchdaten. Speicherort: <strong>europe-west3</strong>
+          (Frankfurt am Main).</li>
+      <li><strong>Firebase Storage</strong> &mdash; Fotos.</li>
+    </ul>
+    <p>Mit Google besteht ein Auftragsverarbeitungsvertrag; f&uuml;r etwaige &Uuml;bermittlungen in
+    Drittl&auml;nder gelten die EU-Standardvertragsklauseln. Beim Kauf der Vollversion wird die Zahlung
+    ausschlie&szlig;lich von Apple abgewickelt &mdash; wir erhalten keine Zahlungsdaten, sondern nur die
+    Information, ob ein g&uuml;ltiger Kauf vorliegt. Solange du offline bist, bleiben deine Eintr&auml;ge auf
+    dem Ger&auml;t und werden bei bestehender Verbindung synchronisiert.</p>
+
+    <h2>5. Wer die Daten sehen kann</h2>
+    <p>Nur du und die Personen, die du selbst &uuml;ber einen Einladungscode hinzuf&uuml;gst. Die
+    Zugriffsregeln werden serverseitig durchgesetzt: ohne Mitgliedschaft an einem Babybuch ist kein Zugriff
+    auf dessen Daten m&ouml;glich. Eine Freigabe kannst du jederzeit in der App widerrufen; die betroffene
+    Person verliert damit den Zugriff, und die lokale Kopie auf ihrem Ger&auml;t wird beim n&auml;chsten Start
+    gel&ouml;scht.</p>
+
+    <h2>6. Speicherdauer und L&ouml;schung</h2>
+    <p>Deine Daten bleiben gespeichert, solange dein Konto besteht. Du kannst dein Konto jederzeit in der App
+    l&ouml;schen: <em>Profil &rarr; Einstellungen &rarr; Konto l&ouml;schen</em>. Dabei werden dein
+    Nutzerprofil, deine Babyb&uuml;cher samt Meilensteinen, Fotos, Ma&szlig;en und Stammbaum, deine
+    Mitgliedschaften sowie dein Anmeldekonto entfernt. Der Vorgang ist nicht umkehrbar.</p>
+
+    <h2>7. Berechtigungen auf dem Ger&auml;t</h2>
+    <ul>
+      <li><strong>Fotomediathek</strong> &mdash; nur um von dir ausgew&auml;hlte Bilder einem Meilenstein
+          hinzuzuf&uuml;gen.</li>
+      <li><strong>Kamera</strong> &mdash; nur um direkt in der App ein Foto aufzunehmen.</li>
+    </ul>
+    <p>Beides wird ausschlie&szlig;lich nach deiner ausdr&uuml;cklichen Aktion genutzt. Die App liest die
+    Fotomediathek nicht im Hintergrund aus.</p>
+
+    <h2>8. Diese Website</h2>
+    <p>Diese Seiten werden &uuml;ber GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA
+    94107, USA) ausgeliefert. Beim Aufruf verarbeitet GitHub technisch notwendige Server-Logdaten
+    einschlie&szlig;lich deiner IP-Adresse (Art. 6 Abs. 1 lit. f DSGVO). Schriften sind selbst gehostet, es
+    werden keine Cookies gesetzt und keine Analysewerkzeuge eingesetzt.</p>
+
+    <h2>9. Deine Rechte</h2>
+    <p>Du hast das Recht auf Auskunft (Art. 15), Berichtigung (Art. 16), L&ouml;schung (Art. 17),
+    Einschr&auml;nkung der Verarbeitung (Art. 18), Daten&uuml;bertragbarkeit (Art. 20) und Widerspruch
+    (Art. 21 DSGVO). Eine erteilte Einwilligung &mdash; insbesondere zu den Gesundheitsdaten &mdash; kannst du
+    jederzeit mit Wirkung f&uuml;r die Zukunft widerrufen, indem du die betreffenden Angaben l&ouml;schst.
+    Au&szlig;erdem steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsbeh&ouml;rde zu.</p>
+
+    <h2>10. &Auml;nderungen</h2>
+    <p>Wird die App um Funktionen erweitert, die andere Daten verarbeiten, aktualisieren wir diese
+    Erkl&auml;rung und weisen in der App darauf hin.</p>
+
+    <p><a href="terms.html">Nutzungsbedingungen &rarr;</a></p>
+
+    <hr />
+
+    <h1 id="en">Privacy Policy</h1>
+    <p><small>Grow Into Life (iOS) &middot; Last updated: 26 July 2026</small></p>
+
+    <h2>1. Controller</h2>
+    <div class="card">
+      <strong>Jen Eric Prei&szlig;er</strong><br />
+      Schellingstra&szlig;e 18/1<br />
+      72622 N&uuml;rtingen, Germany<br />
+      Email: <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>
+    </div>
+
+    <h2>2. What this app does</h2>
+    <p>Grow Into Life is a digital baby journal. You record your child&rsquo;s development &mdash; milestones,
+    photos, measurements, teeth, family tree &mdash; and you can share the journal with people you invite
+    yourself. The data lives in your personal account. It is never sold, never shared with third parties,
+    never profiled and never used for advertising.</p>
+    <p><strong>There is no tracking.</strong> The app contains no analytics SDKs, no third-party crash
+    reporting, no advertising identifiers and no ad networks.</p>
+
+    <h2>3. Data we process</h2>
+    <table>
+      <tr><th>Category</th><th>Specifically</th><th>Purpose</th><th>Legal basis</th></tr>
+      <tr><td>Account</td><td>Email address, display name, a Firebase user ID; with Sign in with Apple
+          possibly a private relay address</td><td>Create an account, sign in, sync across devices</td>
+          <td>Art. 6(1)(b) GDPR (contract)</td></tr>
+      <tr><td>About the child</td><td>First name, date of birth, optionally sex, profile photo</td>
+          <td>Displaying the journal, age calculation</td><td>Art. 6(1)(b) GDPR</td></tr>
+      <tr><td>Content</td><td>Milestones with title, date, notes and photos; comments and reactions;
+          family-tree entries</td><td>Core functionality</td><td>Art. 6(1)(b) GDPR</td></tr>
+      <tr><td><strong>Health data</strong></td><td>Weight, height, head circumference, tooth eruptions</td>
+          <td>Growth curves, tooth chart</td>
+          <td>Art. 9(2)(a) GDPR &mdash; <strong>explicit consent</strong>, given by entering the values
+          voluntarily. The app works fully without them.</td></tr>
+      <tr><td>Sharing</td><td>Invitation codes, memberships and roles (owner / caregiver / viewer)</td>
+          <td>Sharing the journal with people you invite</td><td>Art. 6(1)(b) GDPR</td></tr>
+      <tr><td>Purchase state</td><td>Whether the full version was purchased, when the trial ends</td>
+          <td>Unlocking paid features</td><td>Art. 6(1)(b) GDPR</td></tr>
+    </table>
+
+    <h3>Children&rsquo;s data</h3>
+    <p>The app is intended for adults only. You enter the information about your child as the person holding
+    parental responsibility, and thereby give the consent required under Art. 8 GDPR on the child&rsquo;s
+    behalf. Children cannot register or use the app on their own.</p>
+
+    <h2>4. Where the data is stored</h2>
+    <p>The app uses Google Firebase as a processor (Google Ireland Limited, Gordon House, Barrow Street,
+    Dublin 4, Ireland): Firebase Authentication for sign-in, Cloud Firestore for journal data (stored in
+    <strong>europe-west3</strong>, Frankfurt, Germany) and Firebase Storage for photos. A data processing
+    agreement is in place; EU standard contractual clauses cover any third-country transfers. Payments for
+    the full version are handled entirely by Apple &mdash; we never receive payment details, only whether a
+    valid purchase exists.</p>
+
+    <h2>5. Who can see the data</h2>
+    <p>Only you and the people you add via an invitation code. Access is enforced server-side: without a
+    membership in a baby book, its data cannot be read. You can revoke access at any time in the app; the
+    person then loses access and the local copy on their device is removed on next launch.</p>
+
+    <h2>6. Retention and deletion</h2>
+    <p>Your data is kept for as long as your account exists. You can delete your account at any time in the
+    app under <em>Profile &rarr; Settings &rarr; Delete account</em>. This removes your user profile, your
+    baby books including milestones, photos, measurements and family tree, your memberships and your sign-in
+    account. The operation cannot be undone.</p>
+
+    <h2>7. Device permissions</h2>
+    <p><strong>Photo library</strong> &mdash; only to attach pictures you select to a milestone.
+    <strong>Camera</strong> &mdash; only to take a photo directly in the app. Both are used solely in
+    response to your explicit action; the app does not read the photo library in the background.</p>
+
+    <h2>8. This website</h2>
+    <p>These pages are served via GitHub Pages (GitHub Inc., San Francisco, USA), which processes technically
+    necessary server log data including your IP address (Art. 6(1)(f) GDPR). Fonts are self-hosted, no cookies
+    are set and no analytics are used.</p>
+
+    <h2>9. Your rights</h2>
+    <p>You have the right of access (Art. 15), rectification (Art. 16), erasure (Art. 17), restriction
+    (Art. 18), data portability (Art. 20) and objection (Art. 21 GDPR). You may withdraw consent &mdash; in
+    particular for health data &mdash; at any time with future effect by deleting the entries in question. You
+    also have the right to lodge a complaint with a supervisory authority.</p>
+
+    <p><a href="terms.html">Terms of Use &rarr;</a></p>
+  </div>
+
+  <footer class="foot">
+    <p>&copy; 2026 Jen Eric Prei&szlig;er &middot; <a href="index.html">Grow Into Life</a> &middot;
+      <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a></p>
+  </footer>
+</body>
+</html>
