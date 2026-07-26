@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grow Into Life — Einladung</title>
+  <meta name="description" content="Einladung zu einem Grow-Into-Life-Familienbuch." />
+  <!-- Eine Einladung gehört nicht in einen Suchindex. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <style>
+    :root {
+      --bg-0: #04070f;
+      --bg-1: #142c54;
+      --ink: #e9edf4;
+      --muted: #93a0b8;
+      --leaf: #8fd8b4;
+      --line: rgba(233, 237, 244, .1);
+      --font-display: "Lora", Georgia, "Times New Roman", serif;
+      --font-body: "Inter", system-ui, -apple-system, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    html { color-scheme: dark; }
+    body {
+      font-family: var(--font-body);
+      font-size: 16.5px;
+      line-height: 1.7;
+      color: var(--muted);
+      background: radial-gradient(120vmax 90vmax at 50% 0%, var(--bg-1) 0%, #0a1730 48%, var(--bg-0) 100%) fixed;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+    :focus-visible { outline: 2px solid var(--leaf); outline-offset: 3px; border-radius: 8px; }
+    .wrap { max-width: 34rem; margin: 0 auto; padding: 56px 22px 80px; text-align: center; }
+    .home {
+      display: inline-block; margin-bottom: 40px;
+      font-family: var(--font-display); font-size: .95rem; letter-spacing: .035em;
+      color: var(--muted); text-decoration: none;
+    }
+    .home:hover { color: var(--leaf); }
+    h1 {
+      font-family: var(--font-display); font-weight: 500;
+      font-size: clamp(1.9rem, 6vw, 2.5rem); line-height: 1.15;
+      margin: 0 0 10px; color: var(--ink);
+    }
+    .lede { margin: 0 auto 34px; max-width: 26rem; }
+    .code-card {
+      border: 1px solid var(--line); border-radius: 16px;
+      background: rgba(233, 237, 244, .04);
+      padding: 26px 20px; margin: 0 0 22px;
+    }
+    .code-label {
+      font-size: .66rem; font-weight: 600; letter-spacing: .18em;
+      text-transform: uppercase; color: rgba(147, 160, 184, .8); margin: 0 0 12px;
+    }
+    .code {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: clamp(1.6rem, 7vw, 2.1rem); font-weight: 600;
+      letter-spacing: .12em; color: var(--ink); margin: 0;
+      word-break: break-all;
+    }
+    .btn {
+      display: block; width: 100%; margin: 0 0 12px;
+      padding: 15px 22px; border-radius: 999px; border: 1px solid transparent;
+      font: inherit; font-weight: 600; text-decoration: none; cursor: pointer;
+      transition: opacity .18s ease, border-color .18s ease, color .18s ease;
+    }
+    .btn--primary { background: var(--leaf); color: #0b1a13; }
+    .btn--primary:hover { opacity: .88; }
+    .btn--ghost {
+      background: transparent; color: var(--muted);
+      border-color: rgba(233, 237, 244, .2);
+    }
+    .btn--ghost:hover { color: var(--ink); border-color: rgba(233, 237, 244, .45); }
+    .steps {
+      text-align: left; margin: 34px 0 0; padding: 22px 24px;
+      border: 1px solid var(--line); border-radius: 14px;
+      background: rgba(233, 237, 244, .02);
+    }
+    .steps h2 {
+      font-family: var(--font-body); font-size: .68rem; font-weight: 600;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(147, 160, 184, .8); margin: 0 0 12px;
+    }
+    .steps ol { margin: 0; padding-left: 1.2rem; }
+    .steps li { margin: 8px 0; }
+    .note { font-size: .85rem; margin: 26px 0 0; }
+    .foot { font-size: .8rem; margin: 44px 0 0; color: rgba(147, 160, 184, .75); }
+    .foot a { color: var(--leaf); }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <a class="home" href="./">Grow Into Life</a>
+
+    <h1>Du bist eingeladen</h1>
+    <p class="lede">Jemand teilt ein Grow-Into-Life-Familienbuch mit dir — die Meilensteine, Fotos und ersten Jahre eines Kindes.</p>
+
+    <div id="has-code" hidden>
+      <div class="code-card">
+        <p class="code-label">Einladungscode</p>
+        <p class="code" id="code-display">–</p>
+      </div>
+
+      <a class="btn btn--primary" id="open-app" href="#">In der App öffnen</a>
+      <button class="btn btn--ghost" id="copy-code" type="button">Code kopieren</button>
+
+      <div class="steps">
+        <h2>Falls sich die App nicht öffnet</h2>
+        <ol>
+          <li>Grow Into Life installieren und öffnen.</li>
+          <li>Auf <strong>Einem Buch beitreten</strong> tippen.</li>
+          <li>Den Code oben eingeben.</li>
+        </ol>
+      </div>
+
+      <p class="note">Der Code gilt für genau eine Person und läuft nach sieben Tagen ab.</p>
+    </div>
+
+    <div id="no-code" hidden>
+      <div class="code-card">
+        <p class="code-label">Kein Code gefunden</p>
+        <p>Dieser Link enthält keinen gültigen Einladungscode. Bitte lass ihn dir noch einmal schicken — am besten als vollständigen Link.</p>
+      </div>
+    </div>
+
+    <p class="foot">
+      <a href="privacy.html">Datenschutz</a> ·
+      <a href="terms.html">Nutzungsbedingungen</a> ·
+      <a href="impressum.html">Impressum</a>
+    </p>
+  </div>
+
+  <script>
+  (function () {
+    // Der Code steht im Fragment (#CODE), damit er nicht in den Server-Logs
+    // des Hosters landet. ?code= wird zusätzlich akzeptiert, weil manche
+    // Messenger Links umschreiben und Fragmente dabei verlieren.
+    function readCode() {
+      var fromHash = (location.hash || '').replace(/^#/, '');
+      if (fromHash) return fromHash;
+      return new URLSearchParams(location.search).get('code') || '';
+    }
+
+    // Gleiche Prüfung wie in der App: zehn Zeichen aus einem bewusst
+    // eindeutigen Alphabet (kein O/0, kein I/1).
+    function normalize(raw) {
+      return decodeURIComponent(raw).trim().toUpperCase();
+    }
+    function isPlausible(code) {
+      return /^[A-Z0-9]{10}$/.test(code);
+    }
+    function grouped(code) {
+      return code.replace(/(.{4})/g, '$1 ').trim();
+    }
+
+    var code = normalize(readCode());
+
+    if (!isPlausible(code)) {
+      document.getElementById('no-code').hidden = false;
+      return;
+    }
+
+    document.getElementById('has-code').hidden = false;
+    document.getElementById('code-display').textContent = grouped(code);
+
+    var openApp = document.getElementById('open-app');
+    openApp.href = 'growintolife://join/' + encodeURIComponent(code);
+
+    var copyBtn = document.getElementById('copy-code');
+    copyBtn.addEventListener('click', function () {
+      // Ohne Zwischenablage-Rechte (älterer Browser, kein HTTPS-Kontext)
+      // bleibt der Code oben ohnehin markierbar stehen.
+      var done = function () {
+        copyBtn.textContent = 'Kopiert';
+        setTimeout(function () { copyBtn.textContent = 'Code kopieren'; }, 2000);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done, function () {
+          copyBtn.textContent = 'Kopieren nicht möglich — bitte markieren';
+        });
+      } else {
+        copyBtn.textContent = 'Bitte den Code oben markieren';
+      }
+    });
+  })();
+  </script>
+</body>
+</html>
