@@ -1,0 +1,278 @@
+/* ============================================================
+   Bow & Arrow — Rechtstexte (Impressum, Datenschutz, Terms)
+
+   Die drei Seiten gehören zum Spiel, nicht zum Studio. Sie tragen
+   deshalb dessen Erscheinungsbild: VT323 auf fast schwarzem Stein,
+   heraldisches Gold, harte Schatten ohne Weichzeichner.
+
+   Die Werte spiegeln das Design-System des Spiels
+   (bow-and-arrow/_ds/…/tokens/), das seinerseits Theme.swift und
+   UIStyleSheet folgt. Sie sind hier bewusst kopiert und nicht per
+   @import geholt: der _ds-Ordner trägt eine UUID im Namen und wird
+   beim Neu-Export ausgetauscht. Ändert sich Theme.swift, ändert sich
+   diese Datei mit.
+
+     --ba-gold          #BF993F   heraldisches Gold, die Markenfarbe
+     --ba-gold-pale     #E0C266   Glanz, Verlaufsoberkante
+     --ba-bg            #0A0E18   bläuliches Fast-Schwarz
+     --ba-panel-raised  #1F1F24   dunkler Stein, erhabene Flächen
+     --ba-panel-border  #473D38   warmer Steinrand unter dem Gold
+     --ba-parchment     #D9D1BF   Pergament, Lesetext
+     --ba-stroke-dark   #1A1208   die schwarze Pixelkontur
+
+   Grundgröße 22 px wie auf der Spielseite (#ba-site) — Pixel-
+   schriften lesen klein. Die Zeilenhöhe ist hier mit 1.55 großzügiger
+   als die 1.3 der Spiel-Oberfläche: das sind lange Fließtexte, keine
+   Bedienelemente.
+   ============================================================ */
+
+:root {
+  --ba-gold: #bf993f;
+  --ba-gold-bright: #f2c733;
+  --ba-gold-pale: #e0c266;
+  --ba-gold-deep: #b3852e;
+  --ba-bg: #0a0e18;
+  --ba-bg-deep: #080c14;
+  --ba-panel: #14141a;
+  --ba-panel-raised: #1f1f24;
+  --ba-panel-border: #473d38;
+  --ba-parchment: #d9d1bf;
+  --ba-parchment-dim: #8c8474;
+  --ba-ink: #0a0e18;
+  --ba-stroke-dark: #1a1208;
+
+  --font-pixel: "VT323", "Courier New", monospace;
+
+  /* Die schwarze Kontur, die im Spiel auf allen Glyphen sitzt. */
+  --text-outline:
+    1px 1px 0 var(--ba-stroke-dark), -1px 1px 0 var(--ba-stroke-dark),
+    1px -1px 0 var(--ba-stroke-dark), -1px -1px 0 var(--ba-stroke-dark);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-pixel);
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--ba-parchment);
+  background: linear-gradient(180deg, #0a0e18 0%, #10182b 55%, #080c14 100%) fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: rgba(191, 153, 63, .38); }
+
+:focus-visible {
+  outline: 2px solid var(--ba-gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+a { color: var(--ba-gold-pale); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: var(--ba-gold-bright); }
+
+/* ---------- Kopfzeile ---------- */
+
+/* Harter Strich statt Rand: pixelige Oberflächen werfen scharfe
+   Kanten, keine weichen Verläufe. */
+header.bar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: rgba(8, 12, 20, .92);
+  box-shadow: 0 2px 0 var(--ba-panel-border);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+}
+header.bar .inner {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 12px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* Der Weg zurück ins Studio — bewusst zurückhaltend, das Gold
+   gehört den Reitern daneben. */
+header.bar a.home {
+  font-size: 21px;
+  letter-spacing: 1px;
+  color: var(--ba-parchment-dim);
+  text-decoration: none;
+  white-space: nowrap;
+}
+header.bar a.home:hover { color: var(--ba-parchment); }
+header.bar a.home::before {
+  content: "\2190";      /* Pfeil nach links */
+  margin-right: 8px;
+  color: var(--ba-gold);
+}
+
+/* ---------- Reiter: dieselben Knöpfe wie im Spiel ---------- */
+
+nav.legal-tabs {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+nav.legal-tabs a {
+  font-size: 19px;
+  letter-spacing: 1px;
+  color: var(--ba-parchment-dim);
+  text-decoration: none;
+  padding: 5px 13px;
+  border: 2px solid var(--ba-stroke-dark);
+  border-radius: 6px;
+  background: var(--ba-panel-raised);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .45);
+  transition: color 180ms cubic-bezier(.2, .8, .2, 1),
+              filter 180ms cubic-bezier(.2, .8, .2, 1);
+}
+nav.legal-tabs a:hover { color: var(--ba-parchment); filter: brightness(1.25); }
+nav.legal-tabs a:active { transform: scale(.96); }
+
+/* Der aktive Reiter ist der Goldknopf der Spielseite. */
+nav.legal-tabs a.active {
+  color: var(--ba-ink);
+  background: linear-gradient(180deg, #e0c266 0%, #bf993f 52%, #b3852e 100%);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, .5);
+}
+nav.legal-tabs a.active:hover { color: var(--ba-ink); filter: brightness(1.06); }
+
+/* ---------- Textkörper ---------- */
+
+.wrap {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 44px 22px 96px;
+}
+
+/* Sprachwahl als kleine Steinplatte über dem Text */
+.lang-switch {
+  font-size: 19px;
+  letter-spacing: 1px;
+  color: var(--ba-parchment-dim);
+  margin-bottom: 40px;
+  padding-bottom: 18px;
+  box-shadow: 0 1px 0 rgba(71, 61, 56, .7);
+}
+.lang-switch a { text-decoration: none; color: var(--ba-gold-pale); }
+.lang-switch a:hover { color: var(--ba-gold-bright); text-decoration: underline; }
+
+h1 {
+  /* Der Boden liegt bei 30 px: „Datenschutzerklärung" ist ein Wort aus
+     20 Zeichen und passt in VT323 sonst auf 320-px-Geräten nicht in die
+     Zeile. Umbrechen darf es zusätzlich — deutsche Komposita sind
+     länger als jede Spalte. */
+  font-size: clamp(30px, 8vw, 56px);
+  line-height: 1.05;
+  letter-spacing: 1px;
+  font-weight: 400;
+  color: var(--ba-gold);
+  text-shadow: var(--text-outline);
+  margin: 56px 0 6px;
+}
+h1:first-of-type { margin-top: 8px; }
+
+/* Zwischentitel mit gemeißeltem Goldbalken links */
+h2 {
+  font-size: clamp(26px, 4vw, 32px);
+  line-height: 1.15;
+  letter-spacing: .5px;
+  font-weight: 400;
+  color: var(--ba-parchment);
+  margin: 40px 0 10px;
+  padding-left: 14px;
+  box-shadow: inset 3px 0 0 var(--ba-gold);
+}
+
+p, li { margin: 0 0 16px; }
+
+/* Die Support-Adresse ist ein einziges langes Wort und passt auf sehr
+   schmalen Geräten (320 px) nicht in eine Zeile. break-word bricht nur
+   dann, wenn es sonst über den Rand ginge — normale Wörter bleiben
+   unangetastet. */
+h1, h2, p, li, .lang-switch, footer.foot { overflow-wrap: break-word; }
+
+ul {
+  margin: 0 0 20px;
+  padding-left: 26px;
+}
+li { padding-left: 2px; }
+li::marker { color: var(--ba-gold); }
+
+strong { color: var(--ba-gold-pale); font-weight: 400; }
+
+small {
+  display: inline-block;
+  font-size: 19px;
+  color: var(--ba-parchment-dim);
+  letter-spacing: .5px;
+}
+
+/* Der Doppelstrich in Gold über Dunkel — die Signatur des Systems. */
+hr {
+  height: 0;
+  margin: 64px 0 8px;
+  border: 0;
+  border-top: 2px solid var(--ba-gold);
+  box-shadow: 0 2px 0 var(--ba-stroke-dark);
+}
+
+/* ---------- Fußzeile ---------- */
+
+footer.foot {
+  max-width: 52rem;
+  margin: 0 auto;
+  padding: 26px 22px 48px;
+  font-size: 19px;
+  color: var(--ba-parchment-dim);
+  box-shadow: inset 0 2px 0 var(--ba-panel-border);
+}
+footer.foot p { margin: 18px 0 0; }
+footer.foot a { color: var(--ba-parchment-dim); text-decoration: none; }
+footer.foot a:hover { color: var(--ba-gold-pale); }
+
+/* ---------- Schmale Viewports ---------- */
+
+/* Dieselben Stufen wie auf der Spielseite: Pixelschrift verträgt
+   kein stufenloses Schrumpfen. */
+@media (max-width: 768px) {
+  body { font-size: 19px; }
+  header.bar .inner { padding: 10px 16px; gap: 12px; }
+  header.bar a.home { font-size: 19px; }
+  nav.legal-tabs a { font-size: 17px; padding: 4px 11px; }
+  .wrap { padding: 34px 18px 72px; }
+  footer.foot { padding: 22px 18px 40px; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 17px; }
+  nav.legal-tabs { margin-left: 0; width: 100%; }
+  header.bar a.home { font-size: 17px; }
+  h2 { padding-left: 11px; }
+  small, .lang-switch, footer.foot { font-size: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  nav.legal-tabs a { transition: none; }
+}
+
+@media print {
+  body { background: #fff; color: #000; }
+  header.bar, nav.legal-tabs, .lang-switch { display: none; }
+  h1, h2, strong, a { color: #000; text-shadow: none; }
+  h2 { box-shadow: none; padding-left: 0; }
+}
