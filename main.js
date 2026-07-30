@@ -29,31 +29,33 @@
 
   /* ============================================================
      1 · Sprachen
-     Bewusst clientseitig: die URL bleibt gleich, damit die von
-     Suchmaschinen indexierte Struktur unangetastet bleibt.
+     Englisch ist die Ausgangssprache, Deutsch und Spanisch stehen im
+     Schalter oben rechts. Bewusst clientseitig: die URL bleibt gleich,
+     damit die von Suchmaschinen indexierte Struktur unangetastet bleibt.
      ============================================================ */
   const I18N = {
     de: {
       docTitle: "Chasing Dreams Interactive — App Studio",
-      docDesc: "Chasing Dreams Interactive ist ein unabhängiges App-Studio. Wir jagen Träumen hinterher – und gießen sie in Apps.",
+      docDesc: "Chasing Dreams Interactive ist ein Ein-Mann-Studio. iOS-Apps und Web-Projekte, von einer Person von Anfang bis Ende gebaut.",
       "nav.studio": "Studio", "nav.works": "Projekte", "nav.contact": "Kontakt",
       "a11y.skip": "Zum Inhalt",
-      "hero.kicker": "Ein unabhängiges App-Studio",
-      "hero.tagline": "Wir jagen Träumen hinterher – und gießen sie in Apps.",
+      "hero.kicker": "Ein-Mann-Show",
+      "hero.tagline": "Wir jagen unseren Träumen nach.",
       "hero.scroll": "Scrollen",
       "studio.kicker": "Studio",
-      "studio.line": "Ich habe einen Traum, und ich mache ihn real.",
-      "studio.copy": "Das ist der Grundsatz unseres kleinen Entwicklerstudios. Man beginnt ganz klein und sieht, wie man Stück für Stück einem Traum näherkommt, den man sich vor ein paar Jahren noch nicht zu träumen gewagt hätte. Wir bauen Apps mit Liebe zum Detail — von der ersten Skizze bis zum letzten Pixel. Nicht jede Idee träumt sich zu Ende. Aber aufzuhören zu träumen — das tun wir nie.",
+      "studio.line": "Irgendwann habe ich beschlossen, sie real zu machen.",
+      "studio.copy": "Als Kind hatte ich unzählige Ideen und Träume im Kopf. Ich gebe alles, um sie zum Leben zu bringen — um das Bild in meinem Kopf hinaus in die Welt zu tragen.",
       "works.open": "Ansehen",
       "works.openExt": "Öffnen",
       "works.bowTags": "iOS · Tower Defense",
-      "works.bowDesc": "Tower Defense für iOS. Stellungen bauen, Wellen halten, Bogen spannen.",
+      "works.bowDesc": "Tower Defense für iOS. Stellung bauen, Wellen halten, Bogen spannen.",
       "works.growTags": "iOS · In Entwicklung",
       "works.growDesc": "Baby-Tracking für iOS. Schlaf, Mahlzeiten, Wachstum — ruhig festgehalten.",
       "works.worldName": "Weltkarte mit Geschichte",
       "works.worldTags": "Web · Bildungsprojekt",
       "works.worldDesc": "Interaktiver 3D-Globus: 100 Jahre Grenzen, Reiche und Regierungsformen von 1926 bis 2026.",
       "cta.kicker": "Kontakt",
+      "cta.copy": "Danke, dass du dir meine Projekte angesehen hast. Für Beratung oder alles andere: schreib mir.",
       "cta.btn": "Schreib uns",
       "foot.claim": "Handgemachte Apps aus Deutschland.",
       "foot.imprint": "Impressum", "foot.privacy": "Datenschutz",
@@ -62,25 +64,26 @@
     },
     en: {
       docTitle: "Chasing Dreams Interactive — App Studio",
-      docDesc: "Chasing Dreams Interactive is an independent app studio. We chase dreams and turn them into apps.",
+      docDesc: "Chasing Dreams Interactive is a one man app studio. iOS apps and web projects, built end to end by one person.",
       "nav.studio": "Studio", "nav.works": "Work", "nav.contact": "Contact",
       "a11y.skip": "Skip to content",
-      "hero.kicker": "An independent app studio",
-      "hero.tagline": "We chase dreams – and turn them into apps.",
+      "hero.kicker": "A one man show",
+      "hero.tagline": "We chase our dreams.",
       "hero.scroll": "Scroll",
       "studio.kicker": "Studio",
-      "studio.line": "I have a dream, and I am making it real.",
-      "studio.copy": "That is the principle behind our small development studio. You start out tiny and watch yourself get closer, step by step, to a dream you would not have dared to have a few years ago. We build apps with care for the detail — from the first sketch to the last pixel. Not every idea gets dreamt to the end. But we never stop dreaming.",
+      "studio.line": "One day I decided to make them real.",
+      "studio.copy": "As a child I always had so many ideas and dreams in my head. I give everything I have to bring them to life — to take the picture in my head and put it out into the world.",
       "works.open": "View",
       "works.openExt": "Open",
       "works.bowTags": "iOS · Tower defense",
-      "works.bowDesc": "Tower defense for iOS. Build your line, hold the waves, draw the bow.",
+      "works.bowDesc": "Tower defense for iOS. Build the line, hold the waves, draw the bow.",
       "works.growTags": "iOS · In development",
       "works.growDesc": "Baby tracking for iOS. Sleep, feeds, growth — quietly kept.",
       "works.worldName": "A World Map with History",
       "works.worldTags": "Web · Educational",
       "works.worldDesc": "An interactive 3D globe: 100 years of borders, empires and forms of government, 1926 to 2026.",
       "cta.kicker": "Contact",
+      "cta.copy": "Thank you for looking through my projects. For consulting or anything else, write to me.",
       "cta.btn": "Get in touch",
       "foot.claim": "Handmade apps from Germany.",
       "foot.imprint": "Legal notice", "foot.privacy": "Privacy",
@@ -89,15 +92,15 @@
     },
     es: {
       docTitle: "Chasing Dreams Interactive — Estudio de apps",
-      docDesc: "Chasing Dreams Interactive es un estudio de apps independiente. Perseguimos sueños y los convertimos en apps.",
+      docDesc: "Chasing Dreams Interactive es un estudio de una sola persona. Apps para iOS y proyectos web, hechos de principio a fin por una persona.",
       "nav.studio": "Estudio", "nav.works": "Proyectos", "nav.contact": "Contacto",
       "a11y.skip": "Ir al contenido",
-      "hero.kicker": "Un estudio de apps independiente",
-      "hero.tagline": "Perseguimos sueños – y los convertimos en apps.",
+      "hero.kicker": "Un hombre, un estudio",
+      "hero.tagline": "Perseguimos nuestros sueños.",
       "hero.scroll": "Desplázate",
       "studio.kicker": "Estudio",
-      "studio.line": "Tengo un sueño y lo estoy haciendo realidad.",
-      "studio.copy": "Ese es el principio de nuestro pequeño estudio de desarrollo. Empiezas siendo muy pequeño y ves cómo te acercas, paso a paso, a un sueño que hace unos años no te habrías atrevido a tener. Construimos apps con cariño por el detalle — desde el primer boceto hasta el último píxel. No todas las ideas llegan al final. Pero nunca dejamos de soñar.",
+      "studio.line": "Un día decidí hacerlos reales.",
+      "studio.copy": "De niño tenía tantas ideas y sueños en la cabeza que no podía contarlos. Doy todo lo que tengo para darles vida — para llevar al mundo la imagen que tengo en la cabeza.",
       "works.open": "Ver",
       "works.openExt": "Abrir",
       "works.bowTags": "iOS · Tower defense",
@@ -108,6 +111,7 @@
       "works.worldTags": "Web · Proyecto educativo",
       "works.worldDesc": "Un globo 3D interactivo: 100 años de fronteras, imperios y formas de gobierno, de 1926 a 2026.",
       "cta.kicker": "Contacto",
+      "cta.copy": "Gracias por echar un ojo a mis proyectos. Para consultoría o cualquier otra cosa, escríbeme.",
       "cta.btn": "Escríbenos",
       "foot.claim": "Apps hechas a mano desde Alemania.",
       "foot.imprint": "Aviso legal", "foot.privacy": "Privacidad",
@@ -310,7 +314,7 @@
   const STORE = "cdi-lang";
 
   function apply(lang) {
-    const dict = I18N[lang] || I18N.de;
+    const dict = I18N[lang] || I18N.en;
 
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const val = dict[el.dataset.i18n];
@@ -341,10 +345,13 @@
 
   function initialLang() {
     let saved;
-    try { saved = localStorage.getItem(STORE); } catch (e) { /* egal */ }
+    try { saved = localStorage.getItem(STORE); } catch (e) { /* privater Modus */ }
     if (saved && I18N[saved]) return saved;
-    const nav = (navigator.language || "de").slice(0, 2).toLowerCase();
-    return I18N[nav] ? nav : "de";
+    /* Wer Deutsch oder Spanisch im Browser hat, bekommt das auch. Für
+       alle anderen ist Englisch die Ausgangssprache — auch das, was im
+       HTML steht und was Suchmaschinen lesen. */
+    const nav = (navigator.language || "en").slice(0, 2).toLowerCase();
+    return I18N[nav] ? nav : "en";
   }
 
   document.querySelectorAll(".lang-switch button").forEach((b) => {

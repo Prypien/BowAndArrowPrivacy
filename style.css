@@ -413,6 +413,17 @@ a { color: inherit; }
 /* In der Mitte sitzt die Zeile zwischen zwei Strichen. */
 .act--center .panel-kicker,
 .foot-cta .panel-kicker { justify-content: center; }
+
+/* Dank und Beratungshinweis stehen dort, wo auch die Adresse steht —
+   nach den Projekten, nicht davor. */
+.foot-cta-copy {
+  max-width: 34rem;
+  margin: 20px auto 0;
+  font-size: .92rem;
+  line-height: 1.7;
+  color: var(--muted);
+  text-wrap: pretty;
+}
 .act--center .panel-kicker::before,
 .foot-cta .panel-kicker::before,
 .act--center .panel-kicker::after,
@@ -640,6 +651,17 @@ a { color: inherit; }
   padding-bottom: clamp(28px, 5vh, 56px);
 }
 .foot-cta .panel-kicker { justify-content: center; }
+
+/* Dank und Beratungshinweis stehen dort, wo auch die Adresse steht —
+   nach den Projekten, nicht davor. */
+.foot-cta-copy {
+  max-width: 34rem;
+  margin: 20px auto 0;
+  font-size: .92rem;
+  line-height: 1.7;
+  color: var(--muted);
+  text-wrap: pretty;
+}
 
 .cta-btn {
   display: inline-flex;

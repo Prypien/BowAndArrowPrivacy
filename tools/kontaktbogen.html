@@ -77,7 +77,7 @@ YS.forEach((y) => {
     hold();
     // Der nachziehende Kamerawert in main.js braucht ein paar Bilder.
     let n = 0;
-    const id = setInterval(() => { hold(); if (++n > 90) { clearInterval(id); done(); } }, 16);
+    const id = setInterval(() => { hold(); if (++n > 150) { clearInterval(id); done(); } }, 16);
   });
 
   box.appendChild(f);
