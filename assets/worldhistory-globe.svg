@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" width="1200" height="1200" role="img" aria-label="Weltkarte mit Geschichte — historischer Globus">
+  <defs>
+    <radialGradient id="sphere" cx="38%" cy="32%" r="78%">
+      <stop offset="0%"  stop-color="#24467f"/>
+      <stop offset="52%" stop-color="#142c54"/>
+      <stop offset="100%" stop-color="#070f22"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="62%" stop-color="#9db8ff" stop-opacity="0"/>
+      <stop offset="88%" stop-color="#9db8ff" stop-opacity=".16"/>
+      <stop offset="100%" stop-color="#9db8ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="term" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"  stop-color="#000" stop-opacity="0"/>
+      <stop offset="58%" stop-color="#000" stop-opacity=".18"/>
+      <stop offset="100%" stop-color="#000" stop-opacity=".55"/>
+    </linearGradient>
+    <clipPath id="globe"><circle cx="600" cy="600" r="400"/></clipPath>
+  </defs>
+
+  <rect width="1200" height="1200" fill="#04070f"/>
+
+  <!-- Sternenfeld -->
+  <g fill="#e9edf4">
+    <circle cx="132" cy="188" r="1.6" opacity=".55"/><circle cx="1036" cy="150" r="1.9" opacity=".45"/>
+    <circle cx="246" cy="964" r="1.5" opacity=".5"/><circle cx="988" cy="892" r="1.7" opacity=".4"/>
+    <circle cx="88"  cy="612" r="1.3" opacity=".35"/><circle cx="1128" cy="520" r="1.4" opacity=".38"/>
+    <circle cx="368" cy="104" r="1.2" opacity=".42"/><circle cx="820" cy="1084" r="1.5" opacity=".33"/>
+    <circle cx="176" cy="392" r="1.1" opacity=".3"/><circle cx="1064" cy="716" r="1.2" opacity=".32"/>
+    <circle cx="520" cy="1140" r="1.3" opacity=".28"/><circle cx="676" cy="60" r="1.4" opacity=".36"/>
+  </g>
+
+  <circle cx="600" cy="600" r="470" fill="url(#halo)"/>
+  <circle cx="600" cy="600" r="400" fill="url(#sphere)"/>
+
+  <g clip-path="url(#globe)">
+    <!-- Breitengrade -->
+    <g fill="none" stroke="#9db8ff" stroke-opacity=".22" stroke-width="1.4">
+      <ellipse cx="600" cy="600" rx="400" ry="0.5"/>
+      <ellipse cx="600" cy="470" rx="378" ry="34"/>
+      <ellipse cx="600" cy="730" rx="378" ry="34"/>
+      <ellipse cx="600" cy="352" rx="310" ry="30"/>
+      <ellipse cx="600" cy="848" rx="310" ry="30"/>
+      <ellipse cx="600" cy="248" rx="212" ry="24"/>
+      <ellipse cx="600" cy="952" rx="212" ry="24"/>
+    </g>
+    <!-- Längengrade -->
+    <g fill="none" stroke="#9db8ff" stroke-opacity=".18" stroke-width="1.4">
+      <ellipse cx="600" cy="600" rx="0.5" ry="400"/>
+      <ellipse cx="600" cy="600" rx="138" ry="400"/>
+      <ellipse cx="600" cy="600" rx="262" ry="400"/>
+      <ellipse cx="600" cy="600" rx="352" ry="400"/>
+    </g>
+
+    <!-- Angedeutete Landmassen -->
+    <g fill="#e9edf4" fill-opacity=".17">
+      <path d="M395 372c34-24 82-30 126-18 38 10 62 34 96 40 30 5 58-8 86-2 26 6 40 28 34 50-7 26-40 34-66 44-34 13-58 42-94 50-38 8-80-4-108-30-26-24-38-62-42-96-3-16-2-30 6-38z"/>
+      <path d="M470 630c26-14 60-10 84 8 22 16 30 44 30 72 0 42-12 84-32 120-14 26-38 50-68 52-26 2-46-18-52-42-8-34 6-68 14-102 8-38 8-84 24-108z"/>
+      <path d="M700 462c30-12 66-6 92 14 24 18 34 50 32 80-2 34-20 64-42 88-16 18-40 32-64 28-22-4-36-26-40-48-6-38 6-76 12-114 2-18 2-40 10-48z"/>
+      <path d="M742 742c24-8 52 2 68 22 14 18 16 44 10 66-6 24-24 44-46 52-18 6-38-4-46-22-10-24-6-52 2-76 4-16 6-36 12-42z"/>
+      <path d="M330 700c18-8 40 0 50 18 10 16 8 38 0 54-10 20-30 34-52 32-18-2-30-20-30-40 0-24 14-56 32-64z"/>
+    </g>
+
+    <rect x="200" y="200" width="800" height="800" fill="url(#term)"/>
+  </g>
+
+  <circle cx="600" cy="600" r="400" fill="none" stroke="#9db8ff" stroke-opacity=".38" stroke-width="2"/>
+
+  <!-- Zeitachse 1926 – 2026 -->
+  <g font-family="Inter, system-ui, sans-serif" fill="#93a0b8">
+    <line x1="300" y1="1092" x2="900" y2="1092" stroke="#9db8ff" stroke-opacity=".3" stroke-width="2"/>
+    <circle cx="300" cy="1092" r="5" fill="#9db8ff" fill-opacity=".65"/>
+    <circle cx="900" cy="1092" r="5" fill="#9db8ff" fill-opacity=".65"/>
+    <circle cx="663" cy="1092" r="8" fill="#e9edf4"/>
+    <text x="300" y="1136" font-size="30" letter-spacing="3" text-anchor="middle">1926</text>
+    <text x="900" y="1136" font-size="30" letter-spacing="3" text-anchor="middle">2026</text>
+  </g>
+</svg>
