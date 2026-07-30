@@ -1,9 +1,15 @@
 .DS_Store
 **/.DS_Store
 
-# Raw design sources / imports — not part of the deployed site
+# Rohmaterial und Design-Quellen — gehören nicht auf die Website
 Website für Spiel mit Marketing/
+_quellen/
 *.zip
 
-# Local tooling
+# Altlasten früherer Umbauten
+_to_delete/
+_site_patch.tgz
+
+# Lokale Werkzeuge
 .claude/
+logs/

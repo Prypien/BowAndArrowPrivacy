@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Legacy-Weiterleitungen (tragen bereits noindex + canonical)
+Disallow: /BowAndArrowPrivacy/
+
+# Werkzeuge für die Entwicklung, kein Seiteninhalt
+Disallow: /tools/
+
+Sitemap: https://chasingdreamsinteractive.com/sitemap.xml

@@ -1,16 +1,21 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="de" class="no-js">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Chasing Dreams Interactive — App Studio</title>
   <meta name="description" content="Chasing Dreams Interactive ist ein unabhängiges App-Studio. Wir jagen Träumen hinterher – und gießen sie in Apps.">
-  <meta name="theme-color" content="#0a1730">
+  <meta name="theme-color" content="#08060a">
+  <link rel="canonical" href="https://chasingdreamsinteractive.com/">
 
   <meta property="og:title" content="Chasing Dreams Interactive">
   <meta property="og:description" content="Ein unabhängiges App-Studio. Wir jagen Träumen hinterher – und gießen sie in Apps.">
   <meta property="og:type" content="website">
-  <meta property="og:image" content="https://chasingdreamsinteractive.com/assets/bow-arrow-splash.png">
+  <meta property="og:url" content="https://chasingdreamsinteractive.com/">
+  <meta property="og:image" content="https://chasingdreamsinteractive.com/assets/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
@@ -18,155 +23,200 @@
   <link rel="preload" href="assets/fonts/lora-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/fonts/fonts.css">
-
   <link rel="stylesheet" href="style.css">
+
+  <!-- Auf dem kritischen Pfad liegen nur diese beiden Kleinigkeiten:
+       orbit.js braucht sie, bevor es das erste Bild anfordern kann.
+       Ein Frame lässt sich hier nicht vorladen — welche Stufe (hi/lo)
+       gebraucht wird, entscheidet sich erst am Gerät. -->
+  <link rel="preload" href="assets/orbit/meta.json" as="fetch" type="application/json">
+  <link rel="preload" href="assets/orbit/accents.json" as="fetch" type="application/json">
+
+  <script>document.documentElement.classList.replace("no-js", "js");</script>
 </head>
 <body>
 
-  <!-- ============ KOSMOS (fixe Hintergrund-Ebenen über die gesamte Scroll-Länge) ============ -->
-  <div id="cosmos" aria-hidden="true">
-    <!-- WebGL-Ebene (Three.js + GLSL): Sternenfeld und scroll-synchrones
-         Partikel-Morphing (Nebel → Bogen+Pfeil → Signal → Komet) -->
-    <canvas id="gl-canvas"></canvas>
-    <!-- Fallback-Sternenfeld (tsParticles) — nur wenn WebGL fehlt -->
-    <div id="starfield"></div>
+  <a class="skip" href="#scene" data-i18n="a11y.skip">Zum Inhalt</a>
 
-    <!-- ======================= SPLINE-SLOT =======================
-         Eigene 3D-Szene aus spline.design einhängen:
-         1. Block auskommentieren.
-         2. data-spline-url durch die eigene Szenen-URL ersetzen
-            (Spline-Editor → Export → "Code" → URL endet auf /scene.splinecode).
-         main.js lädt dann automatisch den Spline-Viewer per CDN als
-         zusätzliche Hintergrund-Ebene.
-
-    <div id="spline-stage"
-         data-spline-url="https://prod.spline.design/DEINE-SZENE-ID/scene.splinecode"></div>
-    ============================================================ -->
+  <!-- ============================================================
+       BÜHNE — liegt fest im Bild, der Inhalt scrollt darüber.
+         #ambient  derselbe Frame, weich und groß: das Licht im Raum
+         #column   die scharfe Rüstung im Hochformat des Clips
+         #embers   aufsteigende Funken
+       ============================================================ -->
+  <div id="stage" aria-hidden="true">
+    <canvas id="ambient" width="30" height="52"></canvas>
+    <div id="column">
+      <canvas id="orbit"></canvas>
+    </div>
+    <canvas id="embers"></canvas>
   </div>
-  <div id="vignette" aria-hidden="true"></div>
+  <div id="veil" aria-hidden="true"></div>
 
-  <!-- ============ Sticky Header ============ -->
+  <!-- ============================================================
+       KOPFZEILE
+       ============================================================ -->
   <header id="site-head">
     <a class="brand" href="#top" aria-label="Chasing Dreams Interactive — zum Seitenanfang">
+      <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-word">Chasing Dreams&nbsp;<span class="brand-tail">Interactive</span></span>
     </a>
     <nav class="site-nav" aria-label="Hauptnavigation">
-      <a href="#works">Projekte</a>
-      <a href="#studio">Studio</a>
-      <a href="#contact">Kontakt</a>
+      <a href="#studio" data-i18n="nav.studio">Studio</a>
+      <a href="#works" data-i18n="nav.works">Projekte</a>
+      <a href="#contact" data-i18n="nav.contact">Kontakt</a>
     </nav>
+    <div class="lang-switch" role="group" aria-label="Sprache wählen">
+      <button type="button" data-lang="de" aria-pressed="true">DE</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    </div>
   </header>
 
-  <!-- ============ Scroll-Erlebnis ============ -->
+  <!-- ============================================================
+       UMRUNDUNGS-LEISTE — Gradzahl, Fortschritt, Sprungmarken
+       ============================================================ -->
+  <nav class="rail" aria-label="Kapitel">
+    <span class="rail-deg num" id="rail-deg" aria-hidden="true">0°</span>
+    <div class="rail-track">
+      <div class="rail-dots" id="rail-dots"></div>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       AKTE — jeder Akt sitzt an seinem Punkt der Umrundung
+       ============================================================ -->
   <main id="scene">
 
-    <!-- Hero -->
-    <section class="hero" id="top">
-      <div class="hero-inner">
-        <p class="hero-kicker">Ein unabhängiges App-Studio</p>
+    <!-- 00 · Auftakt ------------------------------------------- -->
+    <section class="act act--center act--hero" id="top" data-act="Auftakt" data-act-key="act.hero">
+      <div class="panel">
+        <p class="micro hero-kicker" data-i18n="hero.kicker">Ein unabhängiges App-Studio</p>
         <h1 id="title">Chasing Dreams Interactive</h1>
-        <p id="tagline">Wir jagen Träumen hinterher&nbsp;–&nbsp;und gießen sie in Apps.</p>
+        <p id="tagline" data-i18n="hero.tagline">Wir jagen Träumen hinterher&nbsp;–&nbsp;und gießen sie in Apps.</p>
       </div>
       <a class="scroll-cue" href="#studio">
-        <span>Scrollen</span>
-        <span class="scroll-cue-arrow" aria-hidden="true">↓</span>
+        <span class="micro" data-i18n="hero.scroll">Scrollen</span>
+        <span class="scroll-cue-line" aria-hidden="true"></span>
       </a>
     </section>
 
-    <!-- Statement / Studio -->
-    <section class="statement" id="studio">
-      <p class="section-kicker" data-reveal>✦&ensp;Studio</p>
-      <h2 class="statement-line" data-words>Ich habe einen Traum, und ich mache ihn real.</h2>
-      <p class="statement-copy" data-reveal>
-        Das ist der Grundsatz unseres kleinen Entwicklerstudios. Man beginnt ganz
-        klein und sieht, wie man Stück für Stück einem Traum näherkommt, den man
-        sich vor ein paar Jahren noch nicht zu träumen gewagt hätte. Wir bauen Apps
-        mit Liebe zum Detail — von der ersten Skizze bis zum letzten Pixel.
-        Nicht jede Idee träumt sich zu Ende. Aber aufzuhören zu träumen — das tun wir nie.
-      </p>
+    <!-- 01 · Studio -------------------------------------------- -->
+    <section class="act act--left" id="studio" data-act="Studio" data-act-key="act.studio">
+      <div class="panel">
+        <p class="micro panel-kicker"><span data-i18n="studio.kicker">Studio</span></p>
+        <h2 class="panel-title" data-words data-i18n="studio.line">Ich habe einen Traum, und ich mache ihn real.</h2>
+        <p class="panel-copy" data-i18n="studio.copy">
+          Das ist der Grundsatz unseres kleinen Entwicklerstudios. Man beginnt ganz
+          klein und sieht, wie man Stück für Stück einem Traum näherkommt, den man
+          sich vor ein paar Jahren noch nicht zu träumen gewagt hätte. Wir bauen Apps
+          mit Liebe zum Detail — von der ersten Skizze bis zum letzten Pixel.
+          Nicht jede Idee träumt sich zu Ende. Aber aufzuhören zu träumen — das tun wir nie.
+        </p>
+      </div>
     </section>
 
-    <!-- Works -->
-    <section class="works" id="works">
-      <div class="works-head" data-reveal>
-        <p class="section-kicker">✦&ensp;Ausgewählte Projekte</p>
-        <span class="works-count" aria-hidden="true">(02)</span>
-      </div>
-
-      <!-- 01 · Bow & Arrow — Kachel rechts, der Partikel-Bogen formt sich links daneben -->
-      <article class="work work--bow" id="work-bow" data-reveal>
-        <a class="work-link" href="bow-and-arrow/" aria-label="Bow and Arrow – Projekt ansehen">
+    <!-- 02 · Bow & Arrow --------------------------------------- -->
+    <section class="act act--right" id="works" data-act="Bow &amp; Arrow" data-act-key="act.bow">
+      <div class="panel">
+        <p class="micro panel-kicker"><span class="num">01</span>&ensp;<span data-i18n="works.bowTags">iOS · Tower Defense</span></p>
+        <a class="work" href="bow-and-arrow/">
+          <h2 class="panel-title">Bow &amp; Arrow</h2>
           <span class="work-media">
-            <span class="work-visual work-visual--bow" role="img" aria-label="Bow and Arrow — Splash-Screen">
-              <img class="work-screenshot" src="assets/bow-arrow-splash.png" alt="" width="1920" height="1080" decoding="async" loading="lazy">
-            </span>
-            <span class="work-open">Projekt ansehen&nbsp;<span aria-hidden="true">→</span></span>
+            <img src="assets/work-bow-and-arrow.webp" alt="Bow and Arrow — App-Symbol mit dem goldenen Wappenlöwen"
+                 width="1200" height="750" loading="lazy" decoding="async">
           </span>
-          <span class="work-meta">
-            <span class="work-meta-top">
-              <span class="work-tags"><span class="work-index" aria-hidden="true">01</span>iOS</span>
-              <span class="work-year" aria-hidden="true">2026</span>
-            </span>
-            <span class="work-desc">Tower Defense für iOS.</span>
+          <span class="work-foot">
+            <span class="work-desc" data-i18n="works.bowDesc">Tower Defense für iOS.</span>
+            <span class="work-go"><span data-i18n="works.open">Ansehen</span>&ensp;<span class="arrow" aria-hidden="true">→</span></span>
           </span>
         </a>
-      </article>
-
-      <!-- 02 · Grow into Life — Kachel links -->
-      <article class="work work--grow" id="work-grow" data-reveal>
-        <div class="work-link is-disabled" role="button" tabindex="0" aria-disabled="true" aria-label="Grow into Life – In Entwicklung">
-          <span class="work-media">
-            <span class="work-visual work-visual--grow" role="img" aria-label="Grow into Life">
-              <img class="work-screenshot work-screenshot--grow" src="assets/grow-into-life-tree.png" alt="" width="1206" height="1206" decoding="async" loading="lazy">
-            </span>
-            <span class="work-open work-open--muted">In Entwicklung</span>
-          </span>
-          <span class="work-meta">
-            <span class="work-meta-top">
-              <span class="work-tags"><span class="work-index" aria-hidden="true">02</span>iOS&ensp;·&ensp;In Entwicklung</span>
-              <span class="work-year" aria-hidden="true">2026</span>
-            </span>
-            <span class="work-desc">Baby-Tracking für iOS.</span>
-          </span>
-        </div>
-      </article>
-    </section>
-
-    <!-- Statement / Kontakt-Übergang -->
-    <section class="statement statement--cta" id="contact">
-      <h2 class="statement-line" data-words>Der nächste Traum entsteht bereits.</h2>
-      <a class="cta-btn" href="mailto:support@chasingdreamsinteractive.com" data-reveal>Schreib uns&nbsp;→</a>
-    </section>
-
-    <!-- Footer -->
-    <footer id="site-foot">
-      <div class="foot-brand">
-        <p class="foot-name">Chasing Dreams Interactive</p>
-        <p class="foot-claim">Handgemachte Apps aus Deutschland.</p>
+        <p class="work-badge">
+          <a href="https://pixelpicked.com/game/5WmOCeQn7UP/bow-arrow/" target="_blank" rel="noopener">
+            <img src="https://api.pixelpicked.com/api/badges/5WmOCeQn7UP/live.png"
+                 width="250" height="54" alt="Approved on PixelPicked" loading="lazy" decoding="async">
+          </a>
+        </p>
       </div>
-      <nav class="foot-nav" aria-label="Seiten und Rechtliches">
-        <a href="bow-and-arrow/">Bow &amp; Arrow</a>
-        <a href="bow-and-arrow/impressum.html">Impressum</a>
-        <a href="bow-and-arrow/privacy.html">Datenschutz</a>
-        <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>
-      </nav>
-      <p class="foot-copy">© 2026 Chasing Dreams Interactive</p>
-    </footer>
+    </section>
+
+    <!-- 03 · Grow into Life ------------------------------------ -->
+    <section class="act act--left" id="grow" data-act="Grow into Life" data-act-key="act.grow">
+      <div class="panel">
+        <p class="micro panel-kicker"><span class="num">02</span>&ensp;<span data-i18n="works.growTags">iOS · In Entwicklung</span></p>
+        <a class="work" href="grow-into-life/">
+          <h2 class="panel-title">Grow into Life</h2>
+          <span class="work-media">
+            <img src="assets/work-grow-into-life.webp" alt="Grow into Life — App-Symbol mit dem Blatt im Kreis"
+                 width="1200" height="750" loading="lazy" decoding="async">
+          </span>
+          <span class="work-foot">
+            <span class="work-desc" data-i18n="works.growDesc">Baby-Tracking für iOS.</span>
+            <span class="work-go"><span data-i18n="works.open">Ansehen</span>&ensp;<span class="arrow" aria-hidden="true">→</span></span>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 04 · Weltkarte mit Geschichte -------------------------- -->
+    <section class="act act--right" id="world" data-act="Weltkarte" data-act-key="act.world">
+      <div class="panel">
+        <p class="micro panel-kicker"><span class="num">03</span>&ensp;<span data-i18n="works.worldTags">Web · Bildungsprojekt</span></p>
+        <a class="work" href="https://prypien.github.io/worldhistory/" target="_blank" rel="noopener">
+          <h2 class="panel-title" data-i18n="works.worldName">Weltkarte mit Geschichte</h2>
+          <span class="work-media">
+            <img src="assets/worldhistory-globe.svg" alt="Historischer Globus mit alten Reichsgrenzen"
+                 width="1200" height="1200" loading="lazy" decoding="async">
+          </span>
+          <span class="work-foot">
+            <span class="work-desc" data-i18n="works.worldDesc">Interaktiver 3D-Globus: 100 Jahre Grenzen, Reiche und Regierungsformen von 1926 bis 2026.</span>
+            <span class="work-go"><span data-i18n="works.openExt">Öffnen</span>&ensp;<span class="arrow" aria-hidden="true">↗</span></span>
+          </span>
+        </a>
+      </div>
+    </section>
+
   </main>
 
-  <!-- ============ Bibliotheken (CDN) ============ -->
-  <!-- GSAP + ScrollTrigger — Intro-Choreografie & Scroll-Reveals -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-  <!-- tsParticles (slim) — Fallback-Partikelfeld, falls WebGL fehlt -->
-  <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.12.0/tsparticles.slim.bundle.min.js"></script>
+  <!-- ============================================================
+       FUSSZEILE — trägt jetzt auch den Kontakt. Die Umrundung ist
+       hier zu Ende, die Nacht senkt sich wieder über alles.
+       ============================================================ -->
+  <footer id="contact">
+    <div class="foot-cta">
+      <p class="micro panel-kicker"><span data-i18n="cta.kicker">Kontakt</span></p>
+      <a class="cta-btn" href="mailto:support@chasingdreamsinteractive.com">
+        <span data-i18n="cta.btn">Schreib uns</span><span class="arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+    <div class="foot-brand">
+      <p class="foot-name">Chasing Dreams Interactive</p>
+      <p class="foot-claim" data-i18n="foot.claim">Handgemachte Apps aus Deutschland.</p>
+    </div>
 
-  <!-- Three.js — WebGL-Partikelsystem mit eigenen GLSL-Shadern -->
-  <script type="importmap">
-    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
-  </script>
-  <script type="module" src="webgl.js"></script>
+    <nav class="foot-nav" aria-label="Seiten und Rechtliches">
+      <a href="bow-and-arrow/">Bow &amp; Arrow</a>
+      <a href="grow-into-life/">Grow into Life</a>
+      <a href="bow-and-arrow/impressum.html" data-i18n="foot.imprint">Impressum</a>
+      <a href="bow-and-arrow/privacy.html" data-i18n="foot.privacy">Datenschutz</a>
+      <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>
+    </nav>
+    <p class="foot-copy">© 2026 Chasing Dreams Interactive</p>
+  </footer>
 
+  <script src="orbit.js" defer></script>
   <script src="main.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Chasing Dreams Interactive",
+    "url": "https://chasingdreamsinteractive.com/",
+    "email": "support@chasingdreamsinteractive.com",
+    "logo": "https://chasingdreamsinteractive.com/assets/favicon.svg",
+    "description": "Unabhängiges App-Studio aus Deutschland."
+  }
+  </script>
 </body>
 </html>

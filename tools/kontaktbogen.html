@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Kontaktbogen</title>
+<meta name="robots" content="noindex, nofollow">
+<!--
+  Entwicklungswerkzeug: zeigt die Startseite an mehreren Scroll-
+  Positionen nebeneinander.
+
+  Warum der Umweg über Rahmen? Chromes Kommandozeilen-Schalter
+  --screenshot fotografiert immer den Seitenanfang; ein vorher per
+  JavaScript gesetzter Scroll-Stand wird ignoriert. In einem <iframe>
+  ist der Scroll dagegen Teil des Layouts der Elternseite — ein
+  einziges Foto vom Seitenanfang zeigt damit alle Positionen.
+
+  Aufruf:
+    tools/kontaktbogen.html?w=1440&h=900&ys=0,900,1800&cols=3&s=0.42
+    &reduced=1   zusätzlich prefers-reduced-motion simulieren
+-->
+<style>
+  body { margin: 0; background: #191517; color: #ddd;
+         font: 12px ui-monospace, monospace; }
+  #sheet { display: grid; gap: 10px; padding: 10px; }
+  figure { margin: 0; position: relative; }
+  figcaption { padding: 4px 2px; letter-spacing: .1em; color: #8a8; }
+  .frame { position: relative; overflow: hidden; border: 1px solid #333; }
+  iframe { position: absolute; left: 0; top: 0; border: 0;
+           transform-origin: 0 0; }
+</style>
+</head>
+<body>
+<div id="sheet"></div>
+<script>
+const q = new URLSearchParams(location.search);
+const W = +q.get('w') || 1440;
+const H = +q.get('h') || 900;
+const S = +q.get('s') || 0.42;
+const COLS = +q.get('cols') || 3;
+const YS = (q.get('ys') || '0,900,1800,2700,3600,4500,5400').split(',').map(Number);
+const SRC = q.get('src') || '../index.html';
+
+const sheet = document.getElementById('sheet');
+sheet.style.gridTemplateColumns = `repeat(${COLS}, ${Math.round(W * S)}px)`;
+
+let pending = YS.length;
+YS.forEach((y) => {
+  const fig = document.createElement('figure');
+  const cap = document.createElement('figcaption');
+  cap.textContent = (q.get('acts') ? 'Akt ' : 'y = ') + y;
+  const box = document.createElement('div');
+  box.className = 'frame';
+  box.style.width = Math.round(W * S) + 'px';
+  box.style.height = Math.round(H * S) + 'px';
+
+  const f = document.createElement('iframe');
+  f.width = W; f.height = H;
+  f.style.transform = `scale(${S})`;
+  f.src = SRC;
+  f.addEventListener('load', () => {
+    const w = f.contentWindow;
+    w.document.documentElement.style.scrollBehavior = 'auto';
+    // acts=1: die Zahlen sind Aktnummern, nicht Pixel. Der Akt wird
+    // dann mittig ins Bild gerückt — unabhängig davon, wie hoch er
+    // durch Umbrüche gerade ausfällt.
+    const hold = () => {
+      let target = y;
+      if (q.get('acts')) {
+        const el = w.document.querySelectorAll('.act')[y];
+        if (el) {
+          const r = el.getBoundingClientRect();
+          target = w.scrollY + r.top + r.height / 2 - w.innerHeight / 2;
+        }
+      }
+      w.scrollTo(0, Math.max(0, Math.round(target)));
+    };
+    hold();
+    // Der nachziehende Kamerawert in main.js braucht ein paar Bilder.
+    let n = 0;
+    const id = setInterval(() => { hold(); if (++n > 90) { clearInterval(id); done(); } }, 16);
+  });
+
+  box.appendChild(f);
+  fig.appendChild(cap);
+  fig.appendChild(box);
+  sheet.appendChild(fig);
+});
+
+function done() {
+  if (--pending === 0) setTimeout(() => { document.title = 'BEREIT'; }, 400);
+}
+</script>
+</body>
+</html>
