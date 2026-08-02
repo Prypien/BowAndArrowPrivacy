@@ -42,8 +42,17 @@
     &mdash; Meilensteine, Fotos, Ma&szlig;e, Z&auml;hne &mdash; und kannst das Tagebuch mit Menschen
     teilen, die du selbst einl&auml;dst. Die Daten liegen in deinem pers&ouml;nlichen Konto. Sie werden nicht
     verkauft, nicht an Dritte weitergegeben, nicht ausgewertet und nicht f&uuml;r Werbung genutzt.</p>
-    <p><strong>Es findet kein Tracking statt.</strong> Die App enth&auml;lt keine Analyse-SDKs, kein
-    Crash-Reporting an Dritte, keine Werbe-IDs und keine Werbenetzwerke.</p>
+    <p><strong>Keine Werbung im Tagebuch, kein Crash-Reporting an Dritte.</strong> Die App zeigt keine
+    Anzeigen und bindet kein Werbenetzwerk ein. Deine Eintr&auml;ge, Fotos und die Daten deines Kindes
+    verlassen den Kreis der eingeladenen Personen nicht &mdash; sie werden niemals an Meta oder sonst
+    jemanden &uuml;bermittelt.</p>
+    <p><strong>Eine Messung gibt es dennoch, und nur mit deiner Einwilligung.</strong> Wir schalten
+    Anzeigen f&uuml;r die App und wollen wissen, welche davon funktioniert. Daf&uuml;r fragt die App dich
+    beim ersten Start, ob du damit einverstanden bist. Sagst du nein, wird nichts gemessen und der
+    Meta-Baustein wird gar nicht erst gestartet. Sagst du ja, werden drei Ereignisse gemeldet &mdash;
+    App ge&ouml;ffnet, Testzeit begonnen, Kauf abgeschlossen &mdash; zusammen mit der Werbekennung deines
+    Ger&auml;ts. Details stehen in Abschnitt 4a. Du kannst die Einwilligung jederzeit widerrufen:
+    <em>Profil &rarr; Einstellungen</em>.</p>
 
     <h2>3. Welche Daten verarbeitet werden</h2>
     <table>
@@ -71,6 +80,10 @@
           <td>Einladungscodes, Mitgliedschaften und Rollen (Inhaber / Mitbetreuung / Lesezugriff)</td>
           <td>Teilen des Tagebuchs mit von dir eingeladenen Personen</td>
           <td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+      <tr><td>Werbekennung<br><em>(nur mit Einwilligung)</em></td><td>IDFA des Ger&auml;ts, IP-Adresse,
+          Ger&auml;tetyp, drei Ereignisse (App ge&ouml;ffnet, Testzeit begonnen, Kauf)</td>
+          <td>Messen, welche unserer Anzeigen zu einer Installation gef&uuml;hrt hat &mdash; siehe
+          Abschnitt 4a</td><td>Art. 6 Abs. 1 lit. a DSGVO (Einwilligung), &sect; 25 Abs. 1 TDDDG</td></tr>
       <tr><td>Kaufstatus</td>
           <td>Ob die Vollversion gekauft ist bzw. wann die Testphase endet</td>
           <td>Freischaltung der kostenpflichtigen Funktionen</td>
@@ -98,6 +111,37 @@
     Information, ob ein g&uuml;ltiger Kauf vorliegt. Solange du offline bist, bleiben deine Eintr&auml;ge auf
     dem Ger&auml;t und werden bei bestehender Verbindung synchronisiert.</p>
 
+    <h2>4a. Werbemessung mit Meta &mdash; nur nach Einwilligung</h2>
+    <p>Wir schalten Anzeigen f&uuml;r Grow Into Life. Um zu erkennen, welche Anzeige tats&auml;chlich zu
+    einer Installation gef&uuml;hrt hat, kann die App das Facebook-SDK von <strong>Meta Platforms Ireland
+    Limited</strong>, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland, verwenden.</p>
+    <ul>
+      <li><strong>Was &uuml;bermittelt wird:</strong> drei Ereignisse &mdash; App ge&ouml;ffnet
+          (<em>Session</em>), Testzeit begonnen (<em>StartTrial</em>) und Kauf abgeschlossen
+          (<em>Purchase</em>, mit Betrag und W&auml;hrung) &mdash; sowie die Werbekennung deines
+          Ger&auml;ts (IDFA), IP-Adresse und Ger&auml;tetyp.</li>
+      <li><strong>Was <u>nicht</u> &uuml;bermittelt wird:</strong> nichts aus dem Tagebuch. Keine Namen,
+          keine Geburtsdaten, keine Fotos, keine Meilensteine, keine Ma&szlig;e, keine Zahndaten, keine
+          Kommentare. Meta erf&auml;hrt nicht, dass du ein Kind hast oder wie es hei&szlig;t.</li>
+      <li><strong>Rechtsgrundlage:</strong> deine Einwilligung, Art. 6 Abs. 1 lit. a DSGVO, sowie
+          &sect; 25 Abs. 1 TDDDG f&uuml;r den Zugriff auf die Werbekennung.</li>
+      <li><strong>Wann:</strong> erst nachdem du im Dialog beim ersten Start zugestimmt hast. Vorher wird
+          das SDK nicht einmal initialisiert &mdash; es geht kein einziges Byte an Meta.</li>
+      <li><strong>Widerruf:</strong> jederzeit unter <em>Profil &rarr; Einstellungen</em>, mit einem
+          Schalter, genauso einfach wie die Zustimmung. Ab dem Widerruf wird nichts mehr gemeldet.
+          Zus&auml;tzlich kannst du das Tracking systemweit unter
+          <em>iOS-Einstellungen &rarr; Datenschutz &amp; Sicherheit &rarr; Tracking</em> abschalten.</li>
+      <li><strong>Drittlandtransfer:</strong> Meta verarbeitet Daten auch in den USA. Grundlage sind die
+          EU-Standardvertragsklauseln und der EU-US Data Privacy Framework. Ein Restrisiko beh&ouml;rdlicher
+          Zugriffe in den USA l&auml;sst sich nicht vollst&auml;ndig ausschlie&szlig;en; mit deiner
+          Einwilligung nimmst du dieses Risiko in Kauf.</li>
+      <li><strong>Gemeinsame Verantwortung:</strong> f&uuml;r die Messung sind wir und Meta gemeinsam
+          verantwortlich (Art. 26 DSGVO). Metas Datenschutzerkl&auml;rung:
+          <a href="https://www.facebook.com/privacy/policy/">facebook.com/privacy/policy</a></li>
+    </ul>
+    <p>Die App zeigt selbst <strong>keine</strong> Werbung an. Es geht ausschlie&szlig;lich darum zu
+    messen, ob unsere eigenen Anzeigen ihr Geld wert sind.</p>
+
     <h2>5. Wer die Daten sehen kann</h2>
     <p>Nur du und die Personen, die du selbst &uuml;ber einen Einladungscode hinzuf&uuml;gst. Die
     Zugriffsregeln werden serverseitig durchgesetzt: ohne Mitgliedschaft an einem Babybuch ist kein Zugriff
@@ -105,7 +149,7 @@
     Person verliert damit den Zugriff, und die lokale Kopie auf ihrem Ger&auml;t wird beim n&auml;chsten Start
     gel&ouml;scht.</p>
 
-    <h2>6. Speicherdauer und L&ouml;schung</h2>
+    <h2 id="loeschung">6. Speicherdauer und L&ouml;schung</h2>
     <p>Deine Daten bleiben gespeichert, solange dein Konto besteht. Du kannst dein Konto jederzeit in der App
     l&ouml;schen: <em>Profil &rarr; Einstellungen &rarr; Konto l&ouml;schen</em>. Dabei werden dein
     Nutzerprofil, deine Babyb&uuml;cher samt Meilensteinen, Fotos und Ma&szlig;en, deine
@@ -157,8 +201,15 @@
     photos, measurements, teeth &mdash; and you can share the journal with people you invite
     yourself. The data lives in your personal account. It is never sold, never shared with third parties,
     never profiled and never used for advertising.</p>
-    <p><strong>There is no tracking.</strong> The app contains no analytics SDKs, no third-party crash
-    reporting, no advertising identifiers and no ad networks.</p>
+    <p><strong>No ads in the journal, no third-party crash reporting.</strong> The app displays no
+    advertising and embeds no ad network. Your entries, photos and your child&rsquo;s data never leave
+    the circle of people you invited &mdash; they are never transmitted to Meta or anyone else.</p>
+    <p><strong>There is measurement, and only with your consent.</strong> We run ads for the app and want
+    to know which ones work. The app therefore asks you on first launch whether you agree. If you decline,
+    nothing is measured and the Meta component is never started. If you agree, three events are reported
+    &mdash; app opened, trial started, purchase completed &mdash; together with your device&rsquo;s
+    advertising identifier. Details in section 4a. You can withdraw consent at any time under
+    <em>Profile &rarr; Settings</em>.</p>
 
     <h2>3. Data we process</h2>
     <table>
@@ -176,6 +227,10 @@
           voluntarily. The app works fully without them.</td></tr>
       <tr><td>Sharing</td><td>Invitation codes, memberships and roles (owner / caregiver / viewer)</td>
           <td>Sharing the journal with people you invite</td><td>Art. 6(1)(b) GDPR</td></tr>
+      <tr><td>Advertising identifier<br><em>(only with consent)</em></td><td>Device IDFA, IP address,
+          device type, three events (app opened, trial started, purchase)</td>
+          <td>Measuring which of our ads led to an install &mdash; see section 4a</td>
+          <td>Art. 6(1)(a) GDPR (consent), &sect; 25(1) TDDDG</td></tr>
       <tr><td>Purchase state</td><td>Whether the full version was purchased, when the trial ends</td>
           <td>Unlocking paid features</td><td>Art. 6(1)(b) GDPR</td></tr>
     </table>
@@ -193,12 +248,40 @@
     the full version are handled entirely by Apple &mdash; we never receive payment details, only whether a
     valid purchase exists.</p>
 
+    <h2>4a. Ad measurement with Meta &mdash; only after consent</h2>
+    <p>We run ads for Grow Into Life. To find out which ad actually led to an install, the app may use the
+    Facebook SDK from <strong>Meta Platforms Ireland Limited</strong>, 4 Grand Canal Square, Dublin 2,
+    Ireland.</p>
+    <ul>
+      <li><strong>What is sent:</strong> three events &mdash; app opened (<em>Session</em>), trial started
+          (<em>StartTrial</em>) and purchase completed (<em>Purchase</em>, with amount and currency)
+          &mdash; plus your device&rsquo;s advertising identifier (IDFA), IP address and device type.</li>
+      <li><strong>What is <u>not</u> sent:</strong> nothing from the journal. No names, no dates of birth,
+          no photos, no milestones, no measurements, no tooth data, no comments. Meta does not learn that
+          you have a child, let alone what it is called.</li>
+      <li><strong>Legal basis:</strong> your consent, Art. 6(1)(a) GDPR, and &sect; 25(1) TDDDG for access
+          to the advertising identifier.</li>
+      <li><strong>When:</strong> only after you agreed in the dialog on first launch. Before that the SDK
+          is not even initialised &mdash; not a single byte reaches Meta.</li>
+      <li><strong>Withdrawal:</strong> at any time under <em>Profile &rarr; Settings</em>, via a switch,
+          exactly as easy as giving consent. You can also turn tracking off system-wide under
+          <em>iOS Settings &rarr; Privacy &amp; Security &rarr; Tracking</em>.</li>
+      <li><strong>Third-country transfer:</strong> Meta also processes data in the USA, based on the EU
+          standard contractual clauses and the EU-US Data Privacy Framework. A residual risk of access by
+          US authorities cannot be fully excluded; by consenting you accept that risk.</li>
+      <li><strong>Joint controllership:</strong> for this measurement we and Meta are joint controllers
+          (Art. 26 GDPR). Meta&rsquo;s privacy policy:
+          <a href="https://www.facebook.com/privacy/policy/">facebook.com/privacy/policy</a></li>
+    </ul>
+    <p>The app itself displays <strong>no</strong> advertising. This is purely about measuring whether our
+    own ads are worth their money.</p>
+
     <h2>5. Who can see the data</h2>
     <p>Only you and the people you add via an invitation code. Access is enforced server-side: without a
     membership in a baby book, its data cannot be read. You can revoke access at any time in the app; the
     person then loses access and the local copy on their device is removed on next launch.</p>
 
-    <h2>6. Retention and deletion</h2>
+    <h2 id="deletion">6. Retention and deletion</h2>
     <p>Your data is kept for as long as your account exists. You can delete your account at any time in the
     app under <em>Profile &rarr; Settings &rarr; Delete account</em>. This removes your user profile, your
     baby books including milestones, photos and measurements, your memberships and your sign-in
