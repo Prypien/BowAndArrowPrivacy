@@ -813,6 +813,16 @@ a { color: inherit; }
   font-size: .72rem;
   color: rgba(244, 240, 236, .5);
 }
+/* Die KI-Offenlegung steht noch eine Stufe leiser als das Copyright —
+   sie soll da sein, aber nicht das letzte Wort an sich reißen. */
+.foot-ai {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+  max-width: 52ch;
+  font-size: .7rem;
+  line-height: 1.6;
+  color: var(--faint);
+}
 
 /* ---------- 9 · Schmale Viewports ---------- */
 
