@@ -699,12 +699,6 @@ a { color: inherit; }
   padding: 4px;
 }
 
-.rail-deg {
-  font-size: .62rem;
-  font-weight: 500;
-  letter-spacing: .1em;
-  color: color-mix(in srgb, var(--accent) 70%, var(--ink));
-}
 
 .rail-track {
   --orbit: 0;
@@ -879,7 +873,6 @@ a { color: inherit; }
   .rail { right: 8px; gap: 10px; }
   .rail-track { height: min(30vh, 220px); }
   .rail-dots a span { display: none; }
-  .rail-deg { display: none; }
 }
 
 @media (max-width: 620px) {
@@ -914,7 +907,6 @@ a { color: inherit; }
   .panel-title .wd { opacity: 1; }
   /* Die Kamera bleibt stehen (siehe orbit.js) — eine Gradzahl,
      die sich nie ändert, wäre nur verwirrend. */
-  .rail-deg { display: none; }
   #column { scale: 1 !important; }
   .panel {
     opacity: 1 !important;

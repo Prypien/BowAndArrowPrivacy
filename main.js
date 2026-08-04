@@ -54,6 +54,8 @@
       "works.worldName": "Weltkarte mit Geschichte",
       "works.worldTags": "Web · Bildungsprojekt",
       "works.worldDesc": "Interaktiver 3D-Globus: 100 Jahre Grenzen, Reiche und Regierungsformen von 1926 bis 2026.",
+      "works.consultTags": "Beratung · KI",
+      "works.consultDesc": "KI-Beratung von jemandem, der selbst baut. Strategie, Automatisierung und Software, die wirklich läuft.",
       "cta.kicker": "Kontakt",
       "cta.copy": "Danke, dass du dir meine Projekte angesehen hast. Für Beratung oder alles andere: schreib mir.",
       "cta.btn": "Schreib uns",
@@ -62,6 +64,7 @@
       "foot.ai": "Bei Entwicklung, Text und Gestaltung kommen KI-Werkzeuge zum Einsatz. Jede Entscheidung trifft ein Mensch.",
       "act.hero": "Auftakt", "act.studio": "Studio", "act.bow": "Bow & Arrow",
       "act.grow": "Grow into Life", "act.world": "Weltkarte",
+      "act.consulting": "Consulting",
     },
     en: {
       docTitle: "Chasing Dreams Interactive — App Studio",
@@ -83,6 +86,8 @@
       "works.worldName": "A World Map with History",
       "works.worldTags": "Web · Educational",
       "works.worldDesc": "An interactive 3D globe: 100 years of borders, empires and forms of government, 1926 to 2026.",
+      "works.consultTags": "Consulting · AI",
+      "works.consultDesc": "AI consulting from someone who ships. Strategy, automation and software that actually runs.",
       "cta.kicker": "Contact",
       "cta.copy": "Thank you for looking through my projects. For consulting or anything else, write to me.",
       "cta.btn": "Get in touch",
@@ -91,6 +96,7 @@
       "foot.ai": "AI tools are part of how the code, the words and the visuals come together. Every decision is made by a human.",
       "act.hero": "Opening", "act.studio": "Studio", "act.bow": "Bow & Arrow",
       "act.grow": "Grow into Life", "act.world": "World map",
+      "act.consulting": "Consulting",
     },
     es: {
       docTitle: "Chasing Dreams Interactive — Estudio de apps",
@@ -112,6 +118,8 @@
       "works.worldName": "Mapa del mundo con historia",
       "works.worldTags": "Web · Proyecto educativo",
       "works.worldDesc": "Un globo 3D interactivo: 100 años de fronteras, imperios y formas de gobierno, de 1926 a 2026.",
+      "works.consultTags": "Consultoría · IA",
+      "works.consultDesc": "Consultoría de IA de alguien que construye. Estrategia, automatización y software que de verdad funciona.",
       "cta.kicker": "Contacto",
       "cta.copy": "Gracias por echar un ojo a mis proyectos. Para consultoría o cualquier otra cosa, escríbeme.",
       "cta.btn": "Escríbenos",
@@ -120,6 +128,7 @@
       "foot.ai": "En el desarrollo, los textos y el diseño se usan herramientas de IA. Cada decisión la toma una persona.",
       "act.hero": "Apertura", "act.studio": "Estudio", "act.bow": "Bow & Arrow",
       "act.grow": "Grow into Life", "act.world": "Mapa del mundo",
+      "act.consulting": "Consultoría",
     },
   };
 
@@ -186,7 +195,6 @@
   }));
 
   const railDots = document.getElementById("rail-dots");
-  const railDeg = document.getElementById("rail-deg");
   const railTrack = document.querySelector(".rail-track");
   const column = document.getElementById("column");
   if (railDots) {
@@ -233,7 +241,6 @@
   let lastY = scrollY;
   let prev = performance.now();
   let activeIdx = -1;
-  let lastDeg = -1;
   let lastSettle = -1;
 
   function tick(now) {
@@ -261,7 +268,6 @@
     // anderthalb Mal herum, der Scroll-Fortschritt allein sagt also
     // nichts über den Blickwinkel.
     const deg = window.CDIOrbit ? window.CDIOrbit.angle : 0;
-    if (railDeg && deg !== lastDeg) { railDeg.textContent = deg + "°"; lastDeg = deg; }
 
     // Die Säule sitzt im Auftakt einen Hauch größer und beruhigt sich.
     const settle = +clamp(1 - y / Math.max(1, innerHeight * 0.9), 0, 1).toFixed(3);
