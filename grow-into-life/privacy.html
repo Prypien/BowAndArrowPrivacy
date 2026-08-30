@@ -25,7 +25,7 @@
     <div class="lang-switch"><a href="#de">Deutsch</a> &middot; <a href="#en">English</a></div>
 
     <h1 id="de">Datenschutzerkl&auml;rung</h1>
-    <p><small>Grow Into Life (iOS) &middot; Stand: 26. Juli 2026</small></p>
+    <p><small>Grow Into Life (iOS) &middot; Stand: 30. August 2026</small></p>
 
     <h2>1. Verantwortlicher</h2>
     <div class="card">
@@ -49,9 +49,10 @@
     <p><strong>Eine Messung gibt es dennoch, und nur mit deiner Einwilligung.</strong> Wir schalten
     Anzeigen f&uuml;r die App und wollen wissen, welche davon funktioniert. Daf&uuml;r fragt die App dich
     beim ersten Start, ob du damit einverstanden bist. Sagst du nein, wird nichts gemessen und der
-    Meta-Baustein wird gar nicht erst gestartet. Sagst du ja, werden drei Ereignisse gemeldet &mdash;
-    App ge&ouml;ffnet, Testzeit begonnen, Kauf abgeschlossen &mdash; zusammen mit der Werbekennung deines
-    Ger&auml;ts. Details stehen in Abschnitt 4a. Du kannst die Einwilligung jederzeit widerrufen:
+    Meta-Baustein wird gar nicht erst gestartet. Sagst du ja, wird gemeldet, dass die App ge&ouml;ffnet
+    wurde &mdash; zusammen mit der Werbekennung deines Ger&auml;ts. Mehr nicht: seit die App kostenlos ist,
+    gibt es weder eine Testzeit noch einen Kauf, die gemeldet werden k&ouml;nnten. Details stehen in
+    Abschnitt 4a. Du kannst die Einwilligung jederzeit widerrufen:
     <em>Profil &rarr; Einstellungen</em>.</p>
 
     <h2>3. Welche Daten verarbeitet werden</h2>
@@ -80,15 +81,19 @@
           <td>Einladungscodes, Mitgliedschaften und Rollen (Inhaber / Mitbetreuung / Lesezugriff)</td>
           <td>Teilen des Tagebuchs mit von dir eingeladenen Personen</td>
           <td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
+      <tr><td>Benachrichtigungen<br><em>(nur wenn du sie erlaubst)</em></td>
+          <td>Ein Ger&auml;tetoken von Firebase Cloud Messaging, dazu Plattform und Sprache &mdash; ein
+          Eintrag pro Ger&auml;t, auf dem du angemeldet bist</td>
+          <td>Erinnerungen (Geburtstage, Monatstage, Jahrestage, stille B&uuml;cher) und Hinweise auf neue
+          Momente und Kommentare in einem geteilten Buch</td>
+          <td>Art. 6 Abs. 1 lit. a DSGVO (Einwilligung, erteilt durch die Erlaubnis f&uuml;r Mitteilungen)</td></tr>
       <tr><td>Werbekennung<br><em>(nur mit Einwilligung)</em></td><td>IDFA des Ger&auml;ts, IP-Adresse,
-          Ger&auml;tetyp, drei Ereignisse (App ge&ouml;ffnet, Testzeit begonnen, Kauf)</td>
+          Ger&auml;tetyp, ein Ereignis (App ge&ouml;ffnet)</td>
           <td>Messen, welche unserer Anzeigen zu einer Installation gef&uuml;hrt hat &mdash; siehe
           Abschnitt 4a</td><td>Art. 6 Abs. 1 lit. a DSGVO (Einwilligung), &sect; 25 Abs. 1 TDDDG</td></tr>
-      <tr><td>Kaufstatus</td>
-          <td>Ob die Vollversion gekauft ist bzw. wann die Testphase endet</td>
-          <td>Freischaltung der kostenpflichtigen Funktionen</td>
-          <td>Art. 6 Abs. 1 lit. b DSGVO</td></tr>
     </table>
+    <p>Einen Kaufstatus gibt es nicht mehr: die App ist kostenlos, es werden weder K&auml;ufe noch
+    Testzeitr&auml;ume erfasst.</p>
 
     <h3>Daten von Kindern</h3>
     <p>Die App richtet sich ausschlie&szlig;lich an Erwachsene. Die Angaben &uuml;ber das Kind gibst du als
@@ -99,27 +104,26 @@
     <p>Die App nutzt Google Firebase als Auftragsverarbeiter (Google Ireland Limited, Gordon House, Barrow
     Street, Dublin 4, Irland):</p>
     <ul>
-      <li><strong>Firebase Authentication</strong> &mdash; Anmeldung per E-Mail/Passwort und
-          &bdquo;Anmelden mit Apple&ldquo;.</li>
+      <li><strong>Firebase Authentication</strong> &mdash; Anmeldung per E-Mail/Passwort,
+          &bdquo;Anmelden mit Apple&ldquo; und &bdquo;Anmelden mit Google&ldquo;.</li>
       <li><strong>Cloud Firestore</strong> &mdash; Tagebuchdaten. Speicherort: <strong>europe-west3</strong>
           (Frankfurt am Main).</li>
       <li><strong>Firebase Storage</strong> &mdash; Fotos.</li>
     </ul>
     <p>Mit Google besteht ein Auftragsverarbeitungsvertrag; f&uuml;r etwaige &Uuml;bermittlungen in
-    Drittl&auml;nder gelten die EU-Standardvertragsklauseln. Beim Kauf der Vollversion wird die Zahlung
-    ausschlie&szlig;lich von Apple abgewickelt &mdash; wir erhalten keine Zahlungsdaten, sondern nur die
-    Information, ob ein g&uuml;ltiger Kauf vorliegt. Solange du offline bist, bleiben deine Eintr&auml;ge auf
-    dem Ger&auml;t und werden bei bestehender Verbindung synchronisiert.</p>
+    Drittl&auml;nder gelten die EU-Standardvertragsklauseln. Zahlungsdaten verarbeiten wir keine &mdash; die
+    App ist kostenlos. Solange du offline bist, bleiben deine Eintr&auml;ge auf dem Ger&auml;t und werden bei
+    bestehender Verbindung synchronisiert.</p>
 
     <h2>4a. Werbemessung mit Meta &mdash; nur nach Einwilligung</h2>
     <p>Wir schalten Anzeigen f&uuml;r Grow Into Life. Um zu erkennen, welche Anzeige tats&auml;chlich zu
     einer Installation gef&uuml;hrt hat, kann die App das Facebook-SDK von <strong>Meta Platforms Ireland
     Limited</strong>, 4 Grand Canal Square, Grand Canal Harbour, Dublin 2, Irland, verwenden.</p>
     <ul>
-      <li><strong>Was &uuml;bermittelt wird:</strong> drei Ereignisse &mdash; App ge&ouml;ffnet
-          (<em>Session</em>), Testzeit begonnen (<em>StartTrial</em>) und Kauf abgeschlossen
-          (<em>Purchase</em>, mit Betrag und W&auml;hrung) &mdash; sowie die Werbekennung deines
-          Ger&auml;ts (IDFA), IP-Adresse und Ger&auml;tetyp.</li>
+      <li><strong>Was &uuml;bermittelt wird:</strong> ein einziges Ereignis &mdash; App ge&ouml;ffnet
+          (<em>Session</em>) &mdash; sowie die Werbekennung deines Ger&auml;ts (IDFA), IP-Adresse und
+          Ger&auml;tetyp. Fr&uuml;her kamen &bdquo;Testzeit begonnen&ldquo; und &bdquo;Kauf
+          abgeschlossen&ldquo; hinzu; seit die App kostenlos ist, gibt es beide nicht mehr.</li>
       <li><strong>Was <u>nicht</u> &uuml;bermittelt wird:</strong> nichts aus dem Tagebuch. Keine Namen,
           keine Geburtsdaten, keine Fotos, keine Meilensteine, keine Ma&szlig;e, keine Zahndaten, keine
           Kommentare. Meta erf&auml;hrt nicht, dass du ein Kind hast oder wie es hei&szlig;t.</li>
@@ -160,9 +164,14 @@
       <li><strong>Fotomediathek</strong> &mdash; nur um von dir ausgew&auml;hlte Bilder einem Meilenstein
           hinzuzuf&uuml;gen.</li>
       <li><strong>Kamera</strong> &mdash; nur um direkt in der App ein Foto aufzunehmen.</li>
+      <li><strong>Mitteilungen</strong> &mdash; nur um dich an Momente zu erinnern und dir zu sagen, wenn
+          in einem geteilten Buch etwas Neues steht. Erlaubst du sie nicht, funktioniert die App
+          vollst&auml;ndig weiter; welche Arten von Mitteilungen du bekommst, stellst du unter
+          <em>Profil &rarr; Einstellungen</em> einzeln ein.</li>
     </ul>
-    <p>Beides wird ausschlie&szlig;lich nach deiner ausdr&uuml;cklichen Aktion genutzt. Die App liest die
-    Fotomediathek nicht im Hintergrund aus.</p>
+    <p>Fotomediathek und Kamera werden ausschlie&szlig;lich nach deiner ausdr&uuml;cklichen Aktion genutzt.
+    Die App liest die Fotomediathek nicht im Hintergrund aus. Der Ger&auml;tetoken f&uuml;r Mitteilungen
+    wird gel&ouml;scht, wenn du dich abmeldest oder dein Konto l&ouml;schst.</p>
 
     <h2>8. Diese Website</h2>
     <p>Diese Seiten werden &uuml;ber GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. St, San Francisco, CA
@@ -186,7 +195,7 @@
     <hr />
 
     <h1 id="en">Privacy Policy</h1>
-    <p><small>Grow Into Life (iOS) &middot; Last updated: 26 July 2026</small></p>
+    <p><small>Grow Into Life (iOS) &middot; Last updated: 30 August 2026</small></p>
 
     <h2>1. Controller</h2>
     <div class="card">
@@ -206,16 +215,17 @@
     the circle of people you invited &mdash; they are never transmitted to Meta or anyone else.</p>
     <p><strong>There is measurement, and only with your consent.</strong> We run ads for the app and want
     to know which ones work. The app therefore asks you on first launch whether you agree. If you decline,
-    nothing is measured and the Meta component is never started. If you agree, three events are reported
-    &mdash; app opened, trial started, purchase completed &mdash; together with your device&rsquo;s
-    advertising identifier. Details in section 4a. You can withdraw consent at any time under
+    nothing is measured and the Meta component is never started. If you agree, a single event is reported
+    &mdash; app opened &mdash; together with your device&rsquo;s advertising identifier. Nothing else:
+    since the app became free there is neither a trial nor a purchase left to report. Details in section 4a. You can withdraw consent at any time under
     <em>Profile &rarr; Settings</em>.</p>
 
     <h2>3. Data we process</h2>
     <table>
       <tr><th>Category</th><th>Specifically</th><th>Purpose</th><th>Legal basis</th></tr>
       <tr><td>Account</td><td>Email address, display name, a Firebase user ID; with Sign in with Apple
-          possibly a private relay address</td><td>Create an account, sign in, sync across devices</td>
+          possibly a private relay address. You can sign in by email and password, with Apple or with
+          Google.</td><td>Create an account, sign in, sync across devices</td>
           <td>Art. 6(1)(b) GDPR (contract)</td></tr>
       <tr><td>About the child</td><td>First name, date of birth, optionally sex, profile photo</td>
           <td>Displaying the journal, age calculation</td><td>Art. 6(1)(b) GDPR</td></tr>
@@ -227,13 +237,19 @@
           voluntarily. The app works fully without them.</td></tr>
       <tr><td>Sharing</td><td>Invitation codes, memberships and roles (owner / caregiver / viewer)</td>
           <td>Sharing the journal with people you invite</td><td>Art. 6(1)(b) GDPR</td></tr>
+      <tr><td>Notifications<br><em>(only if you allow them)</em></td>
+          <td>A Firebase Cloud Messaging device token, plus platform and language &mdash; one entry per
+          device you are signed in on</td>
+          <td>Reminders (birthdays, month days, anniversaries, books that have gone quiet) and notices about
+          new moments and comments in a shared book</td>
+          <td>Art. 6(1)(a) GDPR (consent, given by allowing notifications)</td></tr>
       <tr><td>Advertising identifier<br><em>(only with consent)</em></td><td>Device IDFA, IP address,
-          device type, three events (app opened, trial started, purchase)</td>
+          device type, one event (app opened)</td>
           <td>Measuring which of our ads led to an install &mdash; see section 4a</td>
           <td>Art. 6(1)(a) GDPR (consent), &sect; 25(1) TDDDG</td></tr>
-      <tr><td>Purchase state</td><td>Whether the full version was purchased, when the trial ends</td>
-          <td>Unlocking paid features</td><td>Art. 6(1)(b) GDPR</td></tr>
     </table>
+    <p>There is no purchase state any more: the app is free, and neither purchases nor trial periods are
+    recorded.</p>
 
     <h3>Children&rsquo;s data</h3>
     <p>The app is intended for adults only. You enter the information about your child as the person holding
@@ -242,20 +258,21 @@
 
     <h2>4. Where the data is stored</h2>
     <p>The app uses Google Firebase as a processor (Google Ireland Limited, Gordon House, Barrow Street,
-    Dublin 4, Ireland): Firebase Authentication for sign-in, Cloud Firestore for journal data (stored in
+    Dublin 4, Ireland): Firebase Authentication for sign-in &mdash; by email and password, Sign in with
+    Apple or Sign in with Google &mdash; Cloud Firestore for journal data (stored in
     <strong>europe-west3</strong>, Frankfurt, Germany) and Firebase Storage for photos. A data processing
-    agreement is in place; EU standard contractual clauses cover any third-country transfers. Payments for
-    the full version are handled entirely by Apple &mdash; we never receive payment details, only whether a
-    valid purchase exists.</p>
+    agreement is in place; EU standard contractual clauses cover any third-country transfers. We process no
+    payment data &mdash; the app is free.</p>
 
     <h2>4a. Ad measurement with Meta &mdash; only after consent</h2>
     <p>We run ads for Grow Into Life. To find out which ad actually led to an install, the app may use the
     Facebook SDK from <strong>Meta Platforms Ireland Limited</strong>, 4 Grand Canal Square, Dublin 2,
     Ireland.</p>
     <ul>
-      <li><strong>What is sent:</strong> three events &mdash; app opened (<em>Session</em>), trial started
-          (<em>StartTrial</em>) and purchase completed (<em>Purchase</em>, with amount and currency)
-          &mdash; plus your device&rsquo;s advertising identifier (IDFA), IP address and device type.</li>
+      <li><strong>What is sent:</strong> a single event &mdash; app opened (<em>Session</em>) &mdash;
+          plus your device&rsquo;s advertising identifier (IDFA), IP address and device type. It used to
+          include &ldquo;trial started&rdquo; and &ldquo;purchase completed&rdquo;; since the app became
+          free, neither exists.</li>
       <li><strong>What is <u>not</u> sent:</strong> nothing from the journal. No names, no dates of birth,
           no photos, no milestones, no measurements, no tooth data, no comments. Meta does not learn that
           you have a child, let alone what it is called.</li>
@@ -291,6 +308,10 @@
     <p><strong>Photo library</strong> &mdash; only to attach pictures you select to a milestone.
     <strong>Camera</strong> &mdash; only to take a photo directly in the app. Both are used solely in
     response to your explicit action; the app does not read the photo library in the background.</p>
+    <p><strong>Notifications</strong> &mdash; only to remind you of moments and to tell you when something
+    new appears in a shared book. If you do not allow them the app works fully; you choose which kinds you
+    receive under <em>Profile &rarr; Settings</em>. The device token is deleted when you sign out or delete
+    your account.</p>
 
     <h2>8. This website</h2>
     <p>These pages are served via GitHub Pages (GitHub Inc., San Francisco, USA), which processes technically
