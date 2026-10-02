@@ -1,0 +1,179 @@
+/* ===========================================================
+   GTFOOB — eigenes Erscheinungsbild
+   ===========================================================
+   Gehört zur App, nicht zum Studio. Werte aus GTFOOB/Design/Theme.swift:
+     Hintergrund   #050508 → #120D1C → #3A1626   (Nacht, Verlauf nach unten)
+     accent        #FF5A4E   Koralle (Wecker, Knöpfe)
+     points        #12B5A5   Türkis
+     streak        #FFA41B   Orange
+   Ändert sich Theme.swift, ändert sich diese Datei mit.
+   Die App ist dunkel – die Seite auch.
+   =========================================================== */
+
+:root {
+  --bg-top: #050508;
+  --bg-mid: #120d1c;
+  --bg-low: #3a1626;
+  --card: rgba(255, 255, 255, .055);
+  --card-strong: rgba(255, 255, 255, .09);
+  --ink: #ffffff;
+  --ink-soft: rgba(255, 255, 255, .78);
+  --muted: rgba(255, 255, 255, .5);
+  --accent: #ff5a4e;
+  --accent-soft: rgba(255, 90, 78, .16);
+  --points: #12b5a5;
+  --streak: #ffa41b;
+  --line: rgba(255, 255, 255, .16);
+  --line-soft: rgba(255, 255, 255, .08);
+  --radius: 22px;
+  --font-display: system-ui, -apple-system, "SF Pro Rounded", "Inter", sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { color-scheme: dark; scroll-behavior: smooth; background: var(--bg-top); }
+
+body {
+  font-family: var(--font-body);
+  font-size: 16.5px;
+  line-height: 1.7;
+  color: var(--ink-soft);
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-low) 100%) fixed;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+::selection { background: rgba(255, 90, 78, .35); color: #fff; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+
+/* ---------- Kopfleiste ---------- */
+
+header.bar {
+  position: sticky; top: 0; z-index: 5;
+  background: rgba(5, 5, 8, .72);
+  border-bottom: 1px solid var(--line-soft);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+header.bar .inner {
+  max-width: 46rem; margin: 0 auto; padding: 14px 22px;
+  display: flex; align-items: center; gap: 14px;
+}
+header.bar a.home {
+  font-family: var(--font-display);
+  font-weight: 800; font-size: 1.05rem; letter-spacing: .04em;
+  color: var(--ink); text-decoration: none; white-space: nowrap;
+}
+header.bar a.home:hover { color: var(--accent); }
+
+nav.legal-tabs { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+nav.legal-tabs a {
+  font-size: .66rem; font-weight: 700; letter-spacing: .16em;
+  padding: 8px 16px; border: 1px solid var(--line);
+  border-radius: 999px; color: var(--muted); text-decoration: none;
+  transition: color .2s ease, border-color .2s ease, background-color .2s ease;
+}
+nav.legal-tabs a:hover { color: var(--ink); border-color: var(--accent); }
+nav.legal-tabs a.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+
+/* ---------- Textfluss ---------- */
+
+.wrap { max-width: 46rem; margin: 0 auto; padding: 48px 22px 90px; }
+
+h1 {
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(2.2rem, 7vw, 3.1rem); line-height: 1.08;
+  margin: 26px 0 8px; letter-spacing: -.02em; color: var(--ink);
+}
+h2 {
+  font-family: var(--font-display); font-weight: 750; font-size: 1.32rem;
+  margin: 44px 0 10px; color: var(--ink);
+}
+h3 {
+  font-family: var(--font-body); font-weight: 700; font-size: 1rem;
+  margin: 26px 0 6px; color: var(--ink);
+}
+p, li, td { color: var(--ink-soft); }
+strong { color: var(--ink); font-weight: 700; }
+small { color: var(--muted); font-size: .82rem; }
+
+a { color: var(--accent); text-underline-offset: 3px; }
+a:hover { color: #fff; }
+
+ul { padding-left: 1.3rem; }
+li { margin: 6px 0; }
+li::marker { color: var(--accent); }
+hr { border: none; border-top: 1px solid var(--line-soft); margin: 56px 0; }
+
+table {
+  width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .92rem;
+  display: block; overflow-x: auto;
+}
+th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+th {
+  color: var(--muted); font-size: .68rem; font-weight: 700;
+  letter-spacing: .14em; text-transform: uppercase;
+}
+
+.card {
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  background: var(--card); padding: 20px 22px; margin: 18px 0;
+}
+
+.foot {
+  max-width: 46rem; margin: 0 auto; padding: 0 22px 60px;
+  color: var(--muted); font-size: .82rem;
+}
+.foot a { color: var(--accent); }
+
+/* ---------- Startseite des Projekts ---------- */
+
+.hero { display: grid; gap: 34px; align-items: center; margin: 12px 0 8px; }
+.kicker {
+  font-size: .68rem; font-weight: 700; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
+}
+.lede { font-size: 1.08rem; max-width: 34rem; }
+.hero-visual { display: flex; justify-content: center; }
+.hero-visual img {
+  width: 100%; max-width: 300px; height: auto; border-radius: 26%;
+  box-shadow: 0 20px 60px rgba(255, 90, 78, .28);
+}
+
+.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; }
+.pill {
+  font-size: .72rem; font-weight: 700; letter-spacing: .02em;
+  padding: 7px 14px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent);
+  border: 1px solid rgba(255, 90, 78, .35);
+}
+.pill--muted { background: var(--card); color: var(--ink-soft); border-color: var(--line); }
+
+.features { display: grid; gap: 14px; margin: 18px 0 0; }
+.feature {
+  border: 1px solid var(--line-soft); border-radius: var(--radius);
+  background: var(--card); padding: 20px 22px;
+}
+.feature:nth-child(4n+1) h3 { color: var(--accent); }
+.feature:nth-child(4n+2) h3 { color: var(--streak); }
+.feature:nth-child(4n+3) h3 { color: var(--points); }
+.feature h3 { margin-top: 0; }
+.feature p { margin-bottom: 0; font-size: .94rem; }
+
+.promise { border-left: 3px solid var(--accent); padding-left: 18px; margin: 18px 0; }
+.promise p { margin: 10px 0; }
+
+.backlink { display: inline-block; margin-top: 12px; font-size: .9rem; }
+
+/* ---------- Breite Darstellung ---------- */
+
+@media (min-width: 720px) {
+  .hero { grid-template-columns: 1.15fr .85fr; }
+  .features { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  header.bar .inner { flex-wrap: wrap; gap: 10px; }
+  nav.legal-tabs { margin-left: 0; }
+}
