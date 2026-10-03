@@ -2,7 +2,9 @@
   "applinks": {
     "details": [
       {
-        "appIDs": ["Y6V66QBZ8J.com.jenpreisser.Grow-Into-Life"],
+        "appIDs": [
+          "Y6V66QBZ8J.com.jenpreisser.Grow-Into-Life"
+        ],
         "components": [
           {
             "/": "/grow-into-life/join.html",
@@ -10,6 +12,21 @@
           },
           {
             "/": "/grow-into-life/join",
+            "comment": "Gleicher Link ohne Dateiendung"
+          }
+        ]
+      },
+      {
+        "appIDs": [
+          "Y6V66QBZ8J.com.jenpreisser.gtfoob"
+        ],
+        "components": [
+          {
+            "/": "/gtfoob/join.html",
+            "comment": "GTFOOB-Einladung — oeffnet die App im Tab Gruppe, Code steht schon drin"
+          },
+          {
+            "/": "/gtfoob/join",
             "comment": "Gleicher Link ohne Dateiendung"
           }
         ]
