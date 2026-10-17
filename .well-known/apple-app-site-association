@@ -22,12 +22,20 @@
         ],
         "components": [
           {
+            "/": "/getup/join.html",
+            "comment": "GET UP!-Einladung — oeffnet die App im Tab Gruppe, Code steht schon drin"
+          },
+          {
+            "/": "/getup/join",
+            "comment": "Gleicher Link ohne Dateiendung"
+          },
+          {
             "/": "/gtfoob/join.html",
-            "comment": "GTFOOB-Einladung — oeffnet die App im Tab Gruppe, Code steht schon drin"
+            "comment": "Alte Einladungslinks (vor der Umbenennung)"
           },
           {
             "/": "/gtfoob/join",
-            "comment": "Gleicher Link ohne Dateiendung"
+            "comment": "Alte Einladungslinks ohne Dateiendung"
           }
         ]
       }

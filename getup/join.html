@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GET UP! — Einladung</title>
+  <meta name="description" content="Einladung in eine Get-Up-Gruppe." />
+  <!-- Eine Einladung gehört nicht in einen Suchindex. -->
+  <meta name="robots" content="noindex, nofollow" />
+  <!-- Ist Get Up installiert, öffnet iOS diesen Link direkt in der App (Universal Link, siehe
+       /.well-known/apple-app-site-association). Diese Seite sieht nur, wer die App noch nicht hat
+       oder den Link im Browser geöffnet hat. Der Code steht im Fragment (#K7M2QX) und geht nie an den Server. -->
+  <meta name="apple-itunes-app" content="app-id=6818147917" />
+  <script>
+  (function () {
+    var raw = (location.hash || '').replace(/^#/, '') ||
+              new URLSearchParams(location.search).get('code') || '';
+    var code = raw.trim().toUpperCase();
+    if (!/^[ABCDEFGHJKMNPQRSTUVWXYZ2-9]{6}$/.test(code)) return;
+    window.gtfoobCode = code;
+    var meta = document.querySelector('meta[name="apple-itunes-app"]');
+    if (meta) meta.setAttribute('content', 'app-id=6818147917, app-argument=' +
+      'https://chasingdreamsinteractive.com/getup/join.html#' + code);
+  })();
+  </script>
+  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <link rel="stylesheet" href="app.css" />
+  <style>
+    .invite { text-align: center; }
+    .invite .hero-visual img { width: 112px; height: 112px; }
+    .code { font: 800 2.6rem/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .18em;
+            color: var(--accent); margin: 18px 0 6px; }
+    .cta { display: grid; gap: 12px; margin: 26px auto 0; max-width: 22rem; }
+    .btn { display: block; padding: 16px 20px; border-radius: 999px; font-weight: 700; text-decoration: none;
+           background: var(--accent); color: #fff; }
+    .btn--ghost { background: var(--card-strong); color: var(--ink); border: 1px solid var(--line); }
+  </style>
+</head>
+<body>
+  <div class="wrap invite">
+    <div class="hero-visual"><img src="icon.png" alt="GET UP! App-Symbol" width="512" height="512" decoding="async" /></div>
+    <h1>Du bist eingeladen!</h1>
+    <p class="lede" style="margin: 0 auto;">Jemand will mit dir um die Wette aufstehen. Wer in der Woche die meisten
+      Punkte holt, ist König.</p>
+
+    <div id="with-code" hidden>
+      <p class="code" id="code"></p>
+      <p style="color: var(--muted); margin: 0;">Dein Einladungscode</p>
+      <div class="cta">
+        <a class="btn" id="open-app" href="gtfoob://join">In Get Up öffnen</a>
+      </div>
+      <p style="margin-top: 22px;">Noch keine App? Get Up ist gerade im Test über TestFlight – frag, wer dich
+        eingeladen hat. Danach in der App unter <strong>Gruppe</strong> den Code eingeben.</p>
+    </div>
+
+    <div id="no-code" class="card" style="margin-top: 26px;">
+      <p><strong>Kein Code gefunden.</strong> Lass dir den Link bitte noch einmal schicken – am besten als ganzen Link.</p>
+    </div>
+
+    <a class="backlink" href="./">&#9666; Was ist Get Up?</a>
+  </div>
+
+  <footer class="foot">
+    <p>&copy; 2026 Jen Eric Prei&szlig;er &middot;
+      <a href="privacy.html">Datenschutz</a> &middot;
+      <a href="impressum.html">Impressum</a></p>
+  </footer>
+  <script>
+    if (window.gtfoobCode) {
+      document.getElementById('code').textContent = window.gtfoobCode;
+      document.getElementById('open-app').href = 'gtfoob://join/' + window.gtfoobCode;
+      document.getElementById('with-code').hidden = false;
+      document.getElementById('no-code').hidden = true;
+    }
+  </script>
+</body>
+</html>
