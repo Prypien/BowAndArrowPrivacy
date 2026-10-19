@@ -35,12 +35,10 @@
   const stage = document.getElementById("stage");
   const column = document.getElementById("column");
   const cv = document.getElementById("orbit");
-  const amb = document.getElementById("ambient");
   const emb = document.getElementById("embers");
   if (!cv || !column) return;
 
   const ctx = cv.getContext("2d", { alpha: false });
-  const actx = amb.getContext("2d", { alpha: false });
 
   /* ---------- Zustand ---------- */
   let meta = null;
@@ -88,12 +86,16 @@
     return BASE + tier + "/" + String(i).padStart(4, "0") + ".webp";
   }
 
+  /* Ein Frame gilt erst als bereit, wenn er auch dekodiert ist.
+     Sonst dekodiert der Browser ihn beim ersten drawImage mitten in
+     der Scroll-Schleife — genau das war das Ruckeln beim ersten
+     Durchscrollen. decode() erledigt das vorab, abseits der Schleife. */
   function load(i) {
     return new Promise((res) => {
       if (ready[i]) return res();
       const im = new Image();
       im.decoding = "async";
-      im.onload = () => {
+      const done = () => {
         imgs[i] = im;
         ready[i] = 1;
         readyCount++;
@@ -102,8 +104,13 @@
         lastDraw = -1;
         res();
       };
-      im.onerror = () => res();
       im.src = src(i);
+      im.decode().then(done, () => {
+        // decode() kann in Einzelfällen scheitern, obwohl das Bild
+        // geladen ist. Dann eben ohne Vorab-Dekodierung.
+        if (im.complete && im.naturalWidth) done();
+        else res();
+      });
     });
   }
 
@@ -198,7 +205,11 @@
      wieder richtig. */
   function resizeEmbers() {
     if (!emb) return;
-    const ed = Math.min(devicePixelRatio || 1, 1.5);
+    // Die Funken sind weiche Lichtpunkte — an ihnen sieht man keinen
+    // Unterschied zwischen einfacher und doppelter Auflösung, die
+    // Grafikkarte aber schon: es ist die einzige Fläche, die in jedem
+    // einzelnen Bild neu gezeichnet wird.
+    const ed = 1;
     const w = Math.round(innerWidth * ed);
     const h = Math.round(innerHeight * ed);
     if (emb.width === w && emb.height === h) return;
@@ -340,7 +351,6 @@
 
     const im = imgs[i];
     cover(ctx, im, cv.width, cv.height);
-    actx.drawImage(im, 0, 0, amb.width, amb.height);
   }
 
   /* ============================================================

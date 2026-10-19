@@ -55,8 +55,8 @@ Ursprüngliche Anleitung: [DOMAIN-SETUP.md](DOMAIN-SETUP.md).
 ## Die Landingpage: eine Kamerafahrt
 
 Die Startseite ist ein einziger Schwenk. In der Mitte steht eine Rüstung, fest im
-Bild; das Scrollen dreht die Kamera um sie herum. Links und rechts ziehen fünf
-Akte vorbei — Auftakt, Studio, Bow & Arrow, Grow into Life, Weltkarte —, jeder an
+Bild; das Scrollen dreht die Kamera um sie herum. Links und rechts ziehen sechs
+Akte vorbei (Auftakt, Studio, Bow & Arrow, Grow Into Life, GET UP!, Weltkarte), jeder an
 seinem Punkt der Umrundung. Der Kontakt sitzt in der Fußzeile. Die Leiste rechts
 zeigt den Winkel und dient als Kapitelsprung.
 
@@ -118,7 +118,7 @@ Chromes `--screenshot` einen gescrollten Zustand nicht mitnimmt.
 
 ### Projektkarten
 
-Die Kacheln von Bow & Arrow und Grow into Life sind keine Screenshots, sondern
+Die Kacheln von Bow & Arrow und Grow Into Life sind keine Screenshots, sondern
 gebaute Bilder: App-Symbol als Kachel, darunter der Name in der Schrift der
 jeweiligen App. Farben und Typografie stammen aus deren eigenem Design-System
 (`bow-and-arrow/_ds/…/tokens/` bzw. `grow-into-life/app.css`), nicht aus dem der
@@ -154,8 +154,10 @@ Die Startseite hat keinen waagerechten Überstand — geprüft von 320 px bis
   weichen Schleier hinter den Tafeln (`.panel::before`) auf den Pixel genau ab.
   Diese Pseudo-Elemente waren die eigentliche Ursache; sie tauchen in keiner
   Element-Suche auf und fallen bei der Fehlersuche leicht durchs Raster.
-- Das Ambient-Licht hängt über negatives `inset` an der Bühne statt über eine
-  `vw`-Breite und taucht damit in keiner Overflow-Rechnung mehr auf.
+- Das frühere Ambient-Licht (`#ambient`) ist entfernt. Als `<canvas>` mit
+  `width: auto` blieb es auf seiner Eigengröße von 30 × 52 px oben links
+  außerhalb des Bildes. Sichtbar war es also nie, gerechnet wurde es trotzdem
+  in jedem Frame.
 
 Nachmessen (Chrome erzwingt mindestens 500 px Fensterbreite — schmaler nur im
 Rahmen, etwa über `tools/kontaktbogen.html`).

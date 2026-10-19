@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Chasing Dreams Interactive — App Studio</title>
+  <title>Chasing Dreams Interactive | App Studio</title>
   <meta name="description" content="Chasing Dreams Interactive is a one man app studio. iOS apps and web projects, built end to end by one person.">
   <meta name="theme-color" content="#08060a">
   <link rel="canonical" href="https://chasingdreamsinteractive.com/">
@@ -40,12 +40,10 @@
 
   <!-- ============================================================
        BÜHNE — liegt fest im Bild, der Inhalt scrollt darüber.
-         #ambient  derselbe Frame, weich und groß: das Licht im Raum
          #column   die scharfe Rüstung im Hochformat des Clips
          #embers   aufsteigende Funken
        ============================================================ -->
   <div id="stage" aria-hidden="true">
-    <canvas id="ambient" width="30" height="52"></canvas>
     <div id="column">
       <canvas id="orbit"></canvas>
     </div>
@@ -57,7 +55,7 @@
        KOPFZEILE
        ============================================================ -->
   <header id="site-head">
-    <a class="brand" href="#top" aria-label="Chasing Dreams Interactive — zum Seitenanfang">
+    <a class="brand" href="#top" aria-label="Chasing Dreams Interactive, zum Seitenanfang">
       <span class="brand-mark" aria-hidden="true"></span>
       <span class="brand-word">Chasing Dreams&nbsp;<span class="brand-tail">Interactive</span></span>
     </a>
@@ -120,7 +118,7 @@
         <a class="work" href="bow-and-arrow/">
           <h2 class="panel-title">Bow &amp; Arrow</h2>
           <span class="work-media">
-            <img src="assets/work-bow-and-arrow.webp" alt="Bow and Arrow — App-Symbol mit dem goldenen Wappenlöwen"
+            <img src="assets/work-bow-and-arrow.webp" alt="Bow and Arrow, App-Symbol mit dem goldenen Wappenlöwen"
                  width="1200" height="750" loading="lazy" decoding="async">
           </span>
           <span class="work-foot">
@@ -128,6 +126,9 @@
             <span class="work-go"><span data-i18n="works.open">View</span>&ensp;<span class="arrow" aria-hidden="true">→</span></span>
           </span>
         </a>
+        <p class="work-store">
+          <a href="https://apps.apple.com/de/app/bow-arrow/id6764893835" target="_blank" rel="noopener"><span data-i18n="works.store">On the App Store</span>&ensp;<span class="arrow" aria-hidden="true">↗</span></a>
+        </p>
         <p class="work-badge">
           <a href="https://pixelpicked.com/game/5WmOCeQn7UP/bow-arrow/" target="_blank" rel="noopener">
             <img src="https://api.pixelpicked.com/api/badges/5WmOCeQn7UP/live.png"
@@ -137,28 +138,49 @@
       </div>
     </section>
 
-    <!-- 03 · Grow into Life ------------------------------------ -->
-    <section class="act act--left" id="grow" data-act="Grow into Life" data-act-key="act.grow">
+    <!-- 03 · Grow Into Life ------------------------------------ -->
+    <section class="act act--left" id="grow" data-act="Grow Into Life" data-act-key="act.grow">
       <div class="panel">
-        <p class="micro panel-kicker"><span class="num">02</span>&ensp;<span data-i18n="works.growTags">iOS · In development</span></p>
+        <p class="micro panel-kicker"><span class="num">02</span>&ensp;<span data-i18n="works.growTags">iOS · On the App Store</span></p>
         <a class="work" href="grow-into-life/">
-          <h2 class="panel-title">Grow into Life</h2>
+          <h2 class="panel-title">Grow Into Life</h2>
           <span class="work-media">
-            <img src="assets/work-grow-into-life.webp" alt="Grow into Life — App-Symbol mit dem Blatt im Kreis"
+            <img src="assets/work-grow-into-life.webp" alt="Grow Into Life, App-Symbol mit dem Blatt im Kreis"
                  width="1200" height="750" loading="lazy" decoding="async">
           </span>
           <span class="work-foot">
-            <span class="work-desc" data-i18n="works.growDesc">Baby tracking for iOS. Sleep, feeds, growth — quietly kept.</span>
+            <span class="work-desc" data-i18n="works.growDesc">Baby book for iOS. Keep every first, chart the growth, share the book.</span>
+            <span class="work-go"><span data-i18n="works.open">View</span>&ensp;<span class="arrow" aria-hidden="true">→</span></span>
+          </span>
+        </a>
+        <p class="work-store">
+          <a href="https://apps.apple.com/de/app/id6777678110" target="_blank" rel="noopener"><span data-i18n="works.store">On the App Store</span>&ensp;<span class="arrow" aria-hidden="true">↗</span></a>
+        </p>
+      </div>
+    </section>
+
+    <!-- 04 · GET UP! ------------------------------------------- -->
+    <section class="act act--right" id="getup" data-act="GET UP!" data-act-key="act.getup">
+      <div class="panel">
+        <p class="micro panel-kicker"><span class="num">03</span>&ensp;<span data-i18n="works.getupTags">iOS · Beta on TestFlight</span></p>
+        <a class="work" href="getup/">
+          <h2 class="panel-title">GET UP!</h2>
+          <span class="work-media">
+            <img src="assets/work-get-up.webp" alt="GET UP!, App-Symbol mit dem Wecker"
+                 width="1200" height="750" loading="lazy" decoding="async">
+          </span>
+          <span class="work-foot">
+            <span class="work-desc" data-i18n="works.getupDesc">An alarm clock for iOS that only stops once you are awake. Solve a mission, earn points, compete with friends.</span>
             <span class="work-go"><span data-i18n="works.open">View</span>&ensp;<span class="arrow" aria-hidden="true">→</span></span>
           </span>
         </a>
       </div>
     </section>
 
-    <!-- 04 · Weltkarte mit Geschichte -------------------------- -->
-    <section class="act act--right" id="world" data-act="World map" data-act-key="act.world">
+    <!-- 05 · Weltkarte mit Geschichte -------------------------- -->
+    <section class="act act--left" id="world" data-act="World map" data-act-key="act.world">
       <div class="panel">
-        <p class="micro panel-kicker"><span class="num">03</span>&ensp;<span data-i18n="works.worldTags">Web · Educational</span></p>
+        <p class="micro panel-kicker"><span class="num">04</span>&ensp;<span data-i18n="works.worldTags">Web · Educational</span></p>
         <a class="work" href="https://prypien.github.io/worldhistory/" target="_blank" rel="noopener">
           <h2 class="panel-title" data-i18n="works.worldName">A World Map with History</h2>
           <span class="work-media">
@@ -167,25 +189,6 @@
           </span>
           <span class="work-foot">
             <span class="work-desc" data-i18n="works.worldDesc">An interactive 3D globe: 100 years of borders, empires and forms of government, 1926 to 2026.</span>
-            <span class="work-go"><span data-i18n="works.openExt">Open</span>&ensp;<span class="arrow" aria-hidden="true">↗</span></span>
-          </span>
-        </a>
-      </div>
-    </section>
-
-
-    <!-- 05 · Jen Preisser Consulting --------------------------- -->
-    <section class="act act--left" id="consulting" data-act="Consulting" data-act-key="act.consulting">
-      <div class="panel">
-        <p class="micro panel-kicker"><span class="num">04</span>&ensp;<span data-i18n="works.consultTags">Consulting · AI</span></p>
-        <a class="work" href="https://jenpreisser-consulting.com" target="_blank" rel="noopener">
-          <h2 class="panel-title">Jen Preisser Consulting</h2>
-          <span class="work-media">
-            <img src="assets/work-consulting.webp" alt="Jen Preisser Consulting — Künstliche Intelligenz, verstanden."
-                 width="1200" height="750" loading="lazy" decoding="async">
-          </span>
-          <span class="work-foot">
-            <span class="work-desc" data-i18n="works.consultDesc">AI consulting from someone who ships. Strategy, automation and software that actually runs.</span>
             <span class="work-go"><span data-i18n="works.openExt">Open</span>&ensp;<span class="arrow" aria-hidden="true">↗</span></span>
           </span>
         </a>
@@ -201,7 +204,7 @@
     <div class="foot-cta">
       <p class="micro panel-kicker"><span data-i18n="cta.kicker">Contact</span></p>
       <p class="foot-cta-copy" data-i18n="cta.copy">Thank you for looking through my projects.
-        For consulting or anything else, write to me.</p>
+        If you have a question or just want to say hello, write to me.</p>
       <a class="cta-btn" href="mailto:support@chasingdreamsinteractive.com">
         <span data-i18n="cta.btn">Get in touch</span><span class="arrow" aria-hidden="true">&rarr;</span>
       </a>
@@ -213,7 +216,8 @@
 
     <nav class="foot-nav" aria-label="Seiten und Rechtliches">
       <a href="bow-and-arrow/">Bow &amp; Arrow</a>
-      <a href="grow-into-life/">Grow into Life</a>
+      <a href="grow-into-life/">Grow Into Life</a>
+      <a href="getup/">GET UP!</a>
       <a href="bow-and-arrow/impressum.html" data-i18n="foot.imprint">Legal notice</a>
       <a href="bow-and-arrow/privacy.html" data-i18n="foot.privacy">Privacy</a>
       <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>

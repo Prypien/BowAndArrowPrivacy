@@ -35,7 +35,7 @@
      ============================================================ */
   const I18N = {
     de: {
-      docTitle: "Chasing Dreams Interactive — App Studio",
+      docTitle: "Chasing Dreams Interactive | App Studio",
       docDesc: "Chasing Dreams Interactive ist ein Ein-Mann-Studio. iOS-Apps und Web-Projekte, von einer Person von Anfang bis Ende gebaut.",
       "nav.studio": "Studio", "nav.works": "Projekte", "nav.contact": "Kontakt",
       "a11y.skip": "Zum Inhalt",
@@ -44,30 +44,31 @@
       "hero.scroll": "Scrollen",
       "studio.kicker": "Studio",
       "studio.line": "Irgendwann habe ich beschlossen, sie real zu machen.",
-      "studio.copy": "Als Kind hatte ich unzählige Ideen und Träume im Kopf. Ich gebe alles, um sie zum Leben zu bringen — um das Bild in meinem Kopf hinaus in die Welt zu tragen.",
+      "studio.copy": "Als Kind hatte ich unzählige Ideen und Träume im Kopf. Ich gebe alles, um sie zum Leben zu bringen und das Bild in meinem Kopf hinaus in die Welt zu tragen.",
       "works.open": "Ansehen",
       "works.openExt": "Öffnen",
       "works.bowTags": "iOS · Tower Defense",
       "works.bowDesc": "Tower Defense für iOS. Stellung bauen, Wellen halten, Bogen spannen.",
-      "works.growTags": "iOS · In Entwicklung",
-      "works.growDesc": "Baby-Tracking für iOS. Schlaf, Mahlzeiten, Wachstum — ruhig festgehalten.",
+      "works.growTags": "iOS · Im App Store",
+      "works.growDesc": "Babybuch für iOS. Jedes erste Mal festhalten, Wachstum eintragen, Buch teilen.",
       "works.worldName": "Weltkarte mit Geschichte",
       "works.worldTags": "Web · Bildungsprojekt",
       "works.worldDesc": "Interaktiver 3D-Globus: 100 Jahre Grenzen, Reiche und Regierungsformen von 1926 bis 2026.",
-      "works.consultTags": "Beratung · KI",
-      "works.consultDesc": "KI-Beratung von jemandem, der selbst baut. Strategie, Automatisierung und Software, die wirklich läuft.",
+      "works.getupTags": "iOS · Beta auf TestFlight",
+      "works.getupDesc": "Ein Wecker für iOS, der erst Ruhe gibt, wenn du wach bist. Mission lösen, Punkte sammeln, gegen Freunde antreten.",
+      "works.store": "Im App Store",
       "cta.kicker": "Kontakt",
-      "cta.copy": "Danke, dass du dir meine Projekte angesehen hast. Für Beratung oder alles andere: schreib mir.",
-      "cta.btn": "Schreib uns",
+      "cta.copy": "Danke, dass du dir meine Projekte angesehen hast. Wenn du Fragen hast oder einfach Hallo sagen willst, schreib mir.",
+      "cta.btn": "Schreib mir",
       "foot.claim": "Handgemachte Apps aus Deutschland.",
       "foot.imprint": "Impressum", "foot.privacy": "Datenschutz",
       "foot.ai": "Bei Entwicklung, Text und Gestaltung kommen KI-Werkzeuge zum Einsatz. Jede Entscheidung trifft ein Mensch.",
       "act.hero": "Auftakt", "act.studio": "Studio", "act.bow": "Bow & Arrow",
-      "act.grow": "Grow into Life", "act.world": "Weltkarte",
-      "act.consulting": "Consulting",
+      "act.grow": "Grow Into Life", "act.world": "Weltkarte",
+      "act.getup": "GET UP!",
     },
     en: {
-      docTitle: "Chasing Dreams Interactive — App Studio",
+      docTitle: "Chasing Dreams Interactive | App Studio",
       docDesc: "Chasing Dreams Interactive is a one man app studio. iOS apps and web projects, built end to end by one person.",
       "nav.studio": "Studio", "nav.works": "Work", "nav.contact": "Contact",
       "a11y.skip": "Skip to content",
@@ -76,30 +77,31 @@
       "hero.scroll": "Scroll",
       "studio.kicker": "Studio",
       "studio.line": "One day I decided to make them real.",
-      "studio.copy": "As a child I always had so many ideas and dreams in my head. I give everything I have to bring them to life — to take the picture in my head and put it out into the world.",
+      "studio.copy": "As a child I always had so many ideas and dreams in my head. I give everything I have to bring them to life and to take the picture in my head out into the world.",
       "works.open": "View",
       "works.openExt": "Open",
       "works.bowTags": "iOS · Tower defense",
       "works.bowDesc": "Tower defense for iOS. Build the line, hold the waves, draw the bow.",
-      "works.growTags": "iOS · In development",
-      "works.growDesc": "Baby tracking for iOS. Sleep, feeds, growth — quietly kept.",
+      "works.growTags": "iOS · On the App Store",
+      "works.growDesc": "Baby book for iOS. Keep every first, chart the growth, share the book.",
       "works.worldName": "A World Map with History",
       "works.worldTags": "Web · Educational",
       "works.worldDesc": "An interactive 3D globe: 100 years of borders, empires and forms of government, 1926 to 2026.",
-      "works.consultTags": "Consulting · AI",
-      "works.consultDesc": "AI consulting from someone who ships. Strategy, automation and software that actually runs.",
+      "works.getupTags": "iOS · Beta on TestFlight",
+      "works.getupDesc": "An alarm clock for iOS that only stops once you are awake. Solve a mission, earn points, compete with friends.",
+      "works.store": "On the App Store",
       "cta.kicker": "Contact",
-      "cta.copy": "Thank you for looking through my projects. For consulting or anything else, write to me.",
+      "cta.copy": "Thank you for looking through my projects. If you have a question or just want to say hello, write to me.",
       "cta.btn": "Get in touch",
       "foot.claim": "Handmade apps from Germany.",
       "foot.imprint": "Legal notice", "foot.privacy": "Privacy",
       "foot.ai": "AI tools are part of how the code, the words and the visuals come together. Every decision is made by a human.",
       "act.hero": "Opening", "act.studio": "Studio", "act.bow": "Bow & Arrow",
-      "act.grow": "Grow into Life", "act.world": "World map",
-      "act.consulting": "Consulting",
+      "act.grow": "Grow Into Life", "act.world": "World map",
+      "act.getup": "GET UP!",
     },
     es: {
-      docTitle: "Chasing Dreams Interactive — Estudio de apps",
+      docTitle: "Chasing Dreams Interactive | Estudio de apps",
       docDesc: "Chasing Dreams Interactive es un estudio de una sola persona. Apps para iOS y proyectos web, hechos de principio a fin por una persona.",
       "nav.studio": "Estudio", "nav.works": "Proyectos", "nav.contact": "Contacto",
       "a11y.skip": "Ir al contenido",
@@ -108,27 +110,28 @@
       "hero.scroll": "Desplázate",
       "studio.kicker": "Estudio",
       "studio.line": "Un día decidí hacerlos reales.",
-      "studio.copy": "De niño tenía tantas ideas y sueños en la cabeza que no podía contarlos. Doy todo lo que tengo para darles vida — para llevar al mundo la imagen que tengo en la cabeza.",
+      "studio.copy": "De niño tenía tantas ideas y sueños en la cabeza que no podía contarlos. Doy todo lo que tengo para darles vida y llevar al mundo la imagen que tengo en la cabeza.",
       "works.open": "Ver",
       "works.openExt": "Abrir",
       "works.bowTags": "iOS · Tower defense",
       "works.bowDesc": "Tower defense para iOS. Levanta la línea, aguanta las oleadas, tensa el arco.",
-      "works.growTags": "iOS · En desarrollo",
-      "works.growDesc": "Seguimiento de bebés para iOS. Sueño, tomas, crecimiento — con calma.",
+      "works.growTags": "iOS · En el App Store",
+      "works.growDesc": "Álbum de bebé para iOS. Guarda cada primera vez, anota el crecimiento, comparte el álbum.",
       "works.worldName": "Mapa del mundo con historia",
       "works.worldTags": "Web · Proyecto educativo",
       "works.worldDesc": "Un globo 3D interactivo: 100 años de fronteras, imperios y formas de gobierno, de 1926 a 2026.",
-      "works.consultTags": "Consultoría · IA",
-      "works.consultDesc": "Consultoría de IA de alguien que construye. Estrategia, automatización y software que de verdad funciona.",
+      "works.getupTags": "iOS · Beta en TestFlight",
+      "works.getupDesc": "Un despertador para iOS que solo se calla cuando estás despierto. Resuelve una misión, gana puntos, compite con tus amigos.",
+      "works.store": "En el App Store",
       "cta.kicker": "Contacto",
-      "cta.copy": "Gracias por echar un ojo a mis proyectos. Para consultoría o cualquier otra cosa, escríbeme.",
-      "cta.btn": "Escríbenos",
+      "cta.copy": "Gracias por echar un ojo a mis proyectos. Si tienes alguna pregunta o solo quieres saludar, escríbeme.",
+      "cta.btn": "Escríbeme",
       "foot.claim": "Apps hechas a mano desde Alemania.",
       "foot.imprint": "Aviso legal", "foot.privacy": "Privacidad",
       "foot.ai": "En el desarrollo, los textos y el diseño se usan herramientas de IA. Cada decisión la toma una persona.",
       "act.hero": "Apertura", "act.studio": "Estudio", "act.bow": "Bow & Arrow",
-      "act.grow": "Grow into Life", "act.world": "Mapa del mundo",
-      "act.consulting": "Consultoría",
+      "act.grow": "Grow Into Life", "act.world": "Mapa del mundo",
+      "act.getup": "GET UP!",
     },
   };
 
@@ -191,6 +194,9 @@
     label: el.dataset.act,
     top: 0, h: 0, p: 0,
     blur: -1,
+    // Zuletzt geschriebene Werte — unverändert wird nichts gesetzt,
+    // sonst bewertet der Browser in jedem Bild alle Tafeln neu.
+    t: "", lit: "",
     dot: null,
   }));
 
@@ -242,6 +248,7 @@
   let prev = performance.now();
   let activeIdx = -1;
   let lastSettle = -1;
+  let lastOrbit = "";
 
   function tick(now) {
     const dt = Math.min(64, now - prev) || 16;
@@ -261,7 +268,11 @@
     // --orbit und --settle sitzen bewusst auf dem Element, das sie
     // braucht, nicht auf :root: eine Variable am Wurzelelement zu
     // ändern lässt den Browser den ganzen Baum neu bewerten.
-    if (railTrack) railTrack.style.setProperty("--orbit", smooth.toFixed(4));
+    const orbit = smooth.toFixed(4);
+    if (railTrack && orbit !== lastOrbit) {
+      railTrack.style.setProperty("--orbit", orbit);
+      lastOrbit = orbit;
+    }
     if (window.CDIOrbit) window.CDIOrbit.render(smooth, drift, dt);
 
     // Die Gradzahl kommt aus orbit.js: die Kamera geht über die Seite
@@ -284,8 +295,12 @@
       const t = clamp((a.top + a.h / 2 - mid) / (innerHeight * 0.85), -1.25, 1.25);
       const abs = t < 0 ? -t : t;
       if (a.panel && !reduced) {
-        a.panel.style.setProperty("--t", t.toFixed(3));
-        a.panel.style.setProperty("--a", abs.toFixed(3));
+        const ts = t.toFixed(3);
+        if (ts !== a.t) {
+          a.panel.style.setProperty("--t", ts);
+          a.panel.style.setProperty("--a", abs.toFixed(3));
+          a.t = ts;
+        }
         // Die Unschärfe wird in Stufen gesetzt. Jeder neue filter-Wert
         // zwingt den Browser, die Tafel neu zu rastern — bei jedem Bild
         // wäre das die teuerste Zeile der ganzen Seite.
@@ -295,8 +310,8 @@
       if (a.words) {
         // --lit wandert von 0 bis über das letzte Wort hinaus,
         // während der Akt von unten in die Mitte kommt.
-        const lit = clamp((0.62 - t) / 0.78, 0, 1) * (a.words.__words + 2.5);
-        a.words.style.setProperty("--lit", lit.toFixed(2));
+        const lit = (clamp((0.62 - t) / 0.78, 0, 1) * (a.words.__words + 2.5)).toFixed(2);
+        if (lit !== a.lit) { a.words.style.setProperty("--lit", lit); a.lit = lit; }
       }
       if (abs < bestD) { bestD = abs; best = i; }
     }
