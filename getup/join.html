@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>GET UP! — Einladung</title>
-  <meta name="description" content="Einladung in eine Get-Up-Gruppe." />
+  <meta name="description" content="Einladung in eine GET UP!-Crew." />
   <!-- Eine Einladung gehört nicht in einen Suchindex. -->
   <meta name="robots" content="noindex, nofollow" />
   <!-- Ist Get Up installiert, öffnet iOS diesen Link direkt in der App (Universal Link, siehe
@@ -23,42 +23,42 @@
       'https://chasingdreamsinteractive.com/getup/join.html#' + code);
   })();
   </script>
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
-  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="stylesheet" href="app.css" />
   <style>
     .invite { text-align: center; }
-    .invite .hero-visual img { width: 112px; height: 112px; }
-    .code { font: 800 2.6rem/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: .18em;
-            color: var(--accent); margin: 18px 0 6px; }
+    .invite .hero-visual img { width: 128px; }
+    .invite .lede { margin: 0 auto; }
+    .code { display: inline-block; font: 700 2.4rem/1 var(--font-mono); letter-spacing: .18em;
+            padding: 14px 18px 12px 26px; margin: 22px 0 6px; background: var(--surface);
+            border: var(--line); border-radius: 16px; box-shadow: var(--hard); }
     .cta { display: grid; gap: 12px; margin: 26px auto 0; max-width: 22rem; }
-    .btn { display: block; padding: 16px 20px; border-radius: 999px; font-weight: 700; text-decoration: none;
-           background: var(--accent); color: #fff; }
-    .btn--ghost { background: var(--card-strong); color: var(--ink); border: 1px solid var(--line); }
   </style>
 </head>
 <body>
   <div class="wrap invite">
-    <div class="hero-visual"><img src="icon.png" alt="GET UP! App-Symbol" width="512" height="512" decoding="async" /></div>
+    <div class="hero-visual"><picture><source srcset="icon-night.png?v=3" media="(prefers-color-scheme: dark)" /><img src="icon.png?v=3" alt="GET UP! App-Symbol" width="512" height="512" decoding="async" /></picture></div>
     <h1>Du bist eingeladen!</h1>
-    <p class="lede" style="margin: 0 auto;">Jemand will mit dir um die Wette aufstehen. Wer in der Woche die meisten
-      Punkte holt, ist König.</p>
+    <p class="lede">Jemand will mit dir um die Wette aufstehen. Wer im Monat die meisten Punkte holt,
+      trägt die Krone.</p>
 
     <div id="with-code" hidden>
       <p class="code" id="code"></p>
-      <p style="color: var(--muted); margin: 0;">Dein Einladungscode</p>
+      <p style="margin: 0;"><small>Dein Einladungscode</small></p>
       <div class="cta">
-        <a class="btn" id="open-app" href="gtfoob://join">In Get Up öffnen</a>
+        <a class="btn" id="open-app" href="gtfoob://join">In GET UP! öffnen</a>
       </div>
-      <p style="margin-top: 22px;">Noch keine App? Get Up ist gerade im Test über TestFlight – frag, wer dich
-        eingeladen hat. Danach in der App unter <strong>Gruppe</strong> den Code eingeben.</p>
+      <p style="margin-top: 26px;">Noch keine App? GET UP! ist gerade im Test: auf dem iPhone über TestFlight, auf
+        Android über Google Play. Frag, wer dich eingeladen hat. Danach in der App im Tab <strong>Crew</strong> den
+        Code eingeben.</p>
     </div>
 
     <div id="no-code" class="card" style="margin-top: 26px;">
       <p><strong>Kein Code gefunden.</strong> Lass dir den Link bitte noch einmal schicken – am besten als ganzen Link.</p>
     </div>
 
-    <a class="backlink" href="./">&#9666; Was ist Get Up?</a>
+    <a class="backlink" href="./">&#9666; Was ist GET UP!?</a>
   </div>
 
   <footer class="foot">

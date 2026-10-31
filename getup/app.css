@@ -1,179 +1,260 @@
 /* ===========================================================
-   GTFOOB — eigenes Erscheinungsbild
+   GET UP! — Retro-Pop, wie in der App
    ===========================================================
-   Gehört zur App, nicht zum Studio. Werte aus GTFOOB/Design/Theme.swift:
-     Hintergrund   #050508 → #120D1C → #3A1626   (Nacht, Verlauf nach unten)
-     accent        #FF5A4E   Koralle (Wecker, Knöpfe)
-     points        #12B5A5   Türkis
-     streak        #FFA41B   Orange
+   Gehört zur App, nicht zum Studio. Werte aus GetUp/Design/Theme.swift
+   (Android: ui/Theme.kt), Regeln in docs/DESIGN.md:
+     Tag „Klassiker“      Papier #F3E3BF, Kirsche #E8344E, Orange #FF9F1C, Türkis #1F8A8A
+     Nacht „Nachtschicht“ Nachtblau #15123A, Pink #FF3D8B, Lila #7B2CBF, Himmelblau #3FB8E6
+   Dicke Tinten-Konturen, harte Schatten nach rechts unten, Rasterpunkte.
+   Schriften: Luckiest Guy (Schlagzeilen), Fredoka (Text), Courier Prime (Codes).
    Ändert sich Theme.swift, ändert sich diese Datei mit.
-   Die App ist dunkel – die Seite auch.
    =========================================================== */
 
+@font-face { font-family: "Luckiest Guy"; src: url("fonts/luckiest-guy.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: "Fredoka"; src: url("fonts/fredoka.woff2") format("woff2"); font-weight: 300 700; font-display: swap; }
+@font-face { font-family: "Courier Prime"; src: url("fonts/courier-prime-bold.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
 :root {
-  --bg-top: #050508;
-  --bg-mid: #120d1c;
-  --bg-low: #3a1626;
-  --card: rgba(255, 255, 255, .055);
-  --card-strong: rgba(255, 255, 255, .09);
-  --ink: #ffffff;
-  --ink-soft: rgba(255, 255, 255, .78);
-  --muted: rgba(255, 255, 255, .5);
-  --accent: #ff5a4e;
-  --accent-soft: rgba(255, 90, 78, .16);
-  --points: #12b5a5;
-  --streak: #ffa41b;
-  --line: rgba(255, 255, 255, .16);
-  --line-soft: rgba(255, 255, 255, .08);
+  --bg: #f3e3bf;
+  --surface: #fffaf0;
+  --ink: #1b1420;
+  --ink-soft: #5d4e45;
+  --outline: #1b1420;
+  --dots: rgba(232, 52, 78, .22);
+  --accent: #e8344e;
+  --accent-ink: #fffaf0;
+  --orange: #ff9f1c;
+  --yellow: #ffd23f;
+  --points: #1f8a8a;
+  --extrusion: #1f8a8a;
+  --line: 3px solid var(--outline);
+  --hard: 5px 5px 0 var(--outline);
+  --hard-sm: 3px 3px 0 var(--outline);
   --radius: 22px;
-  --font-display: system-ui, -apple-system, "SF Pro Rounded", "Inter", sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, sans-serif;
+  --font-display: "Luckiest Guy", "Arial Black", Impact, sans-serif;
+  --font-body: "Fredoka", ui-rounded, system-ui, -apple-system, sans-serif;
+  --font-mono: "Courier Prime", ui-monospace, Menlo, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15123a;
+    --surface: #231d57;
+    --ink: #fff6e8;
+    --ink-soft: #b8b1d9;
+    --outline: #07051a;
+    --dots: rgba(63, 184, 230, .26);
+    --accent: #ff3d8b;
+    --orange: #3fb8e6;
+    --yellow: #ffd23f;
+    --points: #2ec4b6;
+    --extrusion: #7b2cbf;
+  }
 }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
-html { color-scheme: dark; scroll-behavior: smooth; background: var(--bg-top); }
+html { color-scheme: light dark; scroll-behavior: smooth; background: var(--bg); }
 
 body {
   font-family: var(--font-body);
-  font-size: 16.5px;
-  line-height: 1.7;
-  color: var(--ink-soft);
-  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-low) 100%) fixed;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--ink);
+  background:
+    radial-gradient(circle, var(--dots) 0 1.3px, transparent 1.7px) 0 0 / 14px 14px,
+    var(--bg);
   -webkit-font-smoothing: antialiased;
   min-height: 100vh;
 }
 
-::selection { background: rgba(255, 90, 78, .35); color: #fff; }
-:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
+::selection { background: var(--yellow); color: #1b1420; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
 
 /* ---------- Kopfleiste ---------- */
 
 header.bar {
   position: sticky; top: 0; z-index: 5;
-  background: rgba(5, 5, 8, .72);
-  border-bottom: 1px solid var(--line-soft);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--surface);
+  border-bottom: var(--line);
 }
 header.bar .inner {
-  max-width: 46rem; margin: 0 auto; padding: 14px 22px;
+  max-width: 60rem; margin: 0 auto; padding: 12px 20px;
   display: flex; align-items: center; gap: 14px;
 }
 header.bar a.home {
   font-family: var(--font-display);
-  font-weight: 800; font-size: 1.05rem; letter-spacing: .04em;
-  color: var(--ink); text-decoration: none; white-space: nowrap;
+  font-size: 1.5rem; line-height: 1; letter-spacing: .02em; padding-top: 4px;
+  color: var(--accent); text-decoration: none; white-space: nowrap;
+  text-shadow: 2px 2px 0 var(--outline);
 }
-header.bar a.home:hover { color: var(--accent); }
 
 nav.legal-tabs { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
 nav.legal-tabs a {
-  font-size: .66rem; font-weight: 700; letter-spacing: .16em;
-  padding: 8px 16px; border: 1px solid var(--line);
-  border-radius: 999px; color: var(--muted); text-decoration: none;
-  transition: color .2s ease, border-color .2s ease, background-color .2s ease;
+  font-family: var(--font-display); font-weight: 400; font-size: .9rem; letter-spacing: .04em;
+  padding: 7px 13px 4px; border: var(--line); border-radius: 999px;
+  background: var(--surface); color: var(--ink); text-decoration: none;
+  box-shadow: var(--hard-sm);
+  transition: transform .08s, box-shadow .08s;
 }
-nav.legal-tabs a:hover { color: var(--ink); border-color: var(--accent); }
-nav.legal-tabs a.active { color: #fff; background: var(--accent); border-color: var(--accent); }
+nav.legal-tabs a:hover { background: var(--yellow); color: #1b1420; }
+nav.legal-tabs a:active { transform: translate(3px, 3px); box-shadow: none; }
+nav.legal-tabs a.active { background: var(--accent); color: var(--accent-ink); }
 
 /* ---------- Textfluss ---------- */
 
-.wrap { max-width: 46rem; margin: 0 auto; padding: 48px 22px 90px; }
+.wrap { max-width: 46rem; margin: 0 auto; padding: 40px 20px 80px; }
+.wrap--wide { max-width: 60rem; }
 
-h1 {
-  font-family: var(--font-display); font-weight: 800;
-  font-size: clamp(2.2rem, 7vw, 3.1rem); line-height: 1.08;
-  margin: 26px 0 8px; letter-spacing: -.02em; color: var(--ink);
+h1, h2 {
+  font-family: var(--font-display); font-weight: 400; color: var(--ink);
+  letter-spacing: .02em;
 }
-h2 {
-  font-family: var(--font-display); font-weight: 750; font-size: 1.32rem;
-  margin: 44px 0 10px; color: var(--ink);
-}
-h3 {
-  font-family: var(--font-body); font-weight: 700; font-size: 1rem;
-  margin: 26px 0 6px; color: var(--ink);
-}
-p, li, td { color: var(--ink-soft); }
-strong { color: var(--ink); font-weight: 700; }
-small { color: var(--muted); font-size: .82rem; }
+h1 { font-size: clamp(2.4rem, 8vw, 3.6rem); line-height: 1.02; margin: 18px 0 10px; }
+h2 { font-size: clamp(1.5rem, 4.5vw, 2rem); line-height: 1.1; margin: 52px 0 12px; }
+h3 { font-family: var(--font-body); font-weight: 700; font-size: 1.08rem; margin: 26px 0 6px; color: var(--ink); }
+p, li, td { color: var(--ink); }
+strong { font-weight: 700; }
+small { color: var(--ink-soft); font-size: .86rem; }
 
-a { color: var(--accent); text-underline-offset: 3px; }
-a:hover { color: #fff; }
+a { color: var(--accent); font-weight: 600; text-underline-offset: 3px; text-decoration-thickness: 2px; }
+a:hover { color: var(--ink); }
 
-ul { padding-left: 1.3rem; }
+ul, ol { padding-left: 1.3rem; }
 li { margin: 6px 0; }
-li::marker { color: var(--accent); }
-hr { border: none; border-top: 1px solid var(--line-soft); margin: 56px 0; }
+li::marker { color: var(--accent); font-weight: 700; }
+hr { border: none; border-top: var(--line); margin: 56px 0; }
 
 table {
-  width: 100%; border-collapse: collapse; margin: 18px 0; font-size: .92rem;
+  width: 100%; border-collapse: separate; border-spacing: 0; margin: 18px 0; font-size: .94rem;
   display: block; overflow-x: auto;
+  background: var(--surface); border: var(--line); border-radius: 16px; box-shadow: var(--hard-sm);
 }
-th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
-th {
-  color: var(--muted); font-size: .68rem; font-weight: 700;
-  letter-spacing: .14em; text-transform: uppercase;
-}
+th, td { text-align: left; padding: 11px 12px; border-bottom: 2px solid color-mix(in srgb, var(--outline) 18%, transparent); vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+th { font-family: var(--font-display); font-weight: 400; font-size: .9rem; letter-spacing: .04em; color: var(--accent); }
 
 .card {
-  border: 1px solid var(--line-soft); border-radius: var(--radius);
-  background: var(--card); padding: 20px 22px; margin: 18px 0;
+  border: var(--line); border-radius: var(--radius);
+  background: var(--surface); padding: 18px 22px; margin: 18px 0;
+  box-shadow: var(--hard);
 }
+.card > :first-child { margin-top: 0; }
+.card > :last-child { margin-bottom: 0; }
+
+ol.steps { padding-left: 1.4rem; margin: 0; }
+ol.steps li { margin: 8px 0; }
 
 .foot {
-  max-width: 46rem; margin: 0 auto; padding: 0 22px 60px;
-  color: var(--muted); font-size: .82rem;
+  max-width: 46rem; margin: 0 auto; padding: 0 20px 60px;
+  color: var(--ink-soft); font-size: .88rem;
 }
 .foot a { color: var(--accent); }
 
-/* ---------- Startseite des Projekts ---------- */
+/* ---------- Knöpfe und Plaketten ---------- */
 
-.hero { display: grid; gap: 34px; align-items: center; margin: 12px 0 8px; }
-.kicker {
-  font-size: .68rem; font-weight: 700; letter-spacing: .18em;
-  text-transform: uppercase; color: var(--accent); margin: 0 0 10px;
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: var(--font-display); font-weight: 400; font-size: 1.2rem; letter-spacing: .03em; line-height: 1;
+  padding: 16px 22px 12px; border: var(--line); border-radius: 18px;
+  background: var(--accent); color: var(--accent-ink); text-decoration: none;
+  box-shadow: var(--hard);
+  transition: transform .08s, box-shadow .08s;
 }
-.lede { font-size: 1.08rem; max-width: 34rem; }
-.hero-visual { display: flex; justify-content: center; }
-.hero-visual img {
-  width: 100%; max-width: 300px; height: auto; border-radius: 26%;
-  box-shadow: 0 20px 60px rgba(255, 90, 78, .28);
-}
+.btn:hover { color: var(--accent-ink); filter: brightness(1.05); }
+.btn:active { transform: translate(5px, 5px); box-shadow: none; }
+.btn--ghost { background: var(--surface); color: var(--ink); }
+.btn--ghost:hover { color: var(--ink); }
 
-.pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 20px 0 0; }
+.pills { display: flex; flex-wrap: wrap; gap: 10px; margin: 22px 0 0; }
 .pill {
-  font-size: .72rem; font-weight: 700; letter-spacing: .02em;
-  padding: 7px 14px; border-radius: 999px;
-  background: var(--accent-soft); color: var(--accent);
-  border: 1px solid rgba(255, 90, 78, .35);
+  font-family: var(--font-display); font-size: .95rem; letter-spacing: .04em; line-height: 1;
+  padding: 8px 13px 5px; border: var(--line); border-radius: 999px;
+  background: var(--yellow); color: #1b1420; box-shadow: var(--hard-sm);
 }
-.pill--muted { background: var(--card); color: var(--ink-soft); border-color: var(--line); }
+.pill--muted { background: var(--surface); color: var(--ink); }
+.pill--accent { background: var(--accent); color: var(--accent-ink); }
 
-.features { display: grid; gap: 14px; margin: 18px 0 0; }
+/* ---------- Startseite der App ---------- */
+
+.hero { display: grid; gap: 30px; align-items: center; margin: 8px 0; }
+.kicker {
+  font-family: var(--font-mono); font-weight: 700; font-size: .9rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-soft); margin: 0 0 6px;
+}
+
+/* Schriftzug „GET UP!“: Tinten-Kontur und 3D-Schatten wie PopText in der App. */
+.lockup {
+  font-family: var(--font-display); font-weight: 400;
+  font-size: clamp(4rem, 17vw, 7.5rem); line-height: .9; letter-spacing: .01em;
+  margin: 6px 0 18px; color: var(--yellow);
+  -webkit-text-stroke: 3px var(--outline); paint-order: stroke fill;
+  text-shadow: 4px 4px 0 var(--extrusion), 7px 7px 0 var(--outline);
+}
+.lockup .hl { color: var(--accent); }
+
+.lede { font-size: 1.15rem; max-width: 32rem; margin: 0; }
+
+/* App-Symbol „Wecker-Knall“: Tag- bzw. Nacht-Fassung wie auf dem Homescreen. Sein Knall-Stern ist der eine Knall der Seite. */
+.hero-visual { display: grid; place-items: center; }
+.hero-visual img {
+  display: block; width: 100%; max-width: 300px; height: auto;
+  border: var(--line); border-radius: 22.5%; box-shadow: 7px 7px 0 var(--outline);
+  transform: rotate(-3deg);
+}
+
+.features { display: grid; gap: 18px; margin: 18px 0 0; }
 .feature {
-  border: 1px solid var(--line-soft); border-radius: var(--radius);
-  background: var(--card); padding: 20px 22px;
+  border: var(--line); border-radius: var(--radius);
+  background: var(--surface); padding: 18px 20px; box-shadow: var(--hard);
 }
-.feature:nth-child(4n+1) h3 { color: var(--accent); }
-.feature:nth-child(4n+2) h3 { color: var(--streak); }
-.feature:nth-child(4n+3) h3 { color: var(--points); }
-.feature h3 { margin-top: 0; }
-.feature p { margin-bottom: 0; font-size: .94rem; }
+.feature h3 {
+  font-family: var(--font-display); font-weight: 400; font-size: 1.35rem; letter-spacing: .03em;
+  margin: 0 0 6px; color: var(--accent);
+}
+.feature:nth-child(3n+2) h3 { color: var(--points); }
+.feature:nth-child(3n+3) h3 { color: var(--extrusion); }
+.feature p { margin: 0; font-size: .98rem; }
 
-.promise { border-left: 3px solid var(--accent); padding-left: 18px; margin: 18px 0; }
-.promise p { margin: 10px 0; }
+.shots {
+  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(170px, 210px);
+  gap: 18px; overflow-x: auto; padding: 6px 8px 18px 2px; margin: 18px 0 0;
+  scroll-snap-type: x mandatory;
+}
+.shots img {
+  width: 100%; height: auto; display: block; scroll-snap-align: start;
+  border: var(--line); border-radius: 18px; box-shadow: var(--hard);
+  background: var(--surface);
+}
 
-.backlink { display: inline-block; margin-top: 12px; font-size: .9rem; }
+.platforms { display: grid; gap: 18px; margin: 18px 0 0; }
+.platform h3 { margin-top: 0; }
+.platform p { margin: 6px 0 0; }
+
+.promise { display: grid; gap: 14px; margin: 18px 0; }
+.promise p {
+  margin: 0; padding: 14px 18px; background: var(--surface);
+  border: var(--line); border-radius: 16px; box-shadow: var(--hard-sm);
+}
+
+.backlink { display: inline-block; margin-top: 14px; }
 
 /* ---------- Breite Darstellung ---------- */
 
 @media (min-width: 720px) {
-  .hero { grid-template-columns: 1.15fr .85fr; }
-  .features { grid-template-columns: 1fr 1fr; }
+  .hero { grid-template-columns: 1.2fr .8fr; }
+  .features { grid-template-columns: 1fr 1fr 1fr; }
+  .platforms { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 560px) {
   header.bar .inner { flex-wrap: wrap; gap: 10px; }
   nav.legal-tabs { margin-left: 0; }
+  .hero-visual img { max-width: 210px; }
+  .lockup { -webkit-text-stroke-width: 2px; text-shadow: 3px 3px 0 var(--extrusion), 5px 5px 0 var(--outline); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn, nav.legal-tabs a { transition: none; }
 }

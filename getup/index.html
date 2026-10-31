@@ -3,16 +3,19 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GET UP! — der Wecker, der dich aus dem Bett holt | Chasing Dreams Interactive</title>
-  <meta name="description" content="Get Up ist ein Wecker für iOS, der erst aus ist, wenn du eine Mission gelöst hast — und mit Freunden in der Gruppe zum Wettbewerb wird." />
-  <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg" />
+  <title>GET UP! — der Wecker mit Aufgaben | Chasing Dreams Interactive</title>
+  <meta name="description" content="GET UP! ist ein Wecker für iPhone und Android, der erst aus ist, wenn du eine Aufgabe gelöst hast. Mit Crew unter Freunden: Wer ist zuerst wach?" />
+  <meta name="theme-color" content="#F3E3BF" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#15123A" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="canonical" href="https://chasingdreamsinteractive.com/getup/" />
-  <meta property="og:title" content="GET UP! — der Wecker, der dich aus dem Bett holt" />
-  <meta property="og:description" content="Missionen statt Snooze. Mit Freunden in der Gruppe: Wer steht am frühesten auf?" />
+  <meta property="og:title" content="GET UP! — der Wecker mit Aufgaben" />
+  <meta property="og:description" content="Kein Snooze. Der Wecker geht erst aus, wenn du eine Aufgabe löst. Mit Crew unter Freunden." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://chasingdreamsinteractive.com/getup/" />
   <meta property="og:image" content="https://chasingdreamsinteractive.com/getup/icon.png" />
-  <link rel="stylesheet" href="../assets/fonts/fonts.css" />
+  <link rel="preload" href="fonts/luckiest-guy.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="app.css" />
 </head>
 <body>
@@ -20,77 +23,106 @@
     <div class="inner">
       <a class="home" href="index.html">GET UP!</a>
       <nav class="legal-tabs">
-        <a href="privacy.html">PRIVACY</a>
+        <a href="privacy.html">DATENSCHUTZ</a>
+        <a href="delete.html">KONTO LÖSCHEN</a>
         <a href="impressum.html">IMPRESSUM</a>
       </nav>
     </div>
   </header>
 
-  <div class="wrap">
+  <div class="wrap wrap--wide">
 
     <div class="hero">
       <div>
-        <p class="kicker">iOS &middot; 2026</p>
-        <h1>GET UP!</h1>
+        <p class="kicker">Wecker &middot; iPhone &amp; Android</p>
+        <h1 class="lockup">GET <span class="hl">UP!</span></h1>
         <p class="lede">
-          Ein Wecker, der erst Ruhe gibt, wenn du wach bist: Er klingelt, bis du
-          eine Mission gel&ouml;st hast. Kein Snooze, keine Ausreden.
+          Der Wecker, der erst Ruhe gibt, wenn du wach bist. Er klingelt, bis du eine Aufgabe gel&ouml;st hast:
+          rechnen, Kniebeugen vor der Kamera, das gemachte Bett fotografieren. Kein Snooze, keine Ausreden.
         </p>
         <div class="pills">
-          <span class="pill">TestFlight</span>
-          <span class="pill pill--muted">Deutsch</span>
+          <span class="pill">31 Aufgaben</span>
+          <span class="pill pill--muted">Crew mit Freunden</span>
           <span class="pill pill--muted">Keine Werbung</span>
         </div>
       </div>
       <div class="hero-visual">
-        <img src="icon.png" alt="GET UP! App-Symbol" width="512" height="512" decoding="async" />
+        <picture><source srcset="icon-night.png?v=3" media="(prefers-color-scheme: dark)" /><img src="icon.png?v=3" alt="App-Symbol von GET UP!: ein Wecker vor einem Knall-Stern" width="512" height="512" decoding="async" /></picture>
       </div>
     </div>
 
+    <div class="shots" aria-label="Bilder aus der App">
+      <img src="img/screen-1-klingeln.webp" alt="Der Wecker klingelt und zeigt die Aufgabe" width="540" height="960" loading="lazy" decoding="async" />
+      <img src="img/screen-2-rechnen.webp" alt="Aufgabe Rechnen" width="540" height="960" loading="lazy" decoding="async" />
+      <img src="img/screen-6-aufgaben.webp" alt="Auswahl der Aufgaben" width="540" height="960" loading="lazy" decoding="async" />
+      <img src="img/screen-3-crew.webp" alt="Crew mit Selfies vom Morgen" width="540" height="960" loading="lazy" decoding="async" />
+      <img src="img/screen-4-krone.webp" alt="Monats-Rangliste mit Krone" width="540" height="960" loading="lazy" decoding="async" />
+      <img src="img/screen-7-wach.webp" alt="Geschafft: wach" width="540" height="960" loading="lazy" decoding="async" />
+    </div>
+
     <section>
-      <h2>Was drin ist</h2>
+      <h2>So l&auml;uft dein Morgen</h2>
       <div class="features">
         <div class="feature">
-          <h3>Missionen</h3>
-          <p>Rechnen, Bombe entsch&auml;rfen, Simon sagt, Memory, sch&uuml;tteln, Schritte gehen, Barcode
-             scannen, ein Foto machen &mdash; oder Zufall.</p>
+          <h3>31 Aufgaben</h3>
+          <p>F&uuml;r den Kopf: Rechnen, Bombe entsch&auml;rfen, Simon sagt, Memory, Flaggen-Quiz. Zum Aufstehen:
+             Kniebeugen, Hampelm&auml;nner, Liegest&uuml;tze, Tanzen &ndash; die Kamera z&auml;hlt mit, direkt auf
+             deinem Handy. Mit Beweisfoto: Bett, Himmel, Barcode. Oder Zufall.</p>
         </div>
         <div class="feature">
-          <h3>Streak &amp; Punkte</h3>
-          <p>Jeder Tag am St&uuml;ck bringt mehr Punkte, und die Missionen werden mit der Streak
-             schwerer.</p>
+          <h3>Deine Crew</h3>
+          <p>Gr&uuml;nde eine private Crew und lade Freunde mit einem 6-stelligen Code ein. Wer zuerst wach ist,
+             schickt den anderen eine Sprach- oder Videonachricht und darf ihnen eine Aufgabe zuteilen. Wer den
+             Monat gewinnt, tr&auml;gt die Krone.</p>
         </div>
         <div class="feature">
-          <h3>Gruppen</h3>
-          <p>Freunde per 6-stelligem Code einladen und sehen, wer am fr&uuml;hesten aufsteht. Jede Woche
-             gibt es einen K&ouml;nig.</p>
-        </div>
-        <div class="feature">
-          <h3>Eigene T&ouml;ne</h3>
-          <p>Klassische Weckt&ouml;ne, eigene Musik oder selbst aufgenommen.</p>
+          <h3>Dein Stil</h3>
+          <p>&Uuml;ber 40 Weckt&ouml;ne, Meme-Videos mit Ton, animierte Hintergr&uuml;nde oder ein eigenes Foto.
+             Dazu Power-Nap, Wach-Check und eine Erinnerung, wann es Zeit f&uuml;rs Bett ist.</p>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Wie wir mit den Daten umgehen</h2>
-      <div class="promise">
-        <p><strong>Ohne Konto bleibt alles auf dem iPhone.</strong> Wecker, Punkte und Verlauf werden
-        nirgendwohin &uuml;bertragen.</p>
-        <p><strong>Crews in der EU.</strong> Wer eine Crew nutzt, dessen Ergebnisse liegen in Frankfurt
-        am Main (Google Firebase, Region europe-west3); einzelne Morgen werden nach 62 Tagen gel&ouml;scht.</p>
-        <p><strong>Keine Werbung in der App.</strong> Statistik und Werbe-Messung (Meta) nur, wenn du
-        zustimmst &ndash; jederzeit in den Einstellungen abschaltbar.</p>
-        <p><strong>Jederzeit l&ouml;schbar.</strong> Konto und Crew-Daten lassen sich direkt in der App
-        entfernen.</p>
-        <p>Die Einzelheiten stehen in der <a href="privacy.html">Datenschutzerkl&auml;rung</a>.</p>
+      <h2>F&uuml;r iPhone und Android</h2>
+      <div class="platforms">
+        <div class="card platform">
+          <h3>iPhone</h3>
+          <p>Ab iOS&nbsp;26. Klingelt &uuml;ber dem Sperrbildschirm und in der Dynamic Island, auch im Lautlos-Modus.
+             Anmelden mit Apple, Google oder E-Mail.</p>
+          <p><strong>Stand:</strong> im Test &uuml;ber TestFlight, bald im App Store.</p>
+        </div>
+        <div class="card platform">
+          <h3>Android</h3>
+          <p>Ab Android&nbsp;8. Klingelt als Vollbild &uuml;ber dem Sperrbildschirm, auch nach einem Neustart.
+             Anmelden mit Google oder E-Mail.</p>
+          <p><strong>Stand:</strong> im Test bei Google Play, bald f&uuml;r alle.</p>
+        </div>
       </div>
+      <p>Die Crew funktioniert &uuml;ber beide Systeme hinweg. <strong>Get Up Pro</strong> schaltet die
+      Aufsteh-Aufgaben, Barcode, Zufall und die Crew frei &ndash; als Monatsabo, Jahresabo (f&uuml;r Neukunden mit
+      7 Tagen gratis) oder Einmalkauf. Ohne Pro bleiben 13 Aufgaben und alle Wecker frei.</p>
+    </section>
+
+    <section>
+      <h2>Deine Daten</h2>
+      <div class="promise">
+        <p><strong>Ohne Konto bleibt alles auf deinem Handy.</strong> Wecker, Punkte und Verlauf werden nirgendwohin
+        &uuml;bertragen. Ein Konto brauchst du nur f&uuml;r die Crew und f&uuml;r Pro auf mehreren Ger&auml;ten.</p>
+        <p><strong>Crews liegen in der EU.</strong> Ergebnisse und Selfies speichern wir in Frankfurt am Main
+        (Google Firebase, Region europe-west3). Einzelne Morgen werden nach 62 Tagen gel&ouml;scht.</p>
+        <p><strong>Keine Werbung in der App.</strong> Nutzungsstatistik und Werbe-Messung (Meta) laufen nur, wenn du
+        zustimmst, und lassen sich in den Einstellungen jederzeit abschalten.</p>
+        <p><strong>Jederzeit l&ouml;schbar.</strong> Dein Konto l&ouml;schst du in der App unter Einstellungen &rarr;
+        Konto l&ouml;schen &ndash; oder ohne App per E-Mail. So geht&rsquo;s: <a href="delete.html">Konto l&ouml;schen</a>.</p>
+      </div>
+      <p>Die Einzelheiten stehen in der <a href="privacy.html">Datenschutzerkl&auml;rung</a>.</p>
     </section>
 
     <section>
       <h2>Kontakt</h2>
-      <p>Fragen, Fehler, W&uuml;nsche &mdash; schreib einfach:
-        <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a></p>
+      <p>Fragen, Fehler, W&uuml;nsche &ndash; schreib einfach an
+        <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>.</p>
       <a class="backlink" href="../">&#9666; Ein Projekt von Chasing Dreams Interactive</a>
     </section>
 
@@ -99,6 +131,7 @@
   <footer class="foot">
     <p>&copy; 2026 Jen Eric Prei&szlig;er &middot;
       <a href="privacy.html">Datenschutz</a> &middot;
+      <a href="delete.html">Konto l&ouml;schen</a> &middot;
       <a href="impressum.html">Impressum</a></p>
   </footer>
 </body>
