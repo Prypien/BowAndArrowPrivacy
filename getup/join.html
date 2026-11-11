@@ -9,14 +9,14 @@
   <meta name="robots" content="noindex, nofollow" />
   <!-- Ist Get Up installiert, öffnet iOS diesen Link direkt in der App (Universal Link, siehe
        /.well-known/apple-app-site-association). Diese Seite sieht nur, wer die App noch nicht hat
-       oder den Link im Browser geöffnet hat. Der Code steht im Fragment (#K7M2QX) und geht nie an den Server. -->
+       oder den Link im Browser geöffnet hat. Der Code steht im Fragment (#JEN7K2Q; alte Crew-Links #K7M2QX) und geht nie an den Server. -->
   <meta name="apple-itunes-app" content="app-id=6818147917" />
   <script>
   (function () {
     var raw = (location.hash || '').replace(/^#/, '') ||
               new URLSearchParams(location.search).get('code') || '';
     var code = raw.trim().toUpperCase();
-    if (!/^[ABCDEFGHJKMNPQRSTUVWXYZ2-9]{6}$/.test(code)) return;
+    if (!/^[ABCDEFGHJKMNPQRSTUVWXYZ2-9]{6,7}$/.test(code)) return;
     window.gtfoobCode = code;
     var meta = document.querySelector('meta[name="apple-itunes-app"]');
     if (meta) meta.setAttribute('content', 'app-id=6818147917, app-argument=' +
@@ -40,8 +40,8 @@
   <div class="wrap invite">
     <div class="hero-visual"><picture><source srcset="icon-night.png?v=3" media="(prefers-color-scheme: dark)" /><img src="icon.png?v=3" alt="GET UP! App-Symbol" width="512" height="512" decoding="async" /></picture></div>
     <h1>Du bist eingeladen!</h1>
-    <p class="lede">Jemand will mit dir um die Wette aufstehen. Wer im Monat die meisten Punkte holt,
-      trägt die Krone.</p>
+    <p class="lede">Jemand will mit dir um die Wette aufstehen. Als Freunde seht ihr jeden Morgen, wer schon wach
+      ist – und im Turnier holt der Frühaufsteher die Krone.</p>
 
     <div id="with-code" hidden>
       <p class="code" id="code"></p>
@@ -50,7 +50,7 @@
         <a class="btn" id="open-app" href="gtfoob://join">In GET UP! öffnen</a>
       </div>
       <p style="margin-top: 26px;">Noch keine App? GET UP! ist gerade im Test: auf dem iPhone über TestFlight, auf
-        Android über Google Play. Frag, wer dich eingeladen hat. Danach in der App im Tab <strong>Crew</strong> den
+        Android über Google Play. Frag, wer dich eingeladen hat. Danach in der App unter <strong>Freunde → +</strong> den
         Code eingeben.</p>
     </div>
 

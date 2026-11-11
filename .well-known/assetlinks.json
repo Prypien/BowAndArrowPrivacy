@@ -1,0 +1,13 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.jenpreisser.gtfoob",
+      "sha256_cert_fingerprints": [
+        "71:1F:5F:77:2D:4B:7B:09:65:F6:8B:B0:86:CF:DD:DB:83:4E:64:28:93:70:DC:A9:A3:CB:1D:A5:A6:E1:2D:4D",
+        "F0:DE:58:D3:4C:C9:FA:2A:28:64:FD:74:D3:BD:26:A4:B3:4D:23:1B:9E:F5:E4:06:87:75:C4:14:42:F6:6F:DD"
+      ]
+    }
+  }
+]
