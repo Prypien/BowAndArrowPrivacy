@@ -3,136 +3,298 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GET UP! — der Wecker mit Aufgaben | Chasing Dreams Interactive</title>
-  <meta name="description" content="GET UP! ist ein Wecker für iPhone und Android, der erst aus ist, wenn du eine Aufgabe gelöst hast. Mit Crew unter Freunden: Wer ist zuerst wach?" />
-  <meta name="theme-color" content="#F3E3BF" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#15123A" media="(prefers-color-scheme: dark)" />
+  <title>GET UP! – Wecker mit Aufgaben. Kein Snooze. Keine Ausreden.</title>
+  <meta name="description" content="GET UP! ist ein Wecker für iPhone und Android, der erst aus ist, wenn du eine Aufgabe gelöst hast. 31 Aufgaben, kein Snooze – und Turniere gegen deine Freunde." />
+  <meta name="theme-color" content="#E8344E" />
   <link rel="icon" type="image/png" href="favicon.png" />
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="canonical" href="https://chasingdreamsinteractive.com/getup/" />
-  <meta property="og:title" content="GET UP! — der Wecker mit Aufgaben" />
-  <meta property="og:description" content="Kein Snooze. Der Wecker geht erst aus, wenn du eine Aufgabe löst. Mit Crew unter Freunden." />
+  <meta property="og:title" content="GET UP! – der Wecker mit Aufgaben" />
+  <meta property="og:description" content="Kein Snooze. Der Wecker geht erst aus, wenn du eine Aufgabe löst. Mit Turnieren gegen deine Freunde." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://chasingdreamsinteractive.com/getup/" />
-  <meta property="og:image" content="https://chasingdreamsinteractive.com/getup/icon.png" />
+  <meta property="og:image" content="https://chasingdreamsinteractive.com/getup/og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <!-- Banner „In der App öffnen“ in Safari auf dem iPhone -->
+  <meta name="apple-itunes-app" content="app-id=6818147917" />
   <link rel="preload" href="fonts/luckiest-guy.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="stylesheet" href="app.css" />
+  <script>
+    // Einblenden beim Scrollen und der passende Store-Knopf vorn – ohne JavaScript ist einfach alles sichtbar.
+    (function (d) {
+      d.classList.add('js');
+      var ua = navigator.userAgent || '';
+      if (/Android/i.test(ua)) d.classList.add('is-android');
+    })(document.documentElement);
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "GET UP! – Wecker mit Aufgaben",
+    "operatingSystem": "iOS, Android",
+    "applicationCategory": "LifestyleApplication",
+    "url": "https://chasingdreamsinteractive.com/getup/",
+    "image": "https://chasingdreamsinteractive.com/getup/icon.png",
+    "inLanguage": "de",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" }
+  }
+  </script>
 </head>
-<body>
+<body class="landing">
   <header class="bar">
     <div class="inner">
-      <a class="home" href="index.html">GET UP!</a>
-      <nav class="legal-tabs">
-        <a href="privacy.html">DATENSCHUTZ</a>
-        <a href="delete.html">KONTO LÖSCHEN</a>
-        <a href="impressum.html">IMPRESSUM</a>
+      <a class="home" href="./">GET UP!</a>
+      <nav class="jump" aria-label="Auf dieser Seite">
+        <a href="#aufgaben">AUFGABEN</a>
+        <a href="#freunde">FREUNDE</a>
+        <a href="#pro">PRO</a>
+        <a class="cta" href="#laden">LADEN</a>
       </nav>
     </div>
   </header>
 
-  <div class="wrap wrap--wide">
+  <main>
 
-    <div class="hero">
-      <div>
-        <p class="kicker">Wecker &middot; iPhone &amp; Android</p>
-        <h1 class="lockup">GET <span class="hl">UP!</span></h1>
-        <p class="lede">
-          Der Wecker, der erst Ruhe gibt, wenn du wach bist. Er klingelt, bis du eine Aufgabe gel&ouml;st hast:
-          rechnen, Kniebeugen vor der Kamera, das gemachte Bett fotografieren. Kein Snooze, keine Ausreden.
-        </p>
-        <div class="pills">
-          <span class="pill">31 Aufgaben</span>
-          <span class="pill pill--muted">Crew mit Freunden</span>
-          <span class="pill pill--muted">Keine Werbung</span>
+    <!-- 1 · Snooze? Nein. -->
+    <section class="panel panel--cherry">
+      <div class="inner split">
+        <div>
+          <p class="kicker">GET UP! &middot; Der Wecker mit Aufgaben</p>
+          <h1 class="pop pop--hero"><span class="pop-sm">Snooze?</span><span class="pop-lg">Nein.</span></h1>
+          <p class="lede">
+            Der Wecker, der erst Ruhe gibt, wenn du wirklich wach bist. Er klingelt, bis du eine Aufgabe
+            gel&ouml;st hast: rechnen, Kniebeugen vor der Kamera, das gemachte Bett fotografieren.
+          </p>
+          <div class="stores">
+            <a class="badge badge--ios" href="https://apps.apple.com/de/app/id6818147917"><img src="img/badge-app-store-de.svg" alt="Laden im App Store" width="168" height="56" /></a>
+            <a class="badge badge--play" href="https://play.google.com/store/apps/details?id=com.jenpreisser.gtfoob"><img src="img/badge-google-play-de.png" alt="Jetzt bei Google Play" width="188" height="56" /></a>
+          </div>
+          <p class="fine">Kostenlos laden &middot; keine Werbung in der App &middot; derzeit in Deutschland</p>
+        </div>
+        <div class="stage">
+          <div class="burst" aria-hidden="true"><i></i></div>
+          <div class="phone phone--ring">
+            <img src="img/app-klingeln.webp" alt="GET UP! klingelt um 09:21 und zeigt den Knopf „Aufgabe starten“" width="600" height="1304" fetchpriority="high" decoding="async" />
+          </div>
         </div>
       </div>
-      <div class="hero-visual">
-        <picture><source srcset="icon-night.png?v=3" media="(prefers-color-scheme: dark)" /><img src="icon.png?v=3" alt="App-Symbol von GET UP!: ein Wecker vor einem Knall-Stern" width="512" height="512" decoding="async" /></picture>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="track">
+        <span>KEIN SNOOZE</span><span>&#9733;</span><span>KEINE AUSREDEN</span><span>&#9733;</span><span>31 AUFGABEN</span><span>&#9733;</span><span>TURNIERE GEGEN FREUNDE</span><span>&#9733;</span><span>&Uuml;BER 40 WECKT&Ouml;NE</span><span>&#9733;</span><span>KEINE WERBUNG</span><span>&#9733;</span>
+        <span>KEIN SNOOZE</span><span>&#9733;</span><span>KEINE AUSREDEN</span><span>&#9733;</span><span>31 AUFGABEN</span><span>&#9733;</span><span>TURNIERE GEGEN FREUNDE</span><span>&#9733;</span><span>&Uuml;BER 40 WECKT&Ouml;NE</span><span>&#9733;</span><span>KEINE WERBUNG</span><span>&#9733;</span>
       </div>
     </div>
 
-    <div class="shots" aria-label="Bilder aus der App">
-      <img src="img/screen-1-klingeln.webp" alt="Der Wecker klingelt und zeigt die Aufgabe" width="540" height="960" loading="lazy" decoding="async" />
-      <img src="img/screen-2-rechnen.webp" alt="Aufgabe Rechnen" width="540" height="960" loading="lazy" decoding="async" />
-      <img src="img/screen-6-aufgaben.webp" alt="Auswahl der Aufgaben" width="540" height="960" loading="lazy" decoding="async" />
-      <img src="img/screen-3-crew.webp" alt="Crew mit Selfies vom Morgen" width="540" height="960" loading="lazy" decoding="async" />
-      <img src="img/screen-4-krone.webp" alt="Monats-Rangliste mit Krone" width="540" height="960" loading="lazy" decoding="async" />
-      <img src="img/screen-7-wach.webp" alt="Geschafft: wach" width="540" height="960" loading="lazy" decoding="async" />
+    <!-- 2 · Erst lösen, dann aus. -->
+    <section class="panel panel--yellow" id="ablauf">
+      <div class="inner">
+        <div class="split">
+          <div>
+            <h2 class="pop reveal"><span class="pop-sm">Erst l&ouml;sen,</span><span class="pop-lg">dann aus.</span></h2>
+            <p class="lede">So l&auml;uft dein Morgen mit GET UP!: Der Wecker l&auml;sst sich nicht wegdr&uuml;cken.
+              Er h&ouml;rt erst auf, wenn die Aufgabe geschafft ist.</p>
+          </div>
+          <div class="stage reveal">
+            <div class="burst" style="--burst: var(--k-cherry)" aria-hidden="true"><i></i></div>
+            <div class="phone" style="--tilt: -4deg">
+              <img src="img/app-rechnen.webp" alt="Aufgabe Rechnen: 4 mal 3 plus 12, darunter ein Ziffernblock" width="600" height="1304" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+        <ol class="steps3">
+          <li class="reveal">
+            <h3>Wecker stellen</h3>
+            <p>Uhrzeit w&auml;hlen, Aufgabe w&auml;hlen, schlafen gehen. Wer mag, l&auml;sst den Zufall entscheiden.</p>
+          </li>
+          <li class="reveal">
+            <h3>Es klingelt</h3>
+            <p>Auch &uuml;ber dem Sperrbildschirm. Der Wecker h&auml;lt die Lautst&auml;rke oben &ndash; leiser dr&uuml;cken
+              bringt dich nicht schneller raus.</p>
+          </li>
+          <li class="reveal">
+            <h3>L&ouml;sen, dann Ruhe</h3>
+            <p>Erst nach der Aufgabe ist der Wecker aus. Auf Wunsch fragt der Wach-Check f&uuml;nf Minuten sp&auml;ter
+              noch einmal nach.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 3 · 31 Aufgaben statt Snooze -->
+    <section class="panel panel--orange" id="aufgaben">
+      <div class="inner">
+        <div class="split split--flip">
+          <div>
+            <h2 class="pop reveal"><span class="pop-lg">31 Aufgaben</span><span class="pop-sm">statt Snooze.</span></h2>
+            <p class="lede">F&uuml;r den Kopf, f&uuml;r die Beine oder mit Beweisfoto. Je l&auml;nger deine Streak,
+              desto schwerer werden sie.</p>
+            <ul class="chips" aria-label="Beispiele f&uuml;r Aufgaben">
+              <li>Rechnen</li><li>Bombe entsch&auml;rfen</li><li>Simon sagt</li><li>Memory</li>
+              <li>Flaggen-Quiz</li><li>Kniebeugen</li><li>Hampelm&auml;nner</li><li>Liegest&uuml;tze</li>
+              <li>Tanzen</li><li>Bett fotografieren</li><li>Barcode</li><li>Zufall</li>
+            </ul>
+          </div>
+          <div class="stage stage--pair reveal">
+            <div class="phone">
+              <img src="img/app-bombe.webp" alt="Aufgabe Bombe entsch&auml;rfen: drei Kabel durchschneiden" width="600" height="1304" loading="lazy" decoding="async" />
+            </div>
+            <div class="phone">
+              <img src="img/app-simon.webp" alt="Aufgabe Simon sagt mit vier farbigen Feldern" width="600" height="1304" loading="lazy" decoding="async" />
+            </div>
+          </div>
+        </div>
+        <div class="tiles">
+          <div class="tile reveal">
+            <h3>F&uuml;r den Kopf</h3>
+            <p>Rechnen, Bombe entsch&auml;rfen, Simon sagt, Memory, Flaggen-Quiz oder einen Satz nachsprechen.</p>
+          </div>
+          <div class="tile reveal">
+            <h3>Zum Aufstehen</h3>
+            <p>Kniebeugen, Hampelm&auml;nner, Liegest&uuml;tze oder Tanzen. Die Kamera z&auml;hlt mit, ausgewertet wird
+              direkt auf deinem Handy.</p>
+          </div>
+          <div class="tile reveal">
+            <h3>Mit Beweisfoto</h3>
+            <p>Das gemachte Bett, der Himmel, ein Barcode, den du festgelegt hast, oder ein Ort, den du vorher
+              fotografiert hast.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 · Gegen deine Freunde. -->
+    <section class="panel panel--night" id="freunde">
+      <div class="inner split">
+        <div>
+          <h2 class="pop reveal"><span class="pop-sm">Gegen deine</span><span class="pop-lg">Freunde.</span></h2>
+          <ul class="ticks">
+            <li>F&uuml;g Freunde per Code, Link oder QR-Code hinzu.</li>
+            <li>Nach dem Aufstehen zeigt ihr euch ein Selfie und seht, wer schon wach ist.</li>
+            <li>Starte ein Turnier mit bis zu 9 Freunden, &uuml;ber 1, 2 oder 4 Wochen.</li>
+            <li>Wer zuerst wach ist, schickt den anderen eine Sprach- oder Videonachricht zum Klingeln &ndash; und
+              darf allen, die noch schlafen, eine Aufgabe zuteilen.</li>
+            <li>Am Ende warten Podest, Krone und Medaillen. Und die Revanche.</li>
+          </ul>
+        </div>
+        <div class="stage reveal">
+          <div class="burst" style="--burst: #ff3d8b" aria-hidden="true"><i></i></div>
+          <div class="phone" style="--tilt: 5deg">
+            <img src="img/app-turnier.webp" alt="Turnier „MTC Monats-Cup“ mit Podest: Adam vorn, Jen auf Platz 2, Bobby auf Platz 3" width="600" height="1304" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 · +20 fürs Aufstehen -->
+    <section class="panel panel--teal">
+      <div class="inner split split--flip">
+        <div>
+          <h2 class="pop pop--num reveal"><span class="pop-lg">+20</span><span class="pop-sm">f&uuml;rs Aufstehen.</span></h2>
+          <p class="lede">Wer rechtzeitig aus dem Bett kommt, sammelt Punkte und baut seine Streak aus. Jeder Morgen
+            z&auml;hlt &ndash; f&uuml;r dich und im Turnier.</p>
+        </div>
+        <div class="stage reveal">
+          <div class="burst" style="--burst: var(--k-orange)" aria-hidden="true"><i></i></div>
+          <div class="phone" style="--tilt: -5deg">
+            <img src="img/app-wach.webp" alt="Geschafft: „Wach!“, plus 20 Punkte, 7 Tage am St&uuml;ck" width="600" height="1304" loading="lazy" decoding="async" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 · Stil, Pro, Geräte -->
+    <section class="panel" id="pro">
+      <div class="inner">
+        <h2 class="pop reveal" style="--p-ex: var(--points)"><span class="pop-sm">Dein Wecker,</span><span class="pop-lg" style="color: var(--accent)">dein Stil.</span></h2>
+        <div class="tiles tiles--two">
+          <div class="tile reveal">
+            <h3>Laut, lauter, Schrei-Ziege</h3>
+            <p>&Uuml;ber 40 Weckt&ouml;ne, von klassisch bis laut. Dazu Meme-Videos, die beim Klingeln laufen:
+              Schrei-Ziege, Hamster-Rave, Klassik-Katze. Au&szlig;erdem Power-Nap und eine Erinnerung, wann es Zeit
+              f&uuml;rs Bett ist.</p>
+          </div>
+          <div class="tile reveal">
+            <h3>Get Up Pro</h3>
+            <p>Ohne Pro gibt es den Rechenwecker. Get Up Pro schaltet alle 31 Aufgaben, Zufall, Freunde und Turniere
+              frei &ndash; als Monatsabo, Jahresabo (f&uuml;r Neukunden mit Gratis-Test) oder Einmalkauf ohne Abo.</p>
+          </div>
+          <div class="tile reveal">
+            <h3>iPhone</h3>
+            <p>Ab iOS&nbsp;26. Klingelt &uuml;ber dem Sperrbildschirm und in der Dynamic Island, auch im
+              Lautlos-Modus. Anmelden mit Apple, Google oder E-Mail.</p>
+          </div>
+          <div class="tile reveal">
+            <h3>Android</h3>
+            <p>Ab Android&nbsp;8. Klingelt als Vollbild &uuml;ber dem Sperrbildschirm, auch nach einem Neustart.
+              Anmelden mit Google oder E-Mail. Freunde und Turniere laufen &uuml;ber beide Systeme hinweg.</p>
+          </div>
+        </div>
+
+        <h2 class="pop reveal" style="--p-ex: var(--points); margin-top: 84px;"><span class="pop-sm">Deine Daten,</span><span class="pop-lg" style="color: var(--accent)">deine Sache.</span></h2>
+        <div class="promise">
+          <p class="reveal"><strong>Ohne Konto bleibt alles auf deinem Handy.</strong> Wecker, Punkte und Verlauf werden
+            nirgendwohin &uuml;bertragen. Ein Konto brauchst du nur f&uuml;r Freunde, Turniere und Pro auf mehreren
+            Ger&auml;ten.</p>
+          <p class="reveal"><strong>Gespeichert in der EU.</strong> Ergebnisse und Selfies liegen in Frankfurt am Main
+            (Google Firebase, Region europe-west3). Einzelne Morgen werden nach 62 Tagen gel&ouml;scht.</p>
+          <p class="reveal"><strong>Keine Werbung in der App.</strong> Nutzungsstatistik und Werbe-Messung (Meta) laufen
+            nur, wenn du zustimmst, und lassen sich in den Einstellungen jederzeit abschalten.</p>
+          <p class="reveal"><strong>Jederzeit l&ouml;schbar.</strong> Dein Konto l&ouml;schst du in der App unter
+            Einstellungen &rarr; Konto l&ouml;schen &ndash; oder ohne App per E-Mail.
+            So geht&rsquo;s: <a href="delete.html">Konto l&ouml;schen</a>.</p>
+        </div>
+        <p>Die Einzelheiten stehen in der <a href="privacy.html">Datenschutzerkl&auml;rung</a>.</p>
+      </div>
+    </section>
+
+    <!-- 7 · Laden -->
+    <section class="panel panel--cherry final" id="laden">
+      <div class="inner">
+        <p class="lockup reveal">GET <span class="hl">UP!</span></p>
+        <p class="lede">Kein Snooze. Keine Ausreden. Morgen fr&uuml;h geht&rsquo;s los.</p>
+        <div class="stores stores--center">
+          <a class="badge badge--ios" href="https://apps.apple.com/de/app/id6818147917"><img src="img/badge-app-store-de.svg" alt="Laden im App Store" width="168" height="56" /></a>
+          <a class="badge badge--play" href="https://play.google.com/store/apps/details?id=com.jenpreisser.gtfoob"><img src="img/badge-google-play-de.png" alt="Jetzt bei Google Play" width="188" height="56" /></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-foot">
+    <div class="inner">
+      <nav aria-label="Rechtliches und Kontakt">
+        <a href="privacy.html">Datenschutz</a>
+        <a href="delete.html">Konto l&ouml;schen</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>
+      </nav>
+      <p>&copy; 2026 Jen Eric Prei&szlig;er &middot;
+        <a href="../">Ein Projekt von Chasing Dreams Interactive</a></p>
+      <p class="marks">Apple und das Apple-Logo sind Marken der Apple Inc. App Store ist eine Dienstleistungsmarke der
+        Apple Inc. Google Play und das Google Play-Logo sind Marken von Google LLC.</p>
     </div>
-
-    <section>
-      <h2>So l&auml;uft dein Morgen</h2>
-      <div class="features">
-        <div class="feature">
-          <h3>31 Aufgaben</h3>
-          <p>F&uuml;r den Kopf: Rechnen, Bombe entsch&auml;rfen, Simon sagt, Memory, Flaggen-Quiz. Zum Aufstehen:
-             Kniebeugen, Hampelm&auml;nner, Liegest&uuml;tze, Tanzen &ndash; die Kamera z&auml;hlt mit, direkt auf
-             deinem Handy. Mit Beweisfoto: Bett, Himmel, Barcode. Oder Zufall.</p>
-        </div>
-        <div class="feature">
-          <h3>Deine Crew</h3>
-          <p>Gr&uuml;nde eine private Crew und lade Freunde mit einem 6-stelligen Code ein. Wer zuerst wach ist,
-             schickt den anderen eine Sprach- oder Videonachricht und darf ihnen eine Aufgabe zuteilen. Wer den
-             Monat gewinnt, tr&auml;gt die Krone.</p>
-        </div>
-        <div class="feature">
-          <h3>Dein Stil</h3>
-          <p>&Uuml;ber 40 Weckt&ouml;ne, Meme-Videos mit Ton, animierte Hintergr&uuml;nde oder ein eigenes Foto.
-             Dazu Power-Nap, Wach-Check und eine Erinnerung, wann es Zeit f&uuml;rs Bett ist.</p>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <h2>F&uuml;r iPhone und Android</h2>
-      <div class="platforms">
-        <div class="card platform">
-          <h3>iPhone</h3>
-          <p>Ab iOS&nbsp;26. Klingelt &uuml;ber dem Sperrbildschirm und in der Dynamic Island, auch im Lautlos-Modus.
-             Anmelden mit Apple, Google oder E-Mail.</p>
-          <p><strong>Stand:</strong> im Test &uuml;ber TestFlight, bald im App Store.</p>
-        </div>
-        <div class="card platform">
-          <h3>Android</h3>
-          <p>Ab Android&nbsp;8. Klingelt als Vollbild &uuml;ber dem Sperrbildschirm, auch nach einem Neustart.
-             Anmelden mit Google oder E-Mail.</p>
-          <p><strong>Stand:</strong> im Test bei Google Play, bald f&uuml;r alle.</p>
-        </div>
-      </div>
-      <p>Die Crew funktioniert &uuml;ber beide Systeme hinweg. <strong>Get Up Pro</strong> schaltet die
-      Aufsteh-Aufgaben, Barcode, Zufall und die Crew frei &ndash; als Monatsabo, Jahresabo (f&uuml;r Neukunden mit
-      7 Tagen gratis) oder Einmalkauf. Ohne Pro bleiben 13 Aufgaben und alle Wecker frei.</p>
-    </section>
-
-    <section>
-      <h2>Deine Daten</h2>
-      <div class="promise">
-        <p><strong>Ohne Konto bleibt alles auf deinem Handy.</strong> Wecker, Punkte und Verlauf werden nirgendwohin
-        &uuml;bertragen. Ein Konto brauchst du nur f&uuml;r die Crew und f&uuml;r Pro auf mehreren Ger&auml;ten.</p>
-        <p><strong>Crews liegen in der EU.</strong> Ergebnisse und Selfies speichern wir in Frankfurt am Main
-        (Google Firebase, Region europe-west3). Einzelne Morgen werden nach 62 Tagen gel&ouml;scht.</p>
-        <p><strong>Keine Werbung in der App.</strong> Nutzungsstatistik und Werbe-Messung (Meta) laufen nur, wenn du
-        zustimmst, und lassen sich in den Einstellungen jederzeit abschalten.</p>
-        <p><strong>Jederzeit l&ouml;schbar.</strong> Dein Konto l&ouml;schst du in der App unter Einstellungen &rarr;
-        Konto l&ouml;schen &ndash; oder ohne App per E-Mail. So geht&rsquo;s: <a href="delete.html">Konto l&ouml;schen</a>.</p>
-      </div>
-      <p>Die Einzelheiten stehen in der <a href="privacy.html">Datenschutzerkl&auml;rung</a>.</p>
-    </section>
-
-    <section>
-      <h2>Kontakt</h2>
-      <p>Fragen, Fehler, W&uuml;nsche &ndash; schreib einfach an
-        <a href="mailto:support@chasingdreamsinteractive.com">support@chasingdreamsinteractive.com</a>.</p>
-      <a class="backlink" href="../">&#9666; Ein Projekt von Chasing Dreams Interactive</a>
-    </section>
-
-  </div>
-
-  <footer class="foot">
-    <p>&copy; 2026 Jen Eric Prei&szlig;er &middot;
-      <a href="privacy.html">Datenschutz</a> &middot;
-      <a href="delete.html">Konto l&ouml;schen</a> &middot;
-      <a href="impressum.html">Impressum</a></p>
   </footer>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      if (!('IntersectionObserver' in window)) {
+        els.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
 </body>
 </html>
